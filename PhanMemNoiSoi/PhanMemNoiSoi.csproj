@@ -1,0 +1,482 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2E52DB5F-BD7E-4E9B-8B2F-BF62A392488B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PhanMemNoiSoi</RootNamespace>
+    <AssemblyName>PhanMemNoiSoi</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\Aha-Soft-Large-User-Doctor.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>PhanMemNoiSoi.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Configuration\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DirectX.Capture, Version=1.0.6381.40264, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DirectX.Capture\bin\Debug\DirectX.Capture.dll</HintPath>
+    </Reference>
+    <Reference Include="DShowNET, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DirectX.Capture\bin\Debug\DShowNET.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Office.Tools.Word.v4.0.Utilities, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.ConnectionInfo, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\sql_dll\Microsoft.SqlServer.ConnectionInfo.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Management.Sdk.Sfc, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\sql_dll\Microsoft.SqlServer.Management.Sdk.Sfc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Smo, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\sql_dll\Microsoft.SqlServer.Smo.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.SmoExtended, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\sql_dll\Microsoft.SqlServer.SmoExtended.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.SqlEnum, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\sql_dll\Microsoft.SqlServer.SqlEnum.dll</HintPath>
+    </Reference>
+    <Reference Include="OD.Forms.Security">
+      <HintPath>..\..\..\Downloads\SecureBaseForm_Src\bin\Debug\OD.Forms.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="About.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="About.Designer.cs">
+      <DependentUpon>About.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CaptureCamera\CaptureTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConfigDB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConfigDB.Designer.cs">
+      <DependentUpon>ConfigDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Glossary\AddNewGlossaryItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Glossary\AddNewGlossaryItem.Designer.cs">
+      <DependentUpon>AddNewGlossaryItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BackupRestoreDB\BackupAndRestore.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BackupRestoreDB\BackupAndRestore.Designer.cs">
+      <DependentUpon>BackupAndRestore.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RolesList.cs" />
+    <Compile Include="UserManagement\ChangePassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserManagement\ChangePassword.Designer.cs">
+      <DependentUpon>ChangePassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CheckItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CheckItem.Designer.cs">
+      <DependentUpon>CheckItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helper.cs" />
+    <Compile Include="InfoReportList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InfoReportList.Designer.cs">
+      <DependentUpon>InfoReportList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Log.cs" />
+    <Compile Include="BackupRestoreDB\MyBackupRestore.cs" />
+    <Compile Include="Patient.cs" />
+    <Compile Include="UserManagement\CreateNewUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserManagement\CreateNewUser.Designer.cs">
+      <DependentUpon>CreateNewUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataManager.Designer.cs">
+      <DependentUpon>DataManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DBConnection.cs" />
+    <Compile Include="CheckAndView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CheckAndView.Designer.cs">
+      <DependentUpon>CheckAndView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Glossary\NewGlossaryItemContent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Glossary\NewGlossaryItemContent.Designer.cs">
+      <DependentUpon>NewGlossaryItemContent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Glossary\EditGlossaryItemContent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Glossary\EditGlossaryItemContent.Designer.cs">
+      <DependentUpon>EditGlossaryItemContent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Glossary\EditGlossaryItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Glossary\EditGlossaryItem.Designer.cs">
+      <DependentUpon>EditGlossaryItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Glossary\NewGlossaryItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Glossary\NewGlossaryItem.Designer.cs">
+      <DependentUpon>NewGlossaryItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Glossary\GlossaryMainteance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Glossary\GlossaryMainteance.Designer.cs">
+      <DependentUpon>GlossaryMainteance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserManagement\ModifyUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserManagement\ModifyUser.Designer.cs">
+      <DependentUpon>ModifyUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewCheck.Designer.cs">
+      <DependentUpon>NewCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PatientDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PatientDetail.Designer.cs">
+      <DependentUpon>PatientDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report.Designer.cs">
+      <DependentUpon>Report.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportWord.cs" />
+    <Compile Include="LogManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogManager.Designer.cs">
+      <DependentUpon>LogManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Search.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Search.Designer.cs">
+      <DependentUpon>Search.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Session.cs" />
+    <Compile Include="SystemConfiguration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SystemConfiguration.Designer.cs">
+      <DependentUpon>SystemConfiguration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserManagement\UserManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserManagement\UserManager.Designer.cs">
+      <DependentUpon>UserManager.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="About.resx">
+      <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CaptureCamera\CaptureTest.resx">
+      <DependentUpon>CaptureTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConfigDB.resx">
+      <DependentUpon>ConfigDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Glossary\AddNewGlossaryItem.resx">
+      <DependentUpon>AddNewGlossaryItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BackupRestoreDB\BackupAndRestore.resx">
+      <DependentUpon>BackupAndRestore.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserManagement\ChangePassword.resx">
+      <DependentUpon>ChangePassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CheckItem.resx">
+      <DependentUpon>CheckItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserManagement\CreateNewUser.resx">
+      <DependentUpon>CreateNewUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataManager.resx">
+      <DependentUpon>DataManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CheckAndView.resx">
+      <DependentUpon>CheckAndView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InfoReportList.resx">
+      <DependentUpon>InfoReportList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Glossary\NewGlossaryItemContent.resx">
+      <DependentUpon>NewGlossaryItemContent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Glossary\EditGlossaryItemContent.resx">
+      <DependentUpon>EditGlossaryItemContent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Glossary\EditGlossaryItem.resx">
+      <DependentUpon>EditGlossaryItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Glossary\NewGlossaryItem.resx">
+      <DependentUpon>NewGlossaryItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Glossary\GlossaryMainteance.resx">
+      <DependentUpon>GlossaryMainteance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserManagement\ModifyUser.resx">
+      <DependentUpon>ModifyUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewCheck.resx">
+      <DependentUpon>NewCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PatientDetail.resx">
+      <DependentUpon>PatientDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report.resx">
+      <DependentUpon>Report.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LogManager.resx">
+      <DependentUpon>LogManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Search.resx">
+      <DependentUpon>Search.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SystemConfiguration.resx">
+      <DependentUpon>SystemConfiguration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserManagement\UserManager.resx">
+      <DependentUpon>UserManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="bin\Debug\PhanMemNoiSoi.exe.config" />
+    <None Include="bin\Debug\PhanMemNoiSoi.vshost.exe.config" />
+    <None Include="bin\Debug\PhanMemNoiSoi.vshost.exe.manifest" />
+    <None Include="Configuration\app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\App.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Logo Quang Huy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>5</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\DirectX.Capture.dll" />
+    <Content Include="bin\Debug\DirectX.Capture.pdb" />
+    <Content Include="bin\Debug\DShowNET.dll" />
+    <Content Include="bin\Debug\DShowNET.pdb" />
+    <Content Include="bin\Debug\Microsoft.Office.Tools.Word.v4.0.Utilities.dll" />
+    <Content Include="bin\Debug\Microsoft.Office.Tools.Word.v4.0.Utilities.xml" />
+    <Content Include="bin\Debug\Microsoft.SqlServer.ConnectionInfo.dll" />
+    <Content Include="bin\Debug\Microsoft.SqlServer.Dmf.dll" />
+    <Content Include="bin\Debug\Microsoft.SqlServer.Management.Sdk.Sfc.dll" />
+    <Content Include="bin\Debug\Microsoft.SqlServer.RegSvrEnum.dll" />
+    <Content Include="bin\Debug\Microsoft.SqlServer.ServiceBrokerEnum.dll" />
+    <Content Include="bin\Debug\Microsoft.SqlServer.Smo.dll" />
+    <Content Include="bin\Debug\Microsoft.SqlServer.SmoExtended.dll" />
+    <Content Include="bin\Debug\Microsoft.SqlServer.SqlEnum.dll" />
+    <Content Include="bin\Debug\PhanMemNoiSoi.exe" />
+    <Content Include="bin\Debug\PhanMemNoiSoi.pdb" />
+    <Content Include="bin\Debug\PhanMemNoiSoi.vshost.exe" />
+    <Content Include="Resources\continue_24.png" />
+    <None Include="Resources\pause_241.png" />
+    <None Include="Resources\save_24.png" />
+    <None Include="Resources\exit_24.png" />
+    <None Include="Resources\pause_24.png" />
+    <None Include="Resources\About us.jpg" />
+    <None Include="bin\Debug\pause_24.png" />
+    <Content Include="Resources\Aha-Soft-Large-User-Doctor.ico" />
+    <None Include="Resources\Apps-utilities-system-monitor-icon.png" />
+    <None Include="Resources\Login.jpg" />
+    <None Include="Resources\13165939071654987882logout.png" />
+    <None Include="Resources\About-icon.png" />
+    <None Include="Resources\data-management-icon.png" />
+    <None Include="Resources\Categories-preferences-system-icon.png" />
+    <None Include="Resources\chart-icon.png" />
+    <None Include="Resources\log.png" />
+    <None Include="Resources\Actions-contact-new-icon.png" />
+    <None Include="Resources\trach_24.png" />
+    <None Include="Resources\Full-Screen_24.png" />
+    <None Include="Resources\camera_24.png" />
+    <None Include="Resources\backup_24.png" />
+    <None Include="Resources\user_24.png" />
+    <None Include="Resources\ok_24.png" />
+    <None Include="Resources\all_24.png" />
+    <None Include="Resources\refresh_24.png" />
+    <None Include="Resources\search_24.png" />
+    <None Include="Resources\Zoom-In-icon.png" />
+    <None Include="Resources\4.jpg" />
+    <None Include="Resources\3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

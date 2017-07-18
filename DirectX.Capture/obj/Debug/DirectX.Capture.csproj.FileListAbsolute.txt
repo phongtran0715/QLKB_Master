@@ -1,0 +1,14 @@
+C:\Users\win7-32bit\Downloads\Programs\capture\phongtn_test\DirectXCapture_demo\DirectX.Capture\bin\Debug\DirectX.Capture.dll
+C:\Users\win7-32bit\Downloads\Programs\capture\phongtn_test\DirectXCapture_demo\DirectX.Capture\bin\Debug\DirectX.Capture.pdb
+C:\Users\win7-32bit\Downloads\Programs\capture\phongtn_test\DirectXCapture_demo\DirectX.Capture\bin\Debug\DShowNET.dll
+C:\Users\win7-32bit\Downloads\Programs\capture\phongtn_test\DirectXCapture_demo\DirectX.Capture\bin\Debug\DShowNET.pdb
+C:\Users\win7-32bit\Downloads\Programs\capture\phongtn_test\DirectXCapture_demo\DirectX.Capture\obj\Debug\DirectX.Capture.csprojResolveAssemblyReference.cache
+C:\Users\win7-32bit\Downloads\Programs\capture\phongtn_test\DirectXCapture_demo\DirectX.Capture\obj\Debug\DirectX.Capture.dll
+C:\Users\win7-32bit\Downloads\Programs\capture\phongtn_test\DirectXCapture_demo\DirectX.Capture\obj\Debug\DirectX.Capture.pdb
+C:\Users\win7-32bit\Desktop\PhanMemNoiSoi\DirectX.Capture\obj\Debug\DirectX.Capture.csprojResolveAssemblyReference.cache
+C:\Users\win7-32bit\Desktop\PhanMemNoiSoi\DirectX.Capture\bin\Debug\DirectX.Capture.dll
+C:\Users\win7-32bit\Desktop\PhanMemNoiSoi\DirectX.Capture\bin\Debug\DirectX.Capture.pdb
+C:\Users\win7-32bit\Desktop\PhanMemNoiSoi\DirectX.Capture\bin\Debug\DShowNET.dll
+C:\Users\win7-32bit\Desktop\PhanMemNoiSoi\DirectX.Capture\bin\Debug\DShowNET.pdb
+C:\Users\win7-32bit\Desktop\PhanMemNoiSoi\DirectX.Capture\obj\Debug\DirectX.Capture.dll
+C:\Users\win7-32bit\Desktop\PhanMemNoiSoi\DirectX.Capture\obj\Debug\DirectX.Capture.pdb
