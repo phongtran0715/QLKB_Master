@@ -144,15 +144,15 @@ namespace PhanMemNoiSoi
                 query += " WHERE SickName LIKE N'%" + txtTenSearch.Text.Trim() + "%'";
                 isAnd = true;
             }
-            if (!string.IsNullOrEmpty(txtCmndSearch.Text.Trim()))
+            if (!string.IsNullOrEmpty(txtPhone.Text.Trim()))
             {
                 if (isAnd == true)
                 {
-                    query += " AND IDCode LIKE N'%" + txtTenSearch.Text.Trim() + "%'";
+                    query += " AND Telephone LIKE N'%" + txtPhone.Text.Trim() + "%'";
                 }
                 else
                 {
-                    query += " WHERE IDCode LIKE 'N%" + txtTenSearch.Text.Trim() + "%'";
+                    query += " WHERE Telephone LIKE N'%" + txtPhone.Text.Trim() + "%'";
                     isAnd = true;
                 }
             }
@@ -194,11 +194,17 @@ namespace PhanMemNoiSoi
             dgvPatient.AutoResizeColumns(
                 DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
             dgvPatient.DataSource = bsPatient;
-            dgvPatient.Columns[0].Visible = false;
-            dgvPatient.Columns[1].HeaderText = "Tên";
-            dgvPatient.Columns[2].HeaderText = "Tuổi";
-            dgvPatient.Columns[3].HeaderText = "Ngày sinh";
-            dgvPatient.Columns[4].HeaderText = "Ngày khám";
+            dgvPatient.Columns["SickNum"].Visible = false;
+            dgvPatient.Columns["SickName"].HeaderText = "Tên";
+            dgvPatient.Columns["Age"].HeaderText = "Tuổi";
+            dgvPatient.Columns["Birthday"].HeaderText = "Ngày sinh";
+            dgvPatient.Columns["Createtime"].HeaderText = "Ngày khám";
+
+            dgvPatient.Columns["SickName"].Width = dgvPatient.Width  / 9;
+            dgvPatient.Columns["Age"].Width = dgvPatient.Width / 9;
+            dgvPatient.Columns["Birthday"].Width = dgvPatient.Width * 2 / 9;
+            dgvPatient.Columns["Createtime"].Width = dgvPatient.Width * 2 / 9;
+
             setRowNumber(dgvPatient);
             //update number record to label
             gbResult.Text = "Danh sách bệnh nhân (" + tbPatient.Rows.Count + " kết quả)";

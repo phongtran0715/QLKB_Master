@@ -227,7 +227,7 @@ namespace PhanMemNoiSoi
             }
             catch
             {
-                MessageBox.Show("Khôi phục dữ liệu không thành công", "Thông báo",
+                MessageBox.Show("Khôi phục dữ liệu không thành công. Vui lòng khởi động lại phần mềm!", "Thông báo",
                                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

@@ -41,11 +41,9 @@
             this.btnTimKiem = new System.Windows.Forms.Button();
             this.dtNgayKetThuc = new System.Windows.Forms.DateTimePicker();
             this.dtNgayBatDau = new System.Windows.Forms.DateTimePicker();
-            this.txtCmndSearch = new System.Windows.Forms.TextBox();
             this.txtTenSearch = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.txtBirthday = new System.Windows.Forms.TextBox();
@@ -73,6 +71,8 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.gbResult = new System.Windows.Forms.GroupBox();
             this.dgvPatient = new System.Windows.Forms.DataGridView();
+            this.txtPhone = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -140,7 +140,7 @@
             this.groupBox2.Controls.Add(this.btnTimKiem);
             this.groupBox2.Controls.Add(this.dtNgayKetThuc);
             this.groupBox2.Controls.Add(this.dtNgayBatDau);
-            this.groupBox2.Controls.Add(this.txtCmndSearch);
+            this.groupBox2.Controls.Add(this.txtPhone);
             this.groupBox2.Controls.Add(this.txtTenSearch);
             this.groupBox2.Controls.Add(this.label13);
             this.groupBox2.Controls.Add(this.label12);
@@ -237,14 +237,6 @@
             this.dtNgayBatDau.Size = new System.Drawing.Size(175, 24);
             this.dtNgayBatDau.TabIndex = 10;
             // 
-            // txtCmndSearch
-            // 
-            this.txtCmndSearch.Location = new System.Drawing.Point(105, 65);
-            this.txtCmndSearch.MaxLength = 49;
-            this.txtCmndSearch.Name = "txtCmndSearch";
-            this.txtCmndSearch.Size = new System.Drawing.Size(176, 24);
-            this.txtCmndSearch.TabIndex = 9;
-            // 
             // txtTenSearch
             // 
             this.txtTenSearch.Location = new System.Drawing.Point(105, 31);
@@ -270,15 +262,6 @@
             this.label12.Size = new System.Drawing.Size(94, 18);
             this.label12.TabIndex = 6;
             this.label12.Text = "Ngày bắt đầu";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 68);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(63, 18);
-            this.label11.TabIndex = 5;
-            this.label11.Text = "CMTND";
             // 
             // label10
             // 
@@ -544,11 +527,13 @@
             // dgvPatient
             // 
             this.dgvPatient.AllowUserToAddRows = false;
-            this.dgvPatient.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvPatient.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvPatient.AllowUserToDeleteRows = false;
+            this.dgvPatient.AllowUserToResizeRows = false;
+            this.dgvPatient.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvPatient.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.dgvPatient.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPatient.Location = new System.Drawing.Point(3, 20);
+            this.dgvPatient.MultiSelect = false;
             this.dgvPatient.Name = "dgvPatient";
             this.dgvPatient.ReadOnly = true;
             this.dgvPatient.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -556,6 +541,23 @@
             this.dgvPatient.TabIndex = 0;
             this.dgvPatient.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgPatient_CellClick);
             this.dgvPatient.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgPatient_DataBindingComplete);
+            // 
+            // txtPhone
+            // 
+            this.txtPhone.Location = new System.Drawing.Point(105, 65);
+            this.txtPhone.MaxLength = 49;
+            this.txtPhone.Name = "txtPhone";
+            this.txtPhone.Size = new System.Drawing.Size(176, 24);
+            this.txtPhone.TabIndex = 9;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 68);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(51, 18);
+            this.label11.TabIndex = 5;
+            this.label11.Text = "Số ĐT";
             // 
             // Search
             // 
@@ -611,8 +613,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox txtCmndSearch;
         private System.Windows.Forms.TextBox txtTenSearch;
         private System.Windows.Forms.TextBox txtNote;
         private System.Windows.Forms.TextBox txtAge;
@@ -636,5 +636,7 @@
         private System.Windows.Forms.TextBox txtMarred;
         private System.Windows.Forms.Button btnDeleteSick;
         private System.Windows.Forms.Button btnReCheck;
+        private System.Windows.Forms.TextBox txtPhone;
+        private System.Windows.Forms.Label label11;
     }
 }

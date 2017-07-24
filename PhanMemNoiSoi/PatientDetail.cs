@@ -74,7 +74,7 @@ namespace PhanMemNoiSoi
             txtJob.Text = patient.JobProperty;
             txtTelephone.Text = patient.TelephoneProperty.Trim();
             txtInsuranceId.Text = patient.InsuranceIdProperty.Trim();
-            if (string.Equals(patient.CauseCheckProperty, "Nam"))
+            if (string.Equals(patient.SexProperty, "Nam"))
                 rdMen.Checked = true;
             else
                 rdWomen.Checked = true;

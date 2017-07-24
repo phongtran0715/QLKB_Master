@@ -355,7 +355,6 @@ namespace PhanMemNoiSoi
 
         private void btnXoa_ND_Click(object sender, EventArgs e)
         {
-
             int selectedRowCount =
             dgCheckContentDetail.Rows.GetRowCount(DataGridViewElementStates.Selected);
             if (selectedRowCount <= 0)
@@ -370,7 +369,7 @@ namespace PhanMemNoiSoi
                 return;
             }
 
-            int currRowIndexCheck = dgvCheck.SelectedRows[selectedRowCount - 1].Index;
+            int currRowIndexCheck = dgCheckContentDetail.SelectedRows[selectedRowCount - 1].Index;
             string contentCode = dgCheckContentDetail.Rows[currRowIndexCheck].Cells[0].Value.ToString().Trim();
 
             //delete from database

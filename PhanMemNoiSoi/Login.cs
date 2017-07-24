@@ -2,7 +2,6 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Security.Principal;
 using System.Windows.Forms;
 
 namespace PhanMemNoiSoi
@@ -11,17 +10,12 @@ namespace PhanMemNoiSoi
     {
         private SqlDataAdapter dataAdapter = new SqlDataAdapter();
         private BindingSource bindingSource = new BindingSource();
-        int userId = 1;
+        int userId = 0;
         string uWorkGroup = "";
 
         public Login()
         {
             InitializeComponent();
-        }
-
-        private void btnCancle_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
         }
 
         private void Login_Load(object sender, EventArgs e)
@@ -94,7 +88,7 @@ namespace PhanMemNoiSoi
                 //check user
                 if (string.Equals(txtUser.Text.Trim(), "sys"))
                 {
-                    this.userId = 1;
+                    this.userId = 0;
                     this.uWorkGroup = "Admin";
                 }
                 string sqlCommand = "SELECT * FROM UserList WHERE UserId = @id;";
@@ -161,6 +155,11 @@ namespace PhanMemNoiSoi
             {
                 btnOk_Click(null, null);
             }
+        }
+
+        private void btnCancle_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

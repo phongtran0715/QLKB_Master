@@ -40,8 +40,8 @@
             this.txtUser = new System.Windows.Forms.TextBox();
             this.txtPass = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
             this.lbStatus = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -115,34 +115,30 @@
             // txtServerName
             // 
             this.txtServerName.Location = new System.Drawing.Point(172, 25);
-            this.txtServerName.Multiline = true;
             this.txtServerName.Name = "txtServerName";
-            this.txtServerName.Size = new System.Drawing.Size(219, 30);
+            this.txtServerName.Size = new System.Drawing.Size(219, 26);
             this.txtServerName.TabIndex = 29;
             // 
             // txtDbName
             // 
             this.txtDbName.Location = new System.Drawing.Point(172, 78);
-            this.txtDbName.Multiline = true;
             this.txtDbName.Name = "txtDbName";
-            this.txtDbName.Size = new System.Drawing.Size(219, 30);
+            this.txtDbName.Size = new System.Drawing.Size(219, 26);
             this.txtDbName.TabIndex = 30;
             // 
             // txtUser
             // 
             this.txtUser.Location = new System.Drawing.Point(172, 125);
-            this.txtUser.Multiline = true;
             this.txtUser.Name = "txtUser";
-            this.txtUser.Size = new System.Drawing.Size(219, 30);
+            this.txtUser.Size = new System.Drawing.Size(219, 26);
             this.txtUser.TabIndex = 31;
             // 
             // txtPass
             // 
             this.txtPass.Location = new System.Drawing.Point(172, 171);
-            this.txtPass.Multiline = true;
             this.txtPass.Name = "txtPass";
             this.txtPass.PasswordChar = '*';
-            this.txtPass.Size = new System.Drawing.Size(219, 30);
+            this.txtPass.Size = new System.Drawing.Size(219, 26);
             this.txtPass.TabIndex = 32;
             // 
             // groupBox1
@@ -164,6 +160,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cấu hình kết nối cơ sở dữ liệu";
             // 
+            // lbStatus
+            // 
+            this.lbStatus.AutoSize = true;
+            this.lbStatus.Location = new System.Drawing.Point(23, 198);
+            this.lbStatus.Name = "lbStatus";
+            this.lbStatus.Size = new System.Drawing.Size(68, 20);
+            this.lbStatus.TabIndex = 33;
+            this.lbStatus.Text = "lbStatus";
+            // 
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -176,15 +181,6 @@
             this.button2.Text = "     Kiểm tra";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // lbStatus
-            // 
-            this.lbStatus.AutoSize = true;
-            this.lbStatus.Location = new System.Drawing.Point(23, 198);
-            this.lbStatus.Name = "lbStatus";
-            this.lbStatus.Size = new System.Drawing.Size(68, 20);
-            this.lbStatus.TabIndex = 33;
-            this.lbStatus.Text = "lbStatus";
             // 
             // ConfigDB
             // 

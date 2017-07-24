@@ -51,7 +51,8 @@ namespace PhanMemNoiSoi
 
         public string [] getRoleByUser(string userGroup, int userId)
         {
-            if(userId == 1)
+            //check admin user
+            if (userId == 0)
             {
                 return roleList.ToArray();
             }

@@ -303,7 +303,7 @@
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.Image = global::PhanMemNoiSoi.Properties.Resources.save_24;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(6, 216);
+            this.btnSave.Location = new System.Drawing.Point(6, 240);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(147, 35);
             this.btnSave.TabIndex = 10;
@@ -324,7 +324,7 @@
             this.dgvUserGroup.Name = "dgvUserGroup";
             this.dgvUserGroup.ReadOnly = true;
             this.dgvUserGroup.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvUserGroup.Size = new System.Drawing.Size(147, 176);
+            this.dgvUserGroup.Size = new System.Drawing.Size(147, 209);
             this.dgvUserGroup.TabIndex = 2;
             this.dgvUserGroup.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUserGroup_CellClick);
             // 
