@@ -1,7 +1,9 @@
 ﻿using OD.Forms.Security;
 using System;
+using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Security.Principal;
@@ -18,6 +20,7 @@ namespace PhanMemNoiSoi
         int imgIndex = 0;
         string BASE_IMG_FOLDER;
         Helper helper = new Helper();
+        string curImgFolder;
 
         public Search(IPrincipal userPrincipal) :
             base(Session.Instance.UserRole, userPrincipal)
@@ -54,47 +57,26 @@ namespace PhanMemNoiSoi
             dgvPatient.AutoResizeColumns(
                 DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
             dgvPatient.DataSource = bsPatient;
-            dgvPatient.Columns[0].Visible = false;
-            dgvPatient.Columns[1].HeaderText = "Tên";
-            dgvPatient.Columns[2].HeaderText = "Tuổi";
-            dgvPatient.Columns[3].HeaderText = "Ngày sinh";
-            dgvPatient.Columns[4].HeaderText = "Ngày khám";
-            //setRowNumber(dgvPatient);
+            dgvPatient.Columns["SickNum"].Visible = false;
+            dgvPatient.Columns["SickName"].HeaderText = "Tên";
+            dgvPatient.Columns["Age"].HeaderText = "Tuổi";
+            dgvPatient.Columns["Birthday"].HeaderText = "Ngày sinh";
+            dgvPatient.Columns["Createtime"].HeaderText = "Ngày khám";
+
+            dgvPatient.Columns["SickName"].Width = dgvPatient.Width * 4  / 10;
+            dgvPatient.Columns["Age"].Width = dgvPatient.Width / 10;
+            dgvPatient.Columns["Birthday"].Width = dgvPatient.Width * 2 / 10;
+            dgvPatient.Columns["Createtime"].Width = dgvPatient.Width * 2 / 9;
+            foreach (DataGridViewColumn col in dgvPatient.Columns)
+            {
+                col.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                col.HeaderCell.Style.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Pixel);
+                col.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+            helper.setRowNumber(dgvPatient);
 
             //update number record to label
             gbResult.Text = "Danh sách bệnh nhân (" + tbPatient.Rows.Count + " kết quả)";
-            setRowNumber(dgvPatient);
-        }
-
-        /// <summary>
-        /// auto set row index for data grid view
-        /// </summary>
-        /// <param name="dgv"></param>
-        private void setRowNumber(DataGridView dgv)
-        {
-            foreach (DataGridViewRow row in dgv.Rows)
-            {
-                row.HeaderCell.Value = String.Format("{0}", row.Index + 1);
-
-            }
-            dgv.RowHeadersWidth = dgv.Width / 12;
-            dgv.RowHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 11f);
-        }
-
-        private void dgPatient_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            foreach (DataGridViewColumn column in dgvPatient.Columns)
-            {
-                column.SortMode = DataGridViewColumnSortMode.NotSortable;
-            }
-            for (int i = 0; i < dgvPatient.Columns.Count; i++)
-            {
-                dgvPatient.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                if (i == dgvPatient.ColumnCount - 1)
-                {
-                    dgvPatient.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                }
-            }
         }
 
         private void rbThang_CheckedChanged(object sender, EventArgs e)
@@ -190,7 +172,7 @@ namespace PhanMemNoiSoi
             dtaPatient.Fill(tbPatient);
             bsPatient.DataSource = tbPatient;
 
-            // Resize the DataGridView columns to fit the newly loaded content.
+            // Resize the DataGridView columns to fit the newly loaded content
             dgvPatient.AutoResizeColumns(
                 DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
             dgvPatient.DataSource = bsPatient;
@@ -200,12 +182,17 @@ namespace PhanMemNoiSoi
             dgvPatient.Columns["Birthday"].HeaderText = "Ngày sinh";
             dgvPatient.Columns["Createtime"].HeaderText = "Ngày khám";
 
-            dgvPatient.Columns["SickName"].Width = dgvPatient.Width  / 9;
-            dgvPatient.Columns["Age"].Width = dgvPatient.Width / 9;
-            dgvPatient.Columns["Birthday"].Width = dgvPatient.Width * 2 / 9;
+            dgvPatient.Columns["SickName"].Width = dgvPatient.Width * 4 / 10;
+            dgvPatient.Columns["Age"].Width = dgvPatient.Width / 10;
+            dgvPatient.Columns["Birthday"].Width = dgvPatient.Width * 2 / 10;
             dgvPatient.Columns["Createtime"].Width = dgvPatient.Width * 2 / 9;
-
-            setRowNumber(dgvPatient);
+            foreach (DataGridViewColumn col in dgvPatient.Columns)
+            {
+                col.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                col.HeaderCell.Style.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Pixel);
+                col.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+            helper.setRowNumber(dgvPatient);
             //update number record to label
             gbResult.Text = "Danh sách bệnh nhân (" + tbPatient.Rows.Count + " kết quả)";
         }
@@ -220,10 +207,10 @@ namespace PhanMemNoiSoi
                 resetPatientDetail();
                 string sickNum = dgvPatient.Rows[e.RowIndex].Cells[0].Value.ToString().Trim();
                 Patient patient = new Patient().getPatientByNum(sickNum);
-                string imageFolder = helper.getImgFolderById(sickNum);
-                if (Directory.Exists(imageFolder))
+                curImgFolder = helper.getImgFolderById(sickNum);
+                if (Directory.Exists(curImgFolder))
                 {
-                    imagesPatient = Directory.GetFiles(imageFolder, "*.jpg", SearchOption.AllDirectories);
+                    imagesPatient = Directory.GetFiles(curImgFolder, "*.jpg", SearchOption.AllDirectories);
                     if (imagesPatient.Length > 0)
                     {
                         Image img = Image.FromFile(imagesPatient[0]);
@@ -315,8 +302,9 @@ namespace PhanMemNoiSoi
                 //delete from database
                 try
                 {
-                    string sqlCommand = "DELETE FROM SickData WHERE SickNum = '" + sickNum + "'";
+                    string sqlCommand = "DELETE FROM SickData WHERE SickNum = @sickNum";
                     SqlCommand mySQL = new SqlCommand(sqlCommand, DBConnection.Instance.sqlConn);
+                    mySQL.Parameters.Add("@sickNum", SqlDbType.NChar).Value = sickNum;
                     mySQL.ExecuteReader();
 
                 }
@@ -372,6 +360,19 @@ namespace PhanMemNoiSoi
         private void Search_UserIsAllowed(object sender, EventArgs e)
         {
             btnDeleteSick.Enabled = ValidatedUserRoles.Contains(RolesList.DELETE_PATIENT);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start(curImgFolder);
+            }
+            catch (Win32Exception win32Exception)
+            {
+                //The system cannot find the file specified...
+                Console.WriteLine(win32Exception.Message);
+            }
         }
     }
 }

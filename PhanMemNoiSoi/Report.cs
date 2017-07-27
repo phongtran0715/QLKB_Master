@@ -150,8 +150,9 @@ namespace PhanMemNoiSoi
                 while (rdr.Read())
                 {
                     string itemContentCode = rdr["ItemContentCode"].ToString().Trim();
-                    query = "SELECT Content FROM " + tbName + " WHERE ContentCode = @itemContentCode;";
+                    query = "SELECT Content FROM @table WHERE ContentCode = @itemContentCode;";
                     SqlCommand mySQLICC = new SqlCommand(query, DBConnection.Instance.sqlConn);
+                    mySQLICC.Parameters.Add("@table", SqlDbType.NChar).Value = table;
                     mySQLICC.Parameters.Add("@itemContentCode", SqlDbType.NChar).Value = itemContentCode;
                     SqlDataReader rdrICC = mySQLICC.ExecuteReader();
                     while (rdrICC.Read())

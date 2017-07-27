@@ -51,16 +51,22 @@
             this.lbpBirthday = new System.Windows.Forms.Label();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.lbRecord = new System.Windows.Forms.Label();
+            this.btnFullScreen = new System.Windows.Forms.Button();
+            this.pbRecordIcon = new System.Windows.Forms.PictureBox();
+            this.btnSaveVideo = new System.Windows.Forms.Button();
             this.btnThoat = new System.Windows.Forms.Button();
             this.btnBaoCao = new System.Windows.Forms.Button();
             this.btnChupHinh = new System.Windows.Forms.Button();
             this.btnDungHinh = new System.Windows.Forms.Button();
             this.pbVideo = new System.Windows.Forms.PictureBox();
             this.caifToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemOpenFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbRecordIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbVideo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -101,7 +107,6 @@
             this.listImage.Size = new System.Drawing.Size(247, 602);
             this.listImage.TabIndex = 0;
             this.listImage.UseCompatibleStateImageBehavior = false;
-            this.listImage.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listImage_ItemChecked);
             this.listImage.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseClick);
             // 
             // groupBox3
@@ -311,19 +316,72 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.caifToolStripMenuItem});
+            this.caifToolStripMenuItem,
+            this.itemOpenFolder});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1222, 29);
             this.menuStrip1.TabIndex = 8;
             this.menuStrip1.Text = "menuStrip1";
             // 
+            // lbRecord
+            // 
+            this.lbRecord.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbRecord.AutoSize = true;
+            this.lbRecord.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbRecord.ForeColor = System.Drawing.Color.Blue;
+            this.lbRecord.Location = new System.Drawing.Point(10, 675);
+            this.lbRecord.Name = "lbRecord";
+            this.lbRecord.Size = new System.Drawing.Size(132, 18);
+            this.lbRecord.TabIndex = 14;
+            this.lbRecord.Text = "Đang quay video";
+            // 
+            // btnFullScreen
+            // 
+            this.btnFullScreen.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFullScreen.Image = global::PhanMemNoiSoi.Properties.Resources.Full_Screen_24;
+            this.btnFullScreen.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnFullScreen.Location = new System.Drawing.Point(15, 457);
+            this.btnFullScreen.Name = "btnFullScreen";
+            this.btnFullScreen.Size = new System.Drawing.Size(135, 43);
+            this.btnFullScreen.TabIndex = 15;
+            this.btnFullScreen.Text = "Phóng to";
+            this.btnFullScreen.UseVisualStyleBackColor = true;
+            this.btnFullScreen.Click += new System.EventHandler(this.btnFullScreen_Click_1);
+            // 
+            // pbRecordIcon
+            // 
+            this.pbRecordIcon.BackColor = System.Drawing.Color.Transparent;
+            this.pbRecordIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pbRecordIcon.Image = global::PhanMemNoiSoi.Properties.Resources.pulse12;
+            this.pbRecordIcon.Location = new System.Drawing.Point(38, 605);
+            this.pbRecordIcon.Name = "pbRecordIcon";
+            this.pbRecordIcon.Size = new System.Drawing.Size(71, 64);
+            this.pbRecordIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbRecordIcon.TabIndex = 1;
+            this.pbRecordIcon.TabStop = false;
+            // 
+            // btnSaveVideo
+            // 
+            this.btnSaveVideo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSaveVideo.Image = global::PhanMemNoiSoi.Properties.Resources.camera_24;
+            this.btnSaveVideo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSaveVideo.Location = new System.Drawing.Point(12, 260);
+            this.btnSaveVideo.Name = "btnSaveVideo";
+            this.btnSaveVideo.Size = new System.Drawing.Size(135, 43);
+            this.btnSaveVideo.TabIndex = 9;
+            this.btnSaveVideo.Text = "  Quay Video";
+            this.btnSaveVideo.UseVisualStyleBackColor = true;
+            this.btnSaveVideo.Click += new System.EventHandler(this.btnSaveVideo_Click);
+            // 
             // btnThoat
             // 
             this.btnThoat.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThoat.Image = ((System.Drawing.Image)(resources.GetObject("btnThoat.Image")));
             this.btnThoat.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnThoat.Location = new System.Drawing.Point(12, 356);
+            this.btnThoat.Location = new System.Drawing.Point(15, 551);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(135, 43);
             this.btnThoat.TabIndex = 5;
@@ -336,7 +394,7 @@
             this.btnBaoCao.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBaoCao.Image = ((System.Drawing.Image)(resources.GetObject("btnBaoCao.Image")));
             this.btnBaoCao.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBaoCao.Location = new System.Drawing.Point(12, 257);
+            this.btnBaoCao.Location = new System.Drawing.Point(12, 358);
             this.btnBaoCao.Name = "btnBaoCao";
             this.btnBaoCao.Size = new System.Drawing.Size(135, 43);
             this.btnBaoCao.TabIndex = 4;
@@ -347,7 +405,7 @@
             // btnChupHinh
             // 
             this.btnChupHinh.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnChupHinh.Image = ((System.Drawing.Image)(resources.GetObject("btnChupHinh.Image")));
+            this.btnChupHinh.Image = global::PhanMemNoiSoi.Properties.Resources.e2edc731cbfc;
             this.btnChupHinh.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnChupHinh.Location = new System.Drawing.Point(12, 166);
             this.btnChupHinh.Name = "btnChupHinh";
@@ -390,11 +448,24 @@
             this.caifToolStripMenuItem.Text = "Cài đặt camera";
             this.caifToolStripMenuItem.Click += new System.EventHandler(this.caifToolStripMenuItem_Click);
             // 
+            // itemOpenFolder
+            // 
+            this.itemOpenFolder.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.itemOpenFolder.Image = global::PhanMemNoiSoi.Properties.Resources.open_icon_24x24;
+            this.itemOpenFolder.Name = "itemOpenFolder";
+            this.itemOpenFolder.Size = new System.Drawing.Size(167, 25);
+            this.itemOpenFolder.Text = "Mở thư mục dữ liệu";
+            this.itemOpenFolder.Click += new System.EventHandler(this.itemOpenFolder_Click);
+            // 
             // CheckAndView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1222, 651);
+            this.Controls.Add(this.btnFullScreen);
+            this.Controls.Add(this.lbRecord);
+            this.Controls.Add(this.pbRecordIcon);
+            this.Controls.Add(this.btnSaveVideo);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btnThoat);
@@ -421,6 +492,7 @@
             this.groupBox3.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbRecordIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbVideo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -456,5 +528,10 @@
         private System.Windows.Forms.Label lbDate;
         private System.Windows.Forms.Label lbCause;
         private System.Windows.Forms.Label lbAge;
+        private System.Windows.Forms.Button btnSaveVideo;
+        private System.Windows.Forms.PictureBox pbRecordIcon;
+        private System.Windows.Forms.Label lbRecord;
+        private System.Windows.Forms.ToolStripMenuItem itemOpenFolder;
+        private System.Windows.Forms.Button btnFullScreen;
     }
 }

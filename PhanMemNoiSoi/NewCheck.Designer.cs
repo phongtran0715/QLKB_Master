@@ -343,7 +343,6 @@
             this.dgvBenhNhan.Size = new System.Drawing.Size(1058, 378);
             this.dgvBenhNhan.TabIndex = 22;
             this.dgvBenhNhan.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBenhNhan_CellDoubleClick);
-            this.dgvBenhNhan.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvBenhNhan_DataBindingComplete);
             this.dgvBenhNhan.SelectionChanged += new System.EventHandler(this.dgvBenhNhan_SelectionChanged);
             // 
             // btnXoaBN

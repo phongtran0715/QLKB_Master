@@ -28,14 +28,6 @@ namespace PhanMemNoiSoi
             this.Close();
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            //this.Hide();
-            //LogManager logManager = new LogManager();
-            //logManager.ShowDialog();
-            //this.Close();
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
             this.Hide();

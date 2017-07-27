@@ -30,20 +30,24 @@
             if (!path.EndsWith("\\")) path += "\\";
             return path;
         }
-
+        bool isLog = false;
+        //TODO set condition to write log file
         public void LogMessageToFile(string msg)
         {
-            System.IO.StreamWriter sw = System.IO.File.AppendText(
+            if (isLog)
+            {
+                System.IO.StreamWriter sw = System.IO.File.AppendText(
                 GetTempPath() + "QuangHuyMedicalLog.txt");
-            try
-            {
-                string logLine = System.String.Format(
-                    "{0:G}: {1}.", System.DateTime.Now, msg);
-                sw.WriteLine(logLine);
-            }
-            finally
-            {
-                sw.Close();
+                try
+                {
+                    string logLine = System.String.Format(
+                        "{0:G}: {1}.", System.DateTime.Now, msg);
+                    sw.WriteLine(logLine);
+                }
+                finally
+                {
+                    sw.Close();
+                }
             }
         }
     }

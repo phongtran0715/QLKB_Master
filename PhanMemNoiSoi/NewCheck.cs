@@ -289,10 +289,10 @@ namespace PhanMemNoiSoi
             //delete from database
             try
             {
-                string sqlCommand = "DELETE FROM SickData WHERE SickNum = '" + sickNum + "'";
+                string sqlCommand = "DELETE FROM SickData WHERE SickNum = @sickNum";
                 SqlCommand mySQL = new SqlCommand(sqlCommand, DBConnection.Instance.sqlConn);
+                mySQL.Parameters.Add("@sickNum", SqlDbType.NChar).Value = sickNum;
                 mySQL.ExecuteReader();
-
             }
             catch (System.Exception ex)
             {
@@ -508,18 +508,6 @@ namespace PhanMemNoiSoi
                     txtAge.Text = "";
                 }
             }
-        }
-
-        private void dgvBenhNhan_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            //for (int i = 0; i < dgvBenhNhan.Columns.Count; i++)
-            //{
-            //    dgvBenhNhan.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            //    if (i == dgvBenhNhan.ColumnCount - 1)
-            //    {
-            //        dgvBenhNhan.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            //    }
-            //}
         }
 
         private int getIdCheck()

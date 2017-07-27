@@ -4,6 +4,7 @@ using OD.Forms.Security;
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.IO;
 using System.Security.Principal;
 using System.Windows.Forms;
@@ -78,9 +79,7 @@ namespace PhanMemNoiSoi
             cbNam.Text = DateTime.Today.Year.ToString();
             cbNamThang.Text = DateTime.Today.Year.ToString();
             cbThang.Text = DateTime.Today.Month.ToString();
-
             dgvBackup.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-
             loadDgvData();
         }
 
@@ -88,12 +87,12 @@ namespace PhanMemNoiSoi
         {
             try
             {
-                table = new DataTable();
+                table = new System.Data.DataTable();
                 bindingSource = new BindingSource();
                 string selectCommand = "SELECT * FROM BackupInfo;";
                 dataAdapter = new SqlDataAdapter(selectCommand, DBConnection.Instance.sqlConn);
                 SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter);
-                table = new DataTable();
+                table = new System.Data.DataTable();
                 table.Locale = System.Globalization.CultureInfo.InvariantCulture;
                 dataAdapter.Fill(table);
                 bindingSource.DataSource = table;
@@ -105,6 +104,12 @@ namespace PhanMemNoiSoi
                 dgvBackup.Columns[4].HeaderText = "Ngày bắt đầu";
                 dgvBackup.Columns[5].HeaderText = "Ngày kết thúc";
                 helper.setRowNumber(dgvBackup);
+                foreach (DataGridViewColumn col in dgvBackup.Columns)
+                {
+                    col.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    col.HeaderCell.Style.Font = new Font("Microsoft Sans Serif", 13F, FontStyle.Bold, GraphicsUnit.Pixel);
+                    col.SortMode = DataGridViewColumnSortMode.NotSortable;
+                }
             }
             catch (Exception ex)
             {
@@ -221,13 +226,18 @@ namespace PhanMemNoiSoi
                 destination.Devices.Add(source);
                 destination.ReplaceDatabase = true;
                 destination.SqlRestore(server);
-                DBConnection.Instance.OpenConnection();
+                //open connection again
+                bool check = DBConnection.Instance.OpenConnection();
+                if(check == true)
+                {
+                    MessageBox.Show("open connection again ok");
+                }
                 MessageBox.Show("Khôi phục dữ liệu thành công", "Thông báo",
                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            catch
+            catch(Exception ex)
             {
-                MessageBox.Show("Khôi phục dữ liệu không thành công. Vui lòng khởi động lại phần mềm!", "Thông báo",
+                MessageBox.Show("Khôi phục dữ liệu không thành công. \n " +  ex.Message, "Thông báo",
                                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -358,8 +368,9 @@ namespace PhanMemNoiSoi
             //delete from database
             try
             {
-                string sqlCommand = "DELETE FROM BackupInfo WHERE Num = '" + num + "'";
+                string sqlCommand = "DELETE FROM BackupInfo WHERE Num = @num";
                 SqlCommand mySQL = new SqlCommand(sqlCommand, DBConnection.Instance.sqlConn);
+                mySQL.Parameters.Add("@num", SqlDbType.NChar).Value = num;
                 mySQL.ExecuteReader();
 
                 // update data grid view

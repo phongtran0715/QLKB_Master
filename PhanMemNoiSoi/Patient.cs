@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace PhanMemNoiSoi
@@ -60,8 +61,9 @@ namespace PhanMemNoiSoi
         public Patient getPatientByNum(string num)
         {
             Patient patient = new Patient();
-            string query = "SELECT * FROM SickData WHERE SickNum = '" + num + "'";
+            string query = "SELECT * FROM SickData WHERE SickNum = @num;";
             SqlCommand mySQL = new SqlCommand(query, DBConnection.Instance.sqlConn);
+            mySQL.Parameters.Add("@num", SqlDbType.NChar).Value = num;
 
             SqlDataReader rdrPatient = mySQL.ExecuteReader();
             while (rdrPatient.Read())

@@ -106,6 +106,8 @@ namespace PhanMemNoiSoi
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.Image = global::PhanMemNoiSoi.Properties.Resources.save_24;
+            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSave.Location = new System.Drawing.Point(332, 439);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(155, 32);
@@ -116,6 +118,8 @@ namespace PhanMemNoiSoi
             // btnExit
             // 
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExit.Image = global::PhanMemNoiSoi.Properties.Resources.exit_24;
+            this.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnExit.Location = new System.Drawing.Point(504, 439);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(120, 32);
@@ -213,8 +217,8 @@ namespace PhanMemNoiSoi
             // 
             // panelVideo
             // 
-            this.panelVideo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.panelVideo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelVideo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panelVideo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -236,7 +240,7 @@ namespace PhanMemNoiSoi
             this.Menu = this.mainMenu;
             this.Name = "CaptureTest";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "CaptureTest";
+            this.Text = "Cấu hình camera";
             ((System.ComponentModel.ISupportInitialize)(this.panelVideo)).EndInit();
             this.ResumeLayout(false);
 

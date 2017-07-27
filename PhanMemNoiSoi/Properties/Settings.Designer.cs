@@ -85,7 +85,7 @@ namespace PhanMemNoiSoi.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("D:\\QLKB")]
+        [global::System.Configuration.DefaultSettingValueAttribute("D:\\\\QLKB")]
         public string defaultImgFolder {
             get {
                 return ((string)(this["defaultImgFolder"]));

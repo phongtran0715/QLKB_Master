@@ -324,36 +324,6 @@ namespace PhanMemNoiSoi
                             "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void tabControl1_Selected(object sender, TabControlEventArgs e)
-        {
-            int tabIndex = e.TabPageIndex;
-            if(tabIndex == 1)
-            {
-                loadUserGroup();
-                loadDgvRoleList();
-                //update role list
-                // check item selected
-                string query = "SELECT RoleId FROM UserGroupRole WHERE GroupId = @id";
-                SqlCommand sqlCom = new SqlCommand(query, DBConnection.Instance.sqlConn);
-                sqlCom.Parameters.Add("@id", SqlDbType.NChar).Value = "Admin";
-                SqlDataReader sqlDtaReader = sqlCom.ExecuteReader();
-
-                while (sqlDtaReader.Read())
-                {
-                    string roleId = sqlDtaReader["RoleId"].ToString().Trim();
-                    // update selected value on data grid
-                    foreach (DataGridViewRow row in dgvRoleList.Rows)
-                    {
-                        if (string.Equals(row.Cells["Num"].Value.ToString().Trim(), roleId))
-                        {
-                            DataGridViewCheckBoxCell chk = (DataGridViewCheckBoxCell)row.Cells["X"];
-                            chk.Value = chk.TrueValue;
-                        }
-                    }
-                }
-            }
-        }
-
         private void loadDgvRoleList()
         {
             //Load data from data base
@@ -401,9 +371,9 @@ namespace PhanMemNoiSoi
                 SqlCommandBuilder commandBuilder = new SqlCommandBuilder(udta);
                 utb.Locale = System.Globalization.CultureInfo.InvariantCulture;
                 udta.Fill(utb);
-                bSource.DataSource = utb;
+                ubs.DataSource = utb;
 
-                dgvUserGroup.DataSource = bSource;
+                dgvUserGroup.DataSource = ubs;
                 dgvUserGroup.Columns["Num"].Visible = false;
                 dgvUserGroup.Columns["GroupNameHeader"].HeaderText = "Nhóm";
                 dgvUserGroup.Rows[0].Selected = true;
@@ -464,7 +434,7 @@ namespace PhanMemNoiSoi
                 return;
             }
             int currRowIndexCheck = dgvUserList.SelectedRows[selectedRowCount - 1].Index;
-            string groupId = dgvUserList.Rows[currRowIndexCheck].Cells["Num"].Value.ToString().Trim();
+            string groupId = dgvUserList.Rows[currRowIndexCheck].Cells["UserId"].Value.ToString().Trim();
 
             for (int i = 0; i < dgvRoleList.Rows.Count; i++)
             {
@@ -543,6 +513,41 @@ namespace PhanMemNoiSoi
             btnThem.Enabled = ValidatedUserRoles.Contains(RolesList.ADD_NEW_USER);
             btnSua.Enabled = ValidatedUserRoles.Contains(RolesList.MODIFY_USER);
             btnXoa.Enabled = ValidatedUserRoles.Contains(RolesList.DELETE_USER);
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedIndex == 1)
+            {
+                this.BeginInvoke(new Action(() => updateRoleList()));
+            }
+        }
+
+        private void updateRoleList()
+        {
+            loadUserGroup();
+            loadDgvRoleList();
+            //update role list
+            // check item selected
+            string query = "SELECT RoleId FROM UserGroupRole WHERE GroupId = @id";
+            SqlCommand sqlCom = new SqlCommand(query, DBConnection.Instance.sqlConn);
+            sqlCom.Parameters.Add("@id", SqlDbType.NChar).Value = "Admin";
+            SqlDataReader sqlDtaReader = sqlCom.ExecuteReader();
+
+            while (sqlDtaReader.Read())
+            {
+                string roleId = sqlDtaReader["RoleId"].ToString().Trim();
+                // update selected value on data grid
+                foreach (DataGridViewRow row in dgvRoleList.Rows)
+                {
+                    if (string.Equals(row.Cells["Num"].Value.ToString().Trim(), roleId))
+                    {
+                        DataGridViewCheckBoxCell chk = (DataGridViewCheckBoxCell)row.Cells["X"];
+                        chk.Value = chk.TrueValue;
+                        break;
+                    }
+                }
+            }
         }
     }
 }

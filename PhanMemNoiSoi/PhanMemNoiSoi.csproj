@@ -126,6 +126,12 @@
     <Compile Include="ConfigDB.Designer.cs">
       <DependentUpon>ConfigDB.cs</DependentUpon>
     </Compile>
+    <Compile Include="FullScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FullScreen.Designer.cs">
+      <DependentUpon>FullScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Glossary\AddNewGlossaryItem.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -288,6 +294,9 @@
     <EmbeddedResource Include="ConfigDB.resx">
       <DependentUpon>ConfigDB.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FullScreen.resx">
+      <DependentUpon>FullScreen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Glossary\AddNewGlossaryItem.resx">
       <DependentUpon>AddNewGlossaryItem.cs</DependentUpon>
     </EmbeddedResource>
@@ -407,6 +416,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="bin\Debug\continue_24.png" />
     <Content Include="bin\Debug\DirectX.Capture.dll" />
     <Content Include="bin\Debug\DirectX.Capture.pdb" />
     <Content Include="bin\Debug\DShowNET.dll" />
@@ -424,6 +434,15 @@
     <Content Include="bin\Debug\PhanMemNoiSoi.exe" />
     <Content Include="bin\Debug\PhanMemNoiSoi.pdb" />
     <Content Include="bin\Debug\PhanMemNoiSoi.vshost.exe" />
+    <None Include="Resources\open_icon_24x24.png" />
+    <None Include="Resources\loading-main.gif" />
+    <None Include="Resources\info-icon.gif" />
+    <None Include="Resources\pulse12.gif" />
+    <None Include="Resources\record-button.gif" />
+    <None Include="Resources\f6656aa6fdb6b8f905dea0bcc2d71dd8.gif" />
+    <None Include="Resources\e2edc731cbfc.png" />
+    <None Include="Resources\Capture-icon.png" />
+    <None Include="Resources\Capture-icon-24x24.png" />
     <Content Include="Resources\continue_24.png" />
     <None Include="Resources\pause_241.png" />
     <None Include="Resources\save_24.png" />

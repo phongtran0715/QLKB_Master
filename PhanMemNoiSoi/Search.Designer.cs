@@ -34,16 +34,13 @@
             this.rbThang = new System.Windows.Forms.RadioButton();
             this.rbNgay = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnReCheck = new System.Windows.Forms.Button();
-            this.btnDeleteSick = new System.Windows.Forms.Button();
-            this.btnXoa = new System.Windows.Forms.Button();
-            this.btnTatCa = new System.Windows.Forms.Button();
-            this.btnTimKiem = new System.Windows.Forms.Button();
             this.dtNgayKetThuc = new System.Windows.Forms.DateTimePicker();
             this.dtNgayBatDau = new System.Windows.Forms.DateTimePicker();
+            this.txtPhone = new System.Windows.Forms.TextBox();
             this.txtTenSearch = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.txtBirthday = new System.Windows.Forms.TextBox();
@@ -56,9 +53,6 @@
             this.txtTelephone = new System.Windows.Forms.TextBox();
             this.txtIdCode = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
-            this.btnNextImg = new System.Windows.Forms.Button();
-            this.btnPrevImg = new System.Windows.Forms.Button();
-            this.pbPatient = new System.Windows.Forms.PictureBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -68,17 +62,24 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnExit = new System.Windows.Forms.Button();
             this.gbResult = new System.Windows.Forms.GroupBox();
             this.dgvPatient = new System.Windows.Forms.DataGridView();
-            this.txtPhone = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
+            this.btnNextImg = new System.Windows.Forms.Button();
+            this.btnPrevImg = new System.Windows.Forms.Button();
+            this.pbPatient = new System.Windows.Forms.PictureBox();
+            this.btnReCheck = new System.Windows.Forms.Button();
+            this.btnDeleteSick = new System.Windows.Forms.Button();
+            this.btnXoa = new System.Windows.Forms.Button();
+            this.btnTatCa = new System.Windows.Forms.Button();
+            this.btnTimKiem = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbPatient)).BeginInit();
             this.gbResult.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPatient)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPatient)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -154,71 +155,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Bộ lọc";
             // 
-            // btnReCheck
-            // 
-            this.btnReCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReCheck.Image = global::PhanMemNoiSoi.Properties.Resources.refresh_24;
-            this.btnReCheck.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnReCheck.Location = new System.Drawing.Point(400, 122);
-            this.btnReCheck.Name = "btnReCheck";
-            this.btnReCheck.Size = new System.Drawing.Size(98, 35);
-            this.btnReCheck.TabIndex = 16;
-            this.btnReCheck.Text = "     Khám lại";
-            this.btnReCheck.UseVisualStyleBackColor = true;
-            this.btnReCheck.Click += new System.EventHandler(this.btnReCheck_Click);
-            // 
-            // btnDeleteSick
-            // 
-            this.btnDeleteSick.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDeleteSick.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteSick.Image")));
-            this.btnDeleteSick.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDeleteSick.Location = new System.Drawing.Point(504, 121);
-            this.btnDeleteSick.Name = "btnDeleteSick";
-            this.btnDeleteSick.Size = new System.Drawing.Size(140, 35);
-            this.btnDeleteSick.TabIndex = 13;
-            this.btnDeleteSick.Text = "     Xóa bệnh nhân";
-            this.btnDeleteSick.UseVisualStyleBackColor = true;
-            this.btnDeleteSick.Click += new System.EventHandler(this.btnDeleteSick_Click);
-            // 
-            // btnXoa
-            // 
-            this.btnXoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnXoa.Image = global::PhanMemNoiSoi.Properties.Resources.trach_24;
-            this.btnXoa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnXoa.Location = new System.Drawing.Point(240, 122);
-            this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(98, 35);
-            this.btnXoa.TabIndex = 15;
-            this.btnXoa.Text = " Tạo lại";
-            this.btnXoa.UseVisualStyleBackColor = true;
-            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
-            // 
-            // btnTatCa
-            // 
-            this.btnTatCa.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTatCa.Image = ((System.Drawing.Image)(resources.GetObject("btnTatCa.Image")));
-            this.btnTatCa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTatCa.Location = new System.Drawing.Point(127, 122);
-            this.btnTatCa.Name = "btnTatCa";
-            this.btnTatCa.Size = new System.Drawing.Size(98, 35);
-            this.btnTatCa.TabIndex = 14;
-            this.btnTatCa.Text = "Tất cả";
-            this.btnTatCa.UseVisualStyleBackColor = true;
-            this.btnTatCa.Click += new System.EventHandler(this.btnTatCa_Click);
-            // 
-            // btnTimKiem
-            // 
-            this.btnTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTimKiem.Image = ((System.Drawing.Image)(resources.GetObject("btnTimKiem.Image")));
-            this.btnTimKiem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTimKiem.Location = new System.Drawing.Point(9, 120);
-            this.btnTimKiem.Name = "btnTimKiem";
-            this.btnTimKiem.Size = new System.Drawing.Size(98, 35);
-            this.btnTimKiem.TabIndex = 13;
-            this.btnTimKiem.Text = "    Tìm kiếm";
-            this.btnTimKiem.UseVisualStyleBackColor = true;
-            this.btnTimKiem.Click += new System.EventHandler(this.btnTimKiem_Click);
-            // 
             // dtNgayKetThuc
             // 
             this.dtNgayKetThuc.Format = System.Windows.Forms.DateTimePickerFormat.Short;
@@ -236,6 +172,14 @@
             this.dtNgayBatDau.ShowCheckBox = true;
             this.dtNgayBatDau.Size = new System.Drawing.Size(175, 24);
             this.dtNgayBatDau.TabIndex = 10;
+            // 
+            // txtPhone
+            // 
+            this.txtPhone.Location = new System.Drawing.Point(105, 65);
+            this.txtPhone.MaxLength = 49;
+            this.txtPhone.Name = "txtPhone";
+            this.txtPhone.Size = new System.Drawing.Size(176, 24);
+            this.txtPhone.TabIndex = 9;
             // 
             // txtTenSearch
             // 
@@ -262,6 +206,15 @@
             this.label12.Size = new System.Drawing.Size(94, 18);
             this.label12.TabIndex = 6;
             this.label12.Text = "Ngày bắt đầu";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 68);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(51, 18);
+            this.label11.TabIndex = 5;
+            this.label11.Text = "Số ĐT";
             // 
             // label10
             // 
@@ -386,39 +339,6 @@
             this.txtName.Size = new System.Drawing.Size(97, 24);
             this.txtName.TabIndex = 12;
             // 
-            // btnNextImg
-            // 
-            this.btnNextImg.Image = ((System.Drawing.Image)(resources.GetObject("btnNextImg.Image")));
-            this.btnNextImg.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNextImg.Location = new System.Drawing.Point(283, 528);
-            this.btnNextImg.Name = "btnNextImg";
-            this.btnNextImg.Size = new System.Drawing.Size(98, 35);
-            this.btnNextImg.TabIndex = 11;
-            this.btnNextImg.Text = "  Sau";
-            this.btnNextImg.UseVisualStyleBackColor = true;
-            this.btnNextImg.Click += new System.EventHandler(this.btnNextImg_Click);
-            // 
-            // btnPrevImg
-            // 
-            this.btnPrevImg.Image = ((System.Drawing.Image)(resources.GetObject("btnPrevImg.Image")));
-            this.btnPrevImg.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPrevImg.Location = new System.Drawing.Point(83, 528);
-            this.btnPrevImg.Name = "btnPrevImg";
-            this.btnPrevImg.Size = new System.Drawing.Size(98, 35);
-            this.btnPrevImg.TabIndex = 10;
-            this.btnPrevImg.Text = "   Trước";
-            this.btnPrevImg.UseVisualStyleBackColor = true;
-            this.btnPrevImg.Click += new System.EventHandler(this.btnPrevImg_Click);
-            // 
-            // pbPatient
-            // 
-            this.pbPatient.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbPatient.Location = new System.Drawing.Point(83, 279);
-            this.pbPatient.Name = "pbPatient";
-            this.pbPatient.Size = new System.Drawing.Size(291, 223);
-            this.pbPatient.TabIndex = 9;
-            this.pbPatient.TabStop = false;
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -500,19 +420,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Tên";
             // 
-            // btnExit
-            // 
-            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExit.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.Image")));
-            this.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnExit.Location = new System.Drawing.Point(1121, 598);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(98, 35);
-            this.btnExit.TabIndex = 12;
-            this.btnExit.Text = "Thoát";
-            this.btnExit.UseVisualStyleBackColor = true;
-            this.btnExit.Click += new System.EventHandler(this.button4_Click);
-            // 
             // gbResult
             // 
             this.gbResult.Controls.Add(this.dgvPatient);
@@ -540,30 +447,138 @@
             this.dgvPatient.Size = new System.Drawing.Size(805, 415);
             this.dgvPatient.TabIndex = 0;
             this.dgvPatient.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgPatient_CellClick);
-            this.dgvPatient.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgPatient_DataBindingComplete);
             // 
-            // txtPhone
+            // button1
             // 
-            this.txtPhone.Location = new System.Drawing.Point(105, 65);
-            this.txtPhone.MaxLength = 49;
-            this.txtPhone.Name = "txtPhone";
-            this.txtPhone.Size = new System.Drawing.Size(176, 24);
-            this.txtPhone.TabIndex = 9;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Image = global::PhanMemNoiSoi.Properties.Resources.open_icon_24x24;
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(911, 599);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(122, 35);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "     Mở thư mục";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // label11
+            // btnExit
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 68);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(51, 18);
-            this.label11.TabIndex = 5;
-            this.label11.Text = "Số ĐT";
+            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExit.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.Image")));
+            this.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnExit.Location = new System.Drawing.Point(1094, 599);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(108, 35);
+            this.btnExit.TabIndex = 12;
+            this.btnExit.Text = "Thoát";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // btnNextImg
+            // 
+            this.btnNextImg.Image = ((System.Drawing.Image)(resources.GetObject("btnNextImg.Image")));
+            this.btnNextImg.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnNextImg.Location = new System.Drawing.Point(265, 529);
+            this.btnNextImg.Name = "btnNextImg";
+            this.btnNextImg.Size = new System.Drawing.Size(108, 35);
+            this.btnNextImg.TabIndex = 11;
+            this.btnNextImg.Text = "  Sau";
+            this.btnNextImg.UseVisualStyleBackColor = true;
+            this.btnNextImg.Click += new System.EventHandler(this.btnNextImg_Click);
+            // 
+            // btnPrevImg
+            // 
+            this.btnPrevImg.Image = ((System.Drawing.Image)(resources.GetObject("btnPrevImg.Image")));
+            this.btnPrevImg.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPrevImg.Location = new System.Drawing.Point(83, 528);
+            this.btnPrevImg.Name = "btnPrevImg";
+            this.btnPrevImg.Size = new System.Drawing.Size(121, 35);
+            this.btnPrevImg.TabIndex = 10;
+            this.btnPrevImg.Text = "   Trước";
+            this.btnPrevImg.UseVisualStyleBackColor = true;
+            this.btnPrevImg.Click += new System.EventHandler(this.btnPrevImg_Click);
+            // 
+            // pbPatient
+            // 
+            this.pbPatient.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbPatient.Location = new System.Drawing.Point(83, 279);
+            this.pbPatient.Name = "pbPatient";
+            this.pbPatient.Size = new System.Drawing.Size(291, 223);
+            this.pbPatient.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbPatient.TabIndex = 9;
+            this.pbPatient.TabStop = false;
+            // 
+            // btnReCheck
+            // 
+            this.btnReCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReCheck.Image = global::PhanMemNoiSoi.Properties.Resources.refresh_24;
+            this.btnReCheck.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnReCheck.Location = new System.Drawing.Point(400, 122);
+            this.btnReCheck.Name = "btnReCheck";
+            this.btnReCheck.Size = new System.Drawing.Size(98, 35);
+            this.btnReCheck.TabIndex = 16;
+            this.btnReCheck.Text = "     Khám lại";
+            this.btnReCheck.UseVisualStyleBackColor = true;
+            this.btnReCheck.Click += new System.EventHandler(this.btnReCheck_Click);
+            // 
+            // btnDeleteSick
+            // 
+            this.btnDeleteSick.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeleteSick.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteSick.Image")));
+            this.btnDeleteSick.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDeleteSick.Location = new System.Drawing.Point(504, 121);
+            this.btnDeleteSick.Name = "btnDeleteSick";
+            this.btnDeleteSick.Size = new System.Drawing.Size(140, 35);
+            this.btnDeleteSick.TabIndex = 13;
+            this.btnDeleteSick.Text = "     Xóa bệnh nhân";
+            this.btnDeleteSick.UseVisualStyleBackColor = true;
+            this.btnDeleteSick.Click += new System.EventHandler(this.btnDeleteSick_Click);
+            // 
+            // btnXoa
+            // 
+            this.btnXoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnXoa.Image = global::PhanMemNoiSoi.Properties.Resources.trach_24;
+            this.btnXoa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnXoa.Location = new System.Drawing.Point(240, 122);
+            this.btnXoa.Name = "btnXoa";
+            this.btnXoa.Size = new System.Drawing.Size(98, 35);
+            this.btnXoa.TabIndex = 15;
+            this.btnXoa.Text = " Tạo lại";
+            this.btnXoa.UseVisualStyleBackColor = true;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
+            // 
+            // btnTatCa
+            // 
+            this.btnTatCa.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTatCa.Image = ((System.Drawing.Image)(resources.GetObject("btnTatCa.Image")));
+            this.btnTatCa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnTatCa.Location = new System.Drawing.Point(127, 122);
+            this.btnTatCa.Name = "btnTatCa";
+            this.btnTatCa.Size = new System.Drawing.Size(98, 35);
+            this.btnTatCa.TabIndex = 14;
+            this.btnTatCa.Text = "Tất cả";
+            this.btnTatCa.UseVisualStyleBackColor = true;
+            this.btnTatCa.Click += new System.EventHandler(this.btnTatCa_Click);
+            // 
+            // btnTimKiem
+            // 
+            this.btnTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTimKiem.Image = ((System.Drawing.Image)(resources.GetObject("btnTimKiem.Image")));
+            this.btnTimKiem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnTimKiem.Location = new System.Drawing.Point(9, 120);
+            this.btnTimKiem.Name = "btnTimKiem";
+            this.btnTimKiem.Size = new System.Drawing.Size(98, 35);
+            this.btnTimKiem.TabIndex = 13;
+            this.btnTimKiem.Text = "    Tìm kiếm";
+            this.btnTimKiem.UseVisualStyleBackColor = true;
+            this.btnTimKiem.Click += new System.EventHandler(this.btnTimKiem_Click);
             // 
             // Search
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1222, 637);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.gbResult);
@@ -585,9 +600,9 @@
             this.groupBox2.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbPatient)).EndInit();
             this.gbResult.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPatient)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPatient)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -638,5 +653,6 @@
         private System.Windows.Forms.Button btnReCheck;
         private System.Windows.Forms.TextBox txtPhone;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button button1;
     }
 }
