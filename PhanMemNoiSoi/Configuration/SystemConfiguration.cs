@@ -47,14 +47,8 @@ namespace PhanMemNoiSoi
             this.Close();
         }
 
-        private void rbLocal_CheckedChanged(object sender, EventArgs e)
-        {
-        }
-
         private void SystemConfiguration_Load(object sender, EventArgs e)
         {
-            //Load data from config file
-
             //load capture type
             string capType = Properties.Settings.Default.captureType;
             if (string.Equals(capType, "capture_only"))
@@ -113,6 +107,14 @@ namespace PhanMemNoiSoi
         {
             MessageBox.Show("Bạn không có quyền truy cập vào danh mục này.\nVui lòng liên hệ với admin!",
                             "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            ActiveKey activeFr = new ActiveKey();
+            activeFr.ShowDialog();
+            this.Close();
         }
     }
 }

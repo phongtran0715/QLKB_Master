@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace PhanMemNoiSoi
@@ -286,6 +287,46 @@ namespace PhanMemNoiSoi
             SqlCommand comd = new SqlCommand(sql, DBConnection.Instance.sqlConn);
             int count = Convert.ToInt32(comd.ExecuteScalar());
             return count;
+        }
+
+        public string RemoveWhitespace(string input)
+        {
+            return new string(input.ToCharArray()
+                .Where(c => !Char.IsWhiteSpace(c))
+                .ToArray());
+        }
+
+        public void deleteFolder(string folderPath)
+        {
+            try
+            {
+                System.IO.DirectoryInfo di = new DirectoryInfo(folderPath);
+                foreach (FileInfo file in di.GetFiles())
+                {
+                    file.Delete();
+                }
+                foreach (DirectoryInfo dir in di.GetDirectories())
+                {
+                    dir.Delete(true);
+                }
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+
+        public bool myValidateRoles(string strInput)
+        {
+            bool isValid = false;
+            foreach (string str in Session.Instance.UserRole)
+            {
+                if (string.Equals(str, strInput))
+                {
+                    isValid = true;
+                    break;
+                }
+            }
+            return isValid;
         }
     }
 }

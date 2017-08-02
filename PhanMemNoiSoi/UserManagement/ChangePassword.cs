@@ -49,6 +49,8 @@ namespace PhanMemNoiSoi
                         mySQL.Parameters.Add("@pass", SqlDbType.NChar).Value = txtMKMoi.Text.Trim();
                         mySQL.Parameters.Add("@id", SqlDbType.Int).Value = Session.Instance.UserId;
                         mySQL.ExecuteNonQuery();
+                        string msg = "Thay đổi mật khẩu tài khoản '" + Session.Instance.UserName + "'";
+                        Log.Instance.LogMessageToDB(DateTime.Now, Session.Instance.UserId, Session.Instance.UserName, msg);
                         MessageBox.Show("Cập nhập mật khẩu thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.Dispose();
                     }

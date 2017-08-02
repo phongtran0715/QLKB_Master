@@ -17,7 +17,7 @@ namespace PhanMemNoiSoi
         {
             this.Hide();
             IPrincipal userPrincipal = new GenericPrincipal(WindowsIdentity.GetCurrent(),
-                                           new string[] { RolesList.CHANGE_GLOSSARY });
+                                            Session.Instance.UserRole);
             GlossaryMainteance glMaFr = new GlossaryMainteance(userPrincipal);
             glMaFr.ShowDialog();
             this.Show();

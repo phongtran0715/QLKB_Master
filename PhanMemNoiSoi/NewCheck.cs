@@ -489,7 +489,7 @@ namespace PhanMemNoiSoi
         {
             if (e.RowIndex != -1)
             {
-                string num = dgvBenhNhan.Rows[e.RowIndex].Cells[0].Value.ToString().Trim();
+                string num = dgvBenhNhan.Rows[e.RowIndex].Cells["SickNum"].Value.ToString().Trim();
                 PatientDetail patienDetail = new PatientDetail(num);
                 patienDetail.RefreshDgv += updateDgv;
                 patienDetail.ShowDialog();

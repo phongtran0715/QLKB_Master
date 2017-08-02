@@ -10,15 +10,21 @@ namespace PhanMemNoiSoi
     public partial class LogManager : SecureBaseForm
     //public partial class LogManager : Form
     {
-        SqlDataAdapter dtaPatient = new SqlDataAdapter();
-        DataTable tbPatient = new DataTable();
-        BindingSource bsPatient = new BindingSource();
+        SqlDataAdapter dtaLog = new SqlDataAdapter();
+        DataTable tbLog = new DataTable();
+        BindingSource bsLog = new BindingSource();
         Helper helper = new Helper();
+        ComboboxItem cbSelectedItem;
+        int MAX_LENGHT = 100;
 
         public LogManager(IPrincipal userPrincipal) : 
             base(Session.Instance.UserRole, userPrincipal)
         {
             InitializeComponent();
+            cbSelectedItem = new ComboboxItem();
+            cbSelectedItem.Text = "";
+            cbSelectedItem.Value = 0;
+            cbUser.Items.Add(cbSelectedItem);
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -26,34 +32,43 @@ namespace PhanMemNoiSoi
             this.Close();
         }
 
-        private void Search_Load(object sender, EventArgs e)
+        private void LogManager_Load(object sender, EventArgs e)
         {
-
+            //load data for combo box
+            string sqlQuery = "SELECT UserId, UserName FROM UserList;";
+            SqlCommand mySQL = new SqlCommand(sqlQuery, DBConnection.Instance.sqlConn);
+            SqlDataReader rdrUser = mySQL.ExecuteReader();
+            if (rdrUser.HasRows)
+            {
+                while (rdrUser.Read())
+                {
+                    //check password
+                    string uId = rdrUser["UserId"].ToString().Trim();
+                    string uName = rdrUser["UserName"].ToString().Trim();
+                    ComboboxItem item = new ComboboxItem();
+                    item.Text = uName;
+                    item.Value = uId;
+                    cbUser.Items.Add(item);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Cơ sở dữ liệu trống. Liên hệ với nhân viên quản trị phần mềm ", "Thông báo",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            dtNgayBatDau.Value = DateTime.Now;
+            dtNgayKetThuc.Value = dtNgayBatDau.Value;
+            //load data for log grid view
+            loadDgvLog();
         }
 
         private void btnTatCa_Click(object sender, EventArgs e)
         {
-            // load data for data grid view
-            string query = "SELECT SickNum,SickName, Age, Birthday, Createtime FROM SickData;";
-            dtaPatient = new SqlDataAdapter(query, DBConnection.Instance.sqlConn);
-
-            SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dtaPatient);
-
-            tbPatient = new DataTable();
-            tbPatient.Locale = System.Globalization.CultureInfo.InvariantCulture;
-            dtaPatient.Fill(tbPatient);
-            bsPatient.DataSource = tbPatient;
-
-            // Resize the DataGridView columns to fit the newly loaded content.
-            dgLogView.AutoResizeColumns(
-                DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
-            dgLogView.DataSource = bsPatient;
-            dgLogView.Columns[0].Visible = false;
-            dgLogView.Columns[1].HeaderText = "Tên";
-            dgLogView.Columns[2].HeaderText = "Tuổi";
-            dgLogView.Columns[3].HeaderText = "Ngày sinh";
-            dgLogView.Columns[4].HeaderText = "Ngày khám";
-            helper.setRowNumber(dgLogView);
+            //cbUser.Text = "";
+            dtNgayBatDau.Checked = false;
+            dtNgayKetThuc.Checked = false;
+            txtContent.Text = "";
+            loadDgvLog();
         }
 
         private void dgPatient_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -95,27 +110,59 @@ namespace PhanMemNoiSoi
         {
         }
 
+        private void loadDgvLog()
+        {
+            // load data for data grid view
+            string query = "SELECT TOP " + MAX_LENGHT.ToString() +" Num,TimeLog, UserName, Descript FROM WorkLog ORDER BY TimeLog DESC;";
+            dtaLog = new SqlDataAdapter(query, DBConnection.Instance.sqlConn);
+
+            SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dtaLog);
+
+            tbLog = new DataTable();
+            tbLog.Locale = System.Globalization.CultureInfo.InvariantCulture;
+            dtaLog.Fill(tbLog);
+            bsLog.DataSource = tbLog;
+            dgLogView.DataSource = bsLog;
+
+            dgLogView.Columns["Num"].Visible = false;
+            dgLogView.Columns["TimeLog"].HeaderText = "Thời gian";
+            dgLogView.Columns["UserName"].HeaderText = "User";
+            dgLogView.Columns["Descript"].HeaderText = "Nội dung";
+
+            dgLogView.Columns["TimeLog"].Width = dgLogView.Width / 5;
+            dgLogView.Columns["UserName"].Width = dgLogView.Width / 5;
+            dgLogView.Columns["Descript"].Width = dgLogView.Width * 3 / 5;
+            helper.setRowNumber(dgLogView);
+        }
+
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
+            //check start date & end date 
+            int checkTime = DateTime.Compare(dtNgayBatDau.Value, dtNgayKetThuc.Value);
+            if(checkTime > 0)
+            {
+                MessageBox.Show("Điều kiện tìm kiếm không hợp lệ. \n Ngày bắt đầu phải nhỏ hơn ngày kết thúc", 
+                                "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             #region comment
-            /*
             // create sql command
             bool isAnd = false;
-            string query = "SELECT SickNum,SickName, Age, Birthday, Createtime FROM SickData ";
-            if (!string.IsNullOrEmpty(txtTenSearch.Text.Trim()))
+            string query = "SELECT " + MAX_LENGHT.ToString() +" Num, TimeLog, UserName, Descript FROM WorkLog ";
+            if (!string.IsNullOrEmpty(cbUser.Text.Trim()))
             {
-                query += " WHERE SickName LIKE '%" + txtTenSearch.Text.Trim() + "%'";
+                query += " WHERE UserId = '" + cbSelectedItem.Value + "'";
                 isAnd = true;
             }
-            if (!string.IsNullOrEmpty(txtCmndSearch.Text.Trim()))
+            if (!string.IsNullOrEmpty(txtContent.Text.Trim()))
             {
                 if(isAnd == true)
                 {
-                    query += " AND IDCode LIKE '%" + txtTenSearch.Text.Trim() + "%'";
+                    query += " AND Descript LIKE '%" + txtContent.Text.Trim() + "%'";
                 }
                 else
                 {
-                    query += " WHERE IDCode LIKE '%" + txtTenSearch.Text.Trim() + "%'";
+                    query += " WHERE Descript LIKE '%" + txtContent.Text.Trim() + "%'";
                     isAnd = true;
                 }
             }
@@ -123,46 +170,50 @@ namespace PhanMemNoiSoi
             {
                 if(isAnd == true)
                 {
-                    query += " AND Createtime >= '" + dtNgayBatDau.Value.ToShortDateString() + "'";
+                    query += " AND TimeLog >= '" + String.Format("{0:d}", dtNgayBatDau.Value) + "'";
                 }
                 else
                 {
-                    query += " WHERE Createtime >= '" + dtNgayBatDau.Value.ToShortDateString() + "'";
+                    query += " WHERE TimeLog >= '" + String.Format("{0:d}", dtNgayBatDau.Value) + "'";
                     isAnd = true;
                 }
             }
-            if(dtNgayKetThuc.Checked == true)
+            bool timeCondi = string.Equals(dtNgayBatDau.Value.ToShortDateString(), dtNgayKetThuc.Value.ToShortDateString());
+            if ((dtNgayKetThuc.Checked == true) && (!timeCondi))
             {
                 if(isAnd == true)
                 {
-                    query += " AND Createtime <= '" + dtNgayKetThuc.Value.ToShortDateString() + "'";
+                    query += " AND TimeLog <= '" + String.Format("{0:d}", dtNgayKetThuc.Value) + "'";
                 }
                 else
                 {
-                    query += " WHERE Createtime <= '" + dtNgayKetThuc.Value.ToShortDateString() + "'";
+                    query += " WHERE TimeLog <= '" + String.Format("{0:d}", dtNgayKetThuc.Value) + "'";
                     isAnd = true;
                 }
             }
-            query += ";";
-            dtaPatient = new SqlDataAdapter(query, DBConnection.Instance.sqlConn);
+            query += " ORDER BY TimeLog DESC;";
+            Console.WriteLine("query =" + query);
+            dtaLog = new SqlDataAdapter(query, DBConnection.Instance.sqlConn);
 
-            SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dtaPatient);
-            tbPatient = new DataTable();
-            tbPatient.Locale = System.Globalization.CultureInfo.InvariantCulture;
-            dtaPatient.Fill(tbPatient);
-            bsPatient.DataSource = tbPatient;
+            SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dtaLog);
+            tbLog = new DataTable();
+            tbLog.Locale = System.Globalization.CultureInfo.InvariantCulture;
+            dtaLog.Fill(tbLog);
+            bsLog.DataSource = tbLog;
 
             // Resize the DataGridView columns to fit the newly loaded content.
             dgLogView.AutoResizeColumns(
                 DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
-            dgLogView.DataSource = bsPatient;
-            dgLogView.Columns[0].Visible = false;
-            dgLogView.Columns[1].HeaderText = "Tên";
-            dgLogView.Columns[2].HeaderText = "Tuổi";
-            dgLogView.Columns[3].HeaderText = "Ngày sinh";
-            dgLogView.Columns[4].HeaderText = "Ngày khám";
-            setRowNumber(dgLogView);
-            */
+            dgLogView.DataSource = bsLog;
+            dgLogView.Columns["Num"].Visible = false;
+            dgLogView.Columns["TimeLog"].HeaderText = "Thời gian";
+            dgLogView.Columns["UserName"].HeaderText = "User";
+            dgLogView.Columns["Descript"].HeaderText = "Nội dung";
+
+            dgLogView.Columns["TimeLog"].Width = dgLogView.Width / 5;
+            dgLogView.Columns["UserName"].Width = dgLogView.Width / 5;
+            dgLogView.Columns["Descript"].Width = dgLogView.Width * 3 / 5;
+            helper.setRowNumber(dgLogView);
             #endregion
         }
 
@@ -175,6 +226,79 @@ namespace PhanMemNoiSoi
             MessageBox.Show("Bạn không có quyền truy cập vào danh mục này. " 
                             + "\n Vui lòng liên hệ với admin.", "Thông báo",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void dgLogView_Resize(object sender, EventArgs e)
+        {
+            dgLogView.Columns["TimeLog"].Width = dgLogView.Width / 5;
+            dgLogView.Columns["UserName"].Width = dgLogView.Width / 5;
+            dgLogView.Columns["Descript"].Width = dgLogView.Width * 3 / 5;
+        }
+
+        private void btnClearLog_Click(object sender, EventArgs e)
+        {
+            int selectedRowCount =
+            dgLogView.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            if (selectedRowCount <= 0)
+            {
+                return;
+            }
+            DialogResult result = MessageBox.Show("Bạn có muốn xóa bản ghi này?", "Thông báo",
+                                                    MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (result == DialogResult.OK)
+            {
+                int currRowIndexCheck = dgLogView.SelectedRows[selectedRowCount - 1].Index;
+                string num = dgLogView.Rows[currRowIndexCheck].Cells["Num"].Value.ToString().Trim();
+                //delete from database
+                try
+                {
+                    string sqlCommand = "DELETE FROM WorkLog WHERE Num = @num";
+                    SqlCommand mySQL = new SqlCommand(sqlCommand, DBConnection.Instance.sqlConn);
+                    mySQL.Parameters.Add("@num", SqlDbType.Int).Value = num;
+                    mySQL.ExecuteReader();
+                    // delete data grid view
+                    tbLog.Rows.RemoveAt(currRowIndexCheck);
+                    bsLog.DataSource = tbLog;
+                    dgLogView.DataSource = bsLog;
+                    dgLogView.Update();
+                    dgLogView.Refresh();
+                    helper.setRowNumber(dgLogView);
+                }
+                catch (System.Exception ex)
+                {
+                    MessageBox.Show("Không kết nối được đến cơ sở dữ liệu. Vui lòng thử lại sau! \n " + ex.ToString(),
+                        "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void dgLogView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            if (dgLogView.Rows.Count > 4)
+            {
+                dgLogView.AllowUserToAddRows = false;
+            }
+            else
+            {
+                dgLogView.AllowUserToAddRows = true;
+            }
+        }
+
+        private void cbUser_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBox cmb = (ComboBox)sender;
+            cbSelectedItem = (ComboboxItem)cmb.SelectedItem;
+        }
+    }
+
+    public class ComboboxItem
+    {
+        public string Text { get; set; }
+        public object Value { get; set; }
+
+        public override string ToString()
+        {
+            return Text;
         }
     }
 }

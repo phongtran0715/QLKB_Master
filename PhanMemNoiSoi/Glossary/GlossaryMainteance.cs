@@ -169,6 +169,8 @@ namespace PhanMemNoiSoi
                 string sqlCommand = "UPDATE CheckItem SET Content = N'" + msg + "' WHERE ItemCode = N'" + code + "'";
                 SqlCommand mySQL = new SqlCommand(sqlCommand, DBConnection.Instance.sqlConn);
                 mySQL.ExecuteNonQuery();
+                string msgLog = "Sửa đổi danh mục nội dung '" + msg + "'";
+                Log.Instance.LogMessageToDB(DateTime.Now, Session.Instance.UserId, Session.Instance.UserName, msgLog);
             }
             catch (System.Exception ex)
             {
@@ -205,6 +207,8 @@ namespace PhanMemNoiSoi
                 mySQL.Parameters.Add("@content", SqlDbType.NChar).Value = msg;
                 mySQL.Parameters.Add("@showNum", SqlDbType.Int).Value = 0;
                 mySQL.Parameters.Add("@isDisplay", SqlDbType.Int).Value = 0;
+                string msgLog = "Thêm mới danh mục '" + msg + "'";
+                Log.Instance.LogMessageToDB(DateTime.Now, Session.Instance.UserId, Session.Instance.UserName, msgLog);
                 mySQL.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -236,6 +240,8 @@ namespace PhanMemNoiSoi
             {
                 string sqlCommand = "UPDATE CheckItemContent SET Content = N'" + msg + "' WHERE ContentCode = N'" + code + "'";
                 SqlCommand mySQL = new SqlCommand(sqlCommand, DBConnection.Instance.sqlConn);
+                string msgLog = "Sửa đổi danh mục nội dung '" + msg + "'";
+                Log.Instance.LogMessageToDB(DateTime.Now, Session.Instance.UserId, Session.Instance.UserName, msgLog);
                 mySQL.ExecuteNonQuery();
             }
             catch (System.Exception ex)
@@ -279,6 +285,8 @@ namespace PhanMemNoiSoi
                                     + itemCode + "', N'" + contentCode + "',N'" + msg + "')";
                 mySQL = new SqlCommand(sqlCommand, DBConnection.Instance.sqlConn);
                 mySQL.ExecuteNonQuery();
+                string msgLog = "Thêm mới danh mục nội dung '" + msg + "'";
+                Log.Instance.LogMessageToDB(DateTime.Now, Session.Instance.UserId, Session.Instance.UserName, msgLog);
             }
             catch (System.Exception ex)
             {
@@ -327,14 +335,17 @@ namespace PhanMemNoiSoi
             }
 
             string itemCode = dgvCheck.Rows[currRowIndexCheck].Cells[0].Value.ToString().Trim();
+            string itemContent = dgvCheck.Rows[currRowIndexCheck].Cells[1].Value.ToString().Trim();
 
             //delete from database
             try
             {
                 string sqlCommand = "DELETE FROM CheckItem WHERE ItemCode = '" + itemCode + "'";
                 SqlCommand mySQL = new SqlCommand(sqlCommand, DBConnection.Instance.sqlConn);
+                string msg = "Xóa danh mục '" + itemContent + "'";
+                Log.Instance.LogMessageToDB(DateTime.Now, Session.Instance.UserId, Session.Instance.UserName, msg);
                 mySQL.ExecuteReader();
-
+                updateShowNum(1);
             }
             catch (System.Exception ex)
             {
@@ -371,12 +382,15 @@ namespace PhanMemNoiSoi
 
             int currRowIndexCheck = dgCheckContentDetail.SelectedRows[selectedRowCount - 1].Index;
             string contentCode = dgCheckContentDetail.Rows[currRowIndexCheck].Cells[0].Value.ToString().Trim();
+            string content = dgCheckContentDetail.Rows[currRowIndexCheck].Cells[1].Value.ToString().Trim();
 
             //delete from database
             try
             {
                 string sqlCommand = "DELETE FROM CheckItemContent WHERE ContentCode = '" + contentCode + "'";
                 SqlCommand mySQL = new SqlCommand(sqlCommand, DBConnection.Instance.sqlConn);
+                string msg = "Xóa danh mục nội dung '" + content + "'";
+                Log.Instance.LogMessageToDB(DateTime.Now, Session.Instance.UserId, Session.Instance.UserName, msg);
                 mySQL.ExecuteReader();
 
             }
@@ -407,7 +421,7 @@ namespace PhanMemNoiSoi
         private void btnSua_ND_Click(object sender, EventArgs e)
         {
             int selectedRowCount =
-       dgCheckContentDetail.Rows.GetRowCount(DataGridViewElementStates.Selected);
+                dgCheckContentDetail.Rows.GetRowCount(DataGridViewElementStates.Selected);
             if (selectedRowCount <= 0)
             {
                 MessageBox.Show("now row select");
@@ -719,7 +733,7 @@ namespace PhanMemNoiSoi
 
                 //update to increase previous item position in database
                 string uQuery = "UPDATE CheckItem SET ShowNum = '" + index +
-                                "' WHERE ItemCode = (SELECT ItemCode FROM CheckItem WHERE ShowNum = '" + (index - 1) + "')";
+                                "' WHERE ItemCode = (SELECT ItemCode FROM CheckItem WHERE ShowNum = '" + (index - 1) + "' AND IsDisplay = 1)";
                 SqlCommand uSQL = new SqlCommand(uQuery, DBConnection.Instance.sqlConn);
                 uSQL.ExecuteReader();
 
@@ -752,7 +766,7 @@ namespace PhanMemNoiSoi
 
                 //update to decrease after item position in database
                 string uQuery = "UPDATE CheckItem SET ShowNum = '" + index +
-                                "' WHERE ItemCode = (SELECT ItemCode FROM CheckItem WHERE ShowNum = '" + (index + 1) + "')";
+                                "' WHERE ItemCode = (SELECT ItemCode FROM CheckItem WHERE ShowNum = '" + (index + 1) + "' AND IsDisplay = 1);";
                 SqlCommand uSQL = new SqlCommand(uQuery, DBConnection.Instance.sqlConn);
                 uSQL.ExecuteReader();
 
@@ -844,6 +858,50 @@ namespace PhanMemNoiSoi
         {
             MessageBox.Show("Bạn không có quyền truy cập vào danh mục này.\nVui lòng liên hệ với admin!",
                             "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void GlossaryMainteance_UserIsAllowed(object sender, EventArgs e)
+        {
+            btnAddCheck.Enabled = helper.myValidateRoles(RolesList.CHANGE_GLOSSARY);
+            btnAddCheckContent.Enabled = helper.myValidateRoles(RolesList.CHANGE_GLOSSARY);
+            btnDeleteCheck.Enabled = helper.myValidateRoles(RolesList.CHANGE_GLOSSARY);
+            btnDeleteCheckContent.Enabled = helper.myValidateRoles(RolesList.CHANGE_GLOSSARY);
+            btnEditCheck.Enabled = helper.myValidateRoles(RolesList.CHANGE_GLOSSARY);
+            btnEditCheckContent.Enabled = helper.myValidateRoles(RolesList.CHANGE_GLOSSARY);
+            btnMoveDown.Visible = helper.myValidateRoles(RolesList.CHANGE_GLOSSARY);
+            btnMoveUp.Visible = helper.myValidateRoles(RolesList.CHANGE_GLOSSARY);
+            btnAddInfoReport.Visible = helper.myValidateRoles(RolesList.CHANGE_GLOSSARY);
+            btnDeleteInfoReport.Visible = helper.myValidateRoles(RolesList.CHANGE_GLOSSARY);
+        }
+
+        private void dgvCheck_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex != -1)
+            {
+                int currRowIndexCheck = e.RowIndex;
+                string code = dgvCheck.Rows[currRowIndexCheck].Cells[0].Value.ToString().Trim();
+                string content = dgvCheck.Rows[currRowIndexCheck].Cells[1].Value.ToString().Trim();
+
+                EditGlossaryItem glossItemFr = new EditGlossaryItem(userPrincipal, content, code);
+                //call back function update data grid
+                glossItemFr.updateData += updateDgvDanhMuc;
+                glossItemFr.ShowDialog();
+            }
+        }
+
+        private void dgCheckContentDetail_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex != -1)
+            {
+                int currRowIndexCheckContent = e.RowIndex;
+                string code = dgCheckContentDetail.Rows[currRowIndexCheckContent].Cells[0].Value.ToString().Trim();
+                string content = dgCheckContentDetail.Rows[currRowIndexCheckContent].Cells[1].Value.ToString().Trim();
+
+                EditGlossaryItemContent glossItemContentFr = new EditGlossaryItemContent(content, code);
+                //call back function update data grid
+                glossItemContentFr.updateData += updateDgvNoiDung;
+                glossItemContentFr.ShowDialog();
+            }
         }
     }
 }

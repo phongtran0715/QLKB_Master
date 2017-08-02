@@ -10,21 +10,19 @@ if not exists (select name from sysobjects where name = 'UserList' and type='U')
 
 CREATE TABLE [dbo].[UserList](
 	[UserId] [int] IDENTITY(0,1) NOT NULL,
-	--[UserId] [int] NOT NULL,
 	[UserName] [nchar](100) COLLATE Vietnamese_CI_AS NOT NULL,
 	[Sex] [nchar](10) COLLATE Vietnamese_CI_AS NOT NULL,
-	[WorkGroup] [nchar](50) COLLATE Vietnamese_CI_AS NOT NULL,
+	[WorkGroupId] [nchar](50) NOT NULL,
 	[Password] [nchar](20) COLLATE Vietnamese_CI_AS NULL,
-	[USERTYPE] [nchar](20) COLLATE Vietnamese_CI_AS NULL,
  CONSTRAINT [PK_UserList] PRIMARY KEY CLUSTERED 
 (
 	[UserId] ASC
 )WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 begin transaction
-INSERT INTO [QuangHuyMedical].[dbo].[UserList]([UserName],[Sex],[WorkGroup],[Password],[USERTYPE]) VALUES ('sys','male','','admin','')
+INSERT INTO [QuangHuyMedical].[dbo].[UserList]([UserName],[Sex],[WorkGroupId],[Password]) VALUES ('sys','male','Admin','admin')
 commit transaction
-
+go
 
 --(2)	SickData
 if not exists (select name from sysobjects where name = 'SickData' and type='U')
@@ -49,7 +47,7 @@ CREATE TABLE [dbo].[SickData](
 	[SickNum] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
-
+go
 
 --(3)	HospitalInfo
 if not exists (select name from sysobjects where name = 'HospitalInfo' and type='U')
@@ -60,7 +58,7 @@ CREATE TABLE [dbo].[HospitalInfo](
 	[HospitalCall] [nchar](20) COLLATE Vietnamese_CI_AS NULL,
 	[HospitalPost] [nchar](20) COLLATE Vietnamese_CI_AS NULL
 ) ON [PRIMARY]
-
+go
 
 --(4)	CheckRecord
 if not exists(select name from sysobjects where name = 'CheckRecord' and type='U')
@@ -70,7 +68,7 @@ CREATE TABLE [dbo].[CheckRecord](
 	[ItemCode] [nchar](6) COLLATE Vietnamese_CI_AS NULL,
 	[ItemContentCode] [char](6) COLLATE Vietnamese_CI_AS NULL
 ) ON [PRIMARY]
-
+go
 
 
 --(5)	CheckItemContent
@@ -82,7 +80,7 @@ CREATE TABLE [dbo].[CheckItemContent](
 	[Content] [nvarchar](100) COLLATE Vietnamese_CI_AS NULL,
 	[ShowNum] [int] NULL
 ) ON [PRIMARY]
-
+go
 
 --(6)	CheckItem
 if not exists (select name from sysobjects where name = 'CheckItem' and type='U')
@@ -94,7 +92,7 @@ CREATE TABLE [dbo].[CheckItem](
 	[ShowNum] [int] NULL,
 	[IsDisplay] [int] NULL CONSTRAINT [DF_CheckItem_IsDisplay]  DEFAULT ((0))
 ) ON [PRIMARY]
-
+go
 
 --(10)	BackupInfo
 if not exists (select name from sysobjects where name = 'BackupInfo' and type='U')
@@ -106,9 +104,10 @@ CREATE TABLE [dbo].[BackupInfo](
 	[BackupStart] [datetime] NULL,
 	[BackupEnd] [datetime] NULL
 ) ON [PRIMARY]
-
+go
 
 --(11) Roles LIST
+if not exists (select name from sysobjects where name = 'RolesList' and type='U')
 CREATE TABLE [dbo].[RolesList](
 	[Num] [int] NOT NULL,
 	[RoleName] [nchar](50) NOT NULL
@@ -125,27 +124,65 @@ INSERT INTO [QuangHuyMedical].[dbo].[RolesList]([Num],[RoleName]) VALUES ('7',N'
 INSERT INTO [QuangHuyMedical].[dbo].[RolesList]([Num],[RoleName]) VALUES ('8',N'Sao lưu , khôi phục dữ liệu ')
 INSERT INTO [QuangHuyMedical].[dbo].[RolesList]([Num],[RoleName]) VALUES ('9',N'Xem lịch sử hệ thống')
 commit transaction
+go
 
-
---(12) User Group
-CREATE TABLE [dbo].[UserGroup](
-	[Num] [nchar](50) NOT NULL,
-	[GroupNameHeader] [nchar](50) COLLATE Vietnamese_CI_AS NOT NULL,
-	[Id] [int] NULL
+--(12) Work Group
+if not exists (select name from sysobjects where name = 'WorkGroup' and type='U')
+CREATE TABLE [dbo].[WorkGroup](
+	[WorkGroupId] [nchar](50) NOT NULL,
+	[Descript] [nchar](50) COLLATE Vietnamese_CI_AS NOT NULL,
 ) ON [PRIMARY]
 begin transaction
-INSERT INTO [QuangHuyMedical].[dbo].[UserGroup]([Num],[GroupNameHeader],[Id]) VALUES (N'Admin',N'Admin','2')
-INSERT INTO [QuangHuyMedical].[dbo].[UserGroup]([Num],[GroupNameHeader],[Id]) VALUES (N'Manager',N'Quản Lý','1')
-INSERT INTO [QuangHuyMedical].[dbo].[UserGroup]([Num],[GroupNameHeader],[Id]) VALUES (N'Doctor',N'Bác sỹ','0')
+INSERT INTO [QuangHuyMedical].[dbo].[WorkGroup]([WorkGroupId],[Descript]) VALUES ('Doctor',N'Bác sỹ')
+INSERT INTO [QuangHuyMedical].[dbo].[WorkGroup]([WorkGroupId],[Descript]) VALUES ('Manager',N'Quản Lý')
+INSERT INTO [QuangHuyMedical].[dbo].[WorkGroup]([WorkGroupId],[Descript]) VALUES ('Admin',N'Admin')
 commit transaction
-
+go
 
 --(13) User Group Role
+if not exists (select name from sysobjects where name = 'UserGroupRole' and type='U')
 CREATE TABLE [dbo].[UserGroupRole](
 	[Num] [int] IDENTITY(1,1) NOT NULL,
 	[GroupId] [nchar](50) NOT NULL,
 	[RoleId] [int] NOT NULL
 ) ON [PRIMARY]
+begin transaction
+INSERT INTO [QuangHuyMedical].[dbo].[UserGroupRole] ([RoleId], [GroupId]) VALUES ( '0', "Admin");
+INSERT INTO [QuangHuyMedical].[dbo].[UserGroupRole] ([RoleId], [GroupId]) VALUES ( '1', "Admin");
+INSERT INTO [QuangHuyMedical].[dbo].[UserGroupRole] ([RoleId], [GroupId]) VALUES ( '2', "Admin");
+INSERT INTO [QuangHuyMedical].[dbo].[UserGroupRole] ([RoleId], [GroupId]) VALUES ( '3', "Admin");
+INSERT INTO [QuangHuyMedical].[dbo].[UserGroupRole] ([RoleId], [GroupId]) VALUES ( '4', "Admin");
+INSERT INTO [QuangHuyMedical].[dbo].[UserGroupRole] ([RoleId], [GroupId]) VALUES ( '5', "Admin");
+INSERT INTO [QuangHuyMedical].[dbo].[UserGroupRole] ([RoleId], [GroupId]) VALUES ( '6', "Admin");
+INSERT INTO [QuangHuyMedical].[dbo].[UserGroupRole] ([RoleId], [GroupId]) VALUES ( '7', "Admin");
+INSERT INTO [QuangHuyMedical].[dbo].[UserGroupRole] ([RoleId], [GroupId]) VALUES ( '8', "Admin");
+INSERT INTO [QuangHuyMedical].[dbo].[UserGroupRole] ([RoleId], [GroupId]) VALUES ( '9', "Admin");
+INSERT INTO [QuangHuyMedical].[dbo].[UserGroupRole] ([RoleId], [GroupId]) VALUES ( '0', "Manager");
+INSERT INTO [QuangHuyMedical].[dbo].[UserGroupRole] ([RoleId], [GroupId]) VALUES ( '1', "Manager");
+INSERT INTO [QuangHuyMedical].[dbo].[UserGroupRole] ([RoleId], [GroupId]) VALUES ( '3', "Manager");
+INSERT INTO [QuangHuyMedical].[dbo].[UserGroupRole] ([RoleId], [GroupId]) VALUES ( '4', "Manager");
+INSERT INTO [QuangHuyMedical].[dbo].[UserGroupRole] ([RoleId], [GroupId]) VALUES ( '5', "Manager");
+INSERT INTO [QuangHuyMedical].[dbo].[UserGroupRole] ([RoleId], [GroupId]) VALUES ( '7', "Manager");
+INSERT INTO [QuangHuyMedical].[dbo].[UserGroupRole] ([RoleId], [GroupId]) VALUES ( '9', "Manager");
+INSERT INTO [QuangHuyMedical].[dbo].[UserGroupRole] ([RoleId], [GroupId]) VALUES ( '4', "Doctor");
+INSERT INTO [QuangHuyMedical].[dbo].[UserGroupRole] ([RoleId], [GroupId]) VALUES ( '5', "Doctor");
+INSERT INTO [QuangHuyMedical].[dbo].[UserGroupRole] ([RoleId], [GroupId]) VALUES ( '7', "Doctor");
+go
 
+
+if not exists (select name from sysobjects where name = 'WorkLog' and type='U')
+CREATE TABLE [dbo].[WorkLog](
+	[Num] [int] IDENTITY(1,1) NOT NULL,
+	[Type] [char](4) NULL,
+	[Time] [datetime] NULL,
+	[Source] [varchar](20) NULL,
+	[UserName] [char](80) NULL,
+	[Discript] [varchar](200) NULL,
+	[SickName] [char](70) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Num] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
 
 		   

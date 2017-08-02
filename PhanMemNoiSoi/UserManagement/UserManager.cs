@@ -71,7 +71,8 @@ namespace PhanMemNoiSoi
             bSource = new BindingSource();
             dta = new SqlDataAdapter();
 
-            string selectCommand = "SELECT UserId, UserName, USERTYPE FROM UserList;";
+            string selectCommand = "SELECT uList.UserId, uList.UserName, wGroup.WorkGroupId, wGroup.Descript " + 
+                                    " FROM UserList uList , WorkGroup wGroup WHERE uList.WorkGroupId = wGroup.WorkGroupId ;";
             dta = new SqlDataAdapter(selectCommand, DBConnection.Instance.sqlConn);
             SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dta);
             table.Locale = System.Globalization.CultureInfo.InvariantCulture;
@@ -91,10 +92,11 @@ namespace PhanMemNoiSoi
 
             dgvUserList.DataSource = bSource;
             dgvUserList.Columns["UserId"].Visible = false;
+            dgvUserList.Columns["WorkGroupId"].Visible = false;
             dgvUserList.Columns["UserName"].HeaderText = "Tên Đăng Nhập";
-            dgvUserList.Columns["USERTYPE"].HeaderText = "Nhóm";
+            dgvUserList.Columns["Descript"].HeaderText = "Nhóm";
             dgvUserList.Columns["UserName"].Width = dgvUserList.Width / 2;
-            dgvUserList.Columns["USERTYPE"].Width = dgvUserList.Width / 2;
+            dgvUserList.Columns["Descript"].Width = dgvUserList.Width / 2;
         }
 
         private void InitDataGrid()
@@ -128,6 +130,8 @@ namespace PhanMemNoiSoi
                     mySQL.Parameters.Add("@id", SqlDbType.Int).Value = int.Parse(userId);
 
                     mySQL.ExecuteNonQuery();
+                    string msg = "Xóa mật khẩu tài khoản '" + userName + "'";
+                    Log.Instance.LogMessageToDB(DateTime.Now, Session.Instance.UserId, Session.Instance.UserName, msg);
                     MessageBox.Show("Xóa mật khẩu thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (System.Exception ex)
@@ -170,6 +174,9 @@ namespace PhanMemNoiSoi
                     // update grid view
                     dgvUserList.Rows.RemoveAt(rowIndex);
 
+                    string msg = "Xóa tài khoản '" + userName + "'";
+                    Log.Instance.LogMessageToDB(DateTime.Now, Session.Instance.UserId, Session.Instance.UserName, msg);
+
                     MessageBox.Show("Xóa tài khoản thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (System.Exception ex)
@@ -198,24 +205,24 @@ namespace PhanMemNoiSoi
             int rowIndex = dgvUserList.SelectedRows[selectedRowCount - 1].Index;
             string userId = dgvUserList.Rows[rowIndex].Cells["UserId"].Value.ToString().Trim();
             string userName = dgvUserList.Rows[rowIndex].Cells["UserName"].Value.ToString().Trim();
-            string group = dgvUserList.Rows[rowIndex].Cells["USERTYPE"].Value.ToString().Trim();
+            string group = dgvUserList.Rows[rowIndex].Cells["Descript"].Value.ToString().Trim();
             ModifyUser mUserFr = new ModifyUser(userPrincipal, userId, userName, group);
             mUserFr.updateUserInfo += updateUserInfo;
             mUserFr.ShowDialog();
         }
 
-        private void updateUserInfo(string userId, string userName, string uGroup, string uType)
+        private void updateUserInfo(string userId, string userName, string uGroup, string descript)
         {
             //update database
             try
             {
-                string sqlCommand = "UPDATE UserList SET UserName = @name, USERTYPE = @type, " 
-                                    + "WorkGroup = @group WHERE UserId = @id;";
+                string sqlCommand = "UPDATE UserList SET UserName = @name, WorkGroupId = @group WHERE UserId = @id;";
                 SqlCommand mySQL = new SqlCommand(sqlCommand, DBConnection.Instance.sqlConn);
                 mySQL.Parameters.Add("@name", SqlDbType.NChar).Value = userName;
-                mySQL.Parameters.Add("@type", SqlDbType.NChar).Value = uType;
                 mySQL.Parameters.Add("@group", SqlDbType.NChar).Value = uGroup;
                 mySQL.Parameters.Add("@id", SqlDbType.Int).Value = int.Parse(userId);
+                string msg = "Sửa đổi thông tin tài khoản '" + userName + "'";
+                Log.Instance.LogMessageToDB(DateTime.Now, Session.Instance.UserId, Session.Instance.UserName, msg);
                 mySQL.ExecuteNonQuery();
             }
             catch (System.Exception ex)
@@ -234,7 +241,8 @@ namespace PhanMemNoiSoi
                 return;
             }
             int rowIndex = dgvUserList.SelectedRows[selectedRowCount - 1].Index;
-            dgvUserList.Rows[rowIndex].Cells["USERTYPE"].Value = uType;
+            dgvUserList.Rows[rowIndex].Cells["UserName"].Value = userName;
+            dgvUserList.Rows[rowIndex].Cells["Descript"].Value = descript;
         }
 
         private void dgUserList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -248,7 +256,7 @@ namespace PhanMemNoiSoi
             int rowIndex = dgvUserList.SelectedRows[selectedRowCount - 1].Index;
             string userId = dgvUserList.Rows[rowIndex].Cells["UserId"].Value.ToString().Trim();
             string userName = dgvUserList.Rows[rowIndex].Cells["UserName"].Value.ToString().Trim();
-            string group = dgvUserList.Rows[rowIndex].Cells["USERTYPE"].Value.ToString().Trim();
+            string group = dgvUserList.Rows[rowIndex].Cells["WorkGroupId"].Value.ToString().Trim();
             ModifyUser mUserFr = new ModifyUser(userPrincipal, userId, userName, group);
             mUserFr.updateUserInfo += updateUserInfo;
             mUserFr.ShowDialog();
@@ -343,14 +351,6 @@ namespace PhanMemNoiSoi
                 dgvRoleList.Columns["Num"].Visible = false;
                 dgvRoleList.Columns["RoleName"].HeaderText = "Danh mục quyền";
                 dgvRoleList.Columns["RoleName"].Width = dgvRoleList.Width;
-                //getRoleByUser("2");
-
-                //reset role list
-                //foreach (DataGridViewRow row in dgvRoleList.Rows)
-                //{
-                //    DataGridViewCheckBoxCell chk = (DataGridViewCheckBoxCell)row.Cells["X"];
-                //    chk.Value = chk.FalseValue;
-                //}
             }
             catch(Exception ex)
             {
@@ -366,17 +366,17 @@ namespace PhanMemNoiSoi
             SqlDataAdapter udta = new SqlDataAdapter();
             try
             {
-                string selectCommand = "SELECT Num, GroupNameHeader FROM UserGroup;";
+                string selectCommand = "SELECT WorkGroupId, Descript FROM WorkGroup;";
                 udta = new SqlDataAdapter(selectCommand, DBConnection.Instance.sqlConn);
                 SqlCommandBuilder commandBuilder = new SqlCommandBuilder(udta);
                 utb.Locale = System.Globalization.CultureInfo.InvariantCulture;
                 udta.Fill(utb);
                 ubs.DataSource = utb;
 
-                dgvUserGroup.DataSource = ubs;
-                dgvUserGroup.Columns["Num"].Visible = false;
-                dgvUserGroup.Columns["GroupNameHeader"].HeaderText = "Nhóm";
-                dgvUserGroup.Rows[0].Selected = true;
+                dgvWorkGroup.DataSource = ubs;
+                dgvWorkGroup.Columns["WorkGroupId"].Visible = false;
+                dgvWorkGroup.Columns["Descript"].HeaderText = "Nhóm";
+                dgvWorkGroup.Rows[0].Selected = true;
             }
             catch (Exception ex)
             {
@@ -388,7 +388,7 @@ namespace PhanMemNoiSoi
         {
             if (e.RowIndex != -1)
             {
-                string groupId = dgvUserGroup.Rows[e.RowIndex].Cells["Num"].Value.ToString().Trim();
+                string groupId = dgvWorkGroup.Rows[e.RowIndex].Cells["WorkGroupId"].Value.ToString().Trim();
                 getRoleByUser(groupId);
             }
         }
@@ -428,13 +428,13 @@ namespace PhanMemNoiSoi
         {
             // get user group
             int selectedRowCount =
-            dgvUserList.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            dgvWorkGroup.Rows.GetRowCount(DataGridViewElementStates.Selected);
             if (selectedRowCount <= 0)
             {
                 return;
             }
-            int currRowIndexCheck = dgvUserList.SelectedRows[selectedRowCount - 1].Index;
-            string groupId = dgvUserList.Rows[currRowIndexCheck].Cells["UserId"].Value.ToString().Trim();
+            int currRowIndexCheck = dgvWorkGroup.SelectedRows[selectedRowCount - 1].Index;
+            string groupId = dgvWorkGroup.Rows[currRowIndexCheck].Cells["WorkGroupId"].Value.ToString().Trim();
 
             for (int i = 0; i < dgvRoleList.Rows.Count; i++)
             {
@@ -531,7 +531,7 @@ namespace PhanMemNoiSoi
             // check item selected
             string query = "SELECT RoleId FROM UserGroupRole WHERE GroupId = @id";
             SqlCommand sqlCom = new SqlCommand(query, DBConnection.Instance.sqlConn);
-            sqlCom.Parameters.Add("@id", SqlDbType.NChar).Value = "Admin";
+            sqlCom.Parameters.Add("@id", SqlDbType.NChar).Value = "Doctor";
             SqlDataReader sqlDtaReader = sqlCom.ExecuteReader();
 
             while (sqlDtaReader.Read())

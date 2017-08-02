@@ -199,12 +199,20 @@ namespace PhanMemNoiSoi
                             Console.WriteLine(filePath);
                             if (File.Exists(filePath))
                             {
-                                GC.Collect();
-                                GC.WaitForPendingFinalizers();
-                                File.Delete(filePath);
+                                try
+                                {
+                                    GC.Collect();
+                                    GC.WaitForPendingFinalizers();
+                                    File.Delete(filePath);
+                                    //delete from list view
+                                    listImage.Items.RemoveAt(index);
+                                }
+                                catch (Exception ex)
+                                {
+                                    MessageBox.Show("Không thể xóa ảnh. Vui lòng thử lại sau! \n" + ex.Message, "Thông báo",
+                                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
                             }
-                            //delete from list view
-                            listImage.Items.RemoveAt(index);
                         }
                     }
                 }

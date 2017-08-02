@@ -35,14 +35,22 @@ namespace PhanMemNoiSoi
 
         private void Search_Load(object sender, EventArgs e)
         {
+            loadDgvPatient();
             //TODO: check base folder is exist
             BASE_IMG_FOLDER = Properties.Settings.Default.imageFolder;
         }
 
         private void btnTatCa_Click(object sender, EventArgs e)
         {
+            loadDgvPatient();
+            //update number record to label
+            gbResult.Text = "Danh sách bệnh nhân (" + tbPatient.Rows.Count + " kết quả)";
+        }
+
+        private void loadDgvPatient()
+        {
             // load data for data grid view
-            string query = "SELECT SickNum,SickName, Age, Birthday, Createtime FROM SickData;";
+            string query = "SELECT TOP 100 SickNum,SickName, Age, Birthday, Createtime FROM SickData ORDER BY Createtime DESC;";
             dtaPatient = new SqlDataAdapter(query, DBConnection.Instance.sqlConn);
 
             SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dtaPatient);
@@ -63,7 +71,7 @@ namespace PhanMemNoiSoi
             dgvPatient.Columns["Birthday"].HeaderText = "Ngày sinh";
             dgvPatient.Columns["Createtime"].HeaderText = "Ngày khám";
 
-            dgvPatient.Columns["SickName"].Width = dgvPatient.Width * 4  / 10;
+            dgvPatient.Columns["SickName"].Width = dgvPatient.Width * 4 / 10;
             dgvPatient.Columns["Age"].Width = dgvPatient.Width / 10;
             dgvPatient.Columns["Birthday"].Width = dgvPatient.Width * 2 / 10;
             dgvPatient.Columns["Createtime"].Width = dgvPatient.Width * 2 / 9;
@@ -74,11 +82,7 @@ namespace PhanMemNoiSoi
                 col.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
             helper.setRowNumber(dgvPatient);
-
-            //update number record to label
-            gbResult.Text = "Danh sách bệnh nhân (" + tbPatient.Rows.Count + " kết quả)";
         }
-
         private void rbThang_CheckedChanged(object sender, EventArgs e)
         {
             if (rbThang.Checked == true)
@@ -299,6 +303,7 @@ namespace PhanMemNoiSoi
             {
                 int currRowIndexCheck = dgvPatient.SelectedRows[selectedRowCount - 1].Index;
                 string sickNum = dgvPatient.Rows[currRowIndexCheck].Cells["SickNum"].Value.ToString().Trim();
+                string sickName = dgvPatient.Rows[currRowIndexCheck].Cells["SickName"].Value.ToString().Trim();
                 //delete from database
                 try
                 {
@@ -306,7 +311,8 @@ namespace PhanMemNoiSoi
                     SqlCommand mySQL = new SqlCommand(sqlCommand, DBConnection.Instance.sqlConn);
                     mySQL.Parameters.Add("@sickNum", SqlDbType.NChar).Value = sickNum;
                     mySQL.ExecuteReader();
-
+                    string msgLog = "Xóa thông tin bệnh nhân '" + sickName + "'";
+                    Log.Instance.LogMessageToDB(DateTime.Now, Session.Instance.UserId, Session.Instance.UserName, msgLog);
                 }
                 catch (System.Exception ex)
                 {
@@ -316,12 +322,18 @@ namespace PhanMemNoiSoi
                     return;
                 }
                 //TODO: delete data in disk
+                //string tmp = curImgFolder;
+                //helper.deleteFolder(curImgFolder);
                 // delete data grid view
                 tbPatient.Rows.RemoveAt(currRowIndexCheck);
                 bsPatient.DataSource = tbPatient;
                 dgvPatient.DataSource = bsPatient;
                 dgvPatient.Update();
                 dgvPatient.Refresh();
+                if (dgvPatient.RowCount == 0)
+                {
+                    btnOpenFolder.Enabled = false;
+                }
                 //update number patient in label
                 gbResult.Text = "Danh sách bệnh nhân ( " + tbPatient.Rows.Count + " kết quả)";
             }
@@ -359,20 +371,43 @@ namespace PhanMemNoiSoi
 
         private void Search_UserIsAllowed(object sender, EventArgs e)
         {
-            btnDeleteSick.Enabled = ValidatedUserRoles.Contains(RolesList.DELETE_PATIENT);
+            btnDeleteSick.Enabled = helper.myValidateRoles(RolesList.DELETE_PATIENT);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            try
+            if(dgvPatient.RowCount == 0)
             {
-                Process.Start(curImgFolder);
+                MessageBox.Show("Danh sách bệnh nhân trống.", "Thông báo",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
-            catch (Win32Exception win32Exception)
+            int selectedRowCount =
+            dgvPatient.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            if (selectedRowCount <= 0)
             {
-                //The system cannot find the file specified...
-                Console.WriteLine(win32Exception.Message);
+                MessageBox.Show("Bạn chưa chọn bệnh nhân. Chọn bệnh nhân trên danh sách để xem chi tiết", "Thông báo",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            //check folder is existed
+            if (Directory.Exists(curImgFolder))
+            {
+                try
+                {
+                    Process.Start(curImgFolder);
+                }
+                catch (Win32Exception win32Exception)
+                {
+                    //The system cannot find the file specified...
+                    Console.WriteLine(win32Exception.Message);
+                }
+            }else
+            {
+                MessageBox.Show("Thư mục không tồn tại.", "Thông báo", 
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+        
     }
 }

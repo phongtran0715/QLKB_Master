@@ -36,8 +36,8 @@
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.btnMoveDown = new System.Windows.Forms.Button();
             this.btnMoveUp = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnAddInfoReport = new System.Windows.Forms.Button();
+            this.btnDeleteInfoReport = new System.Windows.Forms.Button();
             this.dgvInfo = new System.Windows.Forms.DataGridView();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.btnEditCheckContent = new System.Windows.Forms.Button();
@@ -62,6 +62,7 @@
             // 
             // btnThoat
             // 
+            this.btnThoat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnThoat.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThoat.Image = ((System.Drawing.Image)(resources.GetObject("btnThoat.Image")));
             this.btnThoat.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -90,8 +91,8 @@
             // 
             this.tabPage5.Controls.Add(this.btnMoveDown);
             this.tabPage5.Controls.Add(this.btnMoveUp);
-            this.tabPage5.Controls.Add(this.button3);
-            this.tabPage5.Controls.Add(this.button1);
+            this.tabPage5.Controls.Add(this.btnAddInfoReport);
+            this.tabPage5.Controls.Add(this.btnDeleteInfoReport);
             this.tabPage5.Controls.Add(this.dgvInfo);
             this.tabPage5.Location = new System.Drawing.Point(4, 27);
             this.tabPage5.Name = "tabPage5";
@@ -127,31 +128,31 @@
             this.btnMoveUp.UseVisualStyleBackColor = true;
             this.btnMoveUp.Click += new System.EventHandler(this.btnMoveUp_Click);
             // 
-            // button3
+            // btnAddInfoReport
             // 
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
-            this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button3.Location = new System.Drawing.Point(78, 356);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(99, 35);
-            this.button3.TabIndex = 10;
-            this.button3.Text = "  Thêm";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.btnAddInfoReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddInfoReport.Image = ((System.Drawing.Image)(resources.GetObject("btnAddInfoReport.Image")));
+            this.btnAddInfoReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAddInfoReport.Location = new System.Drawing.Point(78, 356);
+            this.btnAddInfoReport.Name = "btnAddInfoReport";
+            this.btnAddInfoReport.Size = new System.Drawing.Size(99, 35);
+            this.btnAddInfoReport.TabIndex = 10;
+            this.btnAddInfoReport.Text = "  Thêm";
+            this.btnAddInfoReport.UseVisualStyleBackColor = true;
+            this.btnAddInfoReport.Click += new System.EventHandler(this.button3_Click);
             // 
-            // button1
+            // btnDeleteInfoReport
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(472, 356);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(99, 35);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Xóa ";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnDeleteInfoReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeleteInfoReport.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteInfoReport.Image")));
+            this.btnDeleteInfoReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDeleteInfoReport.Location = new System.Drawing.Point(472, 356);
+            this.btnDeleteInfoReport.Name = "btnDeleteInfoReport";
+            this.btnDeleteInfoReport.Size = new System.Drawing.Size(99, 35);
+            this.btnDeleteInfoReport.TabIndex = 9;
+            this.btnDeleteInfoReport.Text = "Xóa ";
+            this.btnDeleteInfoReport.UseVisualStyleBackColor = true;
+            this.btnDeleteInfoReport.Click += new System.EventHandler(this.button1_Click);
             // 
             // dgvInfo
             // 
@@ -193,6 +194,9 @@
             // 
             // btnEditCheckContent
             // 
+            this.btnEditCheckContent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEditCheckContent.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEditCheckContent.Image = ((System.Drawing.Image)(resources.GetObject("btnEditCheckContent.Image")));
             this.btnEditCheckContent.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -206,6 +210,9 @@
             // 
             // btnDeleteCheckContent
             // 
+            this.btnDeleteCheckContent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDeleteCheckContent.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDeleteCheckContent.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteCheckContent.Image")));
             this.btnDeleteCheckContent.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -219,6 +226,9 @@
             // 
             // btnAddCheckContent
             // 
+            this.btnAddCheckContent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAddCheckContent.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddCheckContent.Image = ((System.Drawing.Image)(resources.GetObject("btnAddCheckContent.Image")));
             this.btnAddCheckContent.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -232,6 +242,9 @@
             // 
             // btnEditCheck
             // 
+            this.btnEditCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEditCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEditCheck.Image = ((System.Drawing.Image)(resources.GetObject("btnEditCheck.Image")));
             this.btnEditCheck.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -245,6 +258,9 @@
             // 
             // btnDeleteCheck
             // 
+            this.btnDeleteCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDeleteCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDeleteCheck.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteCheck.Image")));
             this.btnDeleteCheck.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -258,6 +274,9 @@
             // 
             // btnAddCheck
             // 
+            this.btnAddCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAddCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddCheck.Image = ((System.Drawing.Image)(resources.GetObject("btnAddCheck.Image")));
             this.btnAddCheck.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -274,6 +293,9 @@
             this.dgCheckContentDetail.AllowUserToAddRows = false;
             this.dgCheckContentDetail.AllowUserToDeleteRows = false;
             this.dgCheckContentDetail.AllowUserToResizeRows = false;
+            this.dgCheckContentDetail.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgCheckContentDetail.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgCheckContentDetail.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.dgCheckContentDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -283,6 +305,7 @@
             this.dgCheckContentDetail.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgCheckContentDetail.Size = new System.Drawing.Size(550, 200);
             this.dgCheckContentDetail.TabIndex = 3;
+            this.dgCheckContentDetail.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCheckContentDetail_CellDoubleClick);
             this.dgCheckContentDetail.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgNoiDung_DataBindingComplete);
             // 
             // label2
@@ -300,6 +323,9 @@
             this.dgvCheck.AllowUserToAddRows = false;
             this.dgvCheck.AllowUserToDeleteRows = false;
             this.dgvCheck.AllowUserToResizeRows = false;
+            this.dgvCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvCheck.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvCheck.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.dgvCheck.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -310,6 +336,7 @@
             this.dgvCheck.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCheck.Size = new System.Drawing.Size(550, 150);
             this.dgvCheck.TabIndex = 1;
+            this.dgvCheck.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCheck_CellDoubleClick);
             this.dgvCheck.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgDanhMuc_DataBindingComplete);
             this.dgvCheck.SelectionChanged += new System.EventHandler(this.dgDanhMuc_SelectionChanged);
             // 
@@ -325,6 +352,9 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -347,8 +377,10 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "GlossaryMainteance";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản lý danh mục";
+            this.UserIsAllowed += new System.EventHandler(this.GlossaryMainteance_UserIsAllowed);
             this.UserIsDenied += new System.EventHandler(this.GlossaryMainteance_UserIsDenied);
             this.Load += new System.EventHandler(this.GlossaryMainteance_Load);
             this.contextMenuStrip1.ResumeLayout(false);
@@ -383,7 +415,7 @@
         private System.Windows.Forms.DataGridView dgvInfo;
         private System.Windows.Forms.Button btnMoveDown;
         private System.Windows.Forms.Button btnMoveUp;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnAddInfoReport;
+        private System.Windows.Forms.Button btnDeleteInfoReport;
     }
 }

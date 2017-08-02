@@ -46,7 +46,7 @@
             this.gbParent.Controls.Add(this.lbCode);
             this.gbParent.Controls.Add(this.label1);
             this.gbParent.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbParent.Location = new System.Drawing.Point(18, 18);
+            this.gbParent.Location = new System.Drawing.Point(13, 13);
             this.gbParent.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gbParent.Name = "gbParent";
             this.gbParent.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -63,7 +63,7 @@
             this.txtNoiDung.Multiline = true;
             this.txtNoiDung.Name = "txtNoiDung";
             this.txtNoiDung.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtNoiDung.Size = new System.Drawing.Size(337, 59);
+            this.txtNoiDung.Size = new System.Drawing.Size(337, 87);
             this.txtNoiDung.TabIndex = 4;
             // 
             // label3
@@ -81,11 +81,12 @@
             // 
             this.lbCode.AutoSize = true;
             this.lbCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbCode.Location = new System.Drawing.Point(130, 58);
+            this.lbCode.Location = new System.Drawing.Point(104, 37);
             this.lbCode.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbCode.Name = "lbCode";
-            this.lbCode.Size = new System.Drawing.Size(0, 18);
+            this.lbCode.Size = new System.Drawing.Size(19, 18);
             this.lbCode.TabIndex = 1;
+            this.lbCode.Text = "C";
             // 
             // label1
             // 
@@ -103,7 +104,7 @@
             this.btnOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOK.Image = ((System.Drawing.Image)(resources.GetObject("btnOK.Image")));
             this.btnOK.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnOK.Location = new System.Drawing.Point(255, 194);
+            this.btnOK.Location = new System.Drawing.Point(250, 190);
             this.btnOK.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(98, 35);
@@ -117,7 +118,7 @@
             this.btnCancle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancle.Image = ((System.Drawing.Image)(resources.GetObject("btnCancle.Image")));
             this.btnCancle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancle.Location = new System.Drawing.Point(379, 194);
+            this.btnCancle.Location = new System.Drawing.Point(374, 190);
             this.btnCancle.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnCancle.Name = "btnCancle";
             this.btnCancle.Size = new System.Drawing.Size(98, 35);
@@ -130,17 +131,18 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(489, 238);
+            this.ClientSize = new System.Drawing.Size(475, 233);
             this.Controls.Add(this.btnCancle);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.gbParent);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "EditGlossaryItem";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Chỉnh sửa danh mục";
             this.Load += new System.EventHandler(this.EditGlossary_Load);

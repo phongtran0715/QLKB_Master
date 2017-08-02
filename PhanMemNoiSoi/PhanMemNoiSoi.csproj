@@ -98,6 +98,7 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions">
@@ -117,15 +118,22 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="ActiveKey.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ActiveKey.Designer.cs">
+      <DependentUpon>ActiveKey.cs</DependentUpon>
+    </Compile>
     <Compile Include="CaptureCamera\CaptureTest.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ConfigDB.cs">
+    <Compile Include="Configuration\ConfigDB.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ConfigDB.Designer.cs">
+    <Compile Include="Configuration\ConfigDB.Designer.cs">
       <DependentUpon>ConfigDB.cs</DependentUpon>
     </Compile>
+    <Compile Include="FingerPrint.cs" />
     <Compile Include="FullScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -273,10 +281,10 @@
       <DependentUpon>Search.cs</DependentUpon>
     </Compile>
     <Compile Include="Session.cs" />
-    <Compile Include="SystemConfiguration.cs">
+    <Compile Include="Configuration\SystemConfiguration.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SystemConfiguration.Designer.cs">
+    <Compile Include="Configuration\SystemConfiguration.Designer.cs">
       <DependentUpon>SystemConfiguration.cs</DependentUpon>
     </Compile>
     <Compile Include="UserManagement\UserManager.cs">
@@ -288,10 +296,13 @@
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ActiveKey.resx">
+      <DependentUpon>ActiveKey.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CaptureCamera\CaptureTest.resx">
       <DependentUpon>CaptureTest.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ConfigDB.resx">
+    <EmbeddedResource Include="Configuration\ConfigDB.resx">
       <DependentUpon>ConfigDB.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FullScreen.resx">
@@ -365,7 +376,7 @@
     <EmbeddedResource Include="Search.resx">
       <DependentUpon>Search.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SystemConfiguration.resx">
+    <EmbeddedResource Include="Configuration\SystemConfiguration.resx">
       <DependentUpon>SystemConfiguration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserManagement\UserManager.resx">
@@ -385,12 +396,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Configuration\App.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Logo Quang Huy.jpg" />
@@ -416,6 +421,8 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\loading51.gif" />
+    <None Include="Resources\loading16.gif" />
     <None Include="bin\Debug\continue_24.png" />
     <Content Include="bin\Debug\DirectX.Capture.dll" />
     <Content Include="bin\Debug\DirectX.Capture.pdb" />
@@ -443,6 +450,8 @@
     <None Include="Resources\e2edc731cbfc.png" />
     <None Include="Resources\Capture-icon.png" />
     <None Include="Resources\Capture-icon-24x24.png" />
+    <None Include="Resources\5.gif" />
+    <None Include="Resources\91.gif" />
     <Content Include="Resources\continue_24.png" />
     <None Include="Resources\pause_241.png" />
     <None Include="Resources\save_24.png" />

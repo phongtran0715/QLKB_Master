@@ -11,7 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DShowNET", "DShowNET\DShowN
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup Phan Mem Noi Soi", "Setup Phan Mem Noi Soi\Setup Phan Mem Noi Soi.vdproj", "{D629F21C-8AEB-4129-A9F5-702C0C7EBB30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OD.Forms.Security", "..\..\Downloads\SecureBaseForm_Src\OD.Forms.Security.csproj", "{5C9ADA8B-7F93-4968-B6C3-B6B9627C2B0F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QLKBKeyGen", "QLKBKeyGen\QLKBKeyGen.csproj", "{DD08AD0F-B5BA-4C7D-8D90-1FE62350BB51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OD.Forms.Security", "C:\Users\win7-32bit\Downloads\SecureBaseForm_Src\OD.Forms.Security.csproj", "{5C9ADA8B-7F93-4968-B6C3-B6B9627C2B0F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{CE009BFA-5EF6-4153-B2A1-2FA79698A9AE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D629F21C-8AEB-4129-A9F5-702C0C7EBB30}.Debug|Any CPU.ActiveCfg = Debug
 		{D629F21C-8AEB-4129-A9F5-702C0C7EBB30}.Release|Any CPU.ActiveCfg = Release
+		{DD08AD0F-B5BA-4C7D-8D90-1FE62350BB51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD08AD0F-B5BA-4C7D-8D90-1FE62350BB51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD08AD0F-B5BA-4C7D-8D90-1FE62350BB51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD08AD0F-B5BA-4C7D-8D90-1FE62350BB51}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5C9ADA8B-7F93-4968-B6C3-B6B9627C2B0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5C9ADA8B-7F93-4968-B6C3-B6B9627C2B0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C9ADA8B-7F93-4968-B6C3-B6B9627C2B0F}.Release|Any CPU.ActiveCfg = Release|Any CPU

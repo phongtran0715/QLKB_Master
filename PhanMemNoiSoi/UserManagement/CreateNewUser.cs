@@ -26,6 +26,11 @@ namespace PhanMemNoiSoi
             this.Dispose();
         }
 
+        /*
+         * Bác sỹ ~ Doctor ~ Id = 0
+         * Quản lý ~ Manager ~ Id = 1
+         * Admin ~ Admin ~ Id = 2 
+         */
         private void button1_Click(object sender, EventArgs e)
         {
             //check user name 
@@ -56,17 +61,18 @@ namespace PhanMemNoiSoi
             try
             {
                 //check user name is exist
-                string sqlCommand = "INSERT INTO UserList (UserName, Sex, WorkGroup, Password, USERTYPE) VALUES "
-                                                    + "(@UserName, @Sex, @workGroup, @Password, @UserType)";
+                string sqlCommand = "INSERT INTO UserList (UserName, Sex, Password, WorkGroupId) VALUES "
+                                                    + "(@UserName, @Sex, @Password, @groupId)";
                 SqlCommand mySQL = new SqlCommand(sqlCommand, DBConnection.Instance.sqlConn);
                 mySQL.Parameters.Add("@UserName", SqlDbType.NChar).Value = txtTen.Text.Trim();
                 mySQL.Parameters.Add("@Sex", SqlDbType.NChar).Value = "male";
-                mySQL.Parameters.Add("@workGroup", SqlDbType.NChar).Value = getUGroupByNum(cbNhom.SelectedIndex);
                 mySQL.Parameters.Add("@Password", SqlDbType.NChar).Value = txtMK.Text.Trim();
-                mySQL.Parameters.Add("@UserType", SqlDbType.NChar).Value = cbNhom.Text.Trim();
+                mySQL.Parameters.Add("@groupId", SqlDbType.NChar).Value = getUGroupByNum(cbNhom.SelectedIndex);
                 mySQL.ExecuteNonQuery();
 
                 this.RefreshDgv();
+                string msg = "Thêm mới tài khoản '" + txtTen.Text.Trim() + "'";
+                Log.Instance.LogMessageToDB(DateTime.Now, Session.Instance.UserId, Session.Instance.UserName, msg);
 
                 MessageBox.Show("Thêm mới tài khoản thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
@@ -83,16 +89,23 @@ namespace PhanMemNoiSoi
 
         private string getUGroupByNum(int num)
         {
-            string uGroup = "";
-            string sqlCommand = "SELECT Num FROM UserGroup WHERE Id = @id ;";
-            SqlCommand mySQL = new SqlCommand(sqlCommand, DBConnection.Instance.sqlConn);
-            mySQL.Parameters.Add("@id", SqlDbType.Int).Value = num;
-            SqlDataReader rdrInfo = mySQL.ExecuteReader();
-            if (rdrInfo.Read())
+            string wGroup = "";
+            switch (num)
             {
-                uGroup = rdrInfo["Num"].ToString().Trim();
+                case 0:
+                    wGroup = "Doctor";
+                    break;
+                case 1:
+                    wGroup = "Manager";
+                    break;
+                case 2:
+                    wGroup = "Admin";
+                    break;
+                default:
+                    wGroup = "Doctor";
+                    break;
             }
-            return uGroup;
+            return wGroup;
         }
     }
 }

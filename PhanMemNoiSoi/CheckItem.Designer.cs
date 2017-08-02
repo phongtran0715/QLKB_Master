@@ -30,13 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheckItem));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dgvContentDetail = new System.Windows.Forms.DataGridView();
+            this.X = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.button3 = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.txtSelected = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.X = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dgvContentDetail = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvContentDetail)).BeginInit();
             this.SuspendLayout();
@@ -51,6 +51,33 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Danh mục lựa chọn";
+            // 
+            // dgvContentDetail
+            // 
+            this.dgvContentDetail.AllowUserToAddRows = false;
+            this.dgvContentDetail.AllowUserToDeleteRows = false;
+            this.dgvContentDetail.AllowUserToResizeRows = false;
+            this.dgvContentDetail.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvContentDetail.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dgvContentDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvContentDetail.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.X});
+            this.dgvContentDetail.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvContentDetail.GridColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dgvContentDetail.Location = new System.Drawing.Point(3, 22);
+            this.dgvContentDetail.Name = "dgvContentDetail";
+            this.dgvContentDetail.Size = new System.Drawing.Size(414, 281);
+            this.dgvContentDetail.TabIndex = 1;
+            this.dgvContentDetail.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvContentDetail_CellContentClick);
+            this.dgvContentDetail.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvContentDetail_CellValueChanged_1);
+            this.dgvContentDetail.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvContentDetail_DataBindingComplete);
+            // 
+            // X
+            // 
+            this.X.HeaderText = "X";
+            this.X.Name = "X";
+            this.X.TrueValue = "true";
+            this.X.Width = 26;
             // 
             // button3
             // 
@@ -112,33 +139,6 @@
             this.label1.TabIndex = 24;
             this.label1.Text = "Danh sách lựa chọn";
             // 
-            // X
-            // 
-            this.X.HeaderText = "X";
-            this.X.Name = "X";
-            this.X.TrueValue = "true";
-            this.X.Width = 26;
-            // 
-            // dgvContentDetail
-            // 
-            this.dgvContentDetail.AllowUserToAddRows = false;
-            this.dgvContentDetail.AllowUserToDeleteRows = false;
-            this.dgvContentDetail.AllowUserToResizeRows = false;
-            this.dgvContentDetail.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgvContentDetail.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.dgvContentDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvContentDetail.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.X});
-            this.dgvContentDetail.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvContentDetail.GridColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.dgvContentDetail.Location = new System.Drawing.Point(3, 22);
-            this.dgvContentDetail.Name = "dgvContentDetail";
-            this.dgvContentDetail.Size = new System.Drawing.Size(414, 281);
-            this.dgvContentDetail.TabIndex = 1;
-            this.dgvContentDetail.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvContentDetail_CellContentClick);
-            this.dgvContentDetail.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvContentDetail_CellValueChanged_1);
-            this.dgvContentDetail.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvContentDetail_DataBindingComplete);
-            // 
             // CheckItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -150,10 +150,12 @@
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CheckItem";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Danh mục lựa chọn";
             this.Load += new System.EventHandler(this.CheckItem_Load);

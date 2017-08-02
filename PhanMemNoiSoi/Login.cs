@@ -22,7 +22,9 @@ namespace PhanMemNoiSoi
         {
             init();
             //Load data from data base
-            string selectCommand = "SELECT UserId, UserName, WorkGroup, USERTYPE FROM UserList;";
+            string selectCommand = "SELECT uList.UserId, uList.UserName, wGroup.WorkGroupId, wGroup.Descript " + 
+                                    "FROM UserList uList , WorkGroup wGroup " +
+                                    "WHERE uList.WorkGroupId = wGroup.WorkGroupId ;";
             dataAdapter = new SqlDataAdapter(selectCommand, DBConnection.Instance.sqlConn);
             DataTable table = new DataTable();
             table.Locale = System.Globalization.CultureInfo.InvariantCulture;
@@ -43,15 +45,16 @@ namespace PhanMemNoiSoi
 
             dgUserList.DataSource = bindingSource;
             dgUserList.Columns["UserId"].Visible = false;
-            dgUserList.Columns["WorkGroup"].Visible = false;
+            dgUserList.Columns["WorkGroupId"].Visible = false;
             dgUserList.Columns["UserName"].HeaderText = "Tên Đăng Nhập";
-            dgUserList.Columns["USERTYPE"].HeaderText = "Nhóm";
+            dgUserList.Columns["Descript"].HeaderText = "Nhóm";
             dgUserList.Columns["UserName"].Width = dgUserList.Width * 2 / 3;
-            dgUserList.Columns["USERTYPE"].Width = dgUserList.Width / 3;
+            dgUserList.Columns["Descript"].Width = dgUserList.Width / 3;
         }
 
         private void init()
         {
+            //load remember account information
             bool rememberAccount = Properties.Settings.Default.rememberAccount;
             if (rememberAccount)
             {
@@ -76,12 +79,13 @@ namespace PhanMemNoiSoi
             {
                 userId = int.Parse(dgUserList.Rows[e.RowIndex].Cells["UserId"].Value.ToString().Trim());
                 txtUser.Text = dgUserList.Rows[e.RowIndex].Cells["UserName"].Value.ToString().Trim();
-                uWorkGroup = dgUserList.Rows[e.RowIndex].Cells["WorkGroup"].Value.ToString().Trim();
+                uWorkGroup = dgUserList.Rows[e.RowIndex].Cells["WorkGroupId"].Value.ToString().Trim();
             }
         }
 
         private void btnOk_Click(object sender, EventArgs e)
         {
+            bool loginSuccessful = false;
             //Check Login information
             try
             {
@@ -106,40 +110,52 @@ namespace PhanMemNoiSoi
                         if (string.Equals(uname, txtUser.Text.Trim()) 
                             && string.Equals(pass, txtPass.Text.Trim()))
                         {
-                            //save login information
-                            if (cbDefault.Checked == true)
-                            {
-                                Properties.Settings.Default.rememberAccount = true;
-                                Properties.Settings.Default.lastUserName = txtUser.Text.Trim();
-                                Properties.Settings.Default.lastUserId = this.userId;
-                                Properties.Settings.Default.lastUserType = this.uWorkGroup;
-                            }
-                            else
-                            {
-                                Properties.Settings.Default.rememberAccount = false;
-                            }
-                            Properties.Settings.Default.Save();
-
-                            //Update session information
-                            this.Hide();
-                            Session.Instance.UserName = txtUser.Text.Trim();
-                            Session.Instance.Password = txtPass.Text.Trim();
-                            Session.Instance.UserId = this.userId;
-                            Session.Instance.WorkGroup = this.uWorkGroup;
-                            Session.Instance.UserRole = RolesList.Instance.getRoleByUser(this.uWorkGroup, this.userId);
-                            Main mainFr = new Main();
-                            mainFr.ShowDialog();
-                            this.Close();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Sai thông tin đăng nhập, vui lòng thử lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            loginSuccessful = true;
+                            break;
                         }
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Sai tên đăng nhập, vui lòng thử lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Cơ sở dữ liệu trống. Liên hệ với nhân viên quản trị phần mềm ", "Thông báo", 
+                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                if (loginSuccessful)
+                {
+                    //save login information
+                    if (cbDefault.Checked == true)
+                    {
+                        Properties.Settings.Default.rememberAccount = true;
+                        Properties.Settings.Default.lastUserName = txtUser.Text.Trim();
+                        Properties.Settings.Default.lastUserId = this.userId;
+                        Properties.Settings.Default.lastUserType = this.uWorkGroup;
+                    }
+                    else
+                    {
+                        Properties.Settings.Default.rememberAccount = false;
+                    }
+                    Properties.Settings.Default.Save();
+                    
+                    //Update session information
+                    this.Hide();
+                    Session.Instance.UserName = txtUser.Text.Trim();
+                    Session.Instance.Password = txtPass.Text.Trim();
+                    Session.Instance.UserId = this.userId;
+                    Session.Instance.WorkGroup = this.uWorkGroup;
+                    Session.Instance.UserRole = RolesList.Instance.getRoleByUser(this.uWorkGroup, this.userId);
+
+                    string msg = "User '" + Session.Instance.UserName + "' đăng nhập thành công!";
+                    Log.Instance.LogMessageToDB(DateTime.Now, Session.Instance.UserId, Session.Instance.UserName, msg);
+
+                    Main mainFr = new Main();
+                    mainFr.ShowDialog();
+                    this.Close();
+                }else
+                {
+                    MessageBox.Show("Sai thông tin đăng nhập, tên đăng nhập hoặc mật khẩu không đúng.", "Thông báo",
+                                                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    string msg = "User '" + txtUser.Text.Trim() + "' đăng nhập thất bại!";
+                    Log.Instance.LogMessageToDB(DateTime.Now, Session.Instance.UserId, Session.Instance.UserName, msg);
                 }
             }
             catch (System.Exception ex)

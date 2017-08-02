@@ -7,7 +7,7 @@ namespace PhanMemNoiSoi
 {
     public partial class ModifyUser : SecureBaseForm
     {
-        public delegate void UpdateDataHandler(string userId, string userName, string uGroup, string uType);
+        public delegate void UpdateDataHandler(string userId, string userName, string uGroup, string descript);
         public UpdateDataHandler updateUserInfo;
         string userId = null;
         public ModifyUser(IPrincipal userPrincipal) :
@@ -21,7 +21,7 @@ namespace PhanMemNoiSoi
         {
             InitializeComponent();
             this.txtTen.Text = username;
-            this.cbNhom.Text = group;
+            this.cbNhom.SelectedIndex = getIndexByGroupId(group);
             this.userId = userId;
         }
 
@@ -52,7 +52,7 @@ namespace PhanMemNoiSoi
 
             //update database
             string uGroup = getGroupByIndex(cbNhom.SelectedIndex);
-            updateUserInfo(this.userId,txtTen.Text.Trim(),uGroup,cbNhom.Text.Trim());
+            updateUserInfo(this.userId,txtTen.Text.Trim(),getGroupByIndex(cbNhom.SelectedIndex), cbNhom.Text.Trim());
             this.Close();
         }
 
@@ -74,6 +74,25 @@ namespace PhanMemNoiSoi
                     break;
             }
             return group;
+        }
+
+        int getIndexByGroupId(string groupId)
+        {
+            int index;
+            if (string.Equals(groupId, "Doctor"))
+            {
+                index = 0;
+            }else if(string.Equals(groupId, "Manager"))
+            {
+                index = 1;
+            }else if (string.Equals(groupId, "Admin"))
+            {
+                index = 2;
+            }else
+            {
+                index = 0;
+            }
+            return index;
         }
     }
 }

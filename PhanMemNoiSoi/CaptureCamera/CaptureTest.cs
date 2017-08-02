@@ -239,6 +239,7 @@ namespace PhanMemNoiSoi
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Menu = this.mainMenu;
             this.Name = "CaptureTest";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cấu hình camera";
             ((System.ComponentModel.ISupportInitialize)(this.panelVideo)).EndInit();

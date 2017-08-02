@@ -34,9 +34,9 @@
             this.rbNgay = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtContent = new System.Windows.Forms.TextBox();
+            this.btnClearLog = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.cbUser = new System.Windows.Forms.ComboBox();
-            this.btnXoa = new System.Windows.Forms.Button();
             this.btnTatCa = new System.Windows.Forms.Button();
             this.btnTimKiem = new System.Windows.Forms.Button();
             this.dtNgayKetThuc = new System.Windows.Forms.DateTimePicker();
@@ -47,8 +47,6 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dgLogView = new System.Windows.Forms.DataGridView();
-            this.btnClearLog = new System.Windows.Forms.Button();
-            this.btnSaveLog = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -57,12 +55,14 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.rbThang);
             this.groupBox1.Controls.Add(this.rbNgay);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(128, 169);
+            this.groupBox1.Size = new System.Drawing.Size(197, 169);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Tìm nhanh";
@@ -94,10 +94,12 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.txtContent);
+            this.groupBox2.Controls.Add(this.btnClearLog);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.cbUser);
-            this.groupBox2.Controls.Add(this.btnXoa);
             this.groupBox2.Controls.Add(this.btnTatCa);
             this.groupBox2.Controls.Add(this.btnTimKiem);
             this.groupBox2.Controls.Add(this.dtNgayKetThuc);
@@ -108,22 +110,36 @@
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(146, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(599, 169);
+            this.groupBox2.Size = new System.Drawing.Size(668, 169);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Bộ lọc";
             // 
             // txtContent
             // 
-            this.txtContent.Location = new System.Drawing.Point(416, 32);
+            this.txtContent.Location = new System.Drawing.Point(460, 31);
             this.txtContent.Name = "txtContent";
-            this.txtContent.Size = new System.Drawing.Size(173, 24);
+            this.txtContent.Size = new System.Drawing.Size(198, 24);
             this.txtContent.TabIndex = 18;
+            // 
+            // btnClearLog
+            // 
+            this.btnClearLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClearLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClearLog.Image = global::PhanMemNoiSoi.Properties.Resources.trach_24;
+            this.btnClearLog.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnClearLog.Location = new System.Drawing.Point(562, 128);
+            this.btnClearLog.Name = "btnClearLog";
+            this.btnClearLog.Size = new System.Drawing.Size(98, 35);
+            this.btnClearLog.TabIndex = 13;
+            this.btnClearLog.Text = "   Xóa Log";
+            this.btnClearLog.UseVisualStyleBackColor = true;
+            this.btnClearLog.Click += new System.EventHandler(this.btnClearLog_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(316, 33);
+            this.label1.Location = new System.Drawing.Point(360, 32);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(67, 18);
             this.label1.TabIndex = 17;
@@ -131,31 +147,21 @@
             // 
             // cbUser
             // 
+            this.cbUser.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbUser.FormattingEnabled = true;
-            this.cbUser.Location = new System.Drawing.Point(114, 30);
+            this.cbUser.Location = new System.Drawing.Point(114, 31);
             this.cbUser.Name = "cbUser";
-            this.cbUser.Size = new System.Drawing.Size(171, 26);
+            this.cbUser.Size = new System.Drawing.Size(214, 26);
             this.cbUser.TabIndex = 16;
-            // 
-            // btnXoa
-            // 
-            this.btnXoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnXoa.Image = ((System.Drawing.Image)(resources.GetObject("btnXoa.Image")));
-            this.btnXoa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnXoa.Location = new System.Drawing.Point(493, 128);
-            this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(98, 35);
-            this.btnXoa.TabIndex = 15;
-            this.btnXoa.Text = "Xóa";
-            this.btnXoa.UseVisualStyleBackColor = true;
-            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
+            this.cbUser.SelectedIndexChanged += new System.EventHandler(this.cbUser_SelectedIndexChanged);
             // 
             // btnTatCa
             // 
+            this.btnTatCa.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnTatCa.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTatCa.Image = ((System.Drawing.Image)(resources.GetObject("btnTatCa.Image")));
             this.btnTatCa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTatCa.Location = new System.Drawing.Point(380, 128);
+            this.btnTatCa.Location = new System.Drawing.Point(441, 128);
             this.btnTatCa.Name = "btnTatCa";
             this.btnTatCa.Size = new System.Drawing.Size(98, 35);
             this.btnTatCa.TabIndex = 14;
@@ -165,10 +171,11 @@
             // 
             // btnTimKiem
             // 
+            this.btnTimKiem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTimKiem.Image = ((System.Drawing.Image)(resources.GetObject("btnTimKiem.Image")));
             this.btnTimKiem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTimKiem.Location = new System.Drawing.Point(262, 126);
+            this.btnTimKiem.Location = new System.Drawing.Point(317, 128);
             this.btnTimKiem.Name = "btnTimKiem";
             this.btnTimKiem.Size = new System.Drawing.Size(98, 35);
             this.btnTimKiem.TabIndex = 13;
@@ -179,10 +186,10 @@
             // dtNgayKetThuc
             // 
             this.dtNgayKetThuc.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtNgayKetThuc.Location = new System.Drawing.Point(416, 78);
+            this.dtNgayKetThuc.Location = new System.Drawing.Point(460, 77);
             this.dtNgayKetThuc.Name = "dtNgayKetThuc";
             this.dtNgayKetThuc.ShowCheckBox = true;
-            this.dtNgayKetThuc.Size = new System.Drawing.Size(175, 24);
+            this.dtNgayKetThuc.Size = new System.Drawing.Size(198, 24);
             this.dtNgayKetThuc.TabIndex = 11;
             // 
             // dtNgayBatDau
@@ -191,13 +198,13 @@
             this.dtNgayBatDau.Location = new System.Drawing.Point(110, 77);
             this.dtNgayBatDau.Name = "dtNgayBatDau";
             this.dtNgayBatDau.ShowCheckBox = true;
-            this.dtNgayBatDau.Size = new System.Drawing.Size(175, 24);
+            this.dtNgayBatDau.Size = new System.Drawing.Size(218, 24);
             this.dtNgayBatDau.TabIndex = 10;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(312, 79);
+            this.label13.Location = new System.Drawing.Point(356, 78);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(98, 18);
             this.label13.TabIndex = 7;
@@ -223,10 +230,11 @@
             // 
             // btnExit
             // 
+            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExit.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.Image")));
             this.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnExit.Location = new System.Drawing.Point(644, 641);
+            this.btnExit.Location = new System.Drawing.Point(713, 641);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(98, 35);
             this.btnExit.TabIndex = 12;
@@ -236,11 +244,14 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.dgLogView);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(12, 187);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(733, 438);
+            this.groupBox3.Size = new System.Drawing.Size(802, 438);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Kết quả";
@@ -248,48 +259,26 @@
             // dgLogView
             // 
             this.dgLogView.AllowUserToAddRows = false;
+            this.dgLogView.AllowUserToDeleteRows = false;
+            this.dgLogView.AllowUserToResizeRows = false;
+            this.dgLogView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgLogView.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
-            this.dgLogView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgLogView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgLogView.Location = new System.Drawing.Point(3, 20);
+            this.dgLogView.MultiSelect = false;
             this.dgLogView.Name = "dgLogView";
             this.dgLogView.ReadOnly = true;
             this.dgLogView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgLogView.Size = new System.Drawing.Size(727, 415);
-            this.dgLogView.TabIndex = 0;
-            this.dgLogView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgPatient_DataBindingComplete);
-            // 
-            // btnClearLog
-            // 
-            this.btnClearLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClearLog.Image = global::PhanMemNoiSoi.Properties.Resources.trach_24;
-            this.btnClearLog.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClearLog.Location = new System.Drawing.Point(406, 641);
-            this.btnClearLog.Name = "btnClearLog";
-            this.btnClearLog.Size = new System.Drawing.Size(98, 35);
-            this.btnClearLog.TabIndex = 13;
-            this.btnClearLog.Text = "   Xóa Log";
-            this.btnClearLog.UseVisualStyleBackColor = true;
-            // 
-            // btnSaveLog
-            // 
-            this.btnSaveLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSaveLog.Image = global::PhanMemNoiSoi.Properties.Resources.save_24;
-            this.btnSaveLog.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSaveLog.Location = new System.Drawing.Point(510, 641);
-            this.btnSaveLog.Name = "btnSaveLog";
-            this.btnSaveLog.Size = new System.Drawing.Size(128, 35);
-            this.btnSaveLog.TabIndex = 14;
-            this.btnSaveLog.Text = "Lưu ra file";
-            this.btnSaveLog.UseVisualStyleBackColor = true;
+            this.dgLogView.Size = new System.Drawing.Size(796, 415);
+            this.dgLogView.TabIndex = 1;
+            this.dgLogView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgLogView_RowsAdded);
+            this.dgLogView.Resize += new System.EventHandler(this.dgLogView_Resize);
             // 
             // LogManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(747, 683);
-            this.Controls.Add(this.btnSaveLog);
-            this.Controls.Add(this.btnClearLog);
+            this.ClientSize = new System.Drawing.Size(816, 683);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -298,11 +287,12 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LogManager";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Search";
+            this.Text = "Tìm kiếm";
             this.UserIsAllowed += new System.EventHandler(this.LogManager_UserIsAllowed);
             this.UserIsDenied += new System.EventHandler(this.LogManager_UserIsDenied);
-            this.Load += new System.EventHandler(this.Search_Load);
+            this.Load += new System.EventHandler(this.LogManager_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -323,17 +313,15 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.DateTimePicker dtNgayBatDau;
         private System.Windows.Forms.DateTimePicker dtNgayKetThuc;
-        private System.Windows.Forms.Button btnXoa;
         private System.Windows.Forms.Button btnTatCa;
         private System.Windows.Forms.Button btnTimKiem;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.DataGridView dgLogView;
         private System.Windows.Forms.RadioButton rbNgay;
         private System.Windows.Forms.RadioButton rbThang;
         private System.Windows.Forms.Button btnClearLog;
-        private System.Windows.Forms.Button btnSaveLog;
         private System.Windows.Forms.ComboBox cbUser;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtContent;
+        private System.Windows.Forms.DataGridView dgLogView;
     }
 }

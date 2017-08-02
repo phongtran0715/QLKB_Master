@@ -197,7 +197,7 @@
         9NNm2fUfKxFDCV1q/OQAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="button3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnAddInfoReport.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAASwSURBVEhLjVYLTJtVFP77gD7oC1poCy3doIWtIAU6YTPq1GW4gpgtGBN0zkjiTJjRxDgXhW1Z
@@ -223,7 +223,7 @@
         9NNm2fUfKxFDCV1q/OQAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="button1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnDeleteInfoReport.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAQ1SURBVEhL3ZVdTJNnFMf7MdS9X23fFnTFYQcYZHwsk2T4kWwEL4hKgonREO9czCIaw4yJRBKN

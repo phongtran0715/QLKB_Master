@@ -1,4 +1,6 @@
-﻿using Microsoft.Win32;
+﻿using Microsoft.SqlServer.Management.Common;
+using Microsoft.SqlServer.Management.Smo;
+using Microsoft.Win32;
 using System;
 using System.Data;
 using System.Data.SqlClient;
@@ -213,6 +215,21 @@ namespace PhanMemNoiSoi
                 {
                     connection.Close();
                 }
+            }
+            return exitCode;
+        }
+
+        public bool CheckConnection2(string sqlInstanceName)
+        {
+            bool exitCode = false;
+            try{
+                ServerConnection conn = new ServerConnection(sqlInstanceName);
+                Server srv = new Server(conn);
+                exitCode = true;
+            }
+            catch(Exception ex)
+            {
+
             }
             return exitCode;
         }

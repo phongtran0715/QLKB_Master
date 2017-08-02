@@ -278,6 +278,7 @@
             this.Controls.Add(this.btnBaoCao);
             this.Controls.Add(this.btnQuanLyData);
             this.Controls.Add(this.btnCaiDat);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

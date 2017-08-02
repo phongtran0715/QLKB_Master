@@ -50,7 +50,7 @@
             this.dgvRoleList = new System.Windows.Forms.DataGridView();
             this.X = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.btnSave = new System.Windows.Forms.Button();
-            this.dgvUserGroup = new System.Windows.Forms.DataGridView();
+            this.dgvWorkGroup = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUserList)).BeginInit();
@@ -59,7 +59,7 @@
             this.tabPage2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRoleList)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvUserGroup)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvWorkGroup)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -254,7 +254,7 @@
             // 
             this.tabPage2.Controls.Add(this.groupBox3);
             this.tabPage2.Controls.Add(this.btnSave);
-            this.tabPage2.Controls.Add(this.dgvUserGroup);
+            this.tabPage2.Controls.Add(this.dgvWorkGroup);
             this.tabPage2.Location = new System.Drawing.Point(4, 27);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -311,22 +311,22 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // dgvUserGroup
+            // dgvWorkGroup
             // 
-            this.dgvUserGroup.AllowUserToAddRows = false;
-            this.dgvUserGroup.AllowUserToDeleteRows = false;
-            this.dgvUserGroup.AllowUserToResizeRows = false;
-            this.dgvUserGroup.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvUserGroup.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
-            this.dgvUserGroup.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvUserGroup.Location = new System.Drawing.Point(6, 25);
-            this.dgvUserGroup.MultiSelect = false;
-            this.dgvUserGroup.Name = "dgvUserGroup";
-            this.dgvUserGroup.ReadOnly = true;
-            this.dgvUserGroup.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvUserGroup.Size = new System.Drawing.Size(147, 209);
-            this.dgvUserGroup.TabIndex = 2;
-            this.dgvUserGroup.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUserGroup_CellClick);
+            this.dgvWorkGroup.AllowUserToAddRows = false;
+            this.dgvWorkGroup.AllowUserToDeleteRows = false;
+            this.dgvWorkGroup.AllowUserToResizeRows = false;
+            this.dgvWorkGroup.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvWorkGroup.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
+            this.dgvWorkGroup.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvWorkGroup.Location = new System.Drawing.Point(6, 25);
+            this.dgvWorkGroup.MultiSelect = false;
+            this.dgvWorkGroup.Name = "dgvWorkGroup";
+            this.dgvWorkGroup.ReadOnly = true;
+            this.dgvWorkGroup.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvWorkGroup.Size = new System.Drawing.Size(147, 209);
+            this.dgvWorkGroup.TabIndex = 2;
+            this.dgvWorkGroup.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUserGroup_CellClick);
             // 
             // UserManager
             // 
@@ -335,10 +335,12 @@
             this.ClientSize = new System.Drawing.Size(639, 644);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnThoat);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "UserManager";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản lý người dùng";
             this.UserIsAllowed += new System.EventHandler(this.UserManager_UserIsAllowed);
@@ -355,7 +357,7 @@
             this.tabPage2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvRoleList)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvUserGroup)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvWorkGroup)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -379,7 +381,7 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.DataGridView dgvUserGroup;
+        private System.Windows.Forms.DataGridView dgvWorkGroup;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.DataGridView dgvRoleList;

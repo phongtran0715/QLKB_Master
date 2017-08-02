@@ -237,6 +237,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "BackupAndRestore";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sao lưu và khôi phục dữ liệu";
             this.UserIsDenied += new System.EventHandler(this.BackupAndRestore_UserIsDenied);

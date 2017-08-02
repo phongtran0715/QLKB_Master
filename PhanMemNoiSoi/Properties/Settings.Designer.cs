@@ -274,5 +274,17 @@ namespace PhanMemNoiSoi.Properties {
                 this["lastUserType"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string softwareLicense {
+            get {
+                return ((string)(this["softwareLicense"]));
+            }
+            set {
+                this["softwareLicense"] = value;
+            }
+        }
     }
 }

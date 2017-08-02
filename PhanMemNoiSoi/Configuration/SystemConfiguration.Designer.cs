@@ -52,6 +52,7 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancle = new System.Windows.Forms.Button();
+            this.btnSoftwareActive = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -300,19 +301,37 @@
             this.btnCancle.UseVisualStyleBackColor = true;
             this.btnCancle.Click += new System.EventHandler(this.btnCancle_Click);
             // 
+            // btnSoftwareActive
+            // 
+            this.btnSoftwareActive.BackColor = System.Drawing.Color.Yellow;
+            this.btnSoftwareActive.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSoftwareActive.Image = ((System.Drawing.Image)(resources.GetObject("btnSoftwareActive.Image")));
+            this.btnSoftwareActive.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSoftwareActive.Location = new System.Drawing.Point(18, 444);
+            this.btnSoftwareActive.Name = "btnSoftwareActive";
+            this.btnSoftwareActive.Size = new System.Drawing.Size(193, 35);
+            this.btnSoftwareActive.TabIndex = 17;
+            this.btnSoftwareActive.Text = "Kích hoạt bản quyền";
+            this.btnSoftwareActive.UseVisualStyleBackColor = false;
+            this.btnSoftwareActive.Click += new System.EventHandler(this.button1_Click);
+            // 
             // SystemConfiguration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(521, 485);
+            this.Controls.Add(this.btnSoftwareActive);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.btnCancle);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SystemConfiguration";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cấu hình hệ thống";
             this.UserIsDenied += new System.EventHandler(this.SystemConfiguration_UserIsDenied);
@@ -353,5 +372,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button btnSoftwareActive;
     }
 }
