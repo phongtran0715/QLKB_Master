@@ -1,0 +1,8 @@
+E:\PhanMemNoiSoi\QLKBKeyGen\bin\Release\QLKBKeyGen.exe.config
+E:\PhanMemNoiSoi\QLKBKeyGen\bin\Release\QLKBKeyGen.exe
+E:\PhanMemNoiSoi\QLKBKeyGen\bin\Release\QLKBKeyGen.pdb
+E:\PhanMemNoiSoi\QLKBKeyGen\obj\Release\QLKBKeyGen.Form1.resources
+E:\PhanMemNoiSoi\QLKBKeyGen\obj\Release\QLKBKeyGen.Properties.Resources.resources
+E:\PhanMemNoiSoi\QLKBKeyGen\obj\Release\QLKBKeyGen.csproj.GenerateResource.Cache
+E:\PhanMemNoiSoi\QLKBKeyGen\obj\Release\QLKBKeyGen.exe
+E:\PhanMemNoiSoi\QLKBKeyGen\obj\Release\QLKBKeyGen.pdb

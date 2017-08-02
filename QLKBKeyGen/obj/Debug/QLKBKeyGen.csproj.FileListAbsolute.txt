@@ -1,0 +1,9 @@
+E:\PhanMemNoiSoi\QLKBKeyGen\obj\Debug\QLKBKeyGen.csprojResolveAssemblyReference.cache
+E:\PhanMemNoiSoi\QLKBKeyGen\obj\Debug\QLKBKeyGen.Form1.resources
+E:\PhanMemNoiSoi\QLKBKeyGen\obj\Debug\QLKBKeyGen.Properties.Resources.resources
+E:\PhanMemNoiSoi\QLKBKeyGen\obj\Debug\QLKBKeyGen.csproj.GenerateResource.Cache
+E:\PhanMemNoiSoi\QLKBKeyGen\bin\Debug\QLKBKeyGen.exe.config
+E:\PhanMemNoiSoi\QLKBKeyGen\bin\Debug\QLKBKeyGen.exe
+E:\PhanMemNoiSoi\QLKBKeyGen\bin\Debug\QLKBKeyGen.pdb
+E:\PhanMemNoiSoi\QLKBKeyGen\obj\Debug\QLKBKeyGen.exe
+E:\PhanMemNoiSoi\QLKBKeyGen\obj\Debug\QLKBKeyGen.pdb
