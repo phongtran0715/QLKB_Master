@@ -148,7 +148,7 @@
             this.MinimizeBox = false;
             this.Name = "gbCheckRecord";
             this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Báo cáo";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.gbCheckRecord_FormClosed);
             this.Load += new System.EventHandler(this.Report_Load);

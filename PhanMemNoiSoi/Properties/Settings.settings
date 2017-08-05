@@ -18,7 +18,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="defaultImgFolder" Type="System.String" Scope="User">
-      <Value Profile="(Default)">D:\QLKB</Value>
+      <Value Profile="(Default)">D:\\QLKB</Value>
     </Setting>
     <Setting Name="rememberAccount" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
@@ -64,6 +64,9 @@
     </Setting>
     <Setting Name="lastUserType" Type="System.String" Scope="User">
       <Value Profile="(Default)">Doctor</Value>
+    </Setting>
+    <Setting Name="softwareLicense" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

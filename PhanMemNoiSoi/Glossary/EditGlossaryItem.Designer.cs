@@ -46,7 +46,7 @@
             this.gbParent.Controls.Add(this.lbCode);
             this.gbParent.Controls.Add(this.label1);
             this.gbParent.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbParent.Location = new System.Drawing.Point(13, 13);
+            this.gbParent.Location = new System.Drawing.Point(13, 14);
             this.gbParent.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gbParent.Name = "gbParent";
             this.gbParent.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);

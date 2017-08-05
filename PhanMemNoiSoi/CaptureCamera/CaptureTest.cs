@@ -83,6 +83,7 @@ namespace PhanMemNoiSoi
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CaptureTest));
             this.btnSave = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.mainMenu = new System.Windows.Forms.MainMenu(this.components);
@@ -108,11 +109,11 @@ namespace PhanMemNoiSoi
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.Image = global::PhanMemNoiSoi.Properties.Resources.save_24;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(332, 439);
+            this.btnSave.Location = new System.Drawing.Point(390, 396);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(155, 32);
+            this.btnSave.Size = new System.Drawing.Size(130, 35);
             this.btnSave.TabIndex = 3;
-            this.btnSave.Text = "Lưu và thoát";
+            this.btnSave.Text = "     Lưu và thoát";
             this.btnSave.Click += new System.EventHandler(this.btnStop_Click);
             // 
             // btnExit
@@ -120,9 +121,9 @@ namespace PhanMemNoiSoi
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExit.Image = global::PhanMemNoiSoi.Properties.Resources.exit_24;
             this.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnExit.Location = new System.Drawing.Point(504, 439);
+            this.btnExit.Location = new System.Drawing.Point(526, 396);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(120, 32);
+            this.btnExit.Size = new System.Drawing.Size(98, 35);
             this.btnExit.TabIndex = 5;
             this.btnExit.Text = "Thoát";
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
@@ -224,7 +225,7 @@ namespace PhanMemNoiSoi
             this.panelVideo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelVideo.Location = new System.Drawing.Point(12, 12);
             this.panelVideo.Name = "panelVideo";
-            this.panelVideo.Size = new System.Drawing.Size(612, 409);
+            this.panelVideo.Size = new System.Drawing.Size(612, 375);
             this.panelVideo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.panelVideo.TabIndex = 6;
             this.panelVideo.TabStop = false;
@@ -232,11 +233,12 @@ namespace PhanMemNoiSoi
             // CaptureTest
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(8, 19);
-            this.ClientSize = new System.Drawing.Size(632, 475);
+            this.ClientSize = new System.Drawing.Size(632, 441);
             this.Controls.Add(this.panelVideo);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnSave);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Menu = this.mainMenu;
             this.Name = "CaptureTest";
             this.ShowInTaskbar = false;
@@ -509,8 +511,8 @@ namespace PhanMemNoiSoi
                 // We subtract 1 from m.Index beacuse the first item is (None)
                 MenuItem m = sender as MenuItem;
                 capture.VideoCompressor = (m.Index > 0 ? filters.VideoCompressors[m.Index - 1] : null);
-                updateMenu();
                 this.vCompressIndex = m.Index;
+                updateMenu();
             }
             catch (Exception ex)
             {

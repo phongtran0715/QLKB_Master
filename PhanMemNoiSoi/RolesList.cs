@@ -57,9 +57,9 @@ namespace PhanMemNoiSoi
                 return roleList.ToArray();
             }
             List<string> listUserRole = new List<string>();
-            string sqlCommand = "SELECT RoleId FROM UserGroupRole WHERE GroupId = @id;";
-            SqlCommand mySQL = new SqlCommand(sqlCommand, DBConnection.Instance.sqlConn);
-            mySQL.Parameters.Add("@id", SqlDbType.NChar).Value = userGroup;
+            string sqlQuery = "SELECT RoleId FROM UserGroupRole WHERE GroupId = @gId;";
+            SqlCommand mySQL = new SqlCommand(sqlQuery, DBConnection.Instance.sqlConn);
+            mySQL.Parameters.Add("@gId", SqlDbType.NChar).Value = userGroup;
             SqlDataReader rdrUser = mySQL.ExecuteReader();
             if (rdrUser.HasRows)
             {

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BackupAndRestore));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.cbThang = new System.Windows.Forms.ComboBox();
@@ -60,7 +61,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 17);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(600, 164);
+            this.groupBox1.Size = new System.Drawing.Size(594, 164);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Sao lưu dữ liệu";
@@ -68,7 +69,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(274, 40);
+            this.label1.Location = new System.Drawing.Point(256, 33);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(42, 20);
             this.label1.TabIndex = 23;
@@ -78,7 +79,7 @@
             // 
             this.cbThang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbThang.FormattingEnabled = true;
-            this.cbThang.Location = new System.Drawing.Point(125, 32);
+            this.cbThang.Location = new System.Drawing.Point(107, 25);
             this.cbThang.Name = "cbThang";
             this.cbThang.Size = new System.Drawing.Size(119, 28);
             this.cbThang.TabIndex = 2;
@@ -87,7 +88,7 @@
             // 
             this.cbNamThang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbNamThang.FormattingEnabled = true;
-            this.cbNamThang.Location = new System.Drawing.Point(332, 32);
+            this.cbNamThang.Location = new System.Drawing.Point(314, 25);
             this.cbNamThang.Name = "cbNamThang";
             this.cbNamThang.Size = new System.Drawing.Size(119, 28);
             this.cbNamThang.TabIndex = 3;
@@ -96,7 +97,7 @@
             // 
             this.cbNam.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbNam.FormattingEnabled = true;
-            this.cbNam.Location = new System.Drawing.Point(125, 75);
+            this.cbNam.Location = new System.Drawing.Point(107, 68);
             this.cbNam.Name = "cbNam";
             this.cbNam.Size = new System.Drawing.Size(119, 28);
             this.cbNam.TabIndex = 5;
@@ -104,7 +105,7 @@
             // rbNam
             // 
             this.rbNam.AutoSize = true;
-            this.rbNam.Location = new System.Drawing.Point(32, 79);
+            this.rbNam.Location = new System.Drawing.Point(14, 72);
             this.rbNam.Name = "rbNam";
             this.rbNam.Size = new System.Drawing.Size(60, 24);
             this.rbNam.TabIndex = 4;
@@ -116,7 +117,7 @@
             // rbThang
             // 
             this.rbThang.AutoSize = true;
-            this.rbThang.Location = new System.Drawing.Point(32, 36);
+            this.rbThang.Location = new System.Drawing.Point(14, 29);
             this.rbThang.Name = "rbThang";
             this.rbThang.Size = new System.Drawing.Size(72, 24);
             this.rbThang.TabIndex = 1;
@@ -129,7 +130,7 @@
             // 
             this.btnSaveData.Image = global::PhanMemNoiSoi.Properties.Resources.save_24;
             this.btnSaveData.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSaveData.Location = new System.Drawing.Point(23, 123);
+            this.btnSaveData.Location = new System.Drawing.Point(6, 123);
             this.btnSaveData.Name = "btnSaveData";
             this.btnSaveData.Size = new System.Drawing.Size(122, 35);
             this.btnSaveData.TabIndex = 6;
@@ -144,7 +145,7 @@
             this.groupBox3.Controls.Add(this.button1);
             this.groupBox3.Controls.Add(this.dgvBackup);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(18, 198);
+            this.groupBox3.Location = new System.Drawing.Point(12, 187);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(594, 238);
             this.groupBox3.TabIndex = 1;
@@ -155,7 +156,7 @@
             // 
             this.button3.Image = global::PhanMemNoiSoi.Properties.Resources.trach_24;
             this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button3.Location = new System.Drawing.Point(306, 193);
+            this.button3.Location = new System.Drawing.Point(295, 190);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(122, 35);
             this.button3.TabIndex = 9;
@@ -167,7 +168,7 @@
             // 
             this.button2.Image = global::PhanMemNoiSoi.Properties.Resources.search_24;
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(157, 193);
+            this.button2.Location = new System.Drawing.Point(146, 190);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(122, 35);
             this.button2.TabIndex = 8;
@@ -179,7 +180,7 @@
             // 
             this.button1.Image = global::PhanMemNoiSoi.Properties.Resources.refresh_24;
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(17, 193);
+            this.button1.Location = new System.Drawing.Point(6, 190);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(122, 35);
             this.button1.TabIndex = 7;
@@ -206,7 +207,7 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(24, 442);
+            this.progressBar1.Location = new System.Drawing.Point(18, 442);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(588, 23);
             this.progressBar1.TabIndex = 19;
@@ -216,7 +217,7 @@
             this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExit.Image = global::PhanMemNoiSoi.Properties.Resources.exit_24;
             this.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnExit.Location = new System.Drawing.Point(517, 471);
+            this.btnExit.Location = new System.Drawing.Point(508, 471);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(98, 35);
             this.btnExit.TabIndex = 9;
@@ -228,12 +229,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(624, 514);
+            this.ClientSize = new System.Drawing.Size(612, 510);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "BackupAndRestore";

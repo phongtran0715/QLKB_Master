@@ -1,9 +1,7 @@
-﻿/////Add the references (new)
-using System;
+﻿using System;
 using System.Drawing;
 using System.Reflection;
 using Word = Microsoft.Office.Interop.Word;
-////
 
 namespace PhanMemNoiSoi
 {

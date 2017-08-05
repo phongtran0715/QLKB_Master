@@ -68,7 +68,7 @@
             this.groupBox1.Controls.Add(this.txtTenBV);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(6, 15);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(577, 117);
@@ -81,7 +81,7 @@
             this.txtDiaChiBV.Location = new System.Drawing.Point(102, 73);
             this.txtDiaChiBV.MaxLength = 99;
             this.txtDiaChiBV.Name = "txtDiaChiBV";
-            this.txtDiaChiBV.Size = new System.Drawing.Size(464, 24);
+            this.txtDiaChiBV.Size = new System.Drawing.Size(464, 26);
             this.txtDiaChiBV.TabIndex = 2;
             // 
             // txtTenBV
@@ -89,7 +89,7 @@
             this.txtTenBV.Location = new System.Drawing.Point(102, 40);
             this.txtTenBV.MaxLength = 99;
             this.txtTenBV.Name = "txtTenBV";
-            this.txtTenBV.Size = new System.Drawing.Size(464, 24);
+            this.txtTenBV.Size = new System.Drawing.Size(464, 26);
             this.txtTenBV.TabIndex = 1;
             // 
             // label2
@@ -97,7 +97,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(29, 73);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 18);
+            this.label2.Size = new System.Drawing.Size(57, 20);
             this.label2.TabIndex = 1;
             this.label2.Text = "Địa chỉ";
             // 
@@ -106,7 +106,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(29, 40);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 18);
+            this.label1.Size = new System.Drawing.Size(62, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Tên BV";
             // 
@@ -118,7 +118,7 @@
             this.groupBox2.Controls.Add(this.btnThem);
             this.groupBox2.Controls.Add(this.dgvUserList);
             this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(6, 142);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(577, 377);
@@ -187,25 +187,25 @@
             this.dgvUserList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvUserList.Size = new System.Drawing.Size(560, 251);
             this.dgvUserList.TabIndex = 3;
-            this.dgvUserList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgUserList_CellDoubleClick);
+            this.dgvUserList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUserList_CellDoubleClick);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(6, 38);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(155, 18);
+            this.label3.Size = new System.Drawing.Size(169, 20);
             this.label3.TabIndex = 2;
             this.label3.Text = "Danh sách người dùng";
             // 
             // btnThayMK
             // 
-            this.btnThayMK.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThayMK.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThayMK.Image = ((System.Drawing.Image)(resources.GetObject("btnThayMK.Image")));
             this.btnThayMK.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnThayMK.Location = new System.Drawing.Point(12, 524);
             this.btnThayMK.Name = "btnThayMK";
-            this.btnThayMK.Size = new System.Drawing.Size(297, 35);
+            this.btnThayMK.Size = new System.Drawing.Size(312, 35);
             this.btnThayMK.TabIndex = 8;
             this.btnThayMK.Text = "  Thay đổi mật khẩu người dùng hiện tại";
             this.btnThayMK.UseVisualStyleBackColor = true;
@@ -213,10 +213,10 @@
             // 
             // btnThoat
             // 
-            this.btnThoat.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThoat.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThoat.Image = ((System.Drawing.Image)(resources.GetObject("btnThoat.Image")));
             this.btnThoat.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnThoat.Location = new System.Drawing.Point(532, 609);
+            this.btnThoat.Location = new System.Drawing.Point(515, 609);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(98, 35);
             this.btnThoat.TabIndex = 9;
@@ -232,7 +232,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(618, 591);
+            this.tabControl1.Size = new System.Drawing.Size(601, 591);
             this.tabControl1.TabIndex = 10;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -245,7 +245,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 27);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(610, 560);
+            this.tabPage1.Size = new System.Drawing.Size(593, 560);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Quản lý người dùng";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -258,7 +258,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 27);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(610, 560);
+            this.tabPage2.Size = new System.Drawing.Size(593, 560);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Quản lý phân quyền";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -300,7 +300,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.Image = global::PhanMemNoiSoi.Properties.Resources.save_24;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSave.Location = new System.Drawing.Point(6, 240);
@@ -326,13 +326,13 @@
             this.dgvWorkGroup.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvWorkGroup.Size = new System.Drawing.Size(147, 209);
             this.dgvWorkGroup.TabIndex = 2;
-            this.dgvWorkGroup.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUserGroup_CellClick);
+            this.dgvWorkGroup.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvWorkGroup_CellClick);
             // 
             // UserManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(639, 644);
+            this.ClientSize = new System.Drawing.Size(620, 644);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnThoat);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -371,7 +371,6 @@
         private System.Windows.Forms.TextBox txtDiaChiBV;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DataGridView dgvUserList;
         private System.Windows.Forms.Button btnXoaMK;
         private System.Windows.Forms.Button btnSua;
         private System.Windows.Forms.Button btnXoa;
@@ -386,5 +385,6 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.DataGridView dgvRoleList;
         private System.Windows.Forms.DataGridViewCheckBoxColumn X;
+        private System.Windows.Forms.DataGridView dgvUserList;
     }
 }

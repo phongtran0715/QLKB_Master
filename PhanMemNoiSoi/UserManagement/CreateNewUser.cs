@@ -16,33 +16,27 @@ namespace PhanMemNoiSoi
             base(Session.Instance.UserRole, userPrincipal)
         {
             InitializeComponent();
-            this.txtTen.Text = "";
-            this.txtMK.Text = "";
-            this.txtMK2.Text = "";
+            txtUserName.Text = "";
+            txtPass.Text = "";
+            txtPassConfirm.Text = "";
         }
 
         private void btnHuy_Click(object sender, EventArgs e)
         {
-            this.Dispose();
+            this.Close();
         }
-
-        /*
-         * Bác sỹ ~ Doctor ~ Id = 0
-         * Quản lý ~ Manager ~ Id = 1
-         * Admin ~ Admin ~ Id = 2 
-         */
         private void button1_Click(object sender, EventArgs e)
         {
             //check user name 
-            if (string.IsNullOrEmpty(txtTen.Text.Trim()))
+            if (string.IsNullOrEmpty(txtUserName.Text.Trim()))
             {
-                MessageBox.Show("Tên đăng nhập không được trống!", "Thông báo",
+                MessageBox.Show("Tên đăng nhập không được để trống!", "Thông báo",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             //check password
-            if (txtMK.Text.Trim() != txtMK2.Text.Trim())
+            if (txtPass.Text.Trim() != txtPassConfirm.Text.Trim())
             {
                 MessageBox.Show("Mật khẩu bạn nhập hai lần không giống nhau!",
                                 "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -50,7 +44,7 @@ namespace PhanMemNoiSoi
             }
 
             //check user type
-            if (string.IsNullOrEmpty(cbNhom.Text.Trim()))
+            if (string.IsNullOrEmpty(cbGroup.Text.Trim()))
             {
                 MessageBox.Show("Nhóm user không được để trống!",
                                 "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -64,14 +58,14 @@ namespace PhanMemNoiSoi
                 string sqlCommand = "INSERT INTO UserList (UserName, Sex, Password, WorkGroupId) VALUES "
                                                     + "(@UserName, @Sex, @Password, @groupId)";
                 SqlCommand mySQL = new SqlCommand(sqlCommand, DBConnection.Instance.sqlConn);
-                mySQL.Parameters.Add("@UserName", SqlDbType.NChar).Value = txtTen.Text.Trim();
+                mySQL.Parameters.Add("@UserName", SqlDbType.NChar).Value = txtUserName.Text.Trim();
                 mySQL.Parameters.Add("@Sex", SqlDbType.NChar).Value = "male";
-                mySQL.Parameters.Add("@Password", SqlDbType.NChar).Value = txtMK.Text.Trim();
-                mySQL.Parameters.Add("@groupId", SqlDbType.NChar).Value = getUGroupByNum(cbNhom.SelectedIndex);
+                mySQL.Parameters.Add("@Password", SqlDbType.NChar).Value = txtPass.Text.Trim();
+                mySQL.Parameters.Add("@groupId", SqlDbType.NChar).Value = getUGroupByNum(cbGroup.SelectedIndex);
                 mySQL.ExecuteNonQuery();
 
                 this.RefreshDgv();
-                string msg = "Thêm mới tài khoản '" + txtTen.Text.Trim() + "'";
+                string msg = "Thêm mới tài khoản '" + txtUserName.Text.Trim() + "'";
                 Log.Instance.LogMessageToDB(DateTime.Now, Session.Instance.UserId, Session.Instance.UserName, msg);
 
                 MessageBox.Show("Thêm mới tài khoản thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -81,12 +75,18 @@ namespace PhanMemNoiSoi
             {
                 MessageBox.Show("Tạo tài khoản mới thất bại. \n Không thể kết nối đến cơ sở dữ liệu. \n Vui lòng thử lại sau!",
                                 "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Console.WriteLine(ex.ToString());
                 Log.Instance.LogMessageToFile(ex.ToString());
-                this.Close();
             }
         }
 
+        /// <summary>
+        /// Get Group by combo box selected index
+        /// Bác sỹ ~ Doctor ~ Id = 0
+        /// Quản lý ~ Manager ~ Id = 1
+        /// Admin ~ Admin ~ Id = 2 
+        /// </summary>
+        /// <param name="num"></param>
+        /// <returns></returns>
         private string getUGroupByNum(int num)
         {
             string wGroup = "";

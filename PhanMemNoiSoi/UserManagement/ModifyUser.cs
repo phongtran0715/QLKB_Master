@@ -20,8 +20,8 @@ namespace PhanMemNoiSoi
             base(RolesList.Instance.roleList.ToArray(), userPrincipal)
         {
             InitializeComponent();
-            this.txtTen.Text = username;
-            this.cbNhom.SelectedIndex = getIndexByGroupId(group);
+            txtUserName.Text = username;
+            cbGroup.SelectedIndex = getIndexByGroupId(group);
             this.userId = userId;
         }
 
@@ -33,7 +33,7 @@ namespace PhanMemNoiSoi
         private void button1_Click(object sender, EventArgs e)
         {
             //check user name 
-            if (string.IsNullOrEmpty(txtTen.Text.Trim()))
+            if (string.IsNullOrEmpty(txtUserName.Text.Trim()))
             {
                 MessageBox.Show("Tên đăng nhập không được trống!", "Thông báo",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -41,22 +41,20 @@ namespace PhanMemNoiSoi
             }
 
             //check group
-            if (string.IsNullOrEmpty(cbNhom.Text.Trim()))
+            if (string.IsNullOrEmpty(cbGroup.Text.Trim()))
             {
                 MessageBox.Show("Nhóm user không được để trống", "Thông báo",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            //check user name is exist
-            //TODO : check user name is exist
-
             //update database
-            string uGroup = getGroupByIndex(cbNhom.SelectedIndex);
-            updateUserInfo(this.userId,txtTen.Text.Trim(),getGroupByIndex(cbNhom.SelectedIndex), cbNhom.Text.Trim());
+            string uGroup = getGroupIdByIndex(cbGroup.SelectedIndex);
+            updateUserInfo(this.userId,txtUserName.Text.Trim(),
+                            getGroupIdByIndex(cbGroup.SelectedIndex), cbGroup.Text.Trim());
             this.Close();
         }
 
-        string getGroupByIndex(int index)
+        string getGroupIdByIndex(int index)
         {
             string group = "Doctor";
             switch (index)

@@ -422,7 +422,6 @@ namespace PhanMemNoiSoi
             string pInsurance = txtInsureId.Text.Trim();
             string doctor = "";
             string checkId = txtId.Text.Trim();
-            //TODO : get patient image 
             folderImgPath = Properties.Settings.Default.imageFolder + "\\" + DateTime.Today.Year.ToString()
                         + DateTime.Today.Month + "\\"
                         + DateTime.Today.Day + "\\"
@@ -516,6 +515,27 @@ namespace PhanMemNoiSoi
             SqlCommand comd = new SqlCommand(sql, DBConnection.Instance.sqlConn);
             int count = Convert.ToInt32(comd.ExecuteScalar());
             return count;
+        }
+
+        private void NewCheck_SizeChanged(object sender, EventArgs e)
+        {
+            dgvBenhNhan.Columns["STT"].Width = dgvBenhNhan.Width / 18;
+            dgvBenhNhan.Columns["SickName"].HeaderText = "Tên bệnh nhân";
+            dgvBenhNhan.Columns["SickName"].Width = dgvBenhNhan.Width / 9;
+            dgvBenhNhan.Columns["Age"].HeaderText = "Tuổi";
+            dgvBenhNhan.Columns["Age"].Width = dgvBenhNhan.Width / 18;
+            dgvBenhNhan.Columns["Address"].HeaderText = "Địa chỉ";
+            dgvBenhNhan.Columns["Address"].Width = dgvBenhNhan.Width / 9;
+            dgvBenhNhan.Columns["Occupation"].HeaderText = "Nghề nghiệp";
+            dgvBenhNhan.Columns["Occupation"].Width = dgvBenhNhan.Width / 9;
+            dgvBenhNhan.Columns["Telephone"].HeaderText = "Điện thoại";
+            dgvBenhNhan.Columns["Telephone"].Width = dgvBenhNhan.Width / 9;
+            dgvBenhNhan.Columns["InsuranceId"].HeaderText = "Số BHYT";
+            dgvBenhNhan.Columns["InsuranceId"].Width = dgvBenhNhan.Width / 9;
+            dgvBenhNhan.Columns["Sex"].HeaderText = "Giới tính";
+            dgvBenhNhan.Columns["Sex"].Width = dgvBenhNhan.Width / 15;
+            dgvBenhNhan.Columns["CauseCheck"].HeaderText = "Lý do khám";
+            dgvBenhNhan.Columns["CauseCheck"].Width = (dgvBenhNhan.Width * 3) / 9;
         }
     }
 }

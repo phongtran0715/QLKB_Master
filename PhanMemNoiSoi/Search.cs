@@ -166,7 +166,7 @@ namespace PhanMemNoiSoi
                     isAnd = true;
                 }
             }
-            query += ";";
+            query += " ORDER BY Createtime DESC;";
             Console.WriteLine(query);
             dtaPatient = new SqlDataAdapter(query, DBConnection.Instance.sqlConn);
 

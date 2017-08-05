@@ -78,9 +78,6 @@ namespace PhanMemNoiSoi
                 patient.SexProperty = rdrPatient["Sex"].ToString().Trim();
                 patient.CauseCheckProperty = rdrPatient["CauseCheck"].ToString().Trim();
                 patient.CreateTimeProperty = DateTime.Parse(rdrPatient["Createtime"].ToString());
-                //string check = rdrPatient["Createtime"].ToString().Trim();
-                //patient.CreateTimeProperty = DateTime.ParseExact(rdrPatient["Createtime"].ToString().Trim(), 
-                //                                               "yyyy-MM-dd hh-mm-ss", CultureInfo.InvariantCulture);
                 patient.NoteProperty = rdrPatient["SickHistoryNote"].ToString().Trim();
             }
             return patient;

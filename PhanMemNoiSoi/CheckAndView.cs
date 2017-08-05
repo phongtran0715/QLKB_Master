@@ -104,10 +104,13 @@ namespace PhanMemNoiSoi
                 if ((videoDevice != null))
                 {
                     capture = new Capture(videoDevice);
+                    int vCompressIndex = Properties.Settings.Default.vCompressIndex;
+                    capture.VideoCompressor = (vCompressIndex > 0 ? filters.VideoCompressors[vCompressIndex - 1] : null);
                     capture.FrameRate = vFrameRate;
                     Size size = new Size(vFrameSizeX, vFrameSizeY);
                     capture.FrameSize = size;
                     capture.PreviewWindowFrame = pbox;
+                   
                     exitCode = true;
                 }
                 heFrame = new Capture.HeFrame(CaptureComplete);
@@ -364,6 +367,7 @@ namespace PhanMemNoiSoi
 
         private void btnSaveVideo_Click(object sender, EventArgs e)
         {
+            //TODO : set video compress
             if (recordingVideo)
             {
                 //stop record video
