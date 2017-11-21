@@ -1,2 +1,0 @@
-C:\Users\win7-32bit\Desktop\PhanMemNoiSoi\DShowNET\bin\Release\DShowNET.dll
-C:\Users\win7-32bit\Desktop\PhanMemNoiSoi\DShowNET\obj\Release\DShowNET.dll

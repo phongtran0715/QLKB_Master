@@ -1,6 +1,0 @@
-C:\Users\win7-32bit\Desktop\PhanMemNoiSoi\DirectX.Capture\bin\Release\DirectX.Capture.dll
-C:\Users\win7-32bit\Desktop\PhanMemNoiSoi\DirectX.Capture\bin\Release\DirectX.Capture.xml
-C:\Users\win7-32bit\Desktop\PhanMemNoiSoi\DirectX.Capture\bin\Release\DShowNET.dll
-C:\Users\win7-32bit\Desktop\PhanMemNoiSoi\DirectX.Capture\bin\Release\DShowNET.pdb
-C:\Users\win7-32bit\Desktop\PhanMemNoiSoi\DirectX.Capture\obj\Release\DirectX.Capture.csprojResolveAssemblyReference.cache
-C:\Users\win7-32bit\Desktop\PhanMemNoiSoi\DirectX.Capture\obj\Release\DirectX.Capture.dll
