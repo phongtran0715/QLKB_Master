@@ -127,9 +127,6 @@
   <data name="refresh_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\refresh_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="loading16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\loading16.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="ok_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ok_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -145,14 +142,8 @@
   <data name="continue_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\continue_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pulse12" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pulse12.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="About us" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\About us.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="5" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\5.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="pause_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pause_241.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -172,9 +163,6 @@
   <data name="4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\4.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="f6656aa6fdb6b8f905dea0bcc2d71dd8" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\f6656aa6fdb6b8f905dea0bcc2d71dd8.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="e2edc731cbfc" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\e2edc731cbfc.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -183,9 +171,6 @@
   </data>
   <data name="user_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\user_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="record-button" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\record-button.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\3.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -198,9 +183,6 @@
   </data>
   <data name="search_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\search_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="info-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\info-icon.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Actions-contact-new-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Actions-contact-new-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -220,22 +202,13 @@
   <data name="Zoom-In-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Zoom-In-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="loading-main" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\loading-main.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Categories-preferences-system-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Categories-preferences-system-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="91" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\91.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="save_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\save_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="open_icon_24x24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\open_icon_24x24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="loading51" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\loading51.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

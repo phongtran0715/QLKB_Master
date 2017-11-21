@@ -11,9 +11,7 @@ namespace PhanMemNoiSoi
         Object missing = Missing.Value;
         Word.Application wordApp;
         Word.Document wordDoc;
-        Object oTemplatePath2 = System.Windows.Forms.Application.StartupPath + "\\Template\\template2.dotx";
-        Object oTemplatePath3 = System.Windows.Forms.Application.StartupPath + "\\Template\\template3.dotx";
-        Object oTemplatePath4 = System.Windows.Forms.Application.StartupPath + "\\Template\\template4.dotx";
+        Object oTemplatePath = System.Windows.Forms.Application.StartupPath + "\\Template\\template.dotx";
 
         public ReportWord()
         {
@@ -25,17 +23,7 @@ namespace PhanMemNoiSoi
         {
             try
             {
-                if (type == 2)
-                {
-                    wordDoc = wordApp.Documents.Add(ref oTemplatePath2, ref missing, ref missing, ref missing);
-                }
-                else if(type == 3)
-                {
-                    wordDoc = wordApp.Documents.Add(ref oTemplatePath3, ref missing, ref missing, ref missing);
-                }else
-                {
-                    wordDoc = wordApp.Documents.Add(ref oTemplatePath4, ref missing, ref missing, ref missing);
-                }
+                wordDoc = wordApp.Documents.Add(ref oTemplatePath, ref missing, ref missing, ref missing);
             }
             catch (Exception ex)
             {
@@ -87,12 +75,6 @@ namespace PhanMemNoiSoi
                     wordApp.Options.SaveNormalPrompt = false;
                     wordApp.Options.SavePropertiesPrompt = false;
                     wordDoc.Windows.Application.WindowState = Word.WdWindowState.wdWindowStateMaximize;
-                    /*
-                    var events = (Word.ApplicationEvents4_Event)wordApp;
-                    events.Quit += delegate {
-                        //DocumentBeforeClose();
-                    };
-                    */
                 }
             }
             catch (Exception ex)

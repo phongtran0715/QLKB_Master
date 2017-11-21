@@ -1709,7 +1709,13 @@ namespace DirectX.Capture
             Marshal.Copy(pBuffer, savedArray, 0, BufferLen);
 
             GCHandle handle = GCHandle.Alloc(savedArray, GCHandleType.Pinned);
-            int scan0 = (int)handle.AddrOfPinnedObject();
+
+            //#if WIN64
+            //            Int64 scan0 = (Int64)handle.AddrOfPinnedObject();
+            //#else
+            //            int scan0 = (int)handle.AddrOfPinnedObject();
+            //#endif
+            Int64 scan0 = (Int64)handle.AddrOfPinnedObject();
             scan0 += (h - 1) * stride;
             Bitmap b = new Bitmap(w, h, -stride, System.Drawing.Imaging.PixelFormat.Format24bppRgb, (IntPtr)scan0);
             handle.Free();

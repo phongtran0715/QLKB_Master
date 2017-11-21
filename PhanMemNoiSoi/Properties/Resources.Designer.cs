@@ -93,26 +93,6 @@ namespace PhanMemNoiSoi.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _5 {
-            get {
-                object obj = ResourceManager.GetObject("5", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap _91 {
-            get {
-                object obj = ResourceManager.GetObject("91", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap About_icon {
             get {
                 object obj = ResourceManager.GetObject("About-icon", resourceCulture);
@@ -263,59 +243,9 @@ namespace PhanMemNoiSoi.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap f6656aa6fdb6b8f905dea0bcc2d71dd8 {
-            get {
-                object obj = ResourceManager.GetObject("f6656aa6fdb6b8f905dea0bcc2d71dd8", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Full_Screen_24 {
             get {
                 object obj = ResourceManager.GetObject("Full-Screen_24", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap info_icon {
-            get {
-                object obj = ResourceManager.GetObject("info-icon", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap loading_main {
-            get {
-                object obj = ResourceManager.GetObject("loading-main", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap loading16 {
-            get {
-                object obj = ResourceManager.GetObject("loading16", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap loading51 {
-            get {
-                object obj = ResourceManager.GetObject("loading51", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -376,26 +306,6 @@ namespace PhanMemNoiSoi.Properties {
         internal static System.Drawing.Bitmap pause_24 {
             get {
                 object obj = ResourceManager.GetObject("pause_24", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap pulse12 {
-            get {
-                object obj = ResourceManager.GetObject("pulse12", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap record_button {
-            get {
-                object obj = ResourceManager.GetObject("record-button", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
