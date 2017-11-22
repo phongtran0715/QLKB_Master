@@ -59,7 +59,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Blue;
-            this.label1.Location = new System.Drawing.Point(100, 7);
+            this.label1.Location = new System.Drawing.Point(111, 7);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(183, 24);
             this.label1.TabIndex = 0;
@@ -105,12 +105,15 @@
             // 
             // btnRegister
             // 
+            this.btnRegister.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRegister.Image = ((System.Drawing.Image)(resources.GetObject("btnRegister.Image")));
+            this.btnRegister.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnRegister.Location = new System.Drawing.Point(149, 156);
             this.btnRegister.Name = "btnRegister";
-            this.btnRegister.Size = new System.Drawing.Size(99, 35);
+            this.btnRegister.Size = new System.Drawing.Size(97, 35);
             this.btnRegister.TabIndex = 5;
-            this.btnRegister.Text = "Đăng ký";
+            this.btnRegister.Text = "     Đăng ký";
             this.btnRegister.UseVisualStyleBackColor = true;
             this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
             // 
@@ -151,6 +154,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.SeaShell;
             this.ClientSize = new System.Drawing.Size(445, 332);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label5);

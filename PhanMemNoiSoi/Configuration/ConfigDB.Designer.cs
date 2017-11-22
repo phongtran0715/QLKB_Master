@@ -37,10 +37,10 @@
             this.txtUser = new System.Windows.Forms.TextBox();
             this.txtPass = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.pbStatus = new System.Windows.Forms.PictureBox();
             this.cbInstance = new System.Windows.Forms.ComboBox();
             this.lbStatus = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
-            this.pbStatus = new System.Windows.Forms.PictureBox();
             this.button3 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
@@ -129,6 +129,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cấu hình kết nối cơ sở dữ liệu";
             // 
+            // pbStatus
+            // 
+            this.pbStatus.BackColor = System.Drawing.Color.Transparent;
+            this.pbStatus.Location = new System.Drawing.Point(172, 203);
+            this.pbStatus.Name = "pbStatus";
+            this.pbStatus.Size = new System.Drawing.Size(51, 48);
+            this.pbStatus.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbStatus.TabIndex = 35;
+            this.pbStatus.TabStop = false;
+            // 
             // cbInstance
             // 
             this.cbInstance.FormattingEnabled = true;
@@ -148,8 +158,9 @@
             // 
             // button2
             // 
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Image = global::PhanMemNoiSoi.Properties.Resources.refresh_24;
+            this.button2.Image = global::PhanMemNoiSoi.Properties.Resources.question_24x24;
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button2.Location = new System.Drawing.Point(12, 277);
             this.button2.Name = "button2";
@@ -159,21 +170,11 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // pbStatus
-            // 
-            this.pbStatus.BackColor = System.Drawing.Color.Transparent;
-            //this.pbStatus.Image = global::PhanMemNoiSoi.Properties.Resources.loading51;
-            this.pbStatus.Location = new System.Drawing.Point(172, 203);
-            this.pbStatus.Name = "pbStatus";
-            this.pbStatus.Size = new System.Drawing.Size(51, 48);
-            this.pbStatus.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbStatus.TabIndex = 35;
-            this.pbStatus.TabStop = false;
-            // 
             // button3
             // 
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
+            this.button3.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
             this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button3.Location = new System.Drawing.Point(314, 277);
             this.button3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -186,10 +187,11 @@
             // 
             // button1
             // 
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Image = global::PhanMemNoiSoi.Properties.Resources.ok_24;
+            this.button1.Image = global::PhanMemNoiSoi.Properties.Resources.checked_24x24;
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(148, 277);
+            this.button1.Location = new System.Drawing.Point(157, 277);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(113, 35);
             this.button1.TabIndex = 23;
@@ -201,6 +203,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.SeaShell;
             this.ClientSize = new System.Drawing.Size(419, 326);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.groupBox1);

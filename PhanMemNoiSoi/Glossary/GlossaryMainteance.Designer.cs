@@ -63,8 +63,9 @@
             // btnThoat
             // 
             this.btnThoat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnThoat.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnThoat.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThoat.Image = ((System.Drawing.Image)(resources.GetObject("btnThoat.Image")));
+            this.btnThoat.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
             this.btnThoat.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnThoat.Location = new System.Drawing.Point(498, 598);
             this.btnThoat.Name = "btnThoat";
@@ -174,6 +175,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.BackColor = System.Drawing.Color.SeaShell;
             this.tabPage1.Controls.Add(this.btnEditCheckContent);
             this.tabPage1.Controls.Add(this.btnDeleteCheckContent);
             this.tabPage1.Controls.Add(this.btnAddCheckContent);
@@ -190,13 +192,13 @@
             this.tabPage1.Size = new System.Drawing.Size(577, 549);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Danh mục kết luận";
-            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // btnEditCheckContent
             // 
             this.btnEditCheckContent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEditCheckContent.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnEditCheckContent.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEditCheckContent.Image = ((System.Drawing.Image)(resources.GetObject("btnEditCheckContent.Image")));
             this.btnEditCheckContent.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -213,8 +215,9 @@
             this.btnDeleteCheckContent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDeleteCheckContent.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnDeleteCheckContent.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDeleteCheckContent.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteCheckContent.Image")));
+            this.btnDeleteCheckContent.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
             this.btnDeleteCheckContent.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnDeleteCheckContent.Location = new System.Drawing.Point(350, 501);
             this.btnDeleteCheckContent.Name = "btnDeleteCheckContent";
@@ -229,8 +232,9 @@
             this.btnAddCheckContent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddCheckContent.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnAddCheckContent.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddCheckContent.Image = ((System.Drawing.Image)(resources.GetObject("btnAddCheckContent.Image")));
+            this.btnAddCheckContent.Image = global::PhanMemNoiSoi.Properties.Resources.add_24x24;
             this.btnAddCheckContent.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAddCheckContent.Location = new System.Drawing.Point(234, 501);
             this.btnAddCheckContent.Name = "btnAddCheckContent";
@@ -245,6 +249,7 @@
             this.btnEditCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEditCheck.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnEditCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEditCheck.Image = ((System.Drawing.Image)(resources.GetObject("btnEditCheck.Image")));
             this.btnEditCheck.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -261,8 +266,9 @@
             this.btnDeleteCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDeleteCheck.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnDeleteCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDeleteCheck.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteCheck.Image")));
+            this.btnDeleteCheck.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
             this.btnDeleteCheck.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnDeleteCheck.Location = new System.Drawing.Point(350, 207);
             this.btnDeleteCheck.Name = "btnDeleteCheck";
@@ -277,8 +283,9 @@
             this.btnAddCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddCheck.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnAddCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddCheck.Image = ((System.Drawing.Image)(resources.GetObject("btnAddCheck.Image")));
+            this.btnAddCheck.Image = global::PhanMemNoiSoi.Properties.Resources.add_24x24;
             this.btnAddCheck.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAddCheck.Location = new System.Drawing.Point(234, 207);
             this.btnAddCheck.Name = "btnAddCheck";
@@ -369,6 +376,7 @@
             // GlossaryMainteance
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.BackColor = System.Drawing.Color.SeaShell;
             this.ClientSize = new System.Drawing.Size(602, 641);
             this.Controls.Add(this.btnThoat);
             this.Controls.Add(this.tabControl1);

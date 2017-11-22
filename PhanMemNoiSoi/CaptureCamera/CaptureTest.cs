@@ -84,8 +84,6 @@ namespace PhanMemNoiSoi
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CaptureTest));
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnExit = new System.Windows.Forms.Button();
             this.mainMenu = new System.Windows.Forms.MainMenu(this.components);
             this.menuItem1 = new System.Windows.Forms.MenuItem();
             this.mnuExit = new System.Windows.Forms.MenuItem();
@@ -101,32 +99,10 @@ namespace PhanMemNoiSoi
             this.menuItem5 = new System.Windows.Forms.MenuItem();
             this.mnuPropertyPages = new System.Windows.Forms.MenuItem();
             this.panelVideo = new System.Windows.Forms.PictureBox();
+            this.btnExit = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.panelVideo)).BeginInit();
             this.SuspendLayout();
-            // 
-            // btnSave
-            // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Image = global::PhanMemNoiSoi.Properties.Resources.save_24;
-            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(390, 396);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(130, 35);
-            this.btnSave.TabIndex = 3;
-            this.btnSave.Text = "     Lưu và thoát";
-            this.btnSave.Click += new System.EventHandler(this.btnStop_Click);
-            // 
-            // btnExit
-            // 
-            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExit.Image = global::PhanMemNoiSoi.Properties.Resources.exit_24;
-            this.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnExit.Location = new System.Drawing.Point(526, 396);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(98, 35);
-            this.btnExit.TabIndex = 5;
-            this.btnExit.Text = "Thoát";
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // mainMenu
             // 
@@ -225,15 +201,44 @@ namespace PhanMemNoiSoi
             this.panelVideo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelVideo.Location = new System.Drawing.Point(12, 12);
             this.panelVideo.Name = "panelVideo";
-            this.panelVideo.Size = new System.Drawing.Size(612, 375);
+            this.panelVideo.Size = new System.Drawing.Size(612, 354);
             this.panelVideo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.panelVideo.TabIndex = 6;
             this.panelVideo.TabStop = false;
             // 
+            // btnExit
+            // 
+            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.btnExit.ForeColor = System.Drawing.Color.Black;
+            this.btnExit.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
+            this.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnExit.Location = new System.Drawing.Point(526, 375);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(98, 35);
+            this.btnExit.TabIndex = 5;
+            this.btnExit.Text = "  Thoát";
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSave.Image = global::PhanMemNoiSoi.Properties.Resources.save_24;
+            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSave.Location = new System.Drawing.Point(390, 375);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(130, 35);
+            this.btnSave.TabIndex = 3;
+            this.btnSave.Text = "     Lưu và thoát";
+            this.btnSave.Click += new System.EventHandler(this.btnStop_Click);
+            // 
             // CaptureTest
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(8, 19);
-            this.ClientSize = new System.Drawing.Size(632, 441);
+            this.BackColor = System.Drawing.Color.SeaShell;
+            this.ClientSize = new System.Drawing.Size(632, 420);
             this.Controls.Add(this.panelVideo);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnSave);

@@ -176,7 +176,7 @@
             // btnCancle
             // 
             this.btnCancle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancle.Image = ((System.Drawing.Image)(resources.GetObject("btnCancle.Image")));
+            this.btnCancle.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
             this.btnCancle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCancle.Location = new System.Drawing.Point(541, 328);
             this.btnCancle.Name = "btnCancle";
@@ -189,7 +189,7 @@
             // btnOk
             // 
             this.btnOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOk.Image = ((System.Drawing.Image)(resources.GetObject("btnOk.Image")));
+            this.btnOk.Image = global::PhanMemNoiSoi.Properties.Resources.checked_24x24;
             this.btnOk.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnOk.Location = new System.Drawing.Point(408, 328);
             this.btnOk.Name = "btnOk";

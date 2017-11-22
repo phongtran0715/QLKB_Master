@@ -46,31 +46,31 @@
             this.gbParent.Controls.Add(this.lbCode);
             this.gbParent.Controls.Add(this.label1);
             this.gbParent.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbParent.Location = new System.Drawing.Point(13, 14);
+            this.gbParent.Location = new System.Drawing.Point(5, 5);
             this.gbParent.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gbParent.Name = "gbParent";
             this.gbParent.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.gbParent.Size = new System.Drawing.Size(459, 166);
+            this.gbParent.Size = new System.Drawing.Size(438, 153);
             this.gbParent.TabIndex = 0;
             this.gbParent.TabStop = false;
             this.gbParent.Text = "Thông tin";
             // 
             // txtNoiDung
             // 
-            this.txtNoiDung.Location = new System.Drawing.Point(107, 72);
+            this.txtNoiDung.Location = new System.Drawing.Point(92, 54);
             this.txtNoiDung.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtNoiDung.MaxLength = 99;
             this.txtNoiDung.Multiline = true;
             this.txtNoiDung.Name = "txtNoiDung";
             this.txtNoiDung.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtNoiDung.Size = new System.Drawing.Size(337, 87);
+            this.txtNoiDung.Size = new System.Drawing.Size(340, 90);
             this.txtNoiDung.TabIndex = 4;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(18, 72);
+            this.label3.Location = new System.Drawing.Point(10, 55);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(72, 20);
@@ -81,7 +81,7 @@
             // 
             this.lbCode.AutoSize = true;
             this.lbCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbCode.Location = new System.Drawing.Point(104, 37);
+            this.lbCode.Location = new System.Drawing.Point(89, 24);
             this.lbCode.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbCode.Name = "lbCode";
             this.lbCode.Size = new System.Drawing.Size(19, 18);
@@ -92,7 +92,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(18, 35);
+            this.label1.Location = new System.Drawing.Point(10, 25);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(47, 20);
@@ -101,10 +101,11 @@
             // 
             // btnOK
             // 
+            this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOK.Image = ((System.Drawing.Image)(resources.GetObject("btnOK.Image")));
+            this.btnOK.Image = global::PhanMemNoiSoi.Properties.Resources.checked_24x24;
             this.btnOK.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnOK.Location = new System.Drawing.Point(250, 190);
+            this.btnOK.Location = new System.Drawing.Point(239, 168);
             this.btnOK.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(98, 35);
@@ -115,10 +116,11 @@
             // 
             // btnCancle
             // 
+            this.btnCancle.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCancle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancle.Image = ((System.Drawing.Image)(resources.GetObject("btnCancle.Image")));
+            this.btnCancle.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
             this.btnCancle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancle.Location = new System.Drawing.Point(374, 190);
+            this.btnCancle.Location = new System.Drawing.Point(345, 168);
             this.btnCancle.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnCancle.Name = "btnCancle";
             this.btnCancle.Size = new System.Drawing.Size(98, 35);
@@ -131,7 +133,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(475, 233);
+            this.BackColor = System.Drawing.Color.SeaShell;
+            this.ClientSize = new System.Drawing.Size(447, 212);
             this.Controls.Add(this.btnCancle);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.gbParent);

@@ -40,10 +40,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.txtAddress = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.btnChiTiet = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
-            this.btnLuuBn = new System.Windows.Forms.Button();
-            this.btnChupHinh = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.txtTelephone = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -56,9 +53,12 @@
             this.gbBenhNhan = new System.Windows.Forms.GroupBox();
             this.dgvBenhNhan = new System.Windows.Forms.DataGridView();
             this.STT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button2 = new System.Windows.Forms.Button();
             this.btnXoaBN = new System.Windows.Forms.Button();
             this.btnThemMoi = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnChiTiet = new System.Windows.Forms.Button();
+            this.btnLuuBn = new System.Windows.Forms.Button();
+            this.btnChupHinh = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.gbBenhNhan.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBenhNhan)).BeginInit();
@@ -190,18 +190,6 @@
             this.label4.TabIndex = 20;
             this.label4.Text = "Địa chỉ";
             // 
-            // btnChiTiet
-            // 
-            this.btnChiTiet.Image = ((System.Drawing.Image)(resources.GetObject("btnChiTiet.Image")));
-            this.btnChiTiet.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnChiTiet.Location = new System.Drawing.Point(12, 160);
-            this.btnChiTiet.Name = "btnChiTiet";
-            this.btnChiTiet.Size = new System.Drawing.Size(112, 35);
-            this.btnChiTiet.TabIndex = 11;
-            this.btnChiTiet.Text = "Chi tiết";
-            this.btnChiTiet.UseVisualStyleBackColor = true;
-            this.btnChiTiet.Click += new System.EventHandler(this.btnChiTiet_Click);
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -211,30 +199,6 @@
             this.label9.Size = new System.Drawing.Size(319, 20);
             this.label9.TabIndex = 19;
             this.label9.Text = "Lưu ý : Bạn phải nhập tên và tuổi bệnh nhân";
-            // 
-            // btnLuuBn
-            // 
-            this.btnLuuBn.Image = ((System.Drawing.Image)(resources.GetObject("btnLuuBn.Image")));
-            this.btnLuuBn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLuuBn.Location = new System.Drawing.Point(170, 160);
-            this.btnLuuBn.Name = "btnLuuBn";
-            this.btnLuuBn.Size = new System.Drawing.Size(112, 35);
-            this.btnLuuBn.TabIndex = 12;
-            this.btnLuuBn.Text = "Lưu BN";
-            this.btnLuuBn.UseVisualStyleBackColor = true;
-            this.btnLuuBn.Click += new System.EventHandler(this.btnLuuBn_Click);
-            // 
-            // btnChupHinh
-            // 
-            this.btnChupHinh.Image = ((System.Drawing.Image)(resources.GetObject("btnChupHinh.Image")));
-            this.btnChupHinh.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnChupHinh.Location = new System.Drawing.Point(930, 160);
-            this.btnChupHinh.Name = "btnChupHinh";
-            this.btnChupHinh.Size = new System.Drawing.Size(112, 35);
-            this.btnChupHinh.TabIndex = 13;
-            this.btnChupHinh.Text = "    Chụp hình";
-            this.btnChupHinh.UseVisualStyleBackColor = true;
-            this.btnChupHinh.Click += new System.EventHandler(this.btnChupHinh_Click);
             // 
             // label7
             // 
@@ -359,9 +323,23 @@
             this.STT.Name = "STT";
             this.STT.ReadOnly = true;
             // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
+            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button2.Location = new System.Drawing.Point(978, 666);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(98, 35);
+            this.button2.TabIndex = 16;
+            this.button2.Text = "Thoát";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button1_Click);
+            // 
             // btnXoaBN
             // 
-            this.btnXoaBN.Image = ((System.Drawing.Image)(resources.GetObject("btnXoaBN.Image")));
+            this.btnXoaBN.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
             this.btnXoaBN.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnXoaBN.Location = new System.Drawing.Point(170, 23);
             this.btnXoaBN.Name = "btnXoaBN";
@@ -373,7 +351,7 @@
             // 
             // btnThemMoi
             // 
-            this.btnThemMoi.Image = ((System.Drawing.Image)(resources.GetObject("btnThemMoi.Image")));
+            this.btnThemMoi.Image = global::PhanMemNoiSoi.Properties.Resources.add_24x24;
             this.btnThemMoi.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnThemMoi.Location = new System.Drawing.Point(12, 23);
             this.btnThemMoi.Name = "btnThemMoi";
@@ -383,19 +361,41 @@
             this.btnThemMoi.UseVisualStyleBackColor = true;
             this.btnThemMoi.Click += new System.EventHandler(this.btnThemMoi_Click);
             // 
-            // button2
+            // btnChiTiet
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
-            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(978, 666);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(98, 35);
-            this.button2.TabIndex = 16;
-            this.button2.Text = "Thoát";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button1_Click);
+            this.btnChiTiet.Image = ((System.Drawing.Image)(resources.GetObject("btnChiTiet.Image")));
+            this.btnChiTiet.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnChiTiet.Location = new System.Drawing.Point(12, 160);
+            this.btnChiTiet.Name = "btnChiTiet";
+            this.btnChiTiet.Size = new System.Drawing.Size(112, 35);
+            this.btnChiTiet.TabIndex = 11;
+            this.btnChiTiet.Text = "Chi tiết";
+            this.btnChiTiet.UseVisualStyleBackColor = true;
+            this.btnChiTiet.Click += new System.EventHandler(this.btnChiTiet_Click);
+            // 
+            // btnLuuBn
+            // 
+            this.btnLuuBn.Image = ((System.Drawing.Image)(resources.GetObject("btnLuuBn.Image")));
+            this.btnLuuBn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLuuBn.Location = new System.Drawing.Point(170, 160);
+            this.btnLuuBn.Name = "btnLuuBn";
+            this.btnLuuBn.Size = new System.Drawing.Size(112, 35);
+            this.btnLuuBn.TabIndex = 12;
+            this.btnLuuBn.Text = "Lưu BN";
+            this.btnLuuBn.UseVisualStyleBackColor = true;
+            this.btnLuuBn.Click += new System.EventHandler(this.btnLuuBn_Click);
+            // 
+            // btnChupHinh
+            // 
+            this.btnChupHinh.Image = ((System.Drawing.Image)(resources.GetObject("btnChupHinh.Image")));
+            this.btnChupHinh.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnChupHinh.Location = new System.Drawing.Point(930, 160);
+            this.btnChupHinh.Name = "btnChupHinh";
+            this.btnChupHinh.Size = new System.Drawing.Size(112, 35);
+            this.btnChupHinh.TabIndex = 13;
+            this.btnChupHinh.Text = "    Chụp hình";
+            this.btnChupHinh.UseVisualStyleBackColor = true;
+            this.btnChupHinh.Click += new System.EventHandler(this.btnChupHinh_Click);
             // 
             // NewCheck
             // 

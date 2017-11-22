@@ -50,9 +50,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.btnSoftwareActive = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancle = new System.Windows.Forms.Button();
-            this.btnSoftwareActive = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -72,6 +72,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.BackColor = System.Drawing.Color.SeaShell;
             this.tabPage2.Controls.Add(this.groupBox4);
             this.tabPage2.Controls.Add(this.groupBox3);
             this.tabPage2.Controls.Add(this.groupBox2);
@@ -82,7 +83,6 @@
             this.tabPage2.Size = new System.Drawing.Size(482, 385);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Cấu hình chụp ảnh";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // groupBox4
             // 
@@ -139,6 +139,7 @@
             // 
             // button2
             // 
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button2.Image = global::PhanMemNoiSoi.Properties.Resources.camera_24;
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button2.Location = new System.Drawing.Point(138, 34);
@@ -225,7 +226,8 @@
             // 
             // btnSelectFolder
             // 
-            this.btnSelectFolder.Image = global::PhanMemNoiSoi.Properties.Resources.refresh_24;
+            this.btnSelectFolder.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSelectFolder.Image = global::PhanMemNoiSoi.Properties.Resources.refresh_24x24;
             this.btnSelectFolder.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSelectFolder.Location = new System.Drawing.Point(353, 75);
             this.btnSelectFolder.Name = "btnSelectFolder";
@@ -275,37 +277,12 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Thư mục lưu ảnh";
             // 
-            // btnOk
-            // 
-            this.btnOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOk.Image = ((System.Drawing.Image)(resources.GetObject("btnOk.Image")));
-            this.btnOk.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnOk.Location = new System.Drawing.Point(285, 444);
-            this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(98, 35);
-            this.btnOk.TabIndex = 16;
-            this.btnOk.Text = "OK";
-            this.btnOk.UseVisualStyleBackColor = true;
-            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
-            // 
-            // btnCancle
-            // 
-            this.btnCancle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancle.Image = ((System.Drawing.Image)(resources.GetObject("btnCancle.Image")));
-            this.btnCancle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancle.Location = new System.Drawing.Point(410, 444);
-            this.btnCancle.Name = "btnCancle";
-            this.btnCancle.Size = new System.Drawing.Size(98, 35);
-            this.btnCancle.TabIndex = 15;
-            this.btnCancle.Text = "Thoát";
-            this.btnCancle.UseVisualStyleBackColor = true;
-            this.btnCancle.Click += new System.EventHandler(this.btnCancle_Click);
-            // 
             // btnSoftwareActive
             // 
             this.btnSoftwareActive.BackColor = System.Drawing.Color.Yellow;
+            this.btnSoftwareActive.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSoftwareActive.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSoftwareActive.Image = ((System.Drawing.Image)(resources.GetObject("btnSoftwareActive.Image")));
+            this.btnSoftwareActive.Image = global::PhanMemNoiSoi.Properties.Resources.user_24x24;
             this.btnSoftwareActive.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSoftwareActive.Location = new System.Drawing.Point(18, 444);
             this.btnSoftwareActive.Name = "btnSoftwareActive";
@@ -315,15 +292,45 @@
             this.btnSoftwareActive.UseVisualStyleBackColor = false;
             this.btnSoftwareActive.Click += new System.EventHandler(this.button1_Click);
             // 
+            // btnOk
+            // 
+            this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOk.Image = global::PhanMemNoiSoi.Properties.Resources.checked_24x24;
+            this.btnOk.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnOk.Location = new System.Drawing.Point(306, 444);
+            this.btnOk.Name = "btnOk";
+            this.btnOk.Size = new System.Drawing.Size(98, 35);
+            this.btnOk.TabIndex = 16;
+            this.btnOk.Text = "OK";
+            this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
+            // 
+            // btnCancle
+            // 
+            this.btnCancle.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnCancle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancle.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
+            this.btnCancle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCancle.Location = new System.Drawing.Point(410, 444);
+            this.btnCancle.Name = "btnCancle";
+            this.btnCancle.Size = new System.Drawing.Size(98, 35);
+            this.btnCancle.TabIndex = 15;
+            this.btnCancle.Text = "Thoát";
+            this.btnCancle.UseVisualStyleBackColor = true;
+            this.btnCancle.Click += new System.EventHandler(this.btnCancle_Click);
+            // 
             // SystemConfiguration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.SeaShell;
             this.ClientSize = new System.Drawing.Size(521, 485);
             this.Controls.Add(this.btnSoftwareActive);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.btnCancle);
             this.Controls.Add(this.tabControl1);
+            this.Cursor = System.Windows.Forms.Cursors.Cross;
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

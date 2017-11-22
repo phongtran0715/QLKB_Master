@@ -38,6 +38,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -47,6 +48,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Resources\Aha-Soft-Large-User-Doctor.ico</ApplicationIcon>
@@ -65,6 +67,7 @@
     <PlatformTarget>x64</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
@@ -74,6 +77,7 @@
     <PlatformTarget>x64</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DirectX.Capture, Version=1.0.6381.40264, Culture=neutral, processorArchitecture=MSIL">
@@ -111,7 +115,7 @@
       <HintPath>..\..\sql_dll\Microsoft.SqlServer.SqlEnum.dll</HintPath>
     </Reference>
     <Reference Include="OD.Forms.Security">
-      <HintPath>..\..\..\Downloads\SecureBaseForm_Src\bin\Debug\OD.Forms.Security.dll</HintPath>
+      <HintPath>..\SecureBaseForm\bin\Debug\OD.Forms.Security.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -430,8 +434,14 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\loading51.gif" />
-    <None Include="Resources\loading16.gif" />
+    <None Include="Resources\user_24x24.png" />
+    <None Include="Resources\export_24x24.png" />
+    <None Include="Resources\trash_24x24.png" />
+    <None Include="Resources\question_24x24.png" />
+    <None Include="Resources\list_24x24.png" />
+    <None Include="Resources\refresh_24x24.png" />
+    <None Include="Resources\delete_32x32.png" />
+    <None Include="Resources\delete_24x24.png" />
     <None Include="bin\Debug\continue_24.png" />
     <Content Include="bin\Debug\DirectX.Capture.dll" />
     <Content Include="bin\Debug\DirectX.Capture.pdb" />
@@ -451,16 +461,12 @@
     <Content Include="bin\Debug\PhanMemNoiSoi.pdb" />
     <Content Include="bin\Debug\PhanMemNoiSoi.vshost.exe" />
     <None Include="Resources\open_icon_24x24.png" />
-    <None Include="Resources\loading-main.gif" />
-    <None Include="Resources\info-icon.gif" />
-    <None Include="Resources\pulse12.gif" />
-    <None Include="Resources\record-button.gif" />
-    <None Include="Resources\f6656aa6fdb6b8f905dea0bcc2d71dd8.gif" />
     <None Include="Resources\e2edc731cbfc.png" />
     <None Include="Resources\Capture-icon.png" />
     <None Include="Resources\Capture-icon-24x24.png" />
-    <None Include="Resources\5.gif" />
-    <None Include="Resources\91.gif" />
+    <None Include="Resources\checked_32x32.png" />
+    <None Include="Resources\checked_24x24.png" />
+    <None Include="Resources\add_24x24.png" />
     <Content Include="Resources\continue_24.png" />
     <None Include="Resources\pause_241.png" />
     <None Include="Resources\save_24.png" />
@@ -508,6 +514,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

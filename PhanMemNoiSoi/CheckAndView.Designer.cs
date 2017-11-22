@@ -369,6 +369,7 @@
             // 
             // btnFullScreen
             // 
+            this.btnFullScreen.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnFullScreen.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFullScreen.Image = global::PhanMemNoiSoi.Properties.Resources.Full_Screen_24;
             this.btnFullScreen.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -384,7 +385,6 @@
             // 
             this.pbRecordIcon.BackColor = System.Drawing.Color.Transparent;
             this.pbRecordIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            //this.pbRecordIcon.Image = global::PhanMemNoiSoi.Properties.Resources.pulse12;
             this.pbRecordIcon.Location = new System.Drawing.Point(38, 605);
             this.pbRecordIcon.Name = "pbRecordIcon";
             this.pbRecordIcon.Size = new System.Drawing.Size(71, 64);
@@ -394,6 +394,7 @@
             // 
             // btnSaveVideo
             // 
+            this.btnSaveVideo.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSaveVideo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSaveVideo.Image = global::PhanMemNoiSoi.Properties.Resources.camera_24;
             this.btnSaveVideo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -407,8 +408,9 @@
             // 
             // btnThoat
             // 
+            this.btnThoat.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnThoat.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThoat.Image = ((System.Drawing.Image)(resources.GetObject("btnThoat.Image")));
+            this.btnThoat.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
             this.btnThoat.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnThoat.Location = new System.Drawing.Point(15, 551);
             this.btnThoat.Name = "btnThoat";
@@ -420,6 +422,7 @@
             // 
             // btnBaoCao
             // 
+            this.btnBaoCao.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnBaoCao.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBaoCao.Image = ((System.Drawing.Image)(resources.GetObject("btnBaoCao.Image")));
             this.btnBaoCao.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -433,6 +436,7 @@
             // 
             // btnChupHinh
             // 
+            this.btnChupHinh.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnChupHinh.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnChupHinh.Image = global::PhanMemNoiSoi.Properties.Resources.e2edc731cbfc;
             this.btnChupHinh.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -446,6 +450,7 @@
             // 
             // btnDungHinh
             // 
+            this.btnDungHinh.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnDungHinh.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDungHinh.Image = global::PhanMemNoiSoi.Properties.Resources.pause_24;
             this.btnDungHinh.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -461,6 +466,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.SeaShell;
             this.ClientSize = new System.Drawing.Size(1222, 651);
             this.Controls.Add(this.btnFullScreen);
             this.Controls.Add(this.lbRecord);
