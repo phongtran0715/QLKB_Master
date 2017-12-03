@@ -1,4 +1,5 @@
 ﻿using OD.Forms.Security;
+using PhanMemNoiSoi.Properties;
 using System;
 using System.Data;
 using System.Data.SqlClient;
@@ -56,6 +57,8 @@ namespace PhanMemNoiSoi
                 MessageBox.Show("Cơ sở dữ liệu trống. Liên hệ với nhân viên quản trị phần mềm ", "Thông báo",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            dtNgayBatDau.CustomFormat = helper.getDateFormat(Settings.Default.datetimeFormat);
+            dtNgayKetThuc.CustomFormat = helper.getDateFormat(Settings.Default.datetimeFormat);
             dtNgayBatDau.Value = DateTime.Now;
             dtNgayKetThuc.Value = dtNgayBatDau.Value;
             //load data for log grid view
@@ -126,6 +129,7 @@ namespace PhanMemNoiSoi
 
             dgLogView.Columns["Num"].Visible = false;
             dgLogView.Columns["TimeLog"].HeaderText = "Thời gian";
+            dgLogView.Columns["TimeLog"].DefaultCellStyle.Format = helper.getDateFormat(Settings.Default.datetimeFormat);
             dgLogView.Columns["UserName"].HeaderText = "User";
             dgLogView.Columns["Descript"].HeaderText = "Nội dung";
 
@@ -170,11 +174,11 @@ namespace PhanMemNoiSoi
             {
                 if(isAnd == true)
                 {
-                    query += " AND TimeLog >= '" + String.Format("{0:d}", dtNgayBatDau.Value) + "'";
+                    query += " AND TimeLog >= '" + dtNgayBatDau.Value.ToString("yyyy-MM-dd") + "'";
                 }
                 else
                 {
-                    query += " WHERE TimeLog >= '" + String.Format("{0:d}", dtNgayBatDau.Value) + "'";
+                    query += " WHERE TimeLog >= '" + dtNgayBatDau.Value.ToString("yyyy-MM-dd") + "'";
                     isAnd = true;
                 }
             }
@@ -183,11 +187,11 @@ namespace PhanMemNoiSoi
             {
                 if(isAnd == true)
                 {
-                    query += " AND TimeLog <= '" + String.Format("{0:d}", dtNgayKetThuc.Value) + "'";
+                    query += " AND TimeLog <= '" + dtNgayKetThuc.Value.ToString("yyyy-MM-dd") + "'";
                 }
                 else
                 {
-                    query += " WHERE TimeLog <= '" + String.Format("{0:d}", dtNgayKetThuc.Value) + "'";
+                    query += " WHERE TimeLog <= '" + dtNgayKetThuc.Value.ToString("yyyy-MM-dd") + "'";
                     isAnd = true;
                 }
             }

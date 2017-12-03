@@ -237,7 +237,7 @@
             this.dtCreateTime.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
             this.dtCreateTime.Enabled = false;
             this.dtCreateTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtCreateTime.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtCreateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtCreateTime.Location = new System.Drawing.Point(99, 167);
             this.dtCreateTime.Name = "dtCreateTime";
             this.dtCreateTime.Size = new System.Drawing.Size(181, 26);

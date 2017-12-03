@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 
@@ -218,9 +219,10 @@ namespace PhanMemNoiSoi
 
         private void loadDgvData()
         {
+            string createTime = DateTime.Today.ToString("yyyy-MM-dd");
             string query = string.Format("SELECT SickNum,SickName, Age, Address, Occupation, Telephone, InsuranceId, Sex, CauseCheck "
                                             + " FROM SickData WHERE Createtime = '"
-                                            + DateTime.Today + "'");
+                                            + createTime + "'");
             dtaSick = new SqlDataAdapter(query, DBConnection.Instance.sqlConn);
             SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dtaSick);
             tbSick = new DataTable();

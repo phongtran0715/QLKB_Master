@@ -60,6 +60,7 @@ namespace PhanMemNoiSoi
             {
                 Settings.Default.maxRowDisplay = int.Parse(this.txtMaxRowDisplay.Text.Trim());
             }
+            Settings.Default.datetimeFormat = cbDateFormat.SelectedIndex;
             Settings.Default.Save();
             base.Close();
         }
@@ -86,6 +87,7 @@ namespace PhanMemNoiSoi
             this.txt4Heigh.Text = Settings.Default.img4Heigh.ToString();
             this.txtMaxDayLog.Text = Settings.Default.maxDayLog.ToString();
             this.txtMaxRowDisplay.Text = Settings.Default.maxRowDisplay.ToString();
+            cbDateFormat.SelectedIndex = Settings.Default.datetimeFormat;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -167,6 +169,7 @@ namespace PhanMemNoiSoi
             Settings.Default.img4Heigh = 150;
             Settings.Default.maxDayLog = 60;
             Settings.Default.maxRowDisplay = 500;
+            Settings.Default.datetimeFormat = 0;
             Settings.Default.Save();
             this.SystemConfiguration_Load(null, null);
             MessageBox.Show("Quay lại thiết lập mặc định thành công công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);

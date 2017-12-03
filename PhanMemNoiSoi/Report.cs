@@ -12,6 +12,7 @@ namespace PhanMemNoiSoi
 {
     public partial class gbCheckRecord : Form
     {
+        Helper helper = new Helper();
         private SqlDataAdapter dta = new SqlDataAdapter();
         private BindingSource bindSource = new BindingSource();
         DataTable table = new DataTable();
@@ -255,7 +256,7 @@ namespace PhanMemNoiSoi
             rp.insertText("Insurance", patientInfo.InsuranceIdProperty);
             rp.insertText("Cause", patientInfo.CauseCheckProperty);
             rp.insertText("Doctor", Session.Instance.UserName);
-            rp.insertText("CreateTime", patientInfo.CreateTimeProperty.ToShortDateString());
+            rp.insertText("CreateTime", patientInfo.CreateTimeProperty.ToString(helper.getDateFormat(Settings.Default.datetimeFormat)));
 
             string result = "";
             if(txtList != null)

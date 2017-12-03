@@ -223,7 +223,7 @@
             // 
             // dtNgayKetThuc
             // 
-            this.dtNgayKetThuc.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtNgayKetThuc.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtNgayKetThuc.Location = new System.Drawing.Point(469, 74);
             this.dtNgayKetThuc.Name = "dtNgayKetThuc";
             this.dtNgayKetThuc.ShowCheckBox = true;
@@ -232,7 +232,7 @@
             // 
             // dtNgayBatDau
             // 
-            this.dtNgayBatDau.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtNgayBatDau.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtNgayBatDau.Location = new System.Drawing.Point(469, 35);
             this.dtNgayBatDau.Name = "dtNgayBatDau";
             this.dtNgayBatDau.ShowCheckBox = true;
@@ -593,7 +593,7 @@
             this.Name = "Search";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Search";
+            this.Text = "Tìm kiếm bệnh nhân";
             this.UserIsAllowed += new System.EventHandler(this.Search_UserIsAllowed);
             this.UserIsDenied += new System.EventHandler(this.Search_UserIsDenied);
             this.Load += new System.EventHandler(this.Search_Load);

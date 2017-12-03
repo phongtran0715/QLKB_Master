@@ -54,6 +54,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.cbDateFormat = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.txtMaxRowDisplay = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -64,8 +66,6 @@
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancle = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.label14 = new System.Windows.Forms.Label();
-            this.cbDateFormat = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -348,6 +348,31 @@
             this.tabPage1.Text = "Cài đặt nâng cao";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // cbDateFormat
+            // 
+            this.cbDateFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbDateFormat.FormattingEnabled = true;
+            this.cbDateFormat.Items.AddRange(new object[] {
+            "dd/MM/yyyy",
+            "yyyy/MM/dd",
+            "d/M/yy",
+            "dd-MM-yyyy",
+            "yyyy-MM-dd",
+            "d-M-yy"});
+            this.cbDateFormat.Location = new System.Drawing.Point(207, 144);
+            this.cbDateFormat.Name = "cbDateFormat";
+            this.cbDateFormat.Size = new System.Drawing.Size(216, 28);
+            this.cbDateFormat.TabIndex = 11;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(81, 144);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(120, 20);
+            this.label14.TabIndex = 10;
+            this.label14.Text = "Định dạng ngày";
+            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -440,28 +465,6 @@
             this.button1.Text = "     Cấu hình mặc định";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(81, 144);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(120, 20);
-            this.label14.TabIndex = 10;
-            this.label14.Text = "Định dạng ngày";
-            // 
-            // cbDateFormat
-            // 
-            this.cbDateFormat.Enabled = false;
-            this.cbDateFormat.FormattingEnabled = true;
-            this.cbDateFormat.Items.AddRange(new object[] {
-            "dd-MM-yyyy",
-            "yyy-MM-dd",
-            "MM-dd-yyyy"});
-            this.cbDateFormat.Location = new System.Drawing.Point(207, 144);
-            this.cbDateFormat.Name = "cbDateFormat";
-            this.cbDateFormat.Size = new System.Drawing.Size(216, 28);
-            this.cbDateFormat.TabIndex = 11;
             // 
             // SystemConfiguration
             // 

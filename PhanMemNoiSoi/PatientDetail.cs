@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PhanMemNoiSoi.Properties;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
@@ -7,6 +8,7 @@ namespace PhanMemNoiSoi
 {
     public partial class PatientDetail : Form
     {
+        Helper help = new Helper();
         string num;
         public delegate void DoEvent(string username, string age, string address,
                                      string job, string telephone, string insuranceId,
@@ -85,6 +87,7 @@ namespace PhanMemNoiSoi
 
         private void PatientDetail_Load(object sender, EventArgs e)
         {
+            dtCreateTime.CustomFormat = help.getDateFormat(Settings.Default.datetimeFormat);
             Patient patient = new Patient().getPatientByNum(num);
             fillPatientDetail(patient);
         }

@@ -1,4 +1,5 @@
 ﻿using OD.Forms.Security;
+using PhanMemNoiSoi.Properties;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -35,6 +36,8 @@ namespace PhanMemNoiSoi
 
         private void Search_Load(object sender, EventArgs e)
         {
+            dtNgayBatDau.CustomFormat = helper.getDateFormat(Settings.Default.datetimeFormat);
+            dtNgayKetThuc.CustomFormat = helper.getDateFormat(Settings.Default.datetimeFormat);
             loadDgvPatient();
             //TODO: check base folder is exist
             BASE_IMG_FOLDER = Properties.Settings.Default.imageFolder;
@@ -70,6 +73,7 @@ namespace PhanMemNoiSoi
             dgvPatient.Columns["Age"].HeaderText = "Tuổi";
             dgvPatient.Columns["Birthday"].HeaderText = "Ngày sinh";
             dgvPatient.Columns["Createtime"].HeaderText = "Ngày khám";
+            dgvPatient.Columns["Createtime"].DefaultCellStyle.Format = helper.getDateFormat(Settings.Default.datetimeFormat);
 
             dgvPatient.Columns["SickName"].Width = dgvPatient.Width * 4 / 10;
             dgvPatient.Columns["Age"].Width = dgvPatient.Width / 10;
@@ -122,6 +126,14 @@ namespace PhanMemNoiSoi
 
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
+            //check start date & end date 
+            int checkTime = DateTime.Compare(dtNgayBatDau.Value, dtNgayKetThuc.Value);
+            if (checkTime > 0)
+            {
+                MessageBox.Show("Điều kiện tìm kiếm không hợp lệ. \n Ngày bắt đầu phải nhỏ hơn ngày kết thúc",
+                                "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             // create sql command
             bool isAnd = false;
             string query = "SELECT SickNum,SickName, Age, Birthday, Createtime FROM SickData ";
@@ -146,11 +158,11 @@ namespace PhanMemNoiSoi
             {
                 if (isAnd == true)
                 {
-                    query += " AND Createtime >= '" + dtNgayBatDau.Value.ToShortDateString() + "'";
+                    query += " AND Createtime >= '" + dtNgayBatDau.Value.ToString("yyyy-MM-dd") + "'";
                 }
                 else
                 {
-                    query += " WHERE Createtime >= '" + dtNgayBatDau.Value.ToShortDateString() + "'";
+                    query += " WHERE Createtime >= '" + dtNgayBatDau.Value.ToString("yyyy-MM-dd") + "'";
                     isAnd = true;
                 }
             }
@@ -158,11 +170,11 @@ namespace PhanMemNoiSoi
             {
                 if (isAnd == true)
                 {
-                    query += " AND Createtime <= '" + dtNgayKetThuc.Value.ToShortDateString() + "'";
+                    query += " AND Createtime <= '" + dtNgayKetThuc.Value.ToString("yyyy-MM-dd") + "'";
                 }
                 else
                 {
-                    query += " WHERE Createtime <= '" + dtNgayKetThuc.Value.ToShortDateString() + "'";
+                    query += " WHERE Createtime <= '" + dtNgayKetThuc.Value.ToString("yyyy-MM-dd") + "'";
                     isAnd = true;
                 }
             }

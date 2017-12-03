@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
@@ -13,6 +14,16 @@ namespace PhanMemNoiSoi
 {
     class Helper
     {
+        Dictionary<int, string> dateFormat = new Dictionary<int, string>()
+        {
+            { 0, "dd/MM/yyyy"},
+            { 1, "yyyy/MM/dd"},
+            { 2, "d/M/yy"},
+            { 3, "dd-MM-yyyy"},
+            { 4, "yyyy-MM-dd"},
+            { 5, "d-M-yy"},
+        };
+
         /// <summary>
         /// Save jpeg image to disk using save dialog
         /// </summary>
@@ -327,6 +338,13 @@ namespace PhanMemNoiSoi
                 }
             }
             return isValid;
+        }
+
+        public string getDateFormat(int index)
+        {
+            string strDateFormat = "";
+            strDateFormat = dateFormat[index];
+            return strDateFormat;
         }
     }
 }

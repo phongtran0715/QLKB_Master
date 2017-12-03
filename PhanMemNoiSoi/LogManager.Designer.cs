@@ -186,7 +186,7 @@
             // 
             // dtNgayKetThuc
             // 
-            this.dtNgayKetThuc.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtNgayKetThuc.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtNgayKetThuc.Location = new System.Drawing.Point(460, 77);
             this.dtNgayKetThuc.Name = "dtNgayKetThuc";
             this.dtNgayKetThuc.ShowCheckBox = true;
@@ -195,7 +195,7 @@
             // 
             // dtNgayBatDau
             // 
-            this.dtNgayBatDau.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtNgayBatDau.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtNgayBatDau.Location = new System.Drawing.Point(110, 77);
             this.dtNgayBatDau.Name = "dtNgayBatDau";
             this.dtNgayBatDau.ShowCheckBox = true;
