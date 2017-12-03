@@ -24,15 +24,6 @@ namespace QLKBKeyGen
         {
         }
 
-        private void btnGenKey_Click(object sender, EventArgs e)
-        {
-            bool checkId = validateClientId(txtClientId.Text.Trim());
-            if (checkId)
-            {
-                txtKey.Text = fp.GenKey(RemoveWhitespace(txtClientId.Text.Trim()));
-            }
-        }
-
         private bool validateClientId(string clientId)
         {
             bool exitCode = false;
@@ -58,6 +49,20 @@ namespace QLKBKeyGen
             return new string(input.ToCharArray()
                 .Where(c => !Char.IsWhiteSpace(c))
                 .ToArray());
+        }
+
+        private void btnGenKey_Click_1(object sender, EventArgs e)
+        {
+            bool checkId = validateClientId(txtClientId.Text.Trim());
+            if (checkId)
+            {
+                txtKey.Text = fp.GenKey(RemoveWhitespace(txtClientId.Text.Trim()));
+            }
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

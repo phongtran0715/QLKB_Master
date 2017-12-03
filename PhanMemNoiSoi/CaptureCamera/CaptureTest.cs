@@ -209,7 +209,6 @@ namespace PhanMemNoiSoi
             // btnExit
             // 
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.btnExit.ForeColor = System.Drawing.Color.Black;
             this.btnExit.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
@@ -224,7 +223,6 @@ namespace PhanMemNoiSoi
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSave.Image = global::PhanMemNoiSoi.Properties.Resources.save_24;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSave.Location = new System.Drawing.Point(390, 375);

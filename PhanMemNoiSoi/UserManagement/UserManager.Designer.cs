@@ -30,12 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserManager));
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnThayMK = new System.Windows.Forms.Button();
             this.btnXoaMK = new System.Windows.Forms.Button();
             this.btnSua = new System.Windows.Forms.Button();
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnThem = new System.Windows.Forms.Button();
             this.dgvUserList = new System.Windows.Forms.DataGridView();
-            this.btnThayMK = new System.Windows.Forms.Button();
             this.btnThoat = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -71,9 +71,21 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Thông tin người dùng";
             // 
+            // btnThayMK
+            // 
+            this.btnThayMK.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThayMK.Image = ((System.Drawing.Image)(resources.GetObject("btnThayMK.Image")));
+            this.btnThayMK.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnThayMK.Location = new System.Drawing.Point(0, 507);
+            this.btnThayMK.Name = "btnThayMK";
+            this.btnThayMK.Size = new System.Drawing.Size(312, 35);
+            this.btnThayMK.TabIndex = 8;
+            this.btnThayMK.Text = "  Thay đổi mật khẩu người dùng hiện tại";
+            this.btnThayMK.UseVisualStyleBackColor = true;
+            this.btnThayMK.Click += new System.EventHandler(this.btnThayMK_Click);
+            // 
             // btnXoaMK
             // 
-            this.btnXoaMK.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnXoaMK.Image = ((System.Drawing.Image)(resources.GetObject("btnXoaMK.Image")));
             this.btnXoaMK.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnXoaMK.Location = new System.Drawing.Point(448, 466);
@@ -86,7 +98,6 @@
             // 
             // btnSua
             // 
-            this.btnSua.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSua.Image = ((System.Drawing.Image)(resources.GetObject("btnSua.Image")));
             this.btnSua.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSua.Location = new System.Drawing.Point(299, 466);
@@ -99,7 +110,6 @@
             // 
             // btnXoa
             // 
-            this.btnXoa.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnXoa.Image = ((System.Drawing.Image)(resources.GetObject("btnXoa.Image")));
             this.btnXoa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnXoa.Location = new System.Drawing.Point(150, 466);
@@ -112,7 +122,6 @@
             // 
             // btnThem
             // 
-            this.btnThem.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnThem.Image = ((System.Drawing.Image)(resources.GetObject("btnThem.Image")));
             this.btnThem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnThem.Location = new System.Drawing.Point(4, 466);
@@ -138,31 +147,16 @@
             this.dgvUserList.TabIndex = 3;
             this.dgvUserList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUserList_CellDoubleClick);
             // 
-            // btnThayMK
-            // 
-            this.btnThayMK.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnThayMK.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThayMK.Image = ((System.Drawing.Image)(resources.GetObject("btnThayMK.Image")));
-            this.btnThayMK.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnThayMK.Location = new System.Drawing.Point(0, 507);
-            this.btnThayMK.Name = "btnThayMK";
-            this.btnThayMK.Size = new System.Drawing.Size(312, 35);
-            this.btnThayMK.TabIndex = 8;
-            this.btnThayMK.Text = "  Thay đổi mật khẩu người dùng hiện tại";
-            this.btnThayMK.UseVisualStyleBackColor = true;
-            this.btnThayMK.Click += new System.EventHandler(this.btnThayMK_Click);
-            // 
             // btnThoat
             // 
-            this.btnThoat.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnThoat.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThoat.Image = ((System.Drawing.Image)(resources.GetObject("btnThoat.Image")));
+            this.btnThoat.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
             this.btnThoat.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnThoat.Location = new System.Drawing.Point(504, 598);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(98, 35);
             this.btnThoat.TabIndex = 9;
-            this.btnThoat.Text = "Thoát";
+            this.btnThoat.Text = "  Thoát";
             this.btnThoat.UseVisualStyleBackColor = true;
             this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 

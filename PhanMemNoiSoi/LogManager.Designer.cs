@@ -60,7 +60,7 @@
             this.groupBox1.Controls.Add(this.rbThang);
             this.groupBox1.Controls.Add(this.rbNgay);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(5, 5);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(134, 169);
             this.groupBox1.TabIndex = 0;
@@ -108,7 +108,7 @@
             this.groupBox2.Controls.Add(this.label12);
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(146, 12);
+            this.groupBox2.Location = new System.Drawing.Point(143, 5);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(668, 169);
             this.groupBox2.TabIndex = 1;
@@ -126,13 +126,13 @@
             // 
             this.btnClearLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClearLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClearLog.Image = global::PhanMemNoiSoi.Properties.Resources.trach_24;
+            this.btnClearLog.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
             this.btnClearLog.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnClearLog.Location = new System.Drawing.Point(562, 128);
             this.btnClearLog.Name = "btnClearLog";
             this.btnClearLog.Size = new System.Drawing.Size(98, 35);
             this.btnClearLog.TabIndex = 13;
-            this.btnClearLog.Text = "    Xóa Log";
+            this.btnClearLog.Text = "     Xóa Log";
             this.btnClearLog.UseVisualStyleBackColor = true;
             this.btnClearLog.Click += new System.EventHandler(this.btnClearLog_Click);
             // 
@@ -158,6 +158,7 @@
             // btnTatCa
             // 
             this.btnTatCa.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnTatCa.Cursor = System.Windows.Forms.Cursors.Default;
             this.btnTatCa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTatCa.Image = ((System.Drawing.Image)(resources.GetObject("btnTatCa.Image")));
             this.btnTatCa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -231,8 +232,9 @@
             // btnExit
             // 
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExit.Cursor = System.Windows.Forms.Cursors.Default;
             this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExit.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.Image")));
+            this.btnExit.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
             this.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnExit.Location = new System.Drawing.Point(713, 641);
             this.btnExit.Name = "btnExit";
@@ -249,7 +251,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.dgLogView);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(12, 187);
+            this.groupBox3.Location = new System.Drawing.Point(3, 174);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(802, 438);
             this.groupBox3.TabIndex = 2;
@@ -278,6 +280,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.SeaShell;
             this.ClientSize = new System.Drawing.Size(816, 683);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.groupBox3);

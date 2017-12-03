@@ -104,7 +104,7 @@
             this.panel3.Controls.Add(this.groupBox1);
             this.panel3.Location = new System.Drawing.Point(354, 118);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(307, 199);
+            this.panel3.Size = new System.Drawing.Size(313, 199);
             this.panel3.TabIndex = 2;
             // 
             // cbDefault
@@ -129,7 +129,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(301, 160);
+            this.groupBox1.Size = new System.Drawing.Size(305, 160);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin đăng nhập";
@@ -140,7 +140,7 @@
             this.txtPass.MaxLength = 19;
             this.txtPass.Name = "txtPass";
             this.txtPass.PasswordChar = '*';
-            this.txtPass.Size = new System.Drawing.Size(156, 26);
+            this.txtPass.Size = new System.Drawing.Size(174, 26);
             this.txtPass.TabIndex = 2;
             this.txtPass.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckEnter);
             // 
@@ -149,7 +149,7 @@
             this.txtUser.Location = new System.Drawing.Point(125, 49);
             this.txtUser.MaxLength = 99;
             this.txtUser.Name = "txtUser";
-            this.txtUser.Size = new System.Drawing.Size(156, 26);
+            this.txtUser.Size = new System.Drawing.Size(174, 26);
             this.txtUser.TabIndex = 1;
             this.txtUser.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckEnter);
             // 
@@ -157,7 +157,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(15, 99);
+            this.label2.Location = new System.Drawing.Point(30, 99);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(75, 20);
             this.label2.TabIndex = 1;
@@ -203,7 +203,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.BackColor = System.Drawing.Color.SeaShell;
             this.ClientSize = new System.Drawing.Size(673, 369);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.btnCancle);

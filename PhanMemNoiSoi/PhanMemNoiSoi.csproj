@@ -140,11 +140,11 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
-    <Compile Include="ActiveKey.cs">
+    <Compile Include="ActiveKeyForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ActiveKey.Designer.cs">
-      <DependentUpon>ActiveKey.cs</DependentUpon>
+    <Compile Include="ActiveKeyForm.Designer.cs">
+      <DependentUpon>ActiveKeyForm.cs</DependentUpon>
     </Compile>
     <Compile Include="CaptureCamera\CaptureTest.cs">
       <SubType>Form</SubType>
@@ -154,6 +154,12 @@
     </Compile>
     <Compile Include="Configuration\ConfigDB.Designer.cs">
       <DependentUpon>ConfigDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CountDownForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CountDownForm.Designer.cs">
+      <DependentUpon>CountDownForm.cs</DependentUpon>
     </Compile>
     <Compile Include="FingerPrint.cs" />
     <Compile Include="FullScreen.cs">
@@ -174,6 +180,14 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="RolesList.cs" />
+    <Compile Include="SplashScreen\ISplashForm.cs" />
+    <Compile Include="SplashScreen\Splasher.cs" />
+    <Compile Include="SplashScreen\SplashScreenFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SplashScreen\SplashScreenFrm.Designer.cs">
+      <DependentUpon>SplashScreenFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserManagement\ChangePassword.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -312,8 +326,8 @@
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ActiveKey.resx">
-      <DependentUpon>ActiveKey.cs</DependentUpon>
+    <EmbeddedResource Include="ActiveKeyForm.resx">
+      <DependentUpon>ActiveKeyForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CaptureCamera\CaptureTest.resx">
       <DependentUpon>CaptureTest.cs</DependentUpon>
@@ -321,11 +335,17 @@
     <EmbeddedResource Include="Configuration\ConfigDB.resx">
       <DependentUpon>ConfigDB.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CountDownForm.resx">
+      <DependentUpon>CountDownForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FullScreen.resx">
       <DependentUpon>FullScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BackupRestoreDB\BackupAndRestore.resx">
       <DependentUpon>BackupAndRestore.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SplashScreen\SplashScreenFrm.resx">
+      <DependentUpon>SplashScreenFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserManagement\ChangePassword.resx">
       <DependentUpon>ChangePassword.cs</DependentUpon>
@@ -434,6 +454,13 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Exit.png" />
+    <None Include="Resources\down.png" />
+    <None Include="Resources\key.gif.gif" />
+    <None Include="Resources\giphy %281%29.gif" />
+    <None Include="Resources\Spalsh Banner.png" />
+    <None Include="Resources\Spalsh Banner.jpg" />
+    <None Include="Resources\Login1.jpg" />
     <None Include="Resources\user_24x24.png" />
     <None Include="Resources\export_24x24.png" />
     <None Include="Resources\trash_24x24.png" />
@@ -467,31 +494,28 @@
     <None Include="Resources\checked_32x32.png" />
     <None Include="Resources\checked_24x24.png" />
     <None Include="Resources\add_24x24.png" />
+    <None Include="Resources\contact-form-background.jpg" />
+    <None Include="Resources\background %281%29.jpg" />
+    <None Include="Resources\About3.png" />
     <Content Include="Resources\continue_24.png" />
-    <None Include="Resources\pause_241.png" />
     <None Include="Resources\save_24.png" />
-    <None Include="Resources\exit_24.png" />
     <None Include="Resources\pause_24.png" />
     <None Include="Resources\About us.jpg" />
     <None Include="bin\Debug\pause_24.png" />
     <Content Include="Resources\Aha-Soft-Large-User-Doctor.ico" />
     <None Include="Resources\Apps-utilities-system-monitor-icon.png" />
     <None Include="Resources\Login.jpg" />
-    <None Include="Resources\13165939071654987882logout.png" />
     <None Include="Resources\About-icon.png" />
     <None Include="Resources\data-management-icon.png" />
     <None Include="Resources\Categories-preferences-system-icon.png" />
     <None Include="Resources\chart-icon.png" />
     <None Include="Resources\log.png" />
     <None Include="Resources\Actions-contact-new-icon.png" />
-    <None Include="Resources\trach_24.png" />
     <None Include="Resources\Full-Screen_24.png" />
     <None Include="Resources\camera_24.png" />
     <None Include="Resources\backup_24.png" />
     <None Include="Resources\user_24.png" />
-    <None Include="Resources\ok_24.png" />
     <None Include="Resources\all_24.png" />
-    <None Include="Resources\refresh_24.png" />
     <None Include="Resources\search_24.png" />
     <None Include="Resources\Zoom-In-icon.png" />
     <None Include="Resources\4.jpg" />

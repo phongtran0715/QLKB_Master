@@ -37,6 +37,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.btnSoftwareActive = new System.Windows.Forms.Button();
+            this.pbKey = new System.Windows.Forms.PictureBox();
             this.btnLog = new System.Windows.Forms.Button();
             this.btnKhambenh = new System.Windows.Forms.Button();
             this.btnThoat = new System.Windows.Forms.Button();
@@ -45,6 +47,7 @@
             this.btnBaoCao = new System.Windows.Forms.Button();
             this.btnQuanLyData = new System.Windows.Forms.Button();
             this.btnCaiDat = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.pbKey)).BeginInit();
             this.SuspendLayout();
             // 
             // label7
@@ -151,6 +154,31 @@
             this.label8.TabIndex = 29;
             this.label8.Text = "Nhật kí";
             // 
+            // btnSoftwareActive
+            // 
+            this.btnSoftwareActive.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnSoftwareActive.BackColor = System.Drawing.Color.Yellow;
+            this.btnSoftwareActive.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSoftwareActive.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSoftwareActive.Location = new System.Drawing.Point(125, 597);
+            this.btnSoftwareActive.Name = "btnSoftwareActive";
+            this.btnSoftwareActive.Size = new System.Drawing.Size(212, 40);
+            this.btnSoftwareActive.TabIndex = 46;
+            this.btnSoftwareActive.Text = "    Kích hoạt bản quyền";
+            this.btnSoftwareActive.UseVisualStyleBackColor = false;
+            this.btnSoftwareActive.Click += new System.EventHandler(this.btnSoftwareActive_Click);
+            // 
+            // pbKey
+            // 
+            this.pbKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pbKey.Image = global::PhanMemNoiSoi.Properties.Resources.key_gif;
+            this.pbKey.Location = new System.Drawing.Point(60, 597);
+            this.pbKey.Name = "pbKey";
+            this.pbKey.Size = new System.Drawing.Size(61, 37);
+            this.pbKey.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbKey.TabIndex = 47;
+            this.pbKey.TabStop = false;
+            // 
             // btnLog
             // 
             this.btnLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -181,7 +209,7 @@
             // btnThoat
             // 
             this.btnThoat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnThoat.BackgroundImage = global::PhanMemNoiSoi.Properties.Resources._13165939071654987882logout;
+            this.btnThoat.BackgroundImage = global::PhanMemNoiSoi.Properties.Resources.Exit;
             this.btnThoat.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnThoat.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThoat.Location = new System.Drawing.Point(1120, 517);
@@ -260,8 +288,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.SeaShell;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1273, 649);
+            this.Controls.Add(this.btnSoftwareActive);
+            this.Controls.Add(this.pbKey);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.btnLog);
             this.Controls.Add(this.label7);
@@ -286,6 +317,7 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
             this.Load += new System.EventHandler(this.Main_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pbKey)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -309,5 +341,7 @@
         private System.Windows.Forms.Button btnCaiDat;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnLog;
+        private System.Windows.Forms.Button btnSoftwareActive;
+        private System.Windows.Forms.PictureBox pbKey;
     }
 }

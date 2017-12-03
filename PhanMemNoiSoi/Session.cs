@@ -10,6 +10,7 @@ namespace PhanMemNoiSoi
         private int userId;
         string [] userRole;
         private static Session instance = null;
+        private bool isActiveLicense = false;
         private static readonly object padlock = new object();
 
         private Session()
@@ -29,6 +30,18 @@ namespace PhanMemNoiSoi
                     }
                     return instance;
                 }
+            }
+        }
+
+        public bool ActiveLicense
+        {
+            get
+            {
+                return isActiveLicense;
+            }
+            set
+            {
+                this.isActiveLicense = value;
             }
         }
 

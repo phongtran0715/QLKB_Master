@@ -88,7 +88,7 @@
             this.groupBox1.Controls.Add(this.rbThang);
             this.groupBox1.Controls.Add(this.rbNgay);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(5, 5);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(128, 169);
             this.groupBox1.TabIndex = 0;
@@ -147,8 +147,9 @@
             this.groupBox2.Controls.Add(this.label12);
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.label10);
+            this.groupBox2.Cursor = System.Windows.Forms.Cursors.Default;
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(146, 12);
+            this.groupBox2.Location = new System.Drawing.Point(139, 5);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(677, 169);
             this.groupBox2.TabIndex = 1;
@@ -158,9 +159,9 @@
             // btnReCheck
             // 
             this.btnReCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReCheck.Image = global::PhanMemNoiSoi.Properties.Resources.refresh_24;
+            this.btnReCheck.Image = global::PhanMemNoiSoi.Properties.Resources.camera_24;
             this.btnReCheck.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnReCheck.Location = new System.Drawing.Point(385, 121);
+            this.btnReCheck.Location = new System.Drawing.Point(370, 122);
             this.btnReCheck.Name = "btnReCheck";
             this.btnReCheck.Size = new System.Drawing.Size(98, 35);
             this.btnReCheck.TabIndex = 16;
@@ -171,9 +172,9 @@
             // btnDeleteSick
             // 
             this.btnDeleteSick.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDeleteSick.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteSick.Image")));
+            this.btnDeleteSick.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
             this.btnDeleteSick.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDeleteSick.Location = new System.Drawing.Point(489, 121);
+            this.btnDeleteSick.Location = new System.Drawing.Point(490, 122);
             this.btnDeleteSick.Name = "btnDeleteSick";
             this.btnDeleteSick.Size = new System.Drawing.Size(155, 35);
             this.btnDeleteSick.TabIndex = 13;
@@ -184,13 +185,13 @@
             // btnXoa
             // 
             this.btnXoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnXoa.Image = global::PhanMemNoiSoi.Properties.Resources.trach_24;
+            this.btnXoa.Image = global::PhanMemNoiSoi.Properties.Resources.refresh_24x24;
             this.btnXoa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnXoa.Location = new System.Drawing.Point(240, 122);
+            this.btnXoa.Location = new System.Drawing.Point(250, 122);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(98, 35);
             this.btnXoa.TabIndex = 15;
-            this.btnXoa.Text = " Tạo lại";
+            this.btnXoa.Text = "   Tạo lại";
             this.btnXoa.UseVisualStyleBackColor = true;
             this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
@@ -199,7 +200,7 @@
             this.btnTatCa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTatCa.Image = ((System.Drawing.Image)(resources.GetObject("btnTatCa.Image")));
             this.btnTatCa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTatCa.Location = new System.Drawing.Point(127, 122);
+            this.btnTatCa.Location = new System.Drawing.Point(130, 122);
             this.btnTatCa.Name = "btnTatCa";
             this.btnTatCa.Size = new System.Drawing.Size(98, 35);
             this.btnTatCa.TabIndex = 14;
@@ -212,7 +213,7 @@
             this.btnTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTimKiem.Image = ((System.Drawing.Image)(resources.GetObject("btnTimKiem.Image")));
             this.btnTimKiem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTimKiem.Location = new System.Drawing.Point(9, 120);
+            this.btnTimKiem.Location = new System.Drawing.Point(10, 122);
             this.btnTimKiem.Name = "btnTimKiem";
             this.btnTimKiem.Size = new System.Drawing.Size(98, 35);
             this.btnTimKiem.TabIndex = 13;
@@ -315,9 +316,9 @@
             this.groupBox4.Controls.Add(this.label2);
             this.groupBox4.Controls.Add(this.label1);
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox4.Location = new System.Drawing.Point(829, 22);
+            this.groupBox4.Location = new System.Drawing.Point(829, 5);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(398, 570);
+            this.groupBox4.Size = new System.Drawing.Size(442, 596);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Chi tiết bệnh nhân";
@@ -325,17 +326,17 @@
             // txtBirthday
             // 
             this.txtBirthday.Enabled = false;
-            this.txtBirthday.Location = new System.Drawing.Point(291, 28);
+            this.txtBirthday.Location = new System.Drawing.Point(318, 28);
             this.txtBirthday.Name = "txtBirthday";
-            this.txtBirthday.Size = new System.Drawing.Size(97, 26);
+            this.txtBirthday.Size = new System.Drawing.Size(118, 26);
             this.txtBirthday.TabIndex = 29;
             // 
             // txtCreatetime
             // 
             this.txtCreatetime.Enabled = false;
-            this.txtCreatetime.Location = new System.Drawing.Point(291, 118);
+            this.txtCreatetime.Location = new System.Drawing.Point(318, 116);
             this.txtCreatetime.Name = "txtCreatetime";
-            this.txtCreatetime.Size = new System.Drawing.Size(97, 26);
+            this.txtCreatetime.Size = new System.Drawing.Size(118, 26);
             this.txtCreatetime.TabIndex = 28;
             // 
             // txtMarred
@@ -343,21 +344,21 @@
             this.txtMarred.Enabled = false;
             this.txtMarred.Location = new System.Drawing.Point(84, 71);
             this.txtMarred.Name = "txtMarred";
-            this.txtMarred.Size = new System.Drawing.Size(97, 26);
+            this.txtMarred.Size = new System.Drawing.Size(120, 26);
             this.txtMarred.TabIndex = 27;
             // 
             // txtJob
             // 
             this.txtJob.Enabled = false;
-            this.txtJob.Location = new System.Drawing.Point(291, 162);
+            this.txtJob.Location = new System.Drawing.Point(318, 159);
             this.txtJob.Name = "txtJob";
-            this.txtJob.Size = new System.Drawing.Size(97, 26);
+            this.txtJob.Size = new System.Drawing.Size(118, 26);
             this.txtJob.TabIndex = 26;
             // 
             // lbimgCount
             // 
             this.lbimgCount.AutoSize = true;
-            this.lbimgCount.Location = new System.Drawing.Point(213, 536);
+            this.lbimgCount.Location = new System.Drawing.Point(241, 562);
             this.lbimgCount.Name = "lbimgCount";
             this.lbimgCount.Size = new System.Drawing.Size(39, 20);
             this.lbimgCount.TabIndex = 25;
@@ -369,15 +370,15 @@
             this.txtNote.Location = new System.Drawing.Point(84, 199);
             this.txtNote.Multiline = true;
             this.txtNote.Name = "txtNote";
-            this.txtNote.Size = new System.Drawing.Size(290, 62);
+            this.txtNote.Size = new System.Drawing.Size(352, 62);
             this.txtNote.TabIndex = 20;
             // 
             // txtAge
             // 
             this.txtAge.Enabled = false;
-            this.txtAge.Location = new System.Drawing.Point(291, 68);
+            this.txtAge.Location = new System.Drawing.Point(318, 71);
             this.txtAge.Name = "txtAge";
-            this.txtAge.Size = new System.Drawing.Size(97, 26);
+            this.txtAge.Size = new System.Drawing.Size(118, 26);
             this.txtAge.TabIndex = 17;
             // 
             // txtTelephone
@@ -385,7 +386,7 @@
             this.txtTelephone.Enabled = false;
             this.txtTelephone.Location = new System.Drawing.Point(83, 159);
             this.txtTelephone.Name = "txtTelephone";
-            this.txtTelephone.Size = new System.Drawing.Size(97, 26);
+            this.txtTelephone.Size = new System.Drawing.Size(121, 26);
             this.txtTelephone.TabIndex = 15;
             // 
             // txtIdCode
@@ -393,7 +394,7 @@
             this.txtIdCode.Enabled = false;
             this.txtIdCode.Location = new System.Drawing.Point(84, 116);
             this.txtIdCode.Name = "txtIdCode";
-            this.txtIdCode.Size = new System.Drawing.Size(97, 26);
+            this.txtIdCode.Size = new System.Drawing.Size(120, 26);
             this.txtIdCode.TabIndex = 14;
             // 
             // txtName
@@ -401,18 +402,18 @@
             this.txtName.Enabled = false;
             this.txtName.Location = new System.Drawing.Point(83, 28);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(97, 26);
+            this.txtName.Size = new System.Drawing.Size(121, 26);
             this.txtName.TabIndex = 12;
             // 
             // btnNextImg
             // 
             this.btnNextImg.Image = ((System.Drawing.Image)(resources.GetObject("btnNextImg.Image")));
-            this.btnNextImg.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNextImg.Location = new System.Drawing.Point(265, 529);
+            this.btnNextImg.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnNextImg.Location = new System.Drawing.Point(293, 555);
             this.btnNextImg.Name = "btnNextImg";
             this.btnNextImg.Size = new System.Drawing.Size(108, 35);
             this.btnNextImg.TabIndex = 11;
-            this.btnNextImg.Text = "  Sau";
+            this.btnNextImg.Text = "Sau";
             this.btnNextImg.UseVisualStyleBackColor = true;
             this.btnNextImg.Click += new System.EventHandler(this.btnNextImg_Click);
             // 
@@ -420,7 +421,7 @@
             // 
             this.btnPrevImg.Image = ((System.Drawing.Image)(resources.GetObject("btnPrevImg.Image")));
             this.btnPrevImg.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPrevImg.Location = new System.Drawing.Point(83, 528);
+            this.btnPrevImg.Location = new System.Drawing.Point(111, 554);
             this.btnPrevImg.Name = "btnPrevImg";
             this.btnPrevImg.Size = new System.Drawing.Size(121, 35);
             this.btnPrevImg.TabIndex = 10;
@@ -433,7 +434,7 @@
             this.pbPatient.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbPatient.Location = new System.Drawing.Point(83, 279);
             this.pbPatient.Name = "pbPatient";
-            this.pbPatient.Size = new System.Drawing.Size(291, 223);
+            this.pbPatient.Size = new System.Drawing.Size(353, 269);
             this.pbPatient.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbPatient.TabIndex = 9;
             this.pbPatient.TabStop = false;
@@ -450,7 +451,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(186, 165);
+            this.label8.Location = new System.Drawing.Point(211, 165);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(101, 20);
             this.label8.TabIndex = 7;
@@ -468,7 +469,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(187, 122);
+            this.label6.Location = new System.Drawing.Point(212, 122);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(88, 20);
             this.label6.TabIndex = 5;
@@ -486,7 +487,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(187, 71);
+            this.label4.Location = new System.Drawing.Point(228, 77);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(39, 20);
             this.label4.TabIndex = 3;
@@ -495,7 +496,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 71);
+            this.label3.Location = new System.Drawing.Point(6, 77);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(79, 20);
             this.label3.TabIndex = 2;
@@ -504,7 +505,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(186, 31);
+            this.label2.Location = new System.Drawing.Point(211, 31);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(78, 20);
             this.label2.TabIndex = 1;
@@ -513,7 +514,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 31);
+            this.label1.Location = new System.Drawing.Point(6, 33);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(36, 20);
             this.label1.TabIndex = 0;
@@ -523,9 +524,9 @@
             // 
             this.gbResult.Controls.Add(this.dgvPatient);
             this.gbResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbResult.Location = new System.Drawing.Point(12, 187);
+            this.gbResult.Location = new System.Drawing.Point(5, 180);
             this.gbResult.Name = "gbResult";
-            this.gbResult.Size = new System.Drawing.Size(811, 438);
+            this.gbResult.Size = new System.Drawing.Size(818, 454);
             this.gbResult.TabIndex = 2;
             this.gbResult.TabStop = false;
             this.gbResult.Text = "Danh sách bệnh nhân";
@@ -543,16 +544,16 @@
             this.dgvPatient.Name = "dgvPatient";
             this.dgvPatient.ReadOnly = true;
             this.dgvPatient.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPatient.Size = new System.Drawing.Size(805, 413);
+            this.dgvPatient.Size = new System.Drawing.Size(812, 429);
             this.dgvPatient.TabIndex = 0;
             this.dgvPatient.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgPatient_CellClick);
             // 
             // btnOpenFolder
             // 
-            this.btnOpenFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOpenFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOpenFolder.Image = global::PhanMemNoiSoi.Properties.Resources.open_icon_24x24;
             this.btnOpenFolder.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnOpenFolder.Location = new System.Drawing.Point(911, 599);
+            this.btnOpenFolder.Location = new System.Drawing.Point(939, 607);
             this.btnOpenFolder.Name = "btnOpenFolder";
             this.btnOpenFolder.Size = new System.Drawing.Size(122, 35);
             this.btnOpenFolder.TabIndex = 13;
@@ -562,10 +563,10 @@
             // 
             // btnExit
             // 
-            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExit.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.Image")));
+            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExit.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
             this.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnExit.Location = new System.Drawing.Point(1094, 599);
+            this.btnExit.Location = new System.Drawing.Point(1122, 607);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(108, 35);
             this.btnExit.TabIndex = 12;
@@ -577,7 +578,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1230, 637);
+            this.BackColor = System.Drawing.Color.SeaShell;
+            this.ClientSize = new System.Drawing.Size(1283, 654);
             this.Controls.Add(this.btnOpenFolder);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.groupBox4);

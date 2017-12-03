@@ -30,12 +30,10 @@ namespace PhanMemNoiSoi
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.Hide();
             IPrincipal userPrincipal = new GenericPrincipal(WindowsIdentity.GetCurrent(),
                                            new string[] { RolesList.BACKUP_RESTORE_DATA });
             BackupAndRestore barfr = new BackupAndRestore(userPrincipal);
             barfr.ShowDialog();
-            this.Show();
         }
 
         private void button4_Click(object sender, EventArgs e)

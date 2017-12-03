@@ -186,7 +186,6 @@ namespace PhanMemNoiSoi
                 System.IO.Directory.CreateDirectory(folderImgPath);
             }
             //check patient folder
-            //folderImgPath += "\\" + name + "_" +  sickNum + "\\";
             folderImgPath += "\\" + sickNum + "\\";
             exists = System.IO.Directory.Exists(folderImgPath);
             if (!exists)
@@ -285,6 +284,20 @@ namespace PhanMemNoiSoi
             }
 
             string sickNum = dgvBenhNhan.Rows[currRowIndex].Cells["SickNum"].Value.ToString().Trim();
+            
+            //delete data in disk
+            string imgPath = helper.getImgFolderById(sickNum);
+            if (Directory.Exists(imgPath))
+            {
+                try
+                {
+                    Directory.Delete(imgPath, true);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
 
             //delete from database
             try
@@ -305,19 +318,6 @@ namespace PhanMemNoiSoi
             // delete from data grid view
             dgvBenhNhan.Rows.RemoveAt(currRowIndex);
             updateNumSick(dgvBenhNhan.Rows.Count - 1);
-            //delete image in disk
-            string imgPath = helper.getImgFolderById(sickNum);
-            if (Directory.Exists(imgPath))
-            {
-                try
-                {
-                    Directory.Delete(imgPath, true);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }
 
             //select last row in dgv
             int lastRowIndex = dgvBenhNhan.Rows.Count - 1;

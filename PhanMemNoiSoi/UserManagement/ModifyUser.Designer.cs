@@ -165,7 +165,6 @@
             // 
             // button1
             // 
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Image = global::PhanMemNoiSoi.Properties.Resources.checked_24x24;
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -180,7 +179,6 @@
             // 
             // button2
             // 
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;

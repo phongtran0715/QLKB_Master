@@ -2,12 +2,13 @@
 
 namespace PhanMemNoiSoi
 {
-    public partial class ActiveKey : Form
+    public partial class ActiveKeyForm : Form
     {
         FingerPrint fp;
         Helper helper;
         const int KEY_LENGTH = 39;
-        public ActiveKey()
+        string clientKey;
+        public ActiveKeyForm()
         {
             InitializeComponent();
             fp = new FingerPrint();
@@ -17,7 +18,8 @@ namespace PhanMemNoiSoi
 
         private void ActiveKey_Load(object sender, System.EventArgs e)
         {
-            txtClientId.Text = fp.GenKey(fp.cpuId());
+            //txtClientId.Text = fp.GenKey(fp.cpuId());
+            backgroundWorker1.RunWorkerAsync();
         }
 
         private void btnRegister_Click(object sender, System.EventArgs e)
@@ -72,6 +74,21 @@ namespace PhanMemNoiSoi
                 exitCode = true;
             }
             return exitCode;
+        }
+
+        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            clientKey = fp.GenKey(fp.cpuId() + fp.macId());
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            txtClientId.Text = clientKey;
+        }
+
+        private void btnExit_Click(object sender, System.EventArgs e)
+        {
+            this.Close();
         }
     }
 }

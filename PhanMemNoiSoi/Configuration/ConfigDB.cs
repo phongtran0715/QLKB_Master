@@ -1,5 +1,10 @@
-﻿using Microsoft.Win32;
+﻿using Microsoft.SqlServer.Management.Common;
+using Microsoft.SqlServer.Management.Smo;
+using Microsoft.Win32;
 using System;
+using System.Data.SqlClient;
+using System.Diagnostics;
+using System.IO;
 using System.Windows.Forms;
 
 namespace PhanMemNoiSoi
@@ -12,35 +17,45 @@ namespace PhanMemNoiSoi
         string cmdAttachDB = Application.StartupPath + "\\CreateDB\\Attach.bat";
         string scrCreateDB = Application.StartupPath + "\\CreateDB\\CreateDataBaseQuangHuy.sql";
         string scrAttachDB = Application.StartupPath + "\\CreateDB\\AttachDataBaseQuangHuy.sql";
+        private string serverInstance;
+        private string dbName;
+        private string password;
+        private string userName;
+        private bool isRunMainApp;
+        private bool isCreateDb;
+        private int checkDbErrorCode = 0;
 
-        public ConfigDB()
+        public ConfigDB(bool isRunMainApp, bool isCreateDb)
         {
-            InitializeComponent();
+            this.InitializeComponent();
+            this.isRunMainApp = isRunMainApp;
+            this.isCreateDb = isCreateDb;
         }
 
         private void ConfigDB_Load(object sender, EventArgs e)
         {
-            cbInstance.Items.Add("");
-            //get all sql server instance
-            RegistryKey rk = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Microsoft SQL Server");
-            String[] instances = (String[])rk.GetValue("InstalledInstances");
-            if (instances.Length > 0)
+            this.lbStatus.Visible = false;
+            this.pbStatus.Visible = false;
+            this.cbInstance.Items.Add("");
+            string[] strArray = (string[])Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Microsoft SQL Server").GetValue("InstalledInstances");
+            if ((strArray != null) && (strArray.Length > 0))
             {
-                foreach (String element in instances)
+                foreach (string str in strArray)
                 {
-                    if (element == "MSSQLSERVER")
-                        cbInstance.Items.Add(System.Environment.MachineName);
+                    if (str == "MSSQLSERVER")
+                    {
+                        this.cbInstance.Items.Add(Environment.MachineName);
+                    }
                     else
-                        cbInstance.Items.Add(System.Environment.MachineName + @"\" + element);
+                    {
+                        this.cbInstance.Items.Add(Environment.MachineName + @"\" + str);
+                    }
                 }
             }
-            //set default value for field
-            txtDbName.Text = Properties.Settings.Default.dbName;
-            txtUser.Text = Properties.Settings.Default.dbUser;
-            txtPass.Text = Properties.Settings.Default.dbPassword;
-            cbInstance.Text = Properties.Settings.Default.serverName;
-            lbStatus.Visible = false;
-            pbStatus.Visible = false;
+            this.txtDbName.Text = PhanMemNoiSoi.Properties.Settings.Default.dbName;
+            this.txtUser.Text = PhanMemNoiSoi.Properties.Settings.Default.dbUser;
+            this.txtPass.Text = PhanMemNoiSoi.Properties.Settings.Default.dbPassword;
+            this.cbInstance.Text = PhanMemNoiSoi.Properties.Settings.Default.serverName;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -62,7 +77,6 @@ namespace PhanMemNoiSoi
 
         private void button2_Click(object sender, EventArgs e)
         {
-            bool trustedConn = true;
             //check server instance name is valid
             if (string.IsNullOrEmpty(cbInstance.Text))
             {
@@ -70,64 +84,124 @@ namespace PhanMemNoiSoi
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            //check database name is valid
             if (string.IsNullOrEmpty(txtDbName.Text))
             {
                 MessageBox.Show("Tên cơ sở dữ liệu không được để trống!", "Thông báo",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-            //check connection 
-            bool isConn = DBConnection.Instance.CheckConnection(cbInstance.Text.Trim());
-            if (isConn)
+            this.serverInstance = this.cbInstance.Text.Trim();
+            this.dbName = this.txtDbName.Text.Trim();
+            this.userName = this.txtUser.Text.Trim();
+            this.password = this.txtPass.Text.Trim();
+            if (this.backgroundWorker1.IsBusy)
             {
-                //check database is exist
-                bool isDb = DBConnection.Instance.CheckDatabaseExists(cbInstance.Text.Trim(), txtDbName.Text.Trim());
-                if (!isDb)
-                {
-                    MessageBox.Show("Cơ sở dữ liệu '" + txtDbName.Text.Trim() + "' không tồn tại.\nKiểm tra lại thông số cài đặt", "Thông báo",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                string connetionString = @"Data Source= " + cbInstance.Text.Trim() + ";Initial Catalog= "
-                                           + txtDbName.Text.Trim() + ";";
-                if (!string.IsNullOrEmpty(txtUser.Text.Trim()))
-                {
-                    connetionString += " User id=" + txtUser.Text.Trim() + ";";
-                    trustedConn = false;
-                }
-                if (!string.IsNullOrEmpty(txtPass.Text.Trim()))
-                {
-                    connetionString += " Password=" + txtPass.Text.Trim() + ";";
-                    trustedConn = false;
-                }
-                if (trustedConn)
-                {
-                    connetionString += "Integrated Security=true;MultipleActiveResultSets=true";
-                }
-                else
-                {
-                    connetionString += "MultipleActiveResultSets=true;";
-                }
+                this.backgroundWorker1.CancelAsync();
+            }
+            else
+            {
+                this.pbStatus.Visible = true;
+                this.lbStatus.Visible = true;
+                this.lbStatus.Text = "Đang kiểm tra ...";
+                this.btnOk.Enabled = false;
+                this.backgroundWorker1.RunWorkerAsync();
+            }
+        }
 
-                bool isOK = helper.DBConnectionStatus(connetionString);
-                if (isOK)
+
+        private bool createDbFromScript(string scriptPath, string serverInstance)
+        {
+            bool flag = false;
+            try
+            {
+                string connectionString = "Data Source = " + serverInstance + "; Initial Catalog = master; Integrated Security = True";
+                string sqlCommand = File.ReadAllText(this.scrCreateDB);
+                SqlConnection sqlConnection = new SqlConnection(connectionString);
+                Server server = new Server(new ServerConnection(sqlConnection));
+                server.ConnectionContext.ExecuteNonQuery(sqlCommand);
+                flag = true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            return flag;
+        }
+
+        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            bool flag = true;
+            if (DBConnection.Instance.CheckConnection(this.serverInstance))
+            {
+                if (this.isCreateDb)
                 {
-                    MessageBox.Show("Kết nối dữ liệu thành công!", "Thông báo",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.createDbFromScript(this.scrCreateDB, this.serverInstance);
+                }
+                string[] textArray1 = new string[] { "Data Source= ", this.serverInstance, ";Initial Catalog=", this.dbName, ";" };
+                string connString = string.Concat(textArray1);
+                if (!string.IsNullOrEmpty(this.userName))
+                {
+                    connString = connString + " User id=" + this.userName + ";";
+                    flag = false;
+                }
+                if (!string.IsNullOrEmpty(this.password))
+                {
+                    connString = connString + " Password=" + this.password + ";";
+                    flag = false;
+                }
+                if (flag)
+                {
+                    connString = connString + "Integrated Security=true;MultipleActiveResultSets=true";
                 }
                 else
                 {
-                    MessageBox.Show("Không thể kết nối cơ sở dữ liệu. Vui lòng kiểm tra lại thông số cài đặt", "Thông báo",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    connString = connString + "MultipleActiveResultSets=true;";
+                }
+                if (this.helper.DBConnectionStatus(connString))
+                {
+                    PhanMemNoiSoi.Properties.Settings.Default.serverName = this.serverInstance;
+                    PhanMemNoiSoi.Properties.Settings.Default.dbName = this.dbName;
+                    PhanMemNoiSoi.Properties.Settings.Default.dbUser = this.userName;
+                    PhanMemNoiSoi.Properties.Settings.Default.dbPassword = this.password;
+                    PhanMemNoiSoi.Properties.Settings.Default.Save();
+                    this.checkDbErrorCode = 0;
+                }
+                else
+                {
+                    this.checkDbErrorCode = 1;
                 }
             }
             else
             {
-                MessageBox.Show("Tên máy chủ cơ sở dữ liệu không chính xác", "Thông báo",
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.checkDbErrorCode = 2;
             }
-        }  
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            this.pbStatus.Visible = false;
+            this.lbStatus.Visible = false;
+            this.btnOk.Enabled = true;
+            switch (this.checkDbErrorCode)
+            {
+                case 0:
+                    MessageBox.Show("Kết nối dữ liệu thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    if (this.isRunMainApp)
+                    {
+                        Process.Start(Application.ExecutablePath);
+                        Application.Exit();
+                    }
+                    break;
+
+                case 1:
+                    MessageBox.Show("Không thể kết nối cơ sở dữ liệu. Vui lòng kiểm tra lại thông số cài đặt", "Thông báo", 
+                        MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    break;
+
+                case 2:
+                    MessageBox.Show("Tên máy chủ cơ sở dữ liệu không chính xác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    break;
+            }
+        }
     }
 }

@@ -11,7 +11,7 @@ namespace PhanMemNoiSoi
         Object missing = Missing.Value;
         Word.Application wordApp;
         Word.Document wordDoc;
-        Object oTemplatePath = System.Windows.Forms.Application.StartupPath + "\\Template\\template.dotx";
+        private object oTemplatePath2 = (System.Windows.Forms.Application.StartupPath + @"\Template\template.dotx");
 
         public ReportWord()
         {
@@ -19,16 +19,19 @@ namespace PhanMemNoiSoi
             wordApp = new Word.Application();
         }
 
-        public void openFile(int type)
+        public bool openFile()
         {
+            bool flag = false;
             try
             {
-                wordDoc = wordApp.Documents.Add(ref oTemplatePath, ref missing, ref missing, ref missing);
+                this.wordDoc = this.wordApp.Documents.Add(ref this.oTemplatePath2, ref this.missing, ref this.missing, ref this.missing);
+                flag = true;
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                Console.WriteLine(ex.ToString());
+                Console.WriteLine(exception.ToString());
             }
+            return flag;
         }
 
         ~ReportWord()
@@ -112,7 +115,7 @@ namespace PhanMemNoiSoi
             }
         }
 
-        public void insertImage(string imgpath, int imgPos)
+        public void insertImage(string imgpath, int imgPos, Size imgSize)
         {
             int count = wordDoc.Bookmarks.Count;
             for (int i = 1; i < count + 1; i++)
@@ -122,17 +125,11 @@ namespace PhanMemNoiSoi
                     object oRange = wordDoc.Bookmarks[i].Range;
                     object saveWithDocument = true;
                     object missing = Type.Missing;
-                    string pictureName = imgpath;
-                    int imgW = Properties.Settings.Default.imgWidth;
-                    int imgH = Properties.Settings.Default.imgHeight;
-                    System.Drawing.Size size = new System.Drawing.Size(imgW, imgH);
-                    //Image imgToResize = helper.resizeImage(imgpath, size);
-                    Image img = Image.FromFile(pictureName);
-                    Image imgToResize = helper.ResizeImage(img, size.Width, size.Height);
-                    //string tmpImgPath = Environment.CurrentDirectory + "\\Images\\tmp.jpg";
-                    string tmpImgPath = Log.Instance.GetTempPath() + "tmp.jpg";
-                    imgToResize.Save(tmpImgPath);
-                    wordDoc.InlineShapes.AddPicture(tmpImgPath, ref missing, ref saveWithDocument, ref oRange);
+                    Image image = Image.FromFile(imgpath);
+                    Image image2 = this.helper.ResizeImage(image, imgSize.Width, imgSize.Height);
+                    string str2 = Log.Instance.GetTempPath() + "tmp.jpg";
+                    image2.Save(str2);
+                    this.wordDoc.InlineShapes.AddPicture(str2, ref missing, true, ref oRange);
                     break;
                 }
             }

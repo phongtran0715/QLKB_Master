@@ -24,8 +24,6 @@ namespace PhanMemNoiSoi
         {
             InitializeComponent();
             InitDataGrid();
-            txtTenBV.Text = string.Empty;
-            txtDiaChiBV.Text = string.Empty;
         }
 
         private void btnThoat_Click(object sender, EventArgs e)
@@ -41,27 +39,12 @@ namespace PhanMemNoiSoi
 
         private void UserManagerForm_Load(object sender, EventArgs e)
         {
-            loadHospitalData();
             loadDgvUser();
             //Hide tab control if user is not admin
             if(Session.Instance.WorkGroup != "Admin")
             {
                 tabControl1.TabPages.RemoveAt(1);
             }
-        }
-
-        private void loadHospitalData()
-        {
-            string query = "SELECT COUNT(*) FROM HospitalInfo;";
-            SqlCommand mySql = new SqlCommand(query, DBConnection.Instance.sqlConn);
-            int count = (int)mySql.ExecuteScalar();
-
-            isHasHospitalInfo = (count == 0) ? false : true;
-            if (isHasHospitalInfo)
-                getHospitalInfo();
-
-            this.hospitalName = txtTenBV.Text.ToString().Trim();
-            this.hospitalAddr = txtDiaChiBV.Text.ToString().Trim();
         }
 
         private void loadDgvUser()
@@ -254,56 +237,8 @@ namespace PhanMemNoiSoi
             loadDgvUser();
         }
 
-        private void getHospitalInfo()
-        {
-            string sqlCommand = "SELECT HospitalName, HospitalAddress FROM HospitalInfo ;";
-            SqlCommand mySQL = new SqlCommand(sqlCommand, DBConnection.Instance.sqlConn);
-            SqlDataReader rdrInfo = mySQL.ExecuteReader();
-            if (rdrInfo.Read())
-            {
-                this.txtTenBV.Text = rdrInfo["HospitalName"].ToString().Trim();
-                this.txtDiaChiBV.Text = rdrInfo["HospitalAddress"].ToString().Trim();
-            }
-        }
-
-        private void setHosptalInfo()
-        {
-            if ((txtTenBV.Text.ToString().Trim() != this.hospitalName) ||
-                (txtDiaChiBV.Text.ToString().Trim() != this.hospitalAddr))
-            {
-                //update hospital info
-                try
-                {
-                    string query;
-                    SqlCommand mySQL;
-                    if (isHasHospitalInfo)
-                    {
-                        query = "UPDATE HospitalInfo SET HospitalName = @name,HospitalAddress = @address ;";
-                    }
-                    else
-                    {
-                        query = "INSERT INTO HospitalInfo (HospitalName, HospitalAddress) " +
-                                "VALUES (@name, @address) ;";
-                    }
-                    mySQL = new SqlCommand(query, DBConnection.Instance.sqlConn);
-                    mySQL.Parameters.Add("@name", SqlDbType.NChar).Value = txtTenBV.Text.Trim();
-                    mySQL.Parameters.Add("@address", SqlDbType.NChar).Value = txtDiaChiBV.Text.Trim();
-                    mySQL.ExecuteNonQuery();
-                }
-                catch (System.Exception ex)
-                {
-                    MessageBox.Show("Không thể lưu thông tin. \n Không thể kết nối đến cơ sở dữ liệu. \n Vui lòng thử lại sau",
-                        "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    Console.WriteLine(ex.ToString());
-                    Log.Instance.LogMessageToFile(ex.ToString());
-                    return;
-                }
-            }
-        }
-
         private void UserManager_FormClosed(object sender, FormClosedEventArgs e)
         {
-            setHosptalInfo();
         }
 
         private void UserManager_UserIsDenied(object sender, EventArgs e)

@@ -1,4 +1,5 @@
 ﻿using OD.Forms.Security;
+using PhanMemNoiSoi.Properties;
 using System;
 using System.Security.Principal;
 using System.Windows.Forms;
@@ -20,31 +21,47 @@ namespace PhanMemNoiSoi
 
         private void btnTest_Click(object sender, EventArgs e)
         {
-            ConfigDB configDB = new ConfigDB();
-            configDB.ShowDialog();
+            new ConfigDB(false, false).ShowDialog();
         }
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            //Capture type
-            if (rbCapOnly.Checked)
+            if (this.rbCapOnly.Checked)
             {
-                Properties.Settings.Default.captureType = "capture_only";
+                Settings.Default.captureType = "capture_only";
             }
             else
             {
-                Properties.Settings.Default.captureType = "capture_freeze";
+                Settings.Default.captureType = "capture_freeze";
             }
-
-            // image 
-            Properties.Settings.Default.imageQuality = cbImgQuality.SelectedIndex;
-            Properties.Settings.Default.imageFolder = txtImgPath.Text.Trim();
-            Properties.Settings.Default.imgWidth = int.Parse(txtWidth.Text.Trim());
-            Properties.Settings.Default.imgHeight = int.Parse(txtHeigh.Text.Trim());
-
-            Properties.Settings.Default.Save();
-
-            this.Close();
+            Settings.Default.imageQuality = this.cbImgQuality.SelectedIndex;
+            Settings.Default.imageFolder = this.txtImgPath.Text.Trim();
+            if (!string.IsNullOrEmpty(this.txt2Width.Text.Trim()))
+            {
+                Settings.Default.img2Width = int.Parse(this.txt2Width.Text.Trim());
+            }
+            if (!string.IsNullOrEmpty(this.txt2Heigh.Text.Trim()))
+            {
+                Settings.Default.img2Height = int.Parse(this.txt2Heigh.Text.Trim());
+            }
+            if (!string.IsNullOrEmpty(this.txt4Width.Text.Trim()))
+            {
+                Settings.Default.img4Width = int.Parse(this.txt4Width.Text.Trim());
+            }
+            if (!string.IsNullOrEmpty(this.txt4Heigh.Text.Trim()))
+            {
+                Settings.Default.img4Heigh = int.Parse(this.txt4Heigh.Text.Trim());
+            }
+            if (!string.IsNullOrEmpty(this.txtMaxDayLog.Text.Trim()))
+            {
+                Settings.Default.maxDayLog = int.Parse(this.txtMaxDayLog.Text.Trim());
+            }
+            if (!string.IsNullOrEmpty(this.txtMaxRowDisplay.Text.Trim()))
+            {
+                Settings.Default.maxRowDisplay = int.Parse(this.txtMaxRowDisplay.Text.Trim());
+            }
+            Settings.Default.Save();
+            base.Close();
         }
 
         private void SystemConfiguration_Load(object sender, EventArgs e)
@@ -60,14 +77,15 @@ namespace PhanMemNoiSoi
                 rbCaptureFreeze.Checked = true;
             }
 
-            //Load image quality 
-            int imgQuality = Properties.Settings.Default.imageQuality;
-            txtImgPath.Text = Properties.Settings.Default.imageFolder;
-            cbImgQuality.SelectedIndex = imgQuality;
-
-            //load image size
-            txtWidth.Text = Properties.Settings.Default.imgWidth.ToString();
-            txtHeigh.Text = Properties.Settings.Default.imgHeight.ToString();
+            int imageQuality = Settings.Default.imageQuality;
+            this.txtImgPath.Text = Settings.Default.imageFolder;
+            this.cbImgQuality.SelectedIndex = imageQuality;
+            this.txt2Width.Text = Settings.Default.img2Width.ToString();
+            this.txt2Heigh.Text = Settings.Default.img2Height.ToString();
+            this.txt4Width.Text = Settings.Default.img4Width.ToString();
+            this.txt4Heigh.Text = Settings.Default.img4Heigh.ToString();
+            this.txtMaxDayLog.Text = Settings.Default.maxDayLog.ToString();
+            this.txtMaxRowDisplay.Text = Settings.Default.maxRowDisplay.ToString();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -112,9 +130,46 @@ namespace PhanMemNoiSoi
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            ActiveKey activeFr = new ActiveKey();
+            ActiveKeyForm activeFr = new ActiveKeyForm();
             activeFr.ShowDialog();
             this.Close();
+        }
+
+        private void txt4Width_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void txt4Heigh_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void txtMaxDayLog_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void txtMaxRowDisplay_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            Settings.Default.captureType = "capture_only";
+            Settings.Default.imageQuality = 2;
+            Settings.Default.imageFolder = @"D:\QLKB";
+            this.cbImgQuality.SelectedIndex = 1;
+            Settings.Default.img2Width = 300;
+            Settings.Default.img2Height = 220;
+            Settings.Default.img4Width = 270;
+            Settings.Default.img4Heigh = 150;
+            Settings.Default.maxDayLog = 60;
+            Settings.Default.maxRowDisplay = 500;
+            Settings.Default.Save();
+            this.SystemConfiguration_Load(null, null);
+            MessageBox.Show("Quay lại thiết lập mặc định thành công công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

@@ -101,7 +101,6 @@
             // 
             // button3
             // 
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
             this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -116,7 +115,6 @@
             // 
             // btnEdit
             // 
-            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEdit.Image = global::PhanMemNoiSoi.Properties.Resources.refresh_24x24;
             this.btnEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -130,7 +128,6 @@
             // 
             // button1
             // 
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Image = global::PhanMemNoiSoi.Properties.Resources.checked_24x24;
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;

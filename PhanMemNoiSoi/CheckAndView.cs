@@ -167,6 +167,7 @@ namespace PhanMemNoiSoi
             listImage.View = View.LargeIcon;
             imageList1.ImageSize = new Size(200, 150);
             listImage.LargeImageList = imageList1;
+            listImage.Sorting = SortOrder.Descending;
 
             //load exist image from disk
             if (Directory.Exists(folderImgPath))
@@ -307,14 +308,13 @@ namespace PhanMemNoiSoi
                     imageList1.Images.Add(imgCapture);
                     ListViewItem item = new ListViewItem();
                     item.ImageIndex = imageList1.Images.Count - 1;
+                    string imageName = pId + "_" + System.Guid.NewGuid() + ".jpg";
+                    item.Name = imageName;
+                    item.Text = DateTime.Now.ToLongTimeString();
+                    listImage.Items.Add(item);
 
                     //save image to disk
-                    int fCount = Directory.GetFiles(folderImgPath, "*", SearchOption.TopDirectoryOnly).Length;
-                    string imageName = pId + "_" + System.Guid.NewGuid() + ".jpg";
                     myHelper.SaveImageCapture(imgCapture, folderImgPath + imageName);
-
-                    item.Name = imageName;
-                    listImage.Items.Add(item);
                 }
             }
             catch (Exception ex)
@@ -399,7 +399,7 @@ namespace PhanMemNoiSoi
                     if (!capture.Cued)
                         capture.Filename = folderImgPath + pId + "_" + DateTime.Now.Millisecond + ".mp4";
                     btnSaveVideo.Text = "  Dừng Quay";
-                    btnSaveVideo.Image = Properties.Resources.pause_24;
+                    //btnSaveVideo.Image = Properties.Resources.pause_24;
                     btnSaveVideo.ImageAlign = ContentAlignment.MiddleLeft;
                     recordingVideo = true;
                     pbRecordIcon.Visible = true;

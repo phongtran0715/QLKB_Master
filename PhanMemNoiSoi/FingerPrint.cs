@@ -16,7 +16,6 @@ namespace PhanMemNoiSoi
         private string GetHash(string s)
         {
             MD5 sec = new MD5CryptoServiceProvider();
-            //SHA256 sec = new SHA256CryptoServiceProvider();
             ASCIIEncoding enc = new ASCIIEncoding();
             byte[] bt = enc.GetBytes(s);
             return GetHexString(sec.ComputeHash(bt));

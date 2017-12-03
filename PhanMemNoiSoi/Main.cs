@@ -43,6 +43,11 @@ namespace PhanMemNoiSoi
         {
             this.BackgroundImage = new Bitmap(PhanMemNoiSoi.Properties.Resources._3);
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            if(Session.Instance.ActiveLicense)
+            {
+                pbKey.Visible = false;
+                btnSoftwareActive.Visible = false;
+            }
         }
 
         private void btnBaoCao_Click(object sender, EventArgs e)
@@ -85,6 +90,12 @@ namespace PhanMemNoiSoi
                                            new string[] { RolesList.VIEW_LOG_HISTORY});
             LogManager logFr = new LogManager(userPrincipal);
             logFr.ShowDialog();
+        }
+
+        private void btnSoftwareActive_Click(object sender, EventArgs e)
+        {
+            ActiveKeyForm activeKeyFrm = new ActiveKeyForm();
+            activeKeyFrm.ShowDialog();
         }
     }
 }

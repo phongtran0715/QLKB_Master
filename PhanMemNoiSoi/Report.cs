@@ -1,8 +1,10 @@
-﻿using System;
+﻿using PhanMemNoiSoi.Properties;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -26,8 +28,9 @@ namespace PhanMemNoiSoi
         string[] imagesPatient = { };
 
         const int TWO_IMAGE_REPORT = 2;
-        const int THREE_IMAGE_REPORT = 3;
         const int FOUR_IMAGE_REPORT = 4;
+        Size img2Size;
+        Size img4Size;
         ReportWord rp;
 
         public gbCheckRecord(string patientId, string imagePath, string checkId)
@@ -37,12 +40,13 @@ namespace PhanMemNoiSoi
             this.imagePath = imagePath;
             this.checkId = checkId;
             // Load image from disk
-            imagesPatient = Directory.GetFiles(imagePath, "*.jpg", SearchOption.AllDirectories);
+            //imagesPatient = Directory.GetFiles(imagePath, "*.jpg", SearchOption.AllDirectories);
+            var files = Directory.GetFiles(imagePath, "*.jpg", SearchOption.AllDirectories).OrderByDescending(d => new FileInfo(d).CreationTime);
+            imagesPatient = files.ToArray();
             //add to imageList
             listImage.View = View.LargeIcon;
             imageList1.ImageSize = new Size(195, 150);
-            imageList1.ColorDepth = ColorDepth.Depth16Bit;
-
+            listImage.Sorting = System.Windows.Forms.SortOrder.Descending;
             listImage.LargeImageList = imageList1;
 
             for (int i = 0; i < imagesPatient.Length; i++)
@@ -55,6 +59,10 @@ namespace PhanMemNoiSoi
                 listImage.Items.Add(item);
             }
             lbNumImgChecked.Text = "0 ảnh đã chọn.";
+            img2Size.Width = Settings.Default.img2Width;
+            img2Size.Height = Settings.Default.img2Height;
+            img4Size.Width = Settings.Default.img4Width;
+            img4Size.Height = Settings.Default.img4Heigh;
         }
 
         private void Report_Load(object sender, EventArgs e)
@@ -195,6 +203,19 @@ namespace PhanMemNoiSoi
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+            if(Session.Instance.ActiveLicense == false)
+            {
+                using (CountDownForm formOptions = new CountDownForm())
+                {
+                    formOptions.ShowDialog();
+
+                    bool result = formOptions.GetMyResult();
+                    if(result == false)
+                    {
+                        return;
+                    }
+                }
+            }
             rp = new ReportWord();
             
             //check number image select
@@ -215,23 +236,7 @@ namespace PhanMemNoiSoi
                     return;
                 }
             }
-            switch (numImg)
-            {
-                case 0:
-                case 1:
-                case 2:
-                    rp.openFile(2);
-                    break;
-                case 3:
-                    rp.openFile(3);
-                    break;
-                case 4:
-                    rp.openFile(4);
-                    break;
-                default:
-                    rp.openFile(4);
-                    break;
-            }
+            rp.openFile();
             fillReport(rp, numImg);
             string tmp = Log.Instance.GetTempPath() + "tmp.docx";
             rp.saveFile(tmp, true);
@@ -271,14 +276,22 @@ namespace PhanMemNoiSoi
             int numImgChecked = 0;
             if(listImage != null)
             {
-                for (int i = 0; i < listImage.Items.Count; i++)
+                int imgCount = listImage.Items.Count;
+                for (int i = 0; i < imgCount; i++)
                 {
                     if (listImage.Items[i].Checked)
                     {
                         numImgChecked++;
                         if (numImgChecked <= rpMode)
                         {
-                            rp.insertImage(imagePath + listImage.Items[i].Name, numImgChecked);
+                            if(imgCount <= 2)
+                            {
+                                rp.insertImage(imagePath + listImage.Items[i].Name, numImgChecked, img2Size);
+                            }
+                            else
+                            {
+                                rp.insertImage(imagePath + listImage.Items[i].Name, numImgChecked, img4Size);
+                            }
                         }
                     }
                 }

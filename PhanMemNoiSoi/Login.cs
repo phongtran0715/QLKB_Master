@@ -16,6 +16,7 @@ namespace PhanMemNoiSoi
         public Login()
         {
             InitializeComponent();
+            Splasher.Close();
         }
 
         private void Login_Load(object sender, EventArgs e)

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using PhanMemNoiSoi.Properties;
+using PhanMemNoiSoi.SplashScreen;
+using System;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace PhanMemNoiSoi
@@ -13,20 +16,35 @@ namespace PhanMemNoiSoi
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            string dbServerName = Properties.Settings.Default.serverName;
-            if (dbServerName == null || dbServerName == "")
+            Helper helper = new Helper();
+
+            Splasher.Show(typeof(SplashScreenFrm));
+            FingerPrint print = new FingerPrint();
+            Splasher.Status = "Đang khởi tạo dữ liệu...";
+            //Check key license
+            string inputString = print.GenKey(print.cpuId() + print.macId());
+            string keyGen = print.GenKey(helper.RemoveWhitespace(inputString));
+            string softwareLicense = Settings.Default.softwareLicense;
+            Session.Instance.ActiveLicense = string.Equals(keyGen, softwareLicense);
+            Settings.Default.ClientId = inputString;
+            Settings.Default.Save();
+
+            Splasher.Status = "Thiết lập kết nối ...";
+            Thread.Sleep(500);
+
+            string serverName = Settings.Default.serverName;
+            if ((serverName == null) || (serverName == ""))
             {
-                Application.Run(new ConfigDB());
+                Splasher.Close();
+                Application.Run(new ConfigDB(true, true));
+            }
+            else if (!DBConnection.Instance.OpenConnection())
+            {
+                Splasher.Close();
+                Application.Run(new ConfigDB(true, true));
             }
             else
             {
-                DBConnection dbConn = DBConnection.Instance;
-                bool isConn = dbConn.OpenConnection();
-                if (isConn == false)
-                {
-                    Application.Run(new ConfigDB());
-                    return;
-                }
                 Application.Run(new Login());
             }
         }

@@ -132,24 +132,27 @@ namespace OD.Forms.Security
 			{
 				if (UserCanOpenForm)
 				{
-					ShowForm(calledShowMethod, owner);
 					if (UserIsAllowed != null)
-						UserIsAllowed(this, new EventArgs());
-				}
+                    {
+                        UserIsAllowed(this, new EventArgs());
+                    }
+                    ShowForm(calledShowMethod, owner);
+
+                }
 				else
 				{
 					if (UserIsDenied != null)
 					{
-						ShowForm(calledShowMethod, owner);
-						UserIsDenied(this, new EventArgs());
-					}
+                        ShowForm(calledShowMethod, owner);
+                        UserIsDenied(this, new EventArgs());
+                    }
 					else
 						if (this.IsMainWindow)
 							Application.Exit();
 				}
 			}
-			else
-				ShowForm(calledShowMethod, owner);
+			//else
+				//ShowForm(calledShowMethod, owner);
 		}
 
 		/// <summary>
@@ -243,15 +246,17 @@ namespace OD.Forms.Security
 				DialogResult result = DialogResult.None;
 				if (UserCanOpenForm)
 				{
-					result = ShowDialogForm(calledShowMethod, owner);
 					if (UserIsAllowed != null)
-						UserIsAllowed(this, new EventArgs());
-				}
+                    {
+                        UserIsAllowed(this, new EventArgs());
+                    }
+                    result = ShowDialogForm(calledShowMethod, owner);
+                }
 				else
 				{
 					if (UserIsDenied != null)
 					{
-						result = ShowDialogForm(calledShowMethod, owner);
+						//result = ShowDialogForm(calledShowMethod, owner);
 						UserIsDenied(this, new EventArgs());
 					}
 					else

@@ -229,7 +229,7 @@ namespace PhanMemNoiSoi
             }
             catch(Exception ex)
             {
-
+                Console.Write(ex.ToString());
             }
             return exitCode;
         }

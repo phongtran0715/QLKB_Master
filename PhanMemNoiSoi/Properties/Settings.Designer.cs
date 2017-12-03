@@ -229,30 +229,6 @@ namespace PhanMemNoiSoi.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("640")]
-        public int imgWidth {
-            get {
-                return ((int)(this["imgWidth"]));
-            }
-            set {
-                this["imgWidth"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("480")]
-        public int imgHeight {
-            get {
-                return ((int)(this["imgHeight"]));
-            }
-            set {
-                this["imgHeight"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int lastUserId {
             get {
@@ -284,6 +260,90 @@ namespace PhanMemNoiSoi.Properties {
             }
             set {
                 this["softwareLicense"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ClientId {
+            get {
+                return ((string)(this["ClientId"]));
+            }
+            set {
+                this["ClientId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("300")]
+        public int img2Width {
+            get {
+                return ((int)(this["img2Width"]));
+            }
+            set {
+                this["img2Width"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("220")]
+        public int img2Height {
+            get {
+                return ((int)(this["img2Height"]));
+            }
+            set {
+                this["img2Height"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("270")]
+        public int img4Width {
+            get {
+                return ((int)(this["img4Width"]));
+            }
+            set {
+                this["img4Width"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("150")]
+        public int img4Heigh {
+            get {
+                return ((int)(this["img4Heigh"]));
+            }
+            set {
+                this["img4Heigh"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("60")]
+        public int maxDayLog {
+            get {
+                return ((int)(this["maxDayLog"]));
+            }
+            set {
+                this["maxDayLog"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("500")]
+        public int maxRowDisplay {
+            get {
+                return ((int)(this["maxRowDisplay"]));
+            }
+            set {
+                this["maxRowDisplay"] = value;
             }
         }
     }

@@ -53,12 +53,6 @@
     <Setting Name="dbPassword" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="imgWidth" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">640</Value>
-    </Setting>
-    <Setting Name="imgHeight" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">480</Value>
-    </Setting>
     <Setting Name="lastUserId" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
@@ -67,6 +61,27 @@
     </Setting>
     <Setting Name="softwareLicense" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ClientId" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="img2Width" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">300</Value>
+    </Setting>
+    <Setting Name="img2Height" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">220</Value>
+    </Setting>
+    <Setting Name="img4Width" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">270</Value>
+    </Setting>
+    <Setting Name="img4Heigh" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">150</Value>
+    </Setting>
+    <Setting Name="maxDayLog" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">60</Value>
+    </Setting>
+    <Setting Name="maxRowDisplay" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">500</Value>
     </Setting>
   </Settings>
 </SettingsFile>

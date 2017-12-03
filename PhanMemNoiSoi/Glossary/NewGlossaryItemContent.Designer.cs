@@ -94,7 +94,6 @@
             // 
             // btnOK
             // 
-            this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOK.Image = global::PhanMemNoiSoi.Properties.Resources.checked_24x24;
             this.btnOK.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -108,7 +107,6 @@
             // 
             // btnCancle
             // 
-            this.btnCancle.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCancle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancle.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
             this.btnCancle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
