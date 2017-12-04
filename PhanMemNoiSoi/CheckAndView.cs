@@ -310,7 +310,7 @@ namespace PhanMemNoiSoi
                     item.ImageIndex = imageList1.Images.Count - 1;
                     string imageName = pId + "_" + System.Guid.NewGuid() + ".jpg";
                     item.Name = imageName;
-                    item.Text = DateTime.Now.ToLongTimeString();
+                    item.Text = DateTime.Now.ToString("hh:mm:ss");
                     listImage.Items.Add(item);
 
                     //save image to disk

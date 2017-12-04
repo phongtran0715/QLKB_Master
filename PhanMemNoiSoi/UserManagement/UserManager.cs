@@ -163,7 +163,6 @@ namespace PhanMemNoiSoi
                 {
                     MessageBox.Show("Xóa tài khoản thất bại. Không cập nhập được cơ sở dữ liệu. Vui lòng thử lại sau!", "Thông báo",
                                     MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    Log.Instance.LogMessageToFile(ex.ToString());
                 }
             }
             //auto select first row
@@ -209,7 +208,6 @@ namespace PhanMemNoiSoi
                 MessageBox.Show("Sửa dữ liệu không thành công. \n Không thể kết nối đến cơ sở dữ liệu. \n Vui lòng thử lại sau",
                                 "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Console.WriteLine(ex.ToString());
-                Log.Instance.LogMessageToFile(ex.ToString());
                 return;
             }
             //update dgv
@@ -372,7 +370,6 @@ namespace PhanMemNoiSoi
                     {
                         MessageBox.Show("Không thể kết nối đến cơ sở dữ liệu", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         Console.WriteLine(ex.ToString());
-                        Log.Instance.LogMessageToFile(ex.ToString());
                         return;
                     }
                 }

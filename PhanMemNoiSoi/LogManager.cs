@@ -70,6 +70,7 @@ namespace PhanMemNoiSoi
             //cbUser.Text = "";
             dtNgayBatDau.Checked = false;
             dtNgayKetThuc.Checked = false;
+            cbUser.SelectedIndex = 0;
             txtContent.Text = "";
             loadDgvLog();
         }
@@ -116,7 +117,8 @@ namespace PhanMemNoiSoi
         private void loadDgvLog()
         {
             // load data for data grid view
-            string query = "SELECT TOP " + MAX_LENGHT.ToString() +" Num,TimeLog, UserName, Descript FROM WorkLog ORDER BY TimeLog DESC;";
+            string str = Settings.Default.maxRowDisplay.ToString();
+            string query = "SELECT TOP " + str + " Num,TimeLog, UserName, Descript FROM WorkLog ORDER BY TimeLog DESC;";
             dtaLog = new SqlDataAdapter(query, DBConnection.Instance.sqlConn);
 
             SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dtaLog);

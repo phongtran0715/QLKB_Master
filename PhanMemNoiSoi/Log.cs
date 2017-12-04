@@ -37,26 +37,6 @@ namespace PhanMemNoiSoi
             return path;
         }
         
-        //TODO set condition to write log file
-        public void LogMessageToFile(string msg)
-        {
-            if (isLog)
-            {
-                System.IO.StreamWriter sw = System.IO.File.AppendText(
-                GetTempPath() + "QuangHuyMedicalLog.txt");
-                try
-                {
-                    string logLine = System.String.Format(
-                        "{0:G}: {1}.", System.DateTime.Now, msg);
-                    sw.WriteLine(logLine);
-                }
-                finally
-                {
-                    sw.Close();
-                }
-            }
-        }
-        
         public void LogMessageToDB(DateTime datetime, int uId, string uName, string msg)
         {
             try

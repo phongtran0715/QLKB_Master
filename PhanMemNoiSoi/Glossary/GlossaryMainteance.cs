@@ -177,7 +177,6 @@ namespace PhanMemNoiSoi
                 MessageBox.Show("Sửa dữ liệu không thành công. \n Không thể kết nối đến cơ sở dữ liệu. \n Vui lòng thử lại sau",
                                 "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Console.WriteLine(ex.ToString());
-                Log.Instance.LogMessageToFile(ex.ToString());
                 return;
             }
             //update dgv
@@ -216,7 +215,6 @@ namespace PhanMemNoiSoi
                 MessageBox.Show("Thêm dữ liệu không thành công. \n Không thể kết nối đến cơ sở dữ liệu. \n Vui lòng thử lại sau",
                                 "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Console.WriteLine(ex.ToString());
-                Log.Instance.LogMessageToFile(ex.ToString());
                 return;
             }
             //update dgv
@@ -249,7 +247,6 @@ namespace PhanMemNoiSoi
                 MessageBox.Show("Sửa dữ liệu không thành công. \n Không thể kết nối đến cơ sở dữ liệu. \n Vui lòng thử lại sau",
                                 "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Console.WriteLine(ex.ToString());
-                Log.Instance.LogMessageToFile(ex.ToString());
                 return;
             }
             //update dgv
@@ -292,7 +289,6 @@ namespace PhanMemNoiSoi
             {
                 MessageBox.Show("Thêm dữ liệu không thành công. \n Không thể kết nối đến cơ sở dữ liệu. \n Vui lòng thử lại sau",
                                 "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-                Log.Instance.LogMessageToFile(ex.ToString());
                 return;
             }
             //update dgv
@@ -351,7 +347,6 @@ namespace PhanMemNoiSoi
             {
                 MessageBox.Show("Không thể xóa dữ liệu. \n Không kết nối được đến cơ sở dữ liệu. \n Vui lòng thử lại sau!",
                     "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Log.Instance.LogMessageToFile(ex.ToString());
                 return;
             }
 
@@ -398,7 +393,6 @@ namespace PhanMemNoiSoi
             {
                 MessageBox.Show("Không thể xóa dữ liệu. \n Không kết nối được đến cơ sở dữ liệu. \n Vui lòng thử lại sau!",
                     "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Log.Instance.LogMessageToFile(ex.ToString());
                 return;
             }
 
@@ -631,7 +625,6 @@ namespace PhanMemNoiSoi
                 MessageBox.Show("Không thể cập nhập cơ sở dữ liệu. \n Không kết nối được đến cơ sở dữ liệu. \n Vui lòng thử lại sau!",
                     "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine(ex.ToString());
-                Log.Instance.LogMessageToFile(ex.ToString());
                 return;
             }
 

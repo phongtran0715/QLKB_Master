@@ -77,7 +77,6 @@ namespace PhanMemNoiSoi
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-                Log.Instance.LogMessageToFile(ex.ToString());
             }
             return exitCode;
         }
@@ -101,7 +100,6 @@ namespace PhanMemNoiSoi
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-                Log.Instance.LogMessageToFile(ex.ToString());
             }
             return exitCode;
         }
@@ -142,11 +140,6 @@ namespace PhanMemNoiSoi
             Console.WriteLine("output>>" + (String.IsNullOrEmpty(output) ? "(none)" : output));
             Console.WriteLine("error>>" + (String.IsNullOrEmpty(error) ? "(none)" : error));
             Console.WriteLine("ExitCode: " + exitCode.ToString(), "ExecuteCommand");
-
-            if (!string.IsNullOrEmpty(output))
-                Log.Instance.LogMessageToFile("Output = " + output);
-            if (!string.IsNullOrEmpty(error))
-                Log.Instance.LogMessageToFile("error = " + error);
 
             process.Close();
             return exitCode;

@@ -54,7 +54,6 @@ namespace PhanMemNoiSoi
                     catch (System.Exception ex)
                     {
                         MessageBox.Show("Không thể cập nhập cơ sở dữ liệu", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        Log.Instance.LogMessageToFile(ex.ToString());
                     }
                 }
             }

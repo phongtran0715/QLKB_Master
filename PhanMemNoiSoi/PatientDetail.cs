@@ -58,7 +58,6 @@ namespace PhanMemNoiSoi
                 MessageBox.Show("Sửa dữ liệu không thành công. \n Không thể kết nối đến cơ sở dữ liệu. \n Vui lòng thử lại sau",
                                 "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Console.WriteLine(ex.ToString());
-                Log.Instance.LogMessageToFile(ex.ToString());
                 return;
             }
             this.RefreshDgv(txtName.Text.Trim(), txtAge.Text.Trim(), txtAddr.Text.Trim(),

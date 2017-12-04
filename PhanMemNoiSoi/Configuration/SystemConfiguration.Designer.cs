@@ -38,16 +38,6 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.txt4Heigh = new System.Windows.Forms.TextBox();
-            this.txt4Width = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txt2Heigh = new System.Windows.Forms.TextBox();
-            this.txt2Width = new System.Windows.Forms.TextBox();
             this.btnSelectFolder = new System.Windows.Forms.Button();
             this.txtImgPath = new System.Windows.Forms.TextBox();
             this.cbImgQuality = new System.Windows.Forms.ComboBox();
@@ -66,6 +56,18 @@
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancle = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txt4Heigh = new System.Windows.Forms.TextBox();
+            this.txt4Width = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txt2Heigh = new System.Windows.Forms.TextBox();
+            this.txt2Width = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -78,6 +80,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Cursor = System.Windows.Forms.Cursors.Default;
             this.tabControl1.Location = new System.Drawing.Point(5, 5);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabControl1.Name = "tabControl1";
@@ -104,9 +107,9 @@
             this.groupBox4.Controls.Add(this.label1);
             this.groupBox4.Controls.Add(this.rbCapOnly);
             this.groupBox4.Controls.Add(this.rbCaptureFreeze);
-            this.groupBox4.Location = new System.Drawing.Point(7, 330);
+            this.groupBox4.Location = new System.Drawing.Point(7, 301);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(468, 74);
+            this.groupBox4.Size = new System.Drawing.Size(468, 86);
             this.groupBox4.TabIndex = 2;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Cài đặt bàn đạp chân";
@@ -145,7 +148,7 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.button2);
-            this.groupBox3.Location = new System.Drawing.Point(7, 231);
+            this.groupBox3.Location = new System.Drawing.Point(7, 190);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(468, 93);
             this.groupBox3.TabIndex = 1;
@@ -166,16 +169,6 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.label9);
-            this.groupBox2.Controls.Add(this.txt4Heigh);
-            this.groupBox2.Controls.Add(this.txt4Width);
-            this.groupBox2.Controls.Add(this.label8);
-            this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.txt2Heigh);
-            this.groupBox2.Controls.Add(this.txt2Width);
             this.groupBox2.Controls.Add(this.btnSelectFolder);
             this.groupBox2.Controls.Add(this.txtImgPath);
             this.groupBox2.Controls.Add(this.cbImgQuality);
@@ -183,106 +176,16 @@
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Location = new System.Drawing.Point(7, 8);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(468, 217);
+            this.groupBox2.Size = new System.Drawing.Size(468, 176);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Chất lượng hình ảnh";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(229, 179);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(20, 20);
-            this.label9.TabIndex = 14;
-            this.label9.Text = "X";
-            // 
-            // txt4Heigh
-            // 
-            this.txt4Heigh.Location = new System.Drawing.Point(264, 179);
-            this.txt4Heigh.MaxLength = 3;
-            this.txt4Heigh.Name = "txt4Heigh";
-            this.txt4Heigh.Size = new System.Drawing.Size(76, 26);
-            this.txt4Heigh.TabIndex = 13;
-            this.txt4Heigh.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt4Heigh_KeyPress);
-            // 
-            // txt4Width
-            // 
-            this.txt4Width.Location = new System.Drawing.Point(138, 179);
-            this.txt4Width.MaxLength = 3;
-            this.txt4Width.Name = "txt4Width";
-            this.txt4Width.Size = new System.Drawing.Size(76, 26);
-            this.txt4Width.TabIndex = 12;
-            this.txt4Width.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt4Width_KeyPress);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(0, 183);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(137, 20);
-            this.label8.TabIndex = 11;
-            this.label8.Text = "Kích thước ảnh (4)";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(229, 147);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(20, 20);
-            this.label7.TabIndex = 10;
-            this.label7.Text = "X";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(260, 124);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(38, 20);
-            this.label6.TabIndex = 9;
-            this.label6.Text = "Cao";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(134, 124);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(48, 20);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "Rộng";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(0, 147);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(137, 20);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Kích thước ảnh (2)";
-            // 
-            // txt2Heigh
-            // 
-            this.txt2Heigh.Location = new System.Drawing.Point(264, 147);
-            this.txt2Heigh.MaxLength = 3;
-            this.txt2Heigh.Name = "txt2Heigh";
-            this.txt2Heigh.Size = new System.Drawing.Size(76, 26);
-            this.txt2Heigh.TabIndex = 6;
-            this.txt2Heigh.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtHeigh_KeyPress);
-            // 
-            // txt2Width
-            // 
-            this.txt2Width.Location = new System.Drawing.Point(138, 147);
-            this.txt2Width.MaxLength = 3;
-            this.txt2Width.Name = "txt2Width";
-            this.txt2Width.Size = new System.Drawing.Size(76, 26);
-            this.txt2Width.TabIndex = 5;
-            this.txt2Width.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtWith_KeyPress);
             // 
             // btnSelectFolder
             // 
             this.btnSelectFolder.Image = global::PhanMemNoiSoi.Properties.Resources.refresh_24x24;
             this.btnSelectFolder.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSelectFolder.Location = new System.Drawing.Point(353, 75);
+            this.btnSelectFolder.Location = new System.Drawing.Point(353, 97);
             this.btnSelectFolder.Name = "btnSelectFolder";
             this.btnSelectFolder.Size = new System.Drawing.Size(109, 35);
             this.btnSelectFolder.TabIndex = 4;
@@ -293,7 +196,7 @@
             // txtImgPath
             // 
             this.txtImgPath.Enabled = false;
-            this.txtImgPath.Location = new System.Drawing.Point(138, 79);
+            this.txtImgPath.Location = new System.Drawing.Point(138, 101);
             this.txtImgPath.Name = "txtImgPath";
             this.txtImgPath.Size = new System.Drawing.Size(202, 26);
             this.txtImgPath.TabIndex = 3;
@@ -324,7 +227,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 85);
+            this.label2.Location = new System.Drawing.Point(6, 107);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(126, 20);
             this.label2.TabIndex = 0;
@@ -332,6 +235,18 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label16);
+            this.tabPage1.Controls.Add(this.label15);
+            this.tabPage1.Controls.Add(this.label9);
+            this.tabPage1.Controls.Add(this.txt4Heigh);
+            this.tabPage1.Controls.Add(this.txt4Width);
+            this.tabPage1.Controls.Add(this.label8);
+            this.tabPage1.Controls.Add(this.label7);
+            this.tabPage1.Controls.Add(this.label6);
+            this.tabPage1.Controls.Add(this.label5);
+            this.tabPage1.Controls.Add(this.label4);
+            this.tabPage1.Controls.Add(this.txt2Heigh);
+            this.tabPage1.Controls.Add(this.txt2Width);
             this.tabPage1.Controls.Add(this.cbDateFormat);
             this.tabPage1.Controls.Add(this.label14);
             this.tabPage1.Controls.Add(this.label12);
@@ -359,19 +274,19 @@
             "dd-MM-yyyy",
             "yyyy-MM-dd",
             "d-M-yy"});
-            this.cbDateFormat.Location = new System.Drawing.Point(207, 144);
+            this.cbDateFormat.Location = new System.Drawing.Point(207, 160);
             this.cbDateFormat.Name = "cbDateFormat";
-            this.cbDateFormat.Size = new System.Drawing.Size(216, 28);
+            this.cbDateFormat.Size = new System.Drawing.Size(202, 28);
             this.cbDateFormat.TabIndex = 11;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(81, 144);
+            this.label14.Location = new System.Drawing.Point(16, 163);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(120, 20);
+            this.label14.Size = new System.Drawing.Size(165, 20);
             this.label14.TabIndex = 10;
-            this.label14.Text = "Định dạng ngày";
+            this.label14.Text = "Định dạng ngày tháng";
             // 
             // label12
             // 
@@ -389,16 +304,17 @@
             this.txtMaxRowDisplay.Name = "txtMaxRowDisplay";
             this.txtMaxRowDisplay.Size = new System.Drawing.Size(71, 26);
             this.txtMaxRowDisplay.TabIndex = 8;
+            this.txtMaxRowDisplay.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtMaxRowDisplay.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMaxRowDisplay_KeyPress);
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(12, 94);
+            this.label13.Location = new System.Drawing.Point(16, 94);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(192, 20);
+            this.label13.Size = new System.Drawing.Size(156, 20);
             this.label13.TabIndex = 7;
-            this.label13.Text = "Số bản ghi hiển thịu tối đa";
+            this.label13.Text = "Dữ liệu hiển thị tối đa";
             // 
             // label11
             // 
@@ -416,12 +332,13 @@
             this.txtMaxDayLog.Name = "txtMaxDayLog";
             this.txtMaxDayLog.Size = new System.Drawing.Size(71, 26);
             this.txtMaxDayLog.TabIndex = 5;
+            this.txtMaxDayLog.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtMaxDayLog.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMaxDayLog_KeyPress);
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(35, 29);
+            this.label10.Location = new System.Drawing.Point(15, 29);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(166, 20);
             this.label10.TabIndex = 4;
@@ -466,6 +383,114 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(298, 303);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(20, 20);
+            this.label9.TabIndex = 24;
+            this.label9.Text = "X";
+            // 
+            // txt4Heigh
+            // 
+            this.txt4Heigh.Location = new System.Drawing.Point(333, 297);
+            this.txt4Heigh.MaxLength = 3;
+            this.txt4Heigh.Name = "txt4Heigh";
+            this.txt4Heigh.Size = new System.Drawing.Size(76, 26);
+            this.txt4Heigh.TabIndex = 23;
+            this.txt4Heigh.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // txt4Width
+            // 
+            this.txt4Width.Location = new System.Drawing.Point(207, 297);
+            this.txt4Width.MaxLength = 3;
+            this.txt4Width.Name = "txt4Width";
+            this.txt4Width.Size = new System.Drawing.Size(76, 26);
+            this.txt4Width.TabIndex = 22;
+            this.txt4Width.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(30, 303);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(137, 20);
+            this.label8.TabIndex = 21;
+            this.label8.Text = "Kích thước ảnh (4)";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(298, 263);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(20, 20);
+            this.label7.TabIndex = 20;
+            this.label7.Text = "X";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(352, 221);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(38, 20);
+            this.label6.TabIndex = 19;
+            this.label6.Text = "Cao";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(228, 221);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(48, 20);
+            this.label5.TabIndex = 18;
+            this.label5.Text = "Rộng";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(30, 244);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(137, 20);
+            this.label4.TabIndex = 17;
+            this.label4.Text = "Kích thước ảnh (2)";
+            // 
+            // txt2Heigh
+            // 
+            this.txt2Heigh.Location = new System.Drawing.Point(333, 244);
+            this.txt2Heigh.MaxLength = 3;
+            this.txt2Heigh.Name = "txt2Heigh";
+            this.txt2Heigh.Size = new System.Drawing.Size(76, 26);
+            this.txt2Heigh.TabIndex = 16;
+            this.txt2Heigh.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // txt2Width
+            // 
+            this.txt2Width.Location = new System.Drawing.Point(207, 244);
+            this.txt2Width.MaxLength = 3;
+            this.txt2Width.Name = "txt2Width";
+            this.txt2Width.Size = new System.Drawing.Size(76, 26);
+            this.txt2Width.TabIndex = 15;
+            this.txt2Width.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(415, 250);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(44, 20);
+            this.label15.TabIndex = 25;
+            this.label15.Text = "point";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(415, 303);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(44, 20);
+            this.label16.TabIndex = 26;
+            this.label16.Text = "point";
+            // 
             // SystemConfiguration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -476,7 +501,7 @@
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.btnCancle);
             this.Controls.Add(this.tabControl1);
-            this.Cursor = System.Windows.Forms.Cursors.Cross;
+            this.Cursor = System.Windows.Forms.Cursors.Default;
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -521,16 +546,6 @@
         private System.Windows.Forms.TextBox txtImgPath;
         private System.Windows.Forms.ComboBox cbImgQuality;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
-        private System.Windows.Forms.TextBox txt2Heigh;
-        private System.Windows.Forms.TextBox txt2Width;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox txt4Heigh;
-        private System.Windows.Forms.TextBox txt4Width;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TextBox txtMaxDayLog;
         private System.Windows.Forms.Label label10;
@@ -541,5 +556,17 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.ComboBox cbDateFormat;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txt4Heigh;
+        private System.Windows.Forms.TextBox txt4Width;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txt2Heigh;
+        private System.Windows.Forms.TextBox txt2Width;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label15;
     }
 }

@@ -65,7 +65,6 @@ namespace PhanMemNoiSoi
             {
                 MessageBox.Show(ex.Message + "\n" + ex.ToString(), "Thông báo",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Log.Instance.LogMessageToFile(ex.ToString());
                 return;
             }
 
@@ -201,7 +200,7 @@ namespace PhanMemNoiSoi
             this.panelVideo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelVideo.Location = new System.Drawing.Point(12, 12);
             this.panelVideo.Name = "panelVideo";
-            this.panelVideo.Size = new System.Drawing.Size(612, 354);
+            this.panelVideo.Size = new System.Drawing.Size(678, 484);
             this.panelVideo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.panelVideo.TabIndex = 6;
             this.panelVideo.TabStop = false;
@@ -213,7 +212,7 @@ namespace PhanMemNoiSoi
             this.btnExit.ForeColor = System.Drawing.Color.Black;
             this.btnExit.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
             this.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnExit.Location = new System.Drawing.Point(526, 375);
+            this.btnExit.Location = new System.Drawing.Point(592, 505);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(98, 35);
             this.btnExit.TabIndex = 5;
@@ -225,7 +224,7 @@ namespace PhanMemNoiSoi
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.Image = global::PhanMemNoiSoi.Properties.Resources.save_24;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(390, 375);
+            this.btnSave.Location = new System.Drawing.Point(456, 505);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(130, 35);
             this.btnSave.TabIndex = 3;
@@ -236,7 +235,7 @@ namespace PhanMemNoiSoi
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(8, 19);
             this.BackColor = System.Drawing.Color.SeaShell;
-            this.ClientSize = new System.Drawing.Size(632, 420);
+            this.ClientSize = new System.Drawing.Size(698, 550);
             this.Controls.Add(this.panelVideo);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnSave);
@@ -287,7 +286,6 @@ namespace PhanMemNoiSoi
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + "\n\n" + ex.ToString());
-                Log.Instance.LogMessageToFile(ex.ToString());
             }
         }
 
@@ -302,7 +300,6 @@ namespace PhanMemNoiSoi
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + "\n\n" + ex.ToString());
-                Log.Instance.LogMessageToFile(ex.ToString());
             }
         }
 
@@ -326,7 +323,6 @@ namespace PhanMemNoiSoi
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + "\n\n" + ex.ToString());
-                Log.Instance.LogMessageToFile(ex.ToString());
             }
             this.Close();
         }
@@ -500,9 +496,7 @@ namespace PhanMemNoiSoi
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("Video device not supported.\n\n" + ex.Message + "\n\n" + ex.ToString());
                 MessageBox.Show("Video device not supported.\n\n" + ex.Message);
-                Log.Instance.LogMessageToFile(ex.ToString());
             }
         }
 

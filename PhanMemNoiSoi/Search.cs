@@ -53,7 +53,8 @@ namespace PhanMemNoiSoi
         private void loadDgvPatient()
         {
             // load data for data grid view
-            string query = "SELECT TOP 100 SickNum,SickName, Age, Birthday, Createtime FROM SickData ORDER BY Createtime DESC;";
+            string str = Settings.Default.maxRowDisplay.ToString();
+            string query = "SELECT TOP " + str + " SickNum,SickName, Age, Birthday, Createtime FROM SickData ORDER BY Createtime DESC;";
             dtaPatient = new SqlDataAdapter(query, DBConnection.Instance.sqlConn);
 
             SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dtaPatient);
@@ -71,8 +72,11 @@ namespace PhanMemNoiSoi
             dgvPatient.Columns["SickNum"].Visible = false;
             dgvPatient.Columns["SickName"].HeaderText = "Tên";
             dgvPatient.Columns["Age"].HeaderText = "Tuổi";
+            dgvPatient.Columns["Age"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvPatient.Columns["Birthday"].HeaderText = "Ngày sinh";
+            dgvPatient.Columns["Birthday"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvPatient.Columns["Createtime"].HeaderText = "Ngày khám";
+            dgvPatient.Columns["Createtime"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvPatient.Columns["Createtime"].DefaultCellStyle.Format = helper.getDateFormat(Settings.Default.datetimeFormat);
 
             dgvPatient.Columns["SickName"].Width = dgvPatient.Width * 4 / 10;

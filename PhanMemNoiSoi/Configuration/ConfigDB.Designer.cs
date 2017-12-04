@@ -133,6 +133,7 @@
             // pbStatus
             // 
             this.pbStatus.BackColor = System.Drawing.Color.Transparent;
+            this.pbStatus.Image = global::PhanMemNoiSoi.Properties.Resources.loading_apple;
             this.pbStatus.Location = new System.Drawing.Point(172, 203);
             this.pbStatus.Name = "pbStatus";
             this.pbStatus.Size = new System.Drawing.Size(51, 48);

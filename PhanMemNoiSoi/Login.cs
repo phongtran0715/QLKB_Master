@@ -162,7 +162,6 @@ namespace PhanMemNoiSoi
             catch (System.Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                Log.Instance.LogMessageToFile(ex.ToString());
             }
         }
 

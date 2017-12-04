@@ -129,7 +129,6 @@ namespace PhanMemNoiSoi
                     {
                         MessageBox.Show("Không thể kết nối đến cơ sở dữ liệu", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         Console.WriteLine(ex.ToString());
-                        Log.Instance.LogMessageToFile(ex.ToString());
                         return;
                     }
                 }

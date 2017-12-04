@@ -93,7 +93,6 @@ namespace PhanMemNoiSoi
                     MessageBox.Show("Thêm dữ liệu không thành công. \n Không thể kết nối đến cơ sở dữ liệu. \n Vui lòng thử lại sau",
                                "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                     Console.WriteLine(ex.ToString());
-                    Log.Instance.LogMessageToFile(ex.ToString());
                     return;
                 }
             }
@@ -135,7 +134,6 @@ namespace PhanMemNoiSoi
                 MessageBox.Show("Thêm dữ liệu không thành công. \n Không thể kết nối đến cơ sở dữ liệu. Vui lòng thử lại sau." + ex.ToString(),
                                 "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Console.WriteLine(ex.ToString());
-                Log.Instance.LogMessageToFile(ex.ToString());
                 return;
             }
             //enable button
@@ -233,22 +231,28 @@ namespace PhanMemNoiSoi
             dgvBenhNhan.DataSource = bsSick;
             dgvBenhNhan.Columns["SickNum"].Visible = false;
             dgvBenhNhan.Columns["STT"].Width = dgvBenhNhan.Width / 18 ;
+            dgvBenhNhan.Columns["STT"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvBenhNhan.Columns["SickName"].HeaderText = "Tên bệnh nhân";
             dgvBenhNhan.Columns["SickName"].Width = dgvBenhNhan.Width / 9;
             dgvBenhNhan.Columns["Age"].HeaderText = "Tuổi";
             dgvBenhNhan.Columns["Age"].Width = dgvBenhNhan.Width / 18;
+            dgvBenhNhan.Columns["Age"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvBenhNhan.Columns["Address"].HeaderText = "Địa chỉ";
             dgvBenhNhan.Columns["Address"].Width = dgvBenhNhan.Width / 9;
             dgvBenhNhan.Columns["Occupation"].HeaderText = "Nghề nghiệp";
             dgvBenhNhan.Columns["Occupation"].Width = dgvBenhNhan.Width / 9;
             dgvBenhNhan.Columns["Telephone"].HeaderText = "Điện thoại";
             dgvBenhNhan.Columns["Telephone"].Width = dgvBenhNhan.Width / 9;
+            dgvBenhNhan.Columns["Telephone"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvBenhNhan.Columns["InsuranceId"].HeaderText = "Số BHYT";
             dgvBenhNhan.Columns["InsuranceId"].Width = dgvBenhNhan.Width / 9;
             dgvBenhNhan.Columns["Sex"].HeaderText = "Giới tính";
             dgvBenhNhan.Columns["Sex"].Width = dgvBenhNhan.Width / 15;
+            dgvBenhNhan.Columns["Sex"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvBenhNhan.Columns["CauseCheck"].HeaderText = "Lý do khám";
             dgvBenhNhan.Columns["CauseCheck"].Width = (dgvBenhNhan.Width * 3) / 9;
+
+
             helper.setRowNumberDgvSick(dgvBenhNhan);
             foreach (DataGridViewColumn col in dgvBenhNhan.Columns)
             {
@@ -313,7 +317,6 @@ namespace PhanMemNoiSoi
             {
                 MessageBox.Show("Không thể xóa dữ liệu. \n Không kết nối được đến cơ sở dữ liệu. \n Vui lòng thử lại sau!",
                     "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Log.Instance.LogMessageToFile(ex.ToString());
                 return;
             }
 

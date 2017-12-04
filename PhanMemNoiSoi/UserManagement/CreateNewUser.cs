@@ -75,7 +75,6 @@ namespace PhanMemNoiSoi
             {
                 MessageBox.Show("Tạo tài khoản mới thất bại. \n Không thể kết nối đến cơ sở dữ liệu. \n Vui lòng thử lại sau!",
                                 "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Log.Instance.LogMessageToFile(ex.ToString());
             }
         }
 

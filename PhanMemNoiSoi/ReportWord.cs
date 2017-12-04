@@ -51,7 +51,6 @@ namespace PhanMemNoiSoi
             }
             catch (Exception ex)
             {
-                Log.Instance.LogMessageToFile(ex.ToString());
             }
         }
 

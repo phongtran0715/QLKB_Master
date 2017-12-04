@@ -78,7 +78,6 @@ namespace PhanMemNoiSoi
                 numRecord = (int)mySQL.ExecuteScalar();
             }catch(Exception ex)
             {
-                Log.Instance.LogMessageToFile(ex.ToString());
             }
             
             if (numRecord <= 0)
@@ -129,14 +128,13 @@ namespace PhanMemNoiSoi
             }
             catch(Exception ex)
             {
-                Log.Instance.LogMessageToFile(ex.ToString());
             }
             
             if(txtList != null)
             {
                 for (int i = 0; i < txtList.Length; i++)
                 {
-                    txtList[i].Text = loadTxtBoxData("CheckItemContent", txtList[i].Name.Trim(), this.patientId);
+                    txtList[i].Text = loadTxtBoxData(txtList[i].Name.Trim(), this.patientId);
                 }
             }
 
@@ -144,7 +142,7 @@ namespace PhanMemNoiSoi
             lbNumImgChecked.Text = "0 ảnh đã chọn.";
         }
 
-        private string loadTxtBoxData(string tbName, string itemCode, string patientId)
+        private string loadTxtBoxData(string itemCode, string patientId)
         {
             string data = "";
             //Load data for precaution box
@@ -159,9 +157,8 @@ namespace PhanMemNoiSoi
                 while (rdr.Read())
                 {
                     string itemContentCode = rdr["ItemContentCode"].ToString().Trim();
-                    query = "SELECT Content FROM @table WHERE ContentCode = @itemContentCode;";
+                    query = "SELECT Content FROM CheckItemContent WHERE ContentCode = @itemContentCode;";
                     SqlCommand mySQLICC = new SqlCommand(query, DBConnection.Instance.sqlConn);
-                    mySQLICC.Parameters.Add("@table", SqlDbType.NChar).Value = table;
                     mySQLICC.Parameters.Add("@itemContentCode", SqlDbType.NChar).Value = itemContentCode;
                     SqlDataReader rdrICC = mySQLICC.ExecuteReader();
                     while (rdrICC.Read())
@@ -173,7 +170,6 @@ namespace PhanMemNoiSoi
             }
             catch(Exception ex)
             {
-                Log.Instance.LogMessageToFile(ex.ToString());
             }
             //remove end character
             if (data.EndsWith(","))
@@ -218,7 +214,7 @@ namespace PhanMemNoiSoi
                 }
             }
             rp = new ReportWord();
-            
+            rp.openFile();
             //check number image select
             int numImg = 0;
             for (int i = 0; i < listImage.Items.Count; i++)
@@ -228,19 +224,19 @@ namespace PhanMemNoiSoi
                     numImg++;
                 }
             }
-            if(numImg == 0)
+            if (numImg == 0)
             {
                 DialogResult result = MessageBox.Show("Bạn chưa chọn ảnh. Bạn có muốn tiếp tục xem báo cáo?", "Thông báo",
                                 MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                if(result == DialogResult.Cancel)
+                if (result == DialogResult.Cancel)
                 {
                     return;
                 }
             }
-            rp.openFile();
+
             fillReport(rp, numImg);
             string tmp = Log.Instance.GetTempPath() + "tmp.docx";
-            rp.saveFile(tmp, true);
+            rp.saveFile(tmp, true);           
         }
 
         private void fillReport(ReportWord rp, int rpMode)
@@ -297,8 +293,6 @@ namespace PhanMemNoiSoi
                     }
                 }
             }
-            
-            //insertImage();
             rp.insertText("ThongTin", result);
             rp.insertText("Date", DateTime.Now.Day.ToString());
             rp.insertText("Month", DateTime.Now.Month.ToString());

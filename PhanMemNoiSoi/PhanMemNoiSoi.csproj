@@ -454,6 +454,8 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\up.png" />
+    <None Include="Resources\loading_apple.gif" />
     <None Include="Resources\Exit.png" />
     <None Include="Resources\down.png" />
     <None Include="Resources\key.gif.gif" />

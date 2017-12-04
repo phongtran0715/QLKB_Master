@@ -91,7 +91,6 @@ namespace PhanMemNoiSoi
             {
                 Console.WriteLine("ERROR : ");
                 Console.WriteLine(ex.ToString());
-                Log.Instance.LogMessageToFile(ex.ToString());
             }
             return false;
         }
@@ -113,7 +112,6 @@ namespace PhanMemNoiSoi
                 }
                 catch (System.Exception ex)
                 {
-                    Log.Instance.LogMessageToFile(ex.ToString());
                     Console.Write(ex.ToString());
                 }
             }
@@ -178,7 +176,6 @@ namespace PhanMemNoiSoi
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-                Log.Instance.LogMessageToFile(ex.ToString());
             }
             finally
             {
@@ -207,7 +204,6 @@ namespace PhanMemNoiSoi
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-                Log.Instance.LogMessageToFile(ex.ToString());
             }
             finally
             {
