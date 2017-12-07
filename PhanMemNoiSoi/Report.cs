@@ -41,7 +41,6 @@ namespace PhanMemNoiSoi
             this.imagePath = imagePath;
             this.checkId = checkId;
             // Load image from disk
-            //imagesPatient = Directory.GetFiles(imagePath, "*.jpg", SearchOption.AllDirectories);
             var files = Directory.GetFiles(imagePath, "*.jpg", SearchOption.AllDirectories).OrderByDescending(d => new FileInfo(d).CreationTime);
             imagesPatient = files.ToArray();
             //add to imageList
@@ -57,6 +56,7 @@ namespace PhanMemNoiSoi
                 ListViewItem item = new ListViewItem();
                 item.ImageIndex = imageList1.Images.Count - 1;
                 item.Name = Path.GetFileName(imagesPatient[i]);
+                item.Text = (imagesPatient.Length - i).ToString();
                 listImage.Items.Add(item);
             }
             lbNumImgChecked.Text = "0 ảnh đã chọn.";
@@ -96,7 +96,7 @@ namespace PhanMemNoiSoi
                 while (rdr.Read())
                 {
                     gbList[index] = new System.Windows.Forms.GroupBox();
-                    gbList[index].Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                    gbList[index].Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                     gbList[index].Location = new System.Drawing.Point(8, 23 + index * 80);
                     gbList[index].Name = rdr["ItemCode"].ToString();
                     gbList[index].Size = new System.Drawing.Size(groupBox1.Width * 98 / 100, 76);
@@ -120,6 +120,7 @@ namespace PhanMemNoiSoi
                     gbList[index].Controls.Add(txtList[index]);
                     txtList[index].ScrollBars = System.Windows.Forms.ScrollBars.Both;
                     txtList[index].MouseClick += new System.Windows.Forms.MouseEventHandler(textbox_MouseClick);
+                    txtList[index].ForeColor = Color.Blue;
 
                     contentShowRp[index] = rdr["Content"].ToString();
                     //increase index for next round

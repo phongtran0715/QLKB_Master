@@ -166,7 +166,7 @@
             this.btnTatCa.Name = "btnTatCa";
             this.btnTatCa.Size = new System.Drawing.Size(98, 35);
             this.btnTatCa.TabIndex = 14;
-            this.btnTatCa.Text = "Tất cả";
+            this.btnTatCa.Text = "   Tất cả";
             this.btnTatCa.UseVisualStyleBackColor = true;
             this.btnTatCa.Click += new System.EventHandler(this.btnTatCa_Click);
             // 
@@ -233,14 +233,14 @@
             // 
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExit.Cursor = System.Windows.Forms.Cursors.Default;
-            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExit.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
             this.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnExit.Location = new System.Drawing.Point(713, 641);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(98, 35);
             this.btnExit.TabIndex = 12;
-            this.btnExit.Text = "Thoát";
+            this.btnExit.Text = "    Thoát";
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.button4_Click);
             // 

@@ -164,9 +164,18 @@ namespace PhanMemNoiSoi
             //check base folder is exist
             if (!Directory.Exists(BASE_IMG_FOLDER))
             {
-                BASE_IMG_FOLDER = Properties.Settings.Default.defaultImgFolder;
-                System.IO.Directory.CreateDirectory(BASE_IMG_FOLDER);
-                Properties.Settings.Default.imageFolder = BASE_IMG_FOLDER;
+                try
+                {
+                    BASE_IMG_FOLDER = Properties.Settings.Default.imageFolder;
+                    System.IO.Directory.CreateDirectory(BASE_IMG_FOLDER);
+                    Properties.Settings.Default.imageFolder = BASE_IMG_FOLDER;
+                }catch(Exception ex)
+                {
+                    MessageBox.Show("Không thể khởi tạo thưu mục lưu ảnh :" + BASE_IMG_FOLDER + ".\n Vui lòng thay đổi cài đặt thư mục lưu ảnh", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                
             }
             //check month folder
             folderImgPath = BASE_IMG_FOLDER + "\\"
@@ -175,7 +184,15 @@ namespace PhanMemNoiSoi
             bool exists = System.IO.Directory.Exists(folderImgPath);
             if (!exists)
             {
-                System.IO.Directory.CreateDirectory(folderImgPath);
+                try
+                {
+                    System.IO.Directory.CreateDirectory(folderImgPath);
+                }catch(Exception es)
+                {
+                    MessageBox.Show("Không thể khởi tạo thưu mục lưu ảnh :" + BASE_IMG_FOLDER + ".\n Vui lòng thay đổi cài đặt thư mục lưu ảnh", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
             }
             //check day folder
             folderImgPath += "\\" + DateTime.Today.Day.ToString();
@@ -189,7 +206,16 @@ namespace PhanMemNoiSoi
             exists = System.IO.Directory.Exists(folderImgPath);
             if (!exists)
             {
-                System.IO.Directory.CreateDirectory(folderImgPath);
+                try
+                {
+                    System.IO.Directory.CreateDirectory(folderImgPath);
+                }catch(Exception ex)
+                {
+                    MessageBox.Show("Không thể khởi tạo thưu mục lưu ảnh :" + BASE_IMG_FOLDER + ".\n Vui lòng thay đổi cài đặt thư mục lưu ảnh", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                
             }
         }
         private void txtTuoiBn_KeyPress(object sender, KeyPressEventArgs e)
@@ -326,6 +352,13 @@ namespace PhanMemNoiSoi
 
             //select last row in dgv
             int lastRowIndex = dgvBenhNhan.Rows.Count - 1;
+            if(lastRowIndex == 0)
+            {
+                btnChiTiet.Enabled = false;
+            }else
+            {
+                btnChiTiet.Enabled = true;
+            }
             currRowIndex = lastRowIndex;
             selectRowInDgv(dgvBenhNhan, lastRowIndex);
             helper.setRowNumberDgvSick(dgvBenhNhan);
@@ -346,6 +379,7 @@ namespace PhanMemNoiSoi
                 btnXoaBN.Enabled = false;
                 btnThemMoi.Enabled = false;
                 btnChupHinh.Enabled = false;
+                btnChiTiet.Enabled = false;
                 return;
             }
 
@@ -433,7 +467,7 @@ namespace PhanMemNoiSoi
                         + patientId + "\\";
             if (!Directory.Exists(folderImgPath))
             {
-                folderImgPath = "D:\\QLKB" + "\\" + DateTime.Today.Year.ToString()
+                folderImgPath = BASE_IMG_FOLDER + "\\" + DateTime.Today.Year.ToString()
                                         + DateTime.Today.Month + "\\"
                                         + DateTime.Today.Day + "\\"
                                         + patientId + "\\";
@@ -454,12 +488,18 @@ namespace PhanMemNoiSoi
             {
                 return;
             }
-
-            currRowIndex = dgvBenhNhan.SelectedRows[selectedRowCount - 1].Index;
-            string num = dgvBenhNhan.Rows[currRowIndex].Cells["SickNum"].Value.ToString().Trim();
-            PatientDetail patienDetail = new PatientDetail(num);
-            patienDetail.RefreshDgv += updateDgv;
-            patienDetail.ShowDialog();
+            try
+            {
+                currRowIndex = dgvBenhNhan.SelectedRows[selectedRowCount - 1].Index;
+                string num = dgvBenhNhan.Rows[currRowIndex].Cells["SickNum"].Value.ToString().Trim();
+                PatientDetail patienDetail = new PatientDetail(num);
+                patienDetail.RefreshDgv += updateDgv;
+                patienDetail.ShowDialog();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
 
         private void updateDgv(string name, string age, string address,

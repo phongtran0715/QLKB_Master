@@ -57,6 +57,7 @@ namespace PhanMemNoiSoi
             dgvCheck.Columns[1].Width = this.dgvCheck.Size.Width;
 
             helper.setRowNumber(dgvCheck);
+            helper.setRowNumber(dgvCheckContentDetail);
         }
 
         private void Init()
@@ -79,19 +80,19 @@ namespace PhanMemNoiSoi
             //Init data grid view
             this.dgvCheck.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 12f);
             this.dgvCheck.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 12f);
-            this.dgCheckContentDetail.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 12f);
-            this.dgCheckContentDetail.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 12f);
+            this.dgvCheckContentDetail.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 12f);
+            this.dgvCheckContentDetail.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 12f);
         }
 
         private void dgDanhMuc_SelectionChanged(object sender, EventArgs e)
         {
             //clear noi dung dgv
-            int countRow = dgCheckContentDetail.Rows.Count;
+            int countRow = dgvCheckContentDetail.Rows.Count;
             if (countRow > 0)
             {
-                dgCheckContentDetail.DataSource = null;
-                dgCheckContentDetail.Rows.Clear();
-                dgCheckContentDetail.Refresh();
+                dgvCheckContentDetail.DataSource = null;
+                dgvCheckContentDetail.Rows.Clear();
+                dgvCheckContentDetail.Refresh();
             }
 
             if (dgvCheck.CurrentRow == null)
@@ -124,14 +125,15 @@ namespace PhanMemNoiSoi
             bsAdap[(int)bindSource.DTA_CONTENT_DETAIL].DataSource = tbAdap[(int)dataTable.DTA_CONTENT_DETAIL];
 
             // Resize the DataGridView columns to fit the newly loaded content.
-            dgCheckContentDetail.AutoResizeColumns(
+            dgvCheckContentDetail.AutoResizeColumns(
                 DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
 
-            dgCheckContentDetail.DataSource = bsAdap[(int)bindSource.DTA_CONTENT_DETAIL];
-            dgCheckContentDetail.Columns[0].Visible = false;
-            dgCheckContentDetail.Columns[1].HeaderText = "Nội Dung";
-            dgCheckContentDetail.Columns[1].Width = this.dgCheckContentDetail.Size.Width;
+            dgvCheckContentDetail.DataSource = bsAdap[(int)bindSource.DTA_CONTENT_DETAIL];
+            dgvCheckContentDetail.Columns[0].Visible = false;
+            dgvCheckContentDetail.Columns[1].HeaderText = "Nội Dung";
+            dgvCheckContentDetail.Columns[1].Width = this.dgvCheckContentDetail.Size.Width;
             helper.setRowNumber(dgvCheck);
+            helper.setRowNumber(dgvCheckContentDetail);
         }
 
         private void btnSua_DM_Click(object sender, EventArgs e)
@@ -226,13 +228,13 @@ namespace PhanMemNoiSoi
         private void updateDgvNoiDung(string msg, string code)
         {
             int selectedRowCount =
-            dgCheckContentDetail.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            dgvCheckContentDetail.Rows.GetRowCount(DataGridViewElementStates.Selected);
             if (selectedRowCount <= 0)
             {
                 return;
             }
 
-            int currRowIndexCheck = dgCheckContentDetail.SelectedRows[selectedRowCount - 1].Index;
+            int currRowIndexCheck = dgvCheckContentDetail.SelectedRows[selectedRowCount - 1].Index;
             //update database
             try
             {
@@ -250,7 +252,7 @@ namespace PhanMemNoiSoi
                 return;
             }
             //update dgv
-            DataGridViewRow newDataRow = dgCheckContentDetail.Rows[currRowIndexCheck];
+            DataGridViewRow newDataRow = dgvCheckContentDetail.Rows[currRowIndexCheck];
             newDataRow.Cells[0].Value = code;
             newDataRow.Cells[1].Value = msg;
         }
@@ -293,8 +295,8 @@ namespace PhanMemNoiSoi
             }
             //update dgv
             tbAdap[(int)dataTable.DTA_CONTENT_DETAIL].Rows.Add(contentCode, msg);
-            dgCheckContentDetail.DataSource = tbAdap[(int)dataTable.DTA_CONTENT_DETAIL];
-            helper.setRowNumber(dgvCheck);
+            dgvCheckContentDetail.DataSource = tbAdap[(int)dataTable.DTA_CONTENT_DETAIL];
+            helper.setRowNumber(dgvCheckContentDetail);
         }
 
         private void btnThem_DM_Click(object sender, EventArgs e)
@@ -314,7 +316,7 @@ namespace PhanMemNoiSoi
             }
             int currRowIndexCheck = dgvCheck.SelectedRows[selectedRowCount - 1].Index;
             //check delete is valid
-            int countRowND = dgCheckContentDetail.Rows.Count;
+            int countRowND = dgvCheckContentDetail.Rows.Count;
             if (countRowND > 0)
             {
                 MessageBox.Show("Không thể xóa danh mục này! \n Danh mục này có chứa nội dung con bên trong!",
@@ -362,7 +364,7 @@ namespace PhanMemNoiSoi
         private void btnXoa_ND_Click(object sender, EventArgs e)
         {
             int selectedRowCount =
-            dgCheckContentDetail.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            dgvCheckContentDetail.Rows.GetRowCount(DataGridViewElementStates.Selected);
             if (selectedRowCount <= 0)
             {
                 return;
@@ -375,9 +377,9 @@ namespace PhanMemNoiSoi
                 return;
             }
 
-            int currRowIndexCheck = dgCheckContentDetail.SelectedRows[selectedRowCount - 1].Index;
-            string contentCode = dgCheckContentDetail.Rows[currRowIndexCheck].Cells[0].Value.ToString().Trim();
-            string content = dgCheckContentDetail.Rows[currRowIndexCheck].Cells[1].Value.ToString().Trim();
+            int currRowIndexCheck = dgvCheckContentDetail.SelectedRows[selectedRowCount - 1].Index;
+            string contentCode = dgvCheckContentDetail.Rows[currRowIndexCheck].Cells[0].Value.ToString().Trim();
+            string content = dgvCheckContentDetail.Rows[currRowIndexCheck].Cells[1].Value.ToString().Trim();
 
             //delete from database
             try
@@ -399,9 +401,9 @@ namespace PhanMemNoiSoi
             // delete from data grid view
             tbAdap[(int)dataTable.DTA_CONTENT_DETAIL].Rows.RemoveAt(currRowIndexCheck);
             bsAdap[(int)bindSource.DTA_CONTENT_DETAIL].DataSource = tbAdap[(int)dataTable.DTA_CONTENT_DETAIL];
-            dgCheckContentDetail.DataSource = bsAdap[(int)bindSource.DTA_CONTENT_DETAIL];
-            dgCheckContentDetail.Update();
-            dgCheckContentDetail.Refresh();
+            dgvCheckContentDetail.DataSource = bsAdap[(int)bindSource.DTA_CONTENT_DETAIL];
+            dgvCheckContentDetail.Update();
+            dgvCheckContentDetail.Refresh();
             helper.setRowNumber(dgvCheck);
         }
 
@@ -415,16 +417,16 @@ namespace PhanMemNoiSoi
         private void btnSua_ND_Click(object sender, EventArgs e)
         {
             int selectedRowCount =
-                dgCheckContentDetail.Rows.GetRowCount(DataGridViewElementStates.Selected);
+                dgvCheckContentDetail.Rows.GetRowCount(DataGridViewElementStates.Selected);
             if (selectedRowCount <= 0)
             {
                 MessageBox.Show("now row select");
                 return;
             }
 
-            int currRowIndexCheckContent = dgCheckContentDetail.SelectedRows[selectedRowCount - 1].Index;
-            string code = dgCheckContentDetail.Rows[currRowIndexCheckContent].Cells[0].Value.ToString().Trim();
-            string content = dgCheckContentDetail.Rows[currRowIndexCheckContent].Cells[1].Value.ToString().Trim();
+            int currRowIndexCheckContent = dgvCheckContentDetail.SelectedRows[selectedRowCount - 1].Index;
+            string code = dgvCheckContentDetail.Rows[currRowIndexCheckContent].Cells[0].Value.ToString().Trim();
+            string content = dgvCheckContentDetail.Rows[currRowIndexCheckContent].Cells[1].Value.ToString().Trim();
 
             EditGlossaryItemContent glossItemContentFr = new EditGlossaryItemContent(content, code);
             //call back function update data grid
@@ -454,16 +456,16 @@ namespace PhanMemNoiSoi
         {
             //dgNoiDung.Rows[0].Selected = true;
             //currRowIndexND = 0;
-            foreach (DataGridViewColumn column in dgCheckContentDetail.Columns)
+            foreach (DataGridViewColumn column in dgvCheckContentDetail.Columns)
             {
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
-            for (int i = 0; i < dgCheckContentDetail.Columns.Count; i++)
+            for (int i = 0; i < dgvCheckContentDetail.Columns.Count; i++)
             {
-                dgCheckContentDetail.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                if (i == dgCheckContentDetail.ColumnCount - 1)
+                dgvCheckContentDetail.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                if (i == dgvCheckContentDetail.ColumnCount - 1)
                 {
-                    dgCheckContentDetail.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    dgvCheckContentDetail.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 }
             }
         }
@@ -540,7 +542,7 @@ namespace PhanMemNoiSoi
             dgvInfo.DataSource = bsAdap[(int)bindSource.DTA_INFO_REPORT];
             dgvInfo.Columns["ItemCode"].Visible = false;
             dgvInfo.Columns["Content"].HeaderText = "Danh Mục";
-            dgvInfo.Columns["ShowNum"].HeaderText = "Thứ Tự";
+            dgvInfo.Columns["ShowNum"].HeaderText = "STT";
             dgvInfo.Columns["ShowNum"].DisplayIndex = 0;
         }
 
@@ -887,8 +889,8 @@ namespace PhanMemNoiSoi
             if (e.RowIndex != -1)
             {
                 int currRowIndexCheckContent = e.RowIndex;
-                string code = dgCheckContentDetail.Rows[currRowIndexCheckContent].Cells[0].Value.ToString().Trim();
-                string content = dgCheckContentDetail.Rows[currRowIndexCheckContent].Cells[1].Value.ToString().Trim();
+                string code = dgvCheckContentDetail.Rows[currRowIndexCheckContent].Cells[0].Value.ToString().Trim();
+                string content = dgvCheckContentDetail.Rows[currRowIndexCheckContent].Cells[1].Value.ToString().Trim();
 
                 EditGlossaryItemContent glossItemContentFr = new EditGlossaryItemContent(content, code);
                 //call back function update data grid

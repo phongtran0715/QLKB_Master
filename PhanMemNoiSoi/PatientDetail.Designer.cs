@@ -148,86 +148,86 @@
             // 
             // btnOK
             // 
-            this.btnOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOK.Image = ((System.Drawing.Image)(resources.GetObject("btnOK.Image")));
             this.btnOK.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnOK.Location = new System.Drawing.Point(373, 362);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(98, 35);
-            this.btnOK.TabIndex = 11;
-            this.btnOK.Text = " Lưu";
+            this.btnOK.TabIndex = 12;
+            this.btnOK.Text = "    Lưu";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // btnCancle
             // 
-            this.btnCancle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancle.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
             this.btnCancle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCancle.Location = new System.Drawing.Point(499, 362);
             this.btnCancle.Name = "btnCancle";
             this.btnCancle.Size = new System.Drawing.Size(98, 35);
-            this.btnCancle.TabIndex = 12;
-            this.btnCancle.Text = "Thoát";
+            this.btnCancle.TabIndex = 13;
+            this.btnCancle.Text = "    Thoát";
             this.btnCancle.UseVisualStyleBackColor = true;
             this.btnCancle.Click += new System.EventHandler(this.btnCancle_Click);
             // 
             // txtName
             // 
-            this.txtName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtName.Location = new System.Drawing.Point(99, 43);
             this.txtName.MaxLength = 69;
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(181, 24);
-            this.txtName.TabIndex = 0;
+            this.txtName.Size = new System.Drawing.Size(181, 26);
+            this.txtName.TabIndex = 1;
             // 
             // txtAddr
             // 
-            this.txtAddr.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAddr.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAddr.Location = new System.Drawing.Point(104, 215);
             this.txtAddr.MaxLength = 99;
             this.txtAddr.Name = "txtAddr";
-            this.txtAddr.Size = new System.Drawing.Size(492, 24);
-            this.txtAddr.TabIndex = 9;
+            this.txtAddr.Size = new System.Drawing.Size(492, 26);
+            this.txtAddr.TabIndex = 10;
             // 
             // txtNote
             // 
-            this.txtNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNote.Location = new System.Drawing.Point(105, 245);
             this.txtNote.MaxLength = 199;
             this.txtNote.Multiline = true;
             this.txtNote.Name = "txtNote";
             this.txtNote.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtNote.Size = new System.Drawing.Size(492, 111);
-            this.txtNote.TabIndex = 10;
+            this.txtNote.TabIndex = 11;
             // 
             // txtAge
             // 
-            this.txtAge.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAge.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAge.Location = new System.Drawing.Point(99, 84);
             this.txtAge.Name = "txtAge";
-            this.txtAge.Size = new System.Drawing.Size(181, 24);
-            this.txtAge.TabIndex = 1;
+            this.txtAge.Size = new System.Drawing.Size(181, 26);
+            this.txtAge.TabIndex = 2;
             this.txtAge.TextChanged += new System.EventHandler(this.txtAge_TextChanged);
             this.txtAge.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAge_KeyPress);
             // 
             // txtTelephone
             // 
-            this.txtTelephone.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTelephone.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTelephone.Location = new System.Drawing.Point(416, 43);
             this.txtTelephone.MaxLength = 39;
             this.txtTelephone.Name = "txtTelephone";
-            this.txtTelephone.Size = new System.Drawing.Size(181, 24);
-            this.txtTelephone.TabIndex = 5;
+            this.txtTelephone.Size = new System.Drawing.Size(181, 26);
+            this.txtTelephone.TabIndex = 6;
             // 
             // txtInsuranceId
             // 
-            this.txtInsuranceId.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtInsuranceId.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtInsuranceId.Location = new System.Drawing.Point(415, 88);
             this.txtInsuranceId.MaxLength = 15;
             this.txtInsuranceId.Name = "txtInsuranceId";
-            this.txtInsuranceId.Size = new System.Drawing.Size(181, 24);
-            this.txtInsuranceId.TabIndex = 6;
+            this.txtInsuranceId.Size = new System.Drawing.Size(181, 26);
+            this.txtInsuranceId.TabIndex = 7;
             // 
             // dtCreateTime
             // 
@@ -241,16 +241,16 @@
             this.dtCreateTime.Location = new System.Drawing.Point(99, 167);
             this.dtCreateTime.Name = "dtCreateTime";
             this.dtCreateTime.Size = new System.Drawing.Size(181, 26);
-            this.dtCreateTime.TabIndex = 9;
+            this.dtCreateTime.TabIndex = 5;
             // 
             // txtJob
             // 
-            this.txtJob.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtJob.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtJob.Location = new System.Drawing.Point(415, 131);
             this.txtJob.MaxLength = 49;
             this.txtJob.Name = "txtJob";
-            this.txtJob.Size = new System.Drawing.Size(181, 24);
-            this.txtJob.TabIndex = 7;
+            this.txtJob.Size = new System.Drawing.Size(181, 26);
+            this.txtJob.TabIndex = 8;
             // 
             // rdWomen
             // 
@@ -260,7 +260,7 @@
             this.rdWomen.Location = new System.Drawing.Point(203, 129);
             this.rdWomen.Name = "rdWomen";
             this.rdWomen.Size = new System.Drawing.Size(47, 24);
-            this.rdWomen.TabIndex = 3;
+            this.rdWomen.TabIndex = 4;
             this.rdWomen.TabStop = true;
             this.rdWomen.Text = "Nữ";
             this.rdWomen.UseVisualStyleBackColor = true;
@@ -272,18 +272,18 @@
             this.rdMen.Location = new System.Drawing.Point(119, 129);
             this.rdMen.Name = "rdMen";
             this.rdMen.Size = new System.Drawing.Size(60, 24);
-            this.rdMen.TabIndex = 2;
+            this.rdMen.TabIndex = 3;
             this.rdMen.Text = "Nam";
             this.rdMen.UseVisualStyleBackColor = true;
             // 
             // txtCauseCheck
             // 
-            this.txtCauseCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCauseCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCauseCheck.Location = new System.Drawing.Point(416, 172);
             this.txtCauseCheck.MaxLength = 99;
             this.txtCauseCheck.Name = "txtCauseCheck";
-            this.txtCauseCheck.Size = new System.Drawing.Size(180, 24);
-            this.txtCauseCheck.TabIndex = 8;
+            this.txtCauseCheck.Size = new System.Drawing.Size(180, 26);
+            this.txtCauseCheck.TabIndex = 9;
             // 
             // label5
             // 
@@ -308,13 +308,13 @@
             // txtPatientId
             // 
             this.txtPatientId.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.txtPatientId.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPatientId.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPatientId.Location = new System.Drawing.Point(99, 9);
             this.txtPatientId.MaxLength = 69;
             this.txtPatientId.Name = "txtPatientId";
             this.txtPatientId.ReadOnly = true;
-            this.txtPatientId.Size = new System.Drawing.Size(181, 24);
-            this.txtPatientId.TabIndex = 35;
+            this.txtPatientId.Size = new System.Drawing.Size(181, 26);
+            this.txtPatientId.TabIndex = 0;
             // 
             // PatientDetail
             // 

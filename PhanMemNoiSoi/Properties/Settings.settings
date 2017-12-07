@@ -15,10 +15,7 @@
       <Value Profile="(Default)">2</Value>
     </Setting>
     <Setting Name="imageFolder" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="defaultImgFolder" Type="System.String" Scope="User">
-      <Value Profile="(Default)">D:\\QLKB</Value>
+      <Value Profile="(Default)">D:\QLKB</Value>
     </Setting>
     <Setting Name="rememberAccount" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>

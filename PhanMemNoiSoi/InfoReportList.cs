@@ -10,6 +10,7 @@ namespace PhanMemNoiSoi
         private SqlDataAdapter dta = new SqlDataAdapter();
         private BindingSource bindSource = new BindingSource();
         DataTable table = new DataTable();
+        Helper helper = new Helper();
 
         public delegate void UpdateDataHandler(Dictionary<string, string> matrix);
         public UpdateDataHandler updateListInfo;
@@ -52,6 +53,7 @@ namespace PhanMemNoiSoi
                 chk.Value = chk.FalseValue;
             }
             //finish init check box
+            helper.setRowNumber(dgvInfoList);
         }
 
         private void button2_Click(object sender, System.EventArgs e)

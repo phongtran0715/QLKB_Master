@@ -181,7 +181,7 @@
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(98, 35);
             this.btnOk.TabIndex = 2;
-            this.btnOk.Text = "OK";
+            this.btnOk.Text = "  OK";
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -195,7 +195,7 @@
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(98, 35);
             this.btnExit.TabIndex = 3;
-            this.btnExit.Text = "Hủy";
+            this.btnExit.Text = "  Hủy";
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnHuy_Click);
             // 

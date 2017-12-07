@@ -83,7 +83,7 @@
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(98, 35);
             this.btnThoat.TabIndex = 14;
-            this.btnThoat.Text = "Thoát";
+            this.btnThoat.Text = "    Thoát";
             this.btnThoat.UseVisualStyleBackColor = true;
             this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
@@ -96,7 +96,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(98, 35);
             this.button1.TabIndex = 4;
-            this.button1.Text = "OK";
+            this.button1.Text = "   OK";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 

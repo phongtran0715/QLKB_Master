@@ -44,6 +44,18 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txt4Heigh = new System.Windows.Forms.TextBox();
+            this.txt4Width = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txt2Heigh = new System.Windows.Forms.TextBox();
+            this.txt2Width = new System.Windows.Forms.TextBox();
             this.cbDateFormat = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -56,18 +68,6 @@
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancle = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
-            this.txt4Heigh = new System.Windows.Forms.TextBox();
-            this.txt4Width = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txt2Heigh = new System.Windows.Forms.TextBox();
-            this.txt2Width = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -263,125 +263,23 @@
             this.tabPage1.Text = "Cài đặt nâng cao";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // cbDateFormat
+            // label16
             // 
-            this.cbDateFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbDateFormat.FormattingEnabled = true;
-            this.cbDateFormat.Items.AddRange(new object[] {
-            "dd/MM/yyyy",
-            "yyyy/MM/dd",
-            "d/M/yy",
-            "dd-MM-yyyy",
-            "yyyy-MM-dd",
-            "d-M-yy"});
-            this.cbDateFormat.Location = new System.Drawing.Point(207, 160);
-            this.cbDateFormat.Name = "cbDateFormat";
-            this.cbDateFormat.Size = new System.Drawing.Size(202, 28);
-            this.cbDateFormat.TabIndex = 11;
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(415, 303);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(44, 20);
+            this.label16.TabIndex = 26;
+            this.label16.Text = "point";
             // 
-            // label14
+            // label15
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(16, 163);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(165, 20);
-            this.label14.TabIndex = 10;
-            this.label14.Text = "Định dạng ngày tháng";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(301, 94);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(45, 20);
-            this.label12.TabIndex = 9;
-            this.label12.Text = "dòng";
-            // 
-            // txtMaxRowDisplay
-            // 
-            this.txtMaxRowDisplay.Enabled = false;
-            this.txtMaxRowDisplay.Location = new System.Drawing.Point(207, 88);
-            this.txtMaxRowDisplay.Name = "txtMaxRowDisplay";
-            this.txtMaxRowDisplay.Size = new System.Drawing.Size(71, 26);
-            this.txtMaxRowDisplay.TabIndex = 8;
-            this.txtMaxRowDisplay.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtMaxRowDisplay.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMaxRowDisplay_KeyPress);
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(16, 94);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(156, 20);
-            this.label13.TabIndex = 7;
-            this.label13.Text = "Dữ liệu hiển thị tối đa";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(301, 29);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(43, 20);
-            this.label11.TabIndex = 6;
-            this.label11.Text = "ngày";
-            // 
-            // txtMaxDayLog
-            // 
-            this.txtMaxDayLog.Enabled = false;
-            this.txtMaxDayLog.Location = new System.Drawing.Point(207, 23);
-            this.txtMaxDayLog.Name = "txtMaxDayLog";
-            this.txtMaxDayLog.Size = new System.Drawing.Size(71, 26);
-            this.txtMaxDayLog.TabIndex = 5;
-            this.txtMaxDayLog.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtMaxDayLog.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMaxDayLog_KeyPress);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(15, 29);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(166, 20);
-            this.label10.TabIndex = 4;
-            this.label10.Text = "Thồi gian lưu log tối đa";
-            // 
-            // btnOk
-            // 
-            this.btnOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOk.Image = global::PhanMemNoiSoi.Properties.Resources.checked_24x24;
-            this.btnOk.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnOk.Location = new System.Drawing.Point(293, 462);
-            this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(98, 35);
-            this.btnOk.TabIndex = 16;
-            this.btnOk.Text = "OK";
-            this.btnOk.UseVisualStyleBackColor = true;
-            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
-            // 
-            // btnCancle
-            // 
-            this.btnCancle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancle.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
-            this.btnCancle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancle.Location = new System.Drawing.Point(397, 462);
-            this.btnCancle.Name = "btnCancle";
-            this.btnCancle.Size = new System.Drawing.Size(98, 35);
-            this.btnCancle.TabIndex = 15;
-            this.btnCancle.Text = "Thoát";
-            this.btnCancle.UseVisualStyleBackColor = true;
-            this.btnCancle.Click += new System.EventHandler(this.btnCancle_Click);
-            // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Image = global::PhanMemNoiSoi.Properties.Resources.refresh_24x24;
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(110, 462);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(168, 35);
-            this.button1.TabIndex = 18;
-            this.button1.Text = "     Cấu hình mặc định";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(415, 250);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(44, 20);
+            this.label15.TabIndex = 25;
+            this.label15.Text = "point";
             // 
             // label9
             // 
@@ -473,23 +371,123 @@
             this.txt2Width.TabIndex = 15;
             this.txt2Width.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // label15
+            // cbDateFormat
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(415, 250);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(44, 20);
-            this.label15.TabIndex = 25;
-            this.label15.Text = "point";
+            this.cbDateFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbDateFormat.FormattingEnabled = true;
+            this.cbDateFormat.Items.AddRange(new object[] {
+            "dd/MM/yyyy",
+            "yyyy/MM/dd",
+            "d/M/yy",
+            "dd-MM-yyyy",
+            "yyyy-MM-dd",
+            "d-M-yy"});
+            this.cbDateFormat.Location = new System.Drawing.Point(207, 160);
+            this.cbDateFormat.Name = "cbDateFormat";
+            this.cbDateFormat.Size = new System.Drawing.Size(202, 28);
+            this.cbDateFormat.TabIndex = 11;
             // 
-            // label16
+            // label14
             // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(415, 303);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(44, 20);
-            this.label16.TabIndex = 26;
-            this.label16.Text = "point";
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(16, 163);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(165, 20);
+            this.label14.TabIndex = 10;
+            this.label14.Text = "Định dạng ngày tháng";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(301, 94);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(45, 20);
+            this.label12.TabIndex = 9;
+            this.label12.Text = "dòng";
+            // 
+            // txtMaxRowDisplay
+            // 
+            this.txtMaxRowDisplay.Location = new System.Drawing.Point(207, 88);
+            this.txtMaxRowDisplay.Name = "txtMaxRowDisplay";
+            this.txtMaxRowDisplay.Size = new System.Drawing.Size(71, 26);
+            this.txtMaxRowDisplay.TabIndex = 8;
+            this.txtMaxRowDisplay.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtMaxRowDisplay.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMaxRowDisplay_KeyPress);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(16, 94);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(156, 20);
+            this.label13.TabIndex = 7;
+            this.label13.Text = "Dữ liệu hiển thị tối đa";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(301, 29);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(43, 20);
+            this.label11.TabIndex = 6;
+            this.label11.Text = "ngày";
+            // 
+            // txtMaxDayLog
+            // 
+            this.txtMaxDayLog.Location = new System.Drawing.Point(207, 23);
+            this.txtMaxDayLog.Name = "txtMaxDayLog";
+            this.txtMaxDayLog.Size = new System.Drawing.Size(71, 26);
+            this.txtMaxDayLog.TabIndex = 5;
+            this.txtMaxDayLog.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtMaxDayLog.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMaxDayLog_KeyPress);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(15, 29);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(166, 20);
+            this.label10.TabIndex = 4;
+            this.label10.Text = "Thồi gian lưu log tối đa";
+            // 
+            // btnOk
+            // 
+            this.btnOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOk.Image = global::PhanMemNoiSoi.Properties.Resources.checked_24x24;
+            this.btnOk.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnOk.Location = new System.Drawing.Point(293, 462);
+            this.btnOk.Name = "btnOk";
+            this.btnOk.Size = new System.Drawing.Size(98, 35);
+            this.btnOk.TabIndex = 16;
+            this.btnOk.Text = "   OK";
+            this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
+            // 
+            // btnCancle
+            // 
+            this.btnCancle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancle.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
+            this.btnCancle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCancle.Location = new System.Drawing.Point(397, 462);
+            this.btnCancle.Name = "btnCancle";
+            this.btnCancle.Size = new System.Drawing.Size(98, 35);
+            this.btnCancle.TabIndex = 15;
+            this.btnCancle.Text = "    Thoát";
+            this.btnCancle.UseVisualStyleBackColor = true;
+            this.btnCancle.Click += new System.EventHandler(this.btnCancle_Click);
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Image = global::PhanMemNoiSoi.Properties.Resources.refresh_24x24;
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(110, 462);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(168, 35);
+            this.button1.TabIndex = 18;
+            this.button1.Text = "     Cấu hình mặc định";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // SystemConfiguration
             // 

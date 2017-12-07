@@ -178,7 +178,7 @@
             this.btnDeleteSick.Name = "btnDeleteSick";
             this.btnDeleteSick.Size = new System.Drawing.Size(155, 35);
             this.btnDeleteSick.TabIndex = 13;
-            this.btnDeleteSick.Text = "   Xóa bệnh nhân";
+            this.btnDeleteSick.Text = "    Xóa bệnh nhân";
             this.btnDeleteSick.UseVisualStyleBackColor = true;
             this.btnDeleteSick.Click += new System.EventHandler(this.btnDeleteSick_Click);
             // 
@@ -191,7 +191,7 @@
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(98, 35);
             this.btnXoa.TabIndex = 15;
-            this.btnXoa.Text = "   Tạo lại";
+            this.btnXoa.Text = "    Tạo lại";
             this.btnXoa.UseVisualStyleBackColor = true;
             this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
@@ -204,7 +204,7 @@
             this.btnTatCa.Name = "btnTatCa";
             this.btnTatCa.Size = new System.Drawing.Size(98, 35);
             this.btnTatCa.TabIndex = 14;
-            this.btnTatCa.Text = "Tất cả";
+            this.btnTatCa.Text = "   Tất cả";
             this.btnTatCa.UseVisualStyleBackColor = true;
             this.btnTatCa.Click += new System.EventHandler(this.btnTatCa_Click);
             // 
@@ -570,7 +570,7 @@
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(108, 35);
             this.btnExit.TabIndex = 12;
-            this.btnExit.Text = "Thoát";
+            this.btnExit.Text = "    Thoát";
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.button4_Click);
             // 

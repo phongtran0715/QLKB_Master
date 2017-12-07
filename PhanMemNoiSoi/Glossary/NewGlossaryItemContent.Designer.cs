@@ -33,7 +33,6 @@
             this.txtNoiDung = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.lbCode = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancle = new System.Windows.Forms.Button();
             this.gbParent.SuspendLayout();
@@ -44,7 +43,6 @@
             this.gbParent.Controls.Add(this.txtNoiDung);
             this.gbParent.Controls.Add(this.label3);
             this.gbParent.Controls.Add(this.lbCode);
-            this.gbParent.Controls.Add(this.label1);
             this.gbParent.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbParent.Location = new System.Drawing.Point(5, 5);
             this.gbParent.Name = "gbParent";
@@ -67,7 +65,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(10, 55);
+            this.label3.Location = new System.Drawing.Point(9, 36);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(72, 20);
             this.label3.TabIndex = 2;
@@ -82,39 +80,29 @@
             this.lbCode.Size = new System.Drawing.Size(0, 18);
             this.lbCode.TabIndex = 1;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(10, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 20);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Code";
-            // 
             // btnOK
             // 
-            this.btnOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOK.Image = global::PhanMemNoiSoi.Properties.Resources.checked_24x24;
             this.btnOK.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnOK.Location = new System.Drawing.Point(221, 168);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(98, 35);
             this.btnOK.TabIndex = 1;
-            this.btnOK.Text = "OK";
+            this.btnOK.Text = "    OK";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // btnCancle
             // 
-            this.btnCancle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancle.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
             this.btnCancle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCancle.Location = new System.Drawing.Point(345, 168);
             this.btnCancle.Name = "btnCancle";
             this.btnCancle.Size = new System.Drawing.Size(98, 35);
             this.btnCancle.TabIndex = 2;
-            this.btnCancle.Text = "Thoát";
+            this.btnCancle.Text = "    Thoát";
             this.btnCancle.UseVisualStyleBackColor = true;
             this.btnCancle.Click += new System.EventHandler(this.btnCancle_Click);
             // 
@@ -145,7 +133,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox gbParent;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lbCode;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnOK;

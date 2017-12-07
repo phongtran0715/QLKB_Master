@@ -182,7 +182,7 @@
             this.btnCancle.Name = "btnCancle";
             this.btnCancle.Size = new System.Drawing.Size(98, 35);
             this.btnCancle.TabIndex = 5;
-            this.btnCancle.Text = "Thoát";
+            this.btnCancle.Text = "    Thoát";
             this.btnCancle.UseVisualStyleBackColor = true;
             this.btnCancle.Click += new System.EventHandler(this.btnCancle_Click);
             // 
@@ -195,7 +195,7 @@
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(98, 35);
             this.btnOk.TabIndex = 4;
-            this.btnOk.Text = "OK";
+            this.btnOk.Text = "  OK";
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 

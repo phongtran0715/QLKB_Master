@@ -49,7 +49,7 @@
             this.groupBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.groupBox1.Controls.Add(this.pnCheckRecord);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(5, -3);
+            this.groupBox1.Location = new System.Drawing.Point(5, 5);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(854, 612);
             this.groupBox1.TabIndex = 0;
@@ -70,7 +70,7 @@
             this.groupBox3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.groupBox3.Controls.Add(this.listImage);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(869, -3);
+            this.groupBox3.Location = new System.Drawing.Point(869, 5);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(254, 612);
             this.groupBox3.TabIndex = 7;
@@ -100,6 +100,7 @@
             // 
             this.lbNumImgChecked.AutoSize = true;
             this.lbNumImgChecked.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbNumImgChecked.ForeColor = System.Drawing.Color.Blue;
             this.lbNumImgChecked.Location = new System.Drawing.Point(868, 630);
             this.lbNumImgChecked.Name = "lbNumImgChecked";
             this.lbNumImgChecked.Size = new System.Drawing.Size(51, 20);
@@ -108,14 +109,14 @@
             // 
             // btnCancle
             // 
-            this.btnCancle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancle.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
             this.btnCancle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCancle.Location = new System.Drawing.Point(1022, 623);
             this.btnCancle.Name = "btnCancle";
             this.btnCancle.Size = new System.Drawing.Size(98, 35);
             this.btnCancle.TabIndex = 14;
-            this.btnCancle.Text = "Thoát";
+            this.btnCancle.Text = "    Thoát";
             this.btnCancle.UseVisualStyleBackColor = true;
             this.btnCancle.Click += new System.EventHandler(this.btnCancle_Click);
             // 

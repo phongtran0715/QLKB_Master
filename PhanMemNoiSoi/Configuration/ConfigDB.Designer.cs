@@ -173,7 +173,7 @@
             // 
             // button3
             // 
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
             this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button3.Location = new System.Drawing.Point(314, 277);
@@ -181,7 +181,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(98, 35);
             this.button3.TabIndex = 24;
-            this.button3.Text = "  Thoát";
+            this.button3.Text = "      Thoát";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 

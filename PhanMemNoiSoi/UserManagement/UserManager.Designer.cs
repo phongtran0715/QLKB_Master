@@ -156,7 +156,7 @@
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(98, 35);
             this.btnThoat.TabIndex = 9;
-            this.btnThoat.Text = "  Thoát";
+            this.btnThoat.Text = "    Thoát";
             this.btnThoat.UseVisualStyleBackColor = true;
             this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
@@ -234,7 +234,6 @@
             // 
             // btnSave
             // 
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.Image = global::PhanMemNoiSoi.Properties.Resources.save_24;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;

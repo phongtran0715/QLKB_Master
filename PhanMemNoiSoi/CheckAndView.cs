@@ -1,9 +1,11 @@
 ﻿using DirectX.Capture;
+using PhanMemNoiSoi.Properties;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace PhanMemNoiSoi
@@ -60,9 +62,19 @@ namespace PhanMemNoiSoi
             lbPhieu.Text = checkId;
             lbName.Text = pName;
             lbAge.Text = pAge;
-            lbCause.Text = cause;
+            if (cause != null)
+            {
+                if (cause.Length <= 25)
+                {
+                    lbCause.Text = cause;
+                }
+                else
+                {
+                    lbCause.Text = cause.Substring(0, 15);
+                }
+            }
             lbdoc.Text = Session.Instance.UserName;
-            lbDate.Text = DateTime.Today.ToShortDateString();
+            lbDate.Text = DateTime.Today.ToString(myHelper.getDateFormat(Settings.Default.datetimeFormat));
             #endregion
         }
 
@@ -172,7 +184,8 @@ namespace PhanMemNoiSoi
             //load exist image from disk
             if (Directory.Exists(folderImgPath))
             {
-                imagesPatient = Directory.GetFiles(folderImgPath, "*.jpg", SearchOption.AllDirectories);
+                var files = Directory.GetFiles(folderImgPath, "*.jpg", SearchOption.AllDirectories).OrderByDescending(d => new FileInfo(d).CreationTime);
+                imagesPatient = files.ToArray();
                 for (int i = 0; i < imagesPatient.Length; i++)
                 {
                     Image img = Image.FromFile(imagesPatient[i]);
@@ -180,6 +193,7 @@ namespace PhanMemNoiSoi
                     ListViewItem item = new ListViewItem();
                     item.ImageIndex = imageList1.Images.Count - 1;
                     item.Name = Path.GetFileName(imagesPatient[i]);
+                    item.Text = (imagesPatient.Length - i).ToString();
                     listImage.Items.Add(item);
                 }
             }
@@ -197,9 +211,8 @@ namespace PhanMemNoiSoi
                     {
                         foreach (ListViewItem eachItem in listImage.SelectedItems)
                         {
-                            int index = eachItem.Index;
                             //delete image on disk
-                            string filePath = folderImgPath + listImage.Items[index].Name;
+                            string filePath = folderImgPath + eachItem.Name;
                             Console.WriteLine(filePath);
                             if (File.Exists(filePath))
                             {
@@ -209,7 +222,12 @@ namespace PhanMemNoiSoi
                                     GC.WaitForPendingFinalizers();
                                     File.Delete(filePath);
                                     //delete from list view
-                                    listImage.Items.RemoveAt(index);
+                                    listImage.Items.Remove(eachItem);
+
+                                    for (int i = 0; i < listImage.Items.Count; i++)
+                                    {
+                                        listImage.Items[i].Text = (listImage.Items.Count - i).ToString();
+                                    }
                                 }
                                 catch (Exception ex)
                                 {
@@ -269,7 +287,6 @@ namespace PhanMemNoiSoi
 
         private void btnChupHinh_Click(object sender, EventArgs e)
         {
-            string ss = Properties.Settings.Default.captureType;
             if (string.Equals(Properties.Settings.Default.captureType, "capture_only"))
             {
                 captureFrame();
@@ -310,7 +327,7 @@ namespace PhanMemNoiSoi
                     item.ImageIndex = imageList1.Images.Count - 1;
                     string imageName = pId + "_" + System.Guid.NewGuid() + ".jpg";
                     item.Name = imageName;
-                    item.Text = DateTime.Now.ToString("hh:mm:ss");
+                    item.Text = (listImage.Items.Count + 1).ToString();
                     listImage.Items.Add(item);
 
                     //save image to disk
