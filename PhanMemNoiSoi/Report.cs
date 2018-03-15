@@ -1,5 +1,6 @@
 ﻿using PhanMemNoiSoi.Properties;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -31,6 +32,7 @@ namespace PhanMemNoiSoi
         const int TWO_IMAGE_REPORT = 2;
         const int FOUR_IMAGE_REPORT = 4;
         Size img2Size;
+        Size img3Size;
         Size img4Size;
         ReportWord rp;
 
@@ -56,14 +58,18 @@ namespace PhanMemNoiSoi
                 ListViewItem item = new ListViewItem();
                 item.ImageIndex = imageList1.Images.Count - 1;
                 item.Name = Path.GetFileName(imagesPatient[i]);
-                item.Text = (imagesPatient.Length - i).ToString();
                 listImage.Items.Add(item);
             }
             lbNumImgChecked.Text = "0 ảnh đã chọn.";
             img2Size.Width = Settings.Default.img2Width;
             img2Size.Height = Settings.Default.img2Height;
+            img3Size.Width = Settings.Default.img3Width;
+            img3Size.Height = Settings.Default.img3Height;
             img4Size.Width = Settings.Default.img4Width;
             img4Size.Height = Settings.Default.img4Heigh;
+            // Set KeyPreview object to true to allow the form to process 
+            // the key before the control with focus processes it.
+            this.KeyPreview = true;
         }
 
         private void Report_Load(object sender, EventArgs e)
@@ -215,7 +221,7 @@ namespace PhanMemNoiSoi
                 }
             }
             rp = new ReportWord();
-            rp.openFile();
+
             //check number image select
             int numImg = 0;
             for (int i = 0; i < listImage.Items.Count; i++)
@@ -235,6 +241,7 @@ namespace PhanMemNoiSoi
                 }
             }
 
+            rp.openTemplateFile();
             fillReport(rp, numImg);
             string tmp = Log.Instance.GetTempPath() + "tmp.docx";
             rp.saveFile(tmp, true);           
@@ -255,23 +262,25 @@ namespace PhanMemNoiSoi
             rp.insertText("Doctor", Session.Instance.UserName);
             rp.insertText("CreateTime", patientInfo.CreateTimeProperty.ToString(helper.getDateFormat(Settings.Default.datetimeFormat)));
 
-            string result = "";
+            string[,] data = new string[txtList.Length, 2];
             if(txtList != null)
             {
                 for (int i = 0; i < txtList.Length; i++)
                 {
-                    result += contentShowRp[i].Trim() + " : ";
-                    result += txtList[i].Text.Trim();
-                    if (result.Trim().EndsWith(","))
+                    string header = contentShowRp[i].Trim() + " : ";
+                    data[i, 0] = header;
+                    string content = txtList[i].Text.Trim();
+                    if (content.EndsWith(","))
                     {
-                        result = result.Remove(result.Length - 1);
+                        content = content.Remove(content.Length - 1);
                     }
-                    result += "\n";
+                    data[i, 1] = content;
                 }
             }
-            
+            rp.createTable("table", data);
+
             //insert image 
-            int numImgChecked = 0;
+            List<String> iList = new List<String>();
             if(listImage != null)
             {
                 int imgCount = listImage.Items.Count;
@@ -279,22 +288,12 @@ namespace PhanMemNoiSoi
                 {
                     if (listImage.Items[i].Checked)
                     {
-                        numImgChecked++;
-                        if (numImgChecked <= rpMode)
-                        {
-                            if(imgCount <= 2)
-                            {
-                                rp.insertImage(imagePath + listImage.Items[i].Name, numImgChecked, img2Size);
-                            }
-                            else
-                            {
-                                rp.insertImage(imagePath + listImage.Items[i].Name, numImgChecked, img4Size);
-                            }
-                        }
+                        iList.Add(imagePath + listImage.Items[i].Name);
                     }
                 }
             }
-            rp.insertText("ThongTin", result);
+            rp.createImageTable("images", iList);
+
             rp.insertText("Date", DateTime.Now.Day.ToString());
             rp.insertText("Month", DateTime.Now.Month.ToString());
             rp.insertText("Year", DateTime.Now.Year.ToString());
@@ -329,6 +328,15 @@ namespace PhanMemNoiSoi
             SqlCommand comd = new SqlCommand(sql, DBConnection.Instance.sqlConn);
             int count = Convert.ToInt32(comd.ExecuteScalar());
             return count;
+        }
+        private Image GetImage(string actfile)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                byte[] data = File.ReadAllBytes(actfile); // read the file, and release it
+                ms.Write(data, 0, data.Length);
+                return Image.FromStream(ms);
+            }
         }
     }
 }

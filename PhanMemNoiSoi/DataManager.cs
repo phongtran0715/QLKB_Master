@@ -7,8 +7,8 @@ namespace PhanMemNoiSoi
 {
     public partial class DataManager : SecureBaseForm
     {
-        public DataManager(IPrincipal userPrincipal) :
-            base(Session.Instance.UserRole, userPrincipal)
+        public DataManager(IPrincipal userPrincipal) 
+            :base(Session.Instance.UserRole, userPrincipal)
         {
             InitializeComponent();
         }

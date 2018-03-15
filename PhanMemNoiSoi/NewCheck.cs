@@ -2,7 +2,6 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 
@@ -21,6 +20,9 @@ namespace PhanMemNoiSoi
         {
             InitializeComponent();
             BASE_IMG_FOLDER = Properties.Settings.Default.imageFolder;
+            // Set KeyPreview object to true to allow the form to process 
+            // the key before the control with focus processes it.
+            this.KeyPreview = true;
         }
 
         private void button1_Click(object sender, EventArgs e)

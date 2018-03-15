@@ -50,10 +50,13 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.lbpBirthday = new System.Windows.Forms.Label();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.imageList = new System.Windows.Forms.ImageList(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.caifToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.itemOpenFolder = new System.Windows.Forms.ToolStripMenuItem();
+            this.aToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnSetFormSize = new System.Windows.Forms.ToolStripMenuItem();
+            this.càiĐặtKhungHìnhToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lbRecord = new System.Windows.Forms.Label();
             this.btnFullScreen = new System.Windows.Forms.Button();
             this.pbRecordIcon = new System.Windows.Forms.PictureBox();
@@ -79,7 +82,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(153, 34);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(810, 469);
+            this.groupBox1.Size = new System.Drawing.Size(812, 599);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Video";
@@ -90,7 +93,7 @@
             this.pbVideo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbVideo.Location = new System.Drawing.Point(3, 22);
             this.pbVideo.Name = "pbVideo";
-            this.pbVideo.Size = new System.Drawing.Size(804, 444);
+            this.pbVideo.Size = new System.Drawing.Size(806, 574);
             this.pbVideo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbVideo.TabIndex = 0;
             this.pbVideo.TabStop = false;
@@ -101,9 +104,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.listImage);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(969, 34);
+            this.groupBox2.Location = new System.Drawing.Point(971, 34);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(253, 627);
+            this.groupBox2.Size = new System.Drawing.Size(253, 757);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Danh sách hình ảnh";
@@ -115,10 +118,10 @@
             this.listImage.GridLines = true;
             this.listImage.Location = new System.Drawing.Point(3, 22);
             this.listImage.Name = "listImage";
-            this.listImage.Size = new System.Drawing.Size(247, 602);
+            this.listImage.Size = new System.Drawing.Size(247, 732);
             this.listImage.TabIndex = 0;
             this.listImage.UseCompatibleStateImageBehavior = false;
-            this.listImage.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseClick);
+            this.listImage.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listImage_MouseClick);
             // 
             // groupBox3
             // 
@@ -140,9 +143,9 @@
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.lbpBirthday);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(153, 509);
+            this.groupBox3.Location = new System.Drawing.Point(153, 639);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(810, 130);
+            this.groupBox3.Size = new System.Drawing.Size(812, 130);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Thông tin bệnh nhân";
@@ -324,20 +327,22 @@
             this.lbpBirthday.Size = new System.Drawing.Size(0, 20);
             this.lbpBirthday.TabIndex = 7;
             // 
-            // imageList1
+            // imageList
             // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth24Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(240, 200);
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth24Bit;
+            this.imageList.ImageSize = new System.Drawing.Size(240, 200);
+            this.imageList.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.caifToolStripMenuItem,
-            this.itemOpenFolder});
+            this.itemOpenFolder,
+            this.aToolStripMenuItem,
+            this.càiĐặtKhungHìnhToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1222, 29);
+            this.menuStrip1.Size = new System.Drawing.Size(1224, 29);
             this.menuStrip1.TabIndex = 8;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -358,6 +363,27 @@
             this.itemOpenFolder.Size = new System.Drawing.Size(167, 25);
             this.itemOpenFolder.Text = "Mở thư mục dữ liệu";
             this.itemOpenFolder.Click += new System.EventHandler(this.itemOpenFolder_Click);
+            // 
+            // aToolStripMenuItem
+            // 
+            this.aToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnSetFormSize});
+            this.aToolStripMenuItem.Image = global::PhanMemNoiSoi.Properties.Resources.add_24x24;
+            this.aToolStripMenuItem.Name = "aToolStripMenuItem";
+            this.aToolStripMenuItem.Size = new System.Drawing.Size(28, 25);
+            // 
+            // btnSetFormSize
+            // 
+            this.btnSetFormSize.Image = global::PhanMemNoiSoi.Properties.Resources.save_24;
+            this.btnSetFormSize.Name = "btnSetFormSize";
+            this.btnSetFormSize.Size = new System.Drawing.Size(259, 22);
+            this.btnSetFormSize.Text = "Lưu kích thước khung hình hiện tại";
+            this.btnSetFormSize.Click += new System.EventHandler(this.btnSetFormSize_Click);
+            // 
+            // càiĐặtKhungHìnhToolStripMenuItem
+            // 
+            this.càiĐặtKhungHìnhToolStripMenuItem.Name = "càiĐặtKhungHìnhToolStripMenuItem";
+            this.càiĐặtKhungHìnhToolStripMenuItem.Size = new System.Drawing.Size(12, 25);
             // 
             // lbRecord
             // 
@@ -469,7 +495,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SeaShell;
-            this.ClientSize = new System.Drawing.Size(1222, 651);
+            this.ClientSize = new System.Drawing.Size(1224, 781);
             this.Controls.Add(this.btnFullScreen);
             this.Controls.Add(this.lbRecord);
             this.Controls.Add(this.pbRecordIcon);
@@ -482,7 +508,7 @@
             this.Controls.Add(this.btnDungHinh);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MinimizeBox = false;
@@ -490,7 +516,6 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Khám bệnh";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CheckAndView_FormClosed);
             this.Load += new System.EventHandler(this.CheckAndView_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CheckAndView_KeyDown);
@@ -516,7 +541,7 @@
         private System.Windows.Forms.Button btnThoat;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.ImageList imageList;
         private System.Windows.Forms.ListView listImage;
         private System.Windows.Forms.PictureBox pbVideo;
         private System.Windows.Forms.MenuStrip menuStrip1;
@@ -541,5 +566,8 @@
         private System.Windows.Forms.Label lbRecord;
         private System.Windows.Forms.ToolStripMenuItem itemOpenFolder;
         private System.Windows.Forms.Button btnFullScreen;
+        private System.Windows.Forms.ToolStripMenuItem aToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem btnSetFormSize;
+        private System.Windows.Forms.ToolStripMenuItem càiĐặtKhungHìnhToolStripMenuItem;
     }
 }

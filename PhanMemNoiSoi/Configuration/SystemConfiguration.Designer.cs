@@ -44,6 +44,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.txt3Heigh = new System.Windows.Forms.TextBox();
+            this.txt3Width = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -235,6 +240,11 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label17);
+            this.tabPage1.Controls.Add(this.label18);
+            this.tabPage1.Controls.Add(this.txt3Heigh);
+            this.tabPage1.Controls.Add(this.txt3Width);
+            this.tabPage1.Controls.Add(this.label19);
             this.tabPage1.Controls.Add(this.label16);
             this.tabPage1.Controls.Add(this.label15);
             this.tabPage1.Controls.Add(this.label9);
@@ -263,10 +273,55 @@
             this.tabPage1.Text = "Cài đặt nâng cao";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(415, 302);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(44, 20);
+            this.label17.TabIndex = 31;
+            this.label17.Text = "point";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(298, 302);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(20, 20);
+            this.label18.TabIndex = 30;
+            this.label18.Text = "X";
+            // 
+            // txt3Heigh
+            // 
+            this.txt3Heigh.Location = new System.Drawing.Point(333, 296);
+            this.txt3Heigh.MaxLength = 3;
+            this.txt3Heigh.Name = "txt3Heigh";
+            this.txt3Heigh.Size = new System.Drawing.Size(76, 26);
+            this.txt3Heigh.TabIndex = 29;
+            this.txt3Heigh.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // txt3Width
+            // 
+            this.txt3Width.Location = new System.Drawing.Point(207, 296);
+            this.txt3Width.MaxLength = 3;
+            this.txt3Width.Name = "txt3Width";
+            this.txt3Width.Size = new System.Drawing.Size(76, 26);
+            this.txt3Width.TabIndex = 28;
+            this.txt3Width.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(30, 302);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(137, 20);
+            this.label19.TabIndex = 27;
+            this.label19.Text = "Kích thước ảnh (3)";
+            // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(415, 303);
+            this.label16.Location = new System.Drawing.Point(415, 354);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(44, 20);
             this.label16.TabIndex = 26;
@@ -284,7 +339,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(298, 303);
+            this.label9.Location = new System.Drawing.Point(298, 354);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(20, 20);
             this.label9.TabIndex = 24;
@@ -292,7 +347,7 @@
             // 
             // txt4Heigh
             // 
-            this.txt4Heigh.Location = new System.Drawing.Point(333, 297);
+            this.txt4Heigh.Location = new System.Drawing.Point(333, 348);
             this.txt4Heigh.MaxLength = 3;
             this.txt4Heigh.Name = "txt4Heigh";
             this.txt4Heigh.Size = new System.Drawing.Size(76, 26);
@@ -301,7 +356,7 @@
             // 
             // txt4Width
             // 
-            this.txt4Width.Location = new System.Drawing.Point(207, 297);
+            this.txt4Width.Location = new System.Drawing.Point(207, 348);
             this.txt4Width.MaxLength = 3;
             this.txt4Width.Name = "txt4Width";
             this.txt4Width.Size = new System.Drawing.Size(76, 26);
@@ -311,7 +366,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(30, 303);
+            this.label8.Location = new System.Drawing.Point(30, 354);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(137, 20);
             this.label8.TabIndex = 21;
@@ -566,5 +621,10 @@
         private System.Windows.Forms.TextBox txt2Width;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox txt3Heigh;
+        private System.Windows.Forms.TextBox txt3Width;
+        private System.Windows.Forms.Label label19;
     }
 }

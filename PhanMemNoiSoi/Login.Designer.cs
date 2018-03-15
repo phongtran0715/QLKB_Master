@@ -85,6 +85,7 @@
             this.dgUserList.AllowUserToDeleteRows = false;
             this.dgUserList.AllowUserToResizeRows = false;
             this.dgUserList.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
+            this.dgUserList.ColumnHeadersHeight = 30;
             this.dgUserList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgUserList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgUserList.Location = new System.Drawing.Point(0, 0);

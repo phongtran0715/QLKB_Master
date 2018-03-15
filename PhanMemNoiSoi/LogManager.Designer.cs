@@ -265,6 +265,7 @@
             this.dgLogView.AllowUserToResizeRows = false;
             this.dgLogView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgLogView.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
+            this.dgLogView.ColumnHeadersHeight = 30;
             this.dgLogView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgLogView.Location = new System.Drawing.Point(3, 22);
             this.dgLogView.MultiSelect = false;
@@ -293,8 +294,6 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tìm kiếm";
-            this.UserIsAllowed += new System.EventHandler(this.LogManager_UserIsAllowed);
-            this.UserIsDenied += new System.EventHandler(this.LogManager_UserIsDenied);
             this.Load += new System.EventHandler(this.LogManager_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

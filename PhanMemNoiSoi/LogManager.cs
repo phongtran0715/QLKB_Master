@@ -9,7 +9,6 @@ using System.Windows.Forms;
 namespace PhanMemNoiSoi
 {
     public partial class LogManager : SecureBaseForm
-    //public partial class LogManager : Form
     {
         SqlDataAdapter dtaLog = new SqlDataAdapter();
         DataTable tbLog = new DataTable();
@@ -18,8 +17,8 @@ namespace PhanMemNoiSoi
         ComboboxItem cbSelectedItem;
         int MAX_LENGHT = 100;
 
-        public LogManager(IPrincipal userPrincipal) : 
-            base(Session.Instance.UserRole, userPrincipal)
+        public LogManager(IPrincipal userPrincipal) 
+            : base(Session.Instance.UserRole, userPrincipal)
         {
             InitializeComponent();
             cbSelectedItem = new ComboboxItem();
@@ -144,13 +143,13 @@ namespace PhanMemNoiSoi
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
             //check start date & end date 
-            int checkTime = DateTime.Compare(dtNgayBatDau.Value, dtNgayKetThuc.Value);
-            if(checkTime > 0)
+            if(dtNgayBatDau.Value.Date.CompareTo(dtNgayKetThuc.Value.Date) > 0)
             {
-                MessageBox.Show("Điều kiện tìm kiếm không hợp lệ. \n Ngày bắt đầu phải nhỏ hơn ngày kết thúc", 
+                MessageBox.Show("Điều kiện tìm kiếm không hợp lệ. \nNgày bắt đầu phải nhỏ hơn hoặc bằng ngày kết thúc",
                                 "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            
             #region comment
             // create sql command
             bool isAnd = false;

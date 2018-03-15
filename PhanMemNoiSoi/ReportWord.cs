@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PhanMemNoiSoi.Properties;
+using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Reflection;
 using Word = Microsoft.Office.Interop.Word;
@@ -12,6 +14,7 @@ namespace PhanMemNoiSoi
         Word.Application wordApp;
         Word.Document wordDoc;
         private object oTemplatePath2 = (System.Windows.Forms.Application.StartupPath + @"\Template\template.dotx");
+        object objEndOfDocFlag = "\\endofdoc"; /* \endofdoc is a predefined bookmark */
 
         public ReportWord()
         {
@@ -19,7 +22,7 @@ namespace PhanMemNoiSoi
             wordApp = new Word.Application();
         }
 
-        public bool openFile()
+        public bool openTemplateFile()
         {
             bool flag = false;
             try
@@ -114,26 +117,125 @@ namespace PhanMemNoiSoi
             }
         }
 
-        public void insertImage(string imgpath, int imgPos, Size imgSize)
+        /*
+         * https://www.codeproject.com/Tips/818331/Word-Automation-using-Csharp-Create-a-Word-Table
+         */
+        public void createTable(string name, string[,] data)
         {
-            int count = wordDoc.Bookmarks.Count;
-            for (int i = 1; i < count + 1; i++)
+            int numRows = data.GetLength(0);
+            int numCols = data.GetLength(1);
+            Word.Table objTab1; //create table object
+            Word.Range objWordRng = wordDoc.Range(0, 0);
+            if (objWordRng.Find.Execute("<table>"))
             {
-                if (i == imgPos)
+                // range is now set to bounds of the word "<table>"
+                objTab1 = wordDoc.Tables.Add(objWordRng, numRows, numCols, ref missing, ref missing); //add table object in word document
+                objTab1.AllowAutoFit = false;
+                objTab1.Columns[1].SetWidth(wordApp.Application.CentimetersToPoints(4f), Word.WdRulerStyle.wdAdjustNone);
+                objTab1.Columns[2].SetWidth(wordApp.Application.CentimetersToPoints(12f), Word.WdRulerStyle.wdAdjustNone);
+                //objTab1.Range.ParagraphFormat.SpaceAfter = 6;
+                int iRow, iCols;
+                for (iRow = 1; iRow <= numRows; iRow++)
                 {
-                    object oRange = wordDoc.Bookmarks[i].Range;
-                    object saveWithDocument = true;
-                    object missing = Type.Missing;
-                    Image image = Image.FromFile(imgpath);
-                    Image image2 = this.helper.ResizeImage(image, imgSize.Width, imgSize.Height);
-                    string str2 = Log.Instance.GetTempPath() + "tmp.jpg";
-                    image2.Save(str2);
-                    this.wordDoc.InlineShapes.AddPicture(str2, ref missing, true, ref oRange);
-                    break;
+                    for (iCols = 1; iCols <= numCols; iCols++)
+                    {
+                        objTab1.Cell(iRow, iCols).Range.Text = data[iRow - 1, iCols - 1];
+                    }
                 }
             }
         }
 
+        public void createImageTable(string name, List<String> images)
+        {
+            int numRows = getImgTableSize(images.Count)[0];
+            int numCols = getImgTableSize(images.Count)[1];
+            Size imgSize = getImgSize(images.Count);
+            Word.Table objTab1; //create table object
+            Word.Range objWordRng = wordDoc.Range(0, 0);
+            if (objWordRng.Find.Execute("<images>"))
+            {
+                // range is now set to bounds of the word "<table>"
+                objTab1 = wordDoc.Tables.Add(objWordRng, numRows, numCols, ref missing, ref missing);
+                objTab1.AllowAutoFit = false;
+                int iRow, iCols;
+                for (iRow = 1; iRow <= numRows; iRow++)
+                {
+                    for (iCols = 1; iCols <= numCols; iCols++)
+                    {
+                        object oRange = objTab1.Cell(iRow, iCols).Range;
+                        string tmpPath = Log.Instance.GetTempPath() + "tmp.jpg";
+                        Image image = Image.FromFile(images[iRow - 1 + iCols - 1]);
+                        Image resizedImg = this.helper.ResizeImage(image, imgSize.Width, imgSize.Height);
+                        resizedImg.Save(tmpPath);
+                        this.wordDoc.InlineShapes.AddPicture(tmpPath, ref missing, true, ref oRange);
+                    }
+                }
+            }
+        }
+
+        private Size getImgSize(int numImgs)
+        {
+            Size imgSize = new Size();
+            switch(numImgs)
+            {
+                case 0:
+                case 1:
+                case 2:
+                    imgSize.Width = Settings.Default.img2Width;
+                    imgSize.Height = Settings.Default.img2Height;
+                    break;
+                case 3:
+                    imgSize.Width = Settings.Default.img3Width;
+                    imgSize.Height = Settings.Default.img3Height;
+                    break;
+                default:
+                    imgSize.Width = Settings.Default.img4Width;
+                    imgSize.Height = Settings.Default.img4Heigh;
+                    break;
+
+            }
+            return imgSize;
+        }
+
+        private int [] getImgTableSize(int numImgs)
+        {
+            int[] dimension = new int[2];
+            switch (numImgs)
+            {
+                case 0:
+                    dimension[0] = 0;
+                    dimension[1] = 0;
+                    break;
+                case 1:
+                    dimension[0] = 1;
+                    dimension[1] = 1;
+                    break;
+                case 2:
+                    dimension[0] = 1;
+                    dimension[1] = 2;
+                    break;
+                case 3:
+                    dimension[0] = 1;
+                    dimension[1] = 3;
+                    break;
+                case 4:
+                    dimension[0] = 2;
+                    dimension[1] = 2;
+                    break;
+                case 5:
+                case 6:
+                    dimension[0] = 2;
+                    dimension[1] = 3;
+                    break;
+                default:
+                    dimension[0] = 2;
+                    dimension[1] = 2;
+                    break;
+
+            }
+
+            return dimension;
+        }
         private void DocumentBeforeClose()
         {
             //Do some thing

@@ -39,12 +39,17 @@ namespace PhanMemNoiSoi
         public CheckAndView()
         {
             InitializeComponent();
+            this.Size = new Size(Settings.Default.CheckViewSizeW, Settings.Default.CheckViewSizeH);
+            // Set KeyPreview object to true to allow the form to process 
+            // the key before the control with focus processes it.
+            this.KeyPreview = true;
         }
 
         public CheckAndView(string checkId, string patientId, string pName, string pAge,
                              string cause, string doctor, string folderImgPath)
         {
             InitializeComponent();
+            this.Size = new Size(Settings.Default.CheckViewSizeW, Settings.Default.CheckViewSizeH);
 
             #region reset field on GUI
             lbPhieu.Text = "";
@@ -62,24 +67,18 @@ namespace PhanMemNoiSoi
             lbPhieu.Text = checkId;
             lbName.Text = pName;
             lbAge.Text = pAge;
-            if (cause != null)
-            {
-                if (cause.Length <= 25)
-                {
-                    lbCause.Text = cause;
-                }
-                else
-                {
-                    lbCause.Text = cause.Substring(0, 15);
-                }
-            }
+            lbCause.Text = cause;
             lbdoc.Text = Session.Instance.UserName;
-            lbDate.Text = DateTime.Today.ToString(myHelper.getDateFormat(Settings.Default.datetimeFormat));
+            lbDate.Text = DateTime.Today.ToShortDateString();
             #endregion
+            // Set KeyPreview object to true to allow the form to process 
+            // the key before the control with focus processes it.
+            this.KeyPreview = true;
         }
 
         public bool initCamera(PictureBox pbox)
         {
+            filters = new Filters();
             bool exitCode = false;
             #region get value from configuration file 
             vDeviceIndex = Properties.Settings.Default.vDeviceIndex;
@@ -122,7 +121,7 @@ namespace PhanMemNoiSoi
                     Size size = new Size(vFrameSizeX, vFrameSizeY);
                     capture.FrameSize = size;
                     capture.PreviewWindowFrame = pbox;
-                   
+
                     exitCode = true;
                 }
                 heFrame = new Capture.HeFrame(CaptureComplete);
@@ -151,7 +150,6 @@ namespace PhanMemNoiSoi
             lbRecord.Visible = false;
             try
             {
-                filters = new Filters();
                 initCamera(pbVideo);
             }
             catch (Exception ex)
@@ -166,41 +164,46 @@ namespace PhanMemNoiSoi
             string imgFolder = Properties.Settings.Default.imageFolder;
             if (!Directory.Exists(imgFolder))
             {
-                System.IO.Directory.CreateDirectory(DEFAULT_IMG_FOLDER);
+                Directory.CreateDirectory(DEFAULT_IMG_FOLDER);
                 Properties.Settings.Default.imageFolder = DEFAULT_IMG_FOLDER;
                 Properties.Settings.Default.Save();
             }
 
-            this.KeyPreview = true;
             //Init Camera
             camStatus = true;
 
             // Set the ImageSize property to a larger size 
             listImage.View = View.LargeIcon;
-            imageList1.ImageSize = new Size(200, 150);
-            listImage.LargeImageList = imageList1;
+            imageList.ImageSize = new Size(200, 150);
+            listImage.LargeImageList = imageList;
             listImage.Sorting = SortOrder.Descending;
 
             //load exist image from disk
             if (Directory.Exists(folderImgPath))
             {
+                imagesPatient = Directory.GetFiles(folderImgPath, "*.jpg", SearchOption.AllDirectories);
                 var files = Directory.GetFiles(folderImgPath, "*.jpg", SearchOption.AllDirectories).OrderByDescending(d => new FileInfo(d).CreationTime);
                 imagesPatient = files.ToArray();
                 for (int i = 0; i < imagesPatient.Length; i++)
                 {
                     Image img = Image.FromFile(imagesPatient[i]);
-                    imageList1.Images.Add(img);
+                    imageList.Images.Add(img);
                     ListViewItem item = new ListViewItem();
-                    item.ImageIndex = imageList1.Images.Count - 1;
+                    //item.ImageIndex = imageList.Images.Count - 1;
+                    item.ImageIndex = i;
                     item.Name = Path.GetFileName(imagesPatient[i]);
-                    item.Text = (imagesPatient.Length - i).ToString();
                     listImage.Items.Add(item);
                 }
             }
+            this.ActiveControl = btnChupHinh;
         }
 
-        private void listView1_MouseClick(object sender, MouseEventArgs e)
+        private void listImage_Click(object sender, MouseEventArgs e)
         {
+            if(sender == null || e == null)
+            {
+                return;
+            }
             if (e.Button == MouseButtons.Right)
             {
                 if (listImage.FocusedItem.Bounds.Contains(e.Location) == true)
@@ -211,8 +214,9 @@ namespace PhanMemNoiSoi
                     {
                         foreach (ListViewItem eachItem in listImage.SelectedItems)
                         {
+                            int index = eachItem.Index;
                             //delete image on disk
-                            string filePath = folderImgPath + eachItem.Name;
+                            string filePath = folderImgPath + listImage.Items[index].Name;
                             Console.WriteLine(filePath);
                             if (File.Exists(filePath))
                             {
@@ -222,12 +226,7 @@ namespace PhanMemNoiSoi
                                     GC.WaitForPendingFinalizers();
                                     File.Delete(filePath);
                                     //delete from list view
-                                    listImage.Items.Remove(eachItem);
-
-                                    for (int i = 0; i < listImage.Items.Count; i++)
-                                    {
-                                        listImage.Items[i].Text = (listImage.Items.Count - i).ToString();
-                                    }
+                                    listImage.Items.RemoveAt(index);
                                 }
                                 catch (Exception ex)
                                 {
@@ -287,10 +286,12 @@ namespace PhanMemNoiSoi
 
         private void btnChupHinh_Click(object sender, EventArgs e)
         {
+            string ss = Properties.Settings.Default.captureType;
             if (string.Equals(Properties.Settings.Default.captureType, "capture_only"))
             {
                 captureFrame();
-            }else
+            }
+            else
             {
                 if (captureStatic)
                 {
@@ -322,16 +323,16 @@ namespace PhanMemNoiSoi
                 if (imgCapture != null)
                 {
                     //add to imageList
-                    imageList1.Images.Add(imgCapture);
+                    imageList.Images.Add(imgCapture);
                     ListViewItem item = new ListViewItem();
-                    item.ImageIndex = imageList1.Images.Count - 1;
-                    string imageName = pId + "_" + System.Guid.NewGuid() + ".jpg";
-                    item.Name = imageName;
-                    item.Text = (listImage.Items.Count + 1).ToString();
-                    listImage.Items.Add(item);
+                    item.ImageIndex = imageList.Images.Count - 1;
 
                     //save image to disk
+                    int fCount = Directory.GetFiles(folderImgPath, "*", SearchOption.TopDirectoryOnly).Length;
+                    string imageName = pId + "_" + System.Guid.NewGuid() + ".jpg";
+                    item.Name = imageName;
                     myHelper.SaveImageCapture(imgCapture, folderImgPath + imageName);
+                    listImage.Items.Insert(0, item);
                 }
             }
             catch (Exception ex)
@@ -358,9 +359,13 @@ namespace PhanMemNoiSoi
             {
                 e.SuppressKeyPress = true;  // Stops other controls on the form receiving event.
                 btnChupHinh_Click(null, null);
-            }else if(e.KeyCode == Keys.F11)
+            }
+            else if (e.KeyCode == Keys.F11)
             {
                 btnFullScreen_Click_1(null, null);
+            }
+            else{
+                Console.WriteLine("Unknow key");
             }
         }
 
@@ -406,7 +411,8 @@ namespace PhanMemNoiSoi
                 {
                     MessageBox.Show(ex.Message + "\n\n" + ex.ToString());
                 }
-            }else
+            }
+            else
             {
                 try
                 {
@@ -416,7 +422,7 @@ namespace PhanMemNoiSoi
                     if (!capture.Cued)
                         capture.Filename = folderImgPath + pId + "_" + DateTime.Now.Millisecond + ".mp4";
                     btnSaveVideo.Text = "  Dừng Quay";
-                    //btnSaveVideo.Image = Properties.Resources.pause_24;
+                    btnSaveVideo.Image = Properties.Resources.pause_24;
                     btnSaveVideo.ImageAlign = ContentAlignment.MiddleLeft;
                     recordingVideo = true;
                     pbRecordIcon.Visible = true;
@@ -455,6 +461,58 @@ namespace PhanMemNoiSoi
         private void fullScreenCallBack()
         {
             btnChupHinh_Click(null, null);
+        }
+
+        private void btnSetFormSize_Click(object sender, EventArgs e)
+        {
+            Settings.Default.CheckViewSizeH = this.Height;
+            Settings.Default.CheckViewSizeW = this.Width;
+            Settings.Default.Save();
+            MessageBox.Show("Lưu thông tin kích thước khung hình thành công!", "Thông báo",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        protected override void OnShown(EventArgs e)
+        {
+            base.OnShown(e);
+            this.listImage_Click(null, null);
+        }
+
+        private void listImage_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (listImage.FocusedItem.Bounds.Contains(e.Location) == true)
+                {
+                    DialogResult dlgResult = MessageBox.Show("Bạn có muốn xóa hình ảnh đã chọn?", "Thông báo",
+                                            MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (dlgResult == DialogResult.OK)
+                    {
+                        foreach (ListViewItem eachItem in listImage.SelectedItems)
+                        {
+                            //delete image on disk
+                            string filePath = folderImgPath + eachItem.Name;
+                            Console.WriteLine(filePath);
+                            if (File.Exists(filePath))
+                            {
+                                try
+                                {
+                                    GC.Collect();
+                                    GC.WaitForPendingFinalizers();
+                                    File.Delete(filePath);
+                                    //delete from list view
+                                    listImage.Items.Remove(eachItem);
+                                }
+                                catch (Exception ex)
+                                {
+                                    MessageBox.Show("Không thể xóa ảnh. Vui lòng thử lại sau! \n" + ex.Message, "Thông báo",
+                                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

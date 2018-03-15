@@ -341,6 +341,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvBenhNhan.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvBenhNhan.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
+            this.dgvBenhNhan.ColumnHeadersHeight = 30;
             this.dgvBenhNhan.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.STT});
             this.dgvBenhNhan.Location = new System.Drawing.Point(12, 67);

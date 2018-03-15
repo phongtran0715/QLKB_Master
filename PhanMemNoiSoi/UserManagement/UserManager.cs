@@ -19,8 +19,8 @@ namespace PhanMemNoiSoi
         IPrincipal userPrincipal = new GenericPrincipal(WindowsIdentity.GetCurrent(),
                                            Session.Instance.UserRole);
 
-        public UserManager(IPrincipal userPrincipal) : 
-            base(Session.Instance.UserRole, userPrincipal)
+        public UserManager(IPrincipal userPrincipal) 
+            : base(Session.Instance.UserRole, userPrincipal)
         {
             InitializeComponent();
             InitDataGrid();
@@ -455,7 +455,8 @@ namespace PhanMemNoiSoi
 
         private void dgvUserList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.RowIndex != -1)
+            /*
+            if (e.RowIndex != -1)
             {
                 int rowIndex = e.RowIndex;
                 string userId = dgvUserList.Rows[rowIndex].Cells["UserId"].Value.ToString().Trim();
@@ -465,6 +466,7 @@ namespace PhanMemNoiSoi
                 mUserFr.updateUserInfo += updateUserInfo;
                 mUserFr.ShowDialog();
             }
+            */
         }
 
         private void dgvWorkGroup_CellClick(object sender, DataGridViewCellEventArgs e)

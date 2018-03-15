@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PhanMemNoiSoi</RootNamespace>
     <AssemblyName>PhanMemNoiSoi</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
@@ -51,7 +51,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>auto-logo.ico</ApplicationIcon>
+    <ApplicationIcon>Doctor.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>PhanMemNoiSoi.Program</StartupObject>
@@ -105,11 +105,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\sql_dll\Microsoft.SqlServer.SmoExtended.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.SqlServer.SqlEnum, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+    <Reference Include="OD.Forms.Security, Version=0.0.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\sql_dll\Microsoft.SqlServer.SqlEnum.dll</HintPath>
-    </Reference>
-    <Reference Include="OD.Forms.Security">
       <HintPath>..\SecureBaseForm\bin\Debug\OD.Forms.Security.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -495,6 +492,7 @@
     <None Include="Resources\contact-form-background.jpg" />
     <None Include="Resources\background %281%29.jpg" />
     <None Include="Resources\About3.png" />
+    <Content Include="Doctor.ico" />
     <Content Include="Resources\continue_24.png" />
     <None Include="Resources\save_24.png" />
     <None Include="Resources\pause_24.png" />

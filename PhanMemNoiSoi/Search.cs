@@ -23,8 +23,8 @@ namespace PhanMemNoiSoi
         Helper helper = new Helper();
         string curImgFolder;
 
-        public Search(IPrincipal userPrincipal) :
-            base(Session.Instance.UserRole, userPrincipal)
+        public Search(IPrincipal userPrincipal) 
+            :base(Session.Instance.UserRole, userPrincipal)
         {
             InitializeComponent();
         }
@@ -131,13 +131,13 @@ namespace PhanMemNoiSoi
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
             //check start date & end date 
-            int checkTime = DateTime.Compare(dtNgayBatDau.Value, dtNgayKetThuc.Value);
-            if (checkTime > 0)
+            if(dtNgayBatDau.Value.Date.CompareTo(dtNgayKetThuc.Value.Date) > 0)
             {
-                MessageBox.Show("Điều kiện tìm kiếm không hợp lệ. \n Ngày bắt đầu phải nhỏ hơn ngày kết thúc",
+                MessageBox.Show("Điều kiện tìm kiếm không hợp lệ. \nNgày bắt đầu phải nhỏ hơn hoặc bằng ngày kết thúc",
                                 "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            
             // create sql command
             bool isAnd = false;
             string query = "SELECT SickNum,SickName, Age, Birthday, Createtime FROM SickData ";

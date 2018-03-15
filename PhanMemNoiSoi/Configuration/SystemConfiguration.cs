@@ -6,10 +6,11 @@ using System.Windows.Forms;
 
 namespace PhanMemNoiSoi
 {
-    public partial class SystemConfiguration : SecureBaseForm
+   public partial class SystemConfiguration : SecureBaseForm
+    //public partial class SystemConfiguration : Form
     {
-        public SystemConfiguration(IPrincipal userPrincipal) :
-            base(Session.Instance.UserRole, userPrincipal)
+        public SystemConfiguration(IPrincipal userPrincipal)
+            :base(Session.Instance.UserRole, userPrincipal)
         {
             InitializeComponent();
         }
@@ -43,6 +44,14 @@ namespace PhanMemNoiSoi
             if (!string.IsNullOrEmpty(this.txt2Heigh.Text.Trim()))
             {
                 Settings.Default.img2Height = int.Parse(this.txt2Heigh.Text.Trim());
+            }
+            if (!string.IsNullOrEmpty(this.txt3Width.Text.Trim()))
+            {
+                Settings.Default.img3Width = int.Parse(this.txt3Width.Text.Trim());
+            }
+            if (!string.IsNullOrEmpty(this.txt3Heigh.Text.Trim()))
+            {
+                Settings.Default.img3Height = int.Parse(this.txt3Heigh.Text.Trim());
             }
             if (!string.IsNullOrEmpty(this.txt4Width.Text.Trim()))
             {
@@ -83,6 +92,8 @@ namespace PhanMemNoiSoi
             this.cbImgQuality.SelectedIndex = imageQuality;
             this.txt2Width.Text = Settings.Default.img2Width.ToString();
             this.txt2Heigh.Text = Settings.Default.img2Height.ToString();
+            this.txt3Width.Text = Settings.Default.img3Width.ToString();
+            this.txt3Heigh.Text = Settings.Default.img3Height.ToString();
             this.txt4Width.Text = Settings.Default.img4Width.ToString();
             this.txt4Heigh.Text = Settings.Default.img4Heigh.ToString();
             this.txtMaxDayLog.Text = Settings.Default.maxDayLog.ToString();
@@ -165,6 +176,8 @@ namespace PhanMemNoiSoi
             this.cbImgQuality.SelectedIndex = 1;
             Settings.Default.img2Width = 300;
             Settings.Default.img2Height = 220;
+            Settings.Default.img3Width = 200;
+            Settings.Default.img3Height = 270;
             Settings.Default.img4Width = 270;
             Settings.Default.img4Heigh = 150;
             Settings.Default.maxDayLog = 60;

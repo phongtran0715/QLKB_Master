@@ -21,7 +21,6 @@ namespace PhanMemNoiSoi
 
         private void Login_Load(object sender, EventArgs e)
         {
-            init();
             //Load data from data base
             string selectCommand = "SELECT uList.UserId, uList.UserName, wGroup.WorkGroupId, wGroup.Descript " + 
                                     "FROM UserList uList , WorkGroup wGroup " +
@@ -51,6 +50,8 @@ namespace PhanMemNoiSoi
             dgUserList.Columns["Descript"].HeaderText = "Nhóm";
             dgUserList.Columns["UserName"].Width = dgUserList.Width * 2 / 3;
             dgUserList.Columns["Descript"].Width = dgUserList.Width / 3;
+
+            init();
         }
 
         private void init()
@@ -72,6 +73,29 @@ namespace PhanMemNoiSoi
             txtPass.Text = "";
             this.dgUserList.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 11f);
             this.dgUserList.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 11f);
+            //focus to last user on dgv
+            int rowIndex = getRowIndexByValue(this.userId.ToString());
+            if(rowIndex != -1)
+            {
+                dgUserList.FirstDisplayedScrollingRowIndex = rowIndex;
+                dgUserList.Refresh();
+                dgUserList.CurrentCell = dgUserList.Rows[rowIndex].Cells[1];
+                dgUserList.Rows[rowIndex].Selected = true;
+            }
+        }
+
+        private int getRowIndexByValue(string searchValue)
+        {
+            int rowIndex = -1;
+            foreach (DataGridViewRow row in dgUserList.Rows)
+            {
+                if (row.Cells[0].Value.ToString().Equals(searchValue))
+                {
+                    rowIndex = row.Index;
+                    break;
+                }
+            }
+            return rowIndex;
         }
 
         private void dgUserList_CellClick(object sender, DataGridViewCellEventArgs e)

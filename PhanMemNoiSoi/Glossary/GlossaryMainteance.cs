@@ -26,8 +26,8 @@ namespace PhanMemNoiSoi
         const int TAB_CHECK_RECORD = 0;
         const int TAB_INFO_IN_REPORT = 1;
 
-        public GlossaryMainteance(IPrincipal userPrincipal) :
-            base(Session.Instance.UserRole, userPrincipal)
+        public GlossaryMainteance(IPrincipal userPrincipal) 
+            : base(Session.Instance.UserRole, userPrincipal)
         {
             InitializeComponent();
             Init();
@@ -749,13 +749,13 @@ namespace PhanMemNoiSoi
         {
             int selectedRowCount =
             dgvInfo.Rows.GetRowCount(DataGridViewElementStates.Selected);
-            if (selectedRowCount <= 0)
+            if (selectedRowCount < 0)
             {
                 return;
             }
             int currRowIndexCheck = dgvInfo.SelectedRows[selectedRowCount - 1].Index;
             int index = int.Parse(dgvInfo.Rows[currRowIndexCheck].Cells["ShowNum"].Value.ToString().Trim());
-            if (index > 0)
+            if (index >= 0)
             {
                 string itemCode = dgvInfo.Rows[currRowIndexCheck].Cells["ItemCode"].Value.ToString().Trim();
 

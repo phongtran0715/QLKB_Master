@@ -83,5 +83,17 @@
     <Setting Name="datetimeFormat" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
+    <Setting Name="CheckViewSizeH" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">820</Value>
+    </Setting>
+    <Setting Name="CheckViewSizeW" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1240</Value>
+    </Setting>
+    <Setting Name="img3Width" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">200</Value>
+    </Setting>
+    <Setting Name="img3Height" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">270</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -56,7 +56,7 @@ namespace OD.Forms.Security
 		/// <param name="userPrincipal">The user principal</param>
 		public SecureBaseForm(string[] roles, IPrincipal userPrincipal)
 		{
-			if (!DesignMode)
+            if (!DesignMode)
 			{
 				this.IsMainWindow = false;
 				this.ValidatedUserRoles = new List<string>();

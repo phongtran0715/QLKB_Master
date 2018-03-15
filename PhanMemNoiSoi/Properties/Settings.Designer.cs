@@ -346,5 +346,53 @@ namespace PhanMemNoiSoi.Properties {
                 this["datetimeFormat"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("820")]
+        public int CheckViewSizeH {
+            get {
+                return ((int)(this["CheckViewSizeH"]));
+            }
+            set {
+                this["CheckViewSizeH"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1240")]
+        public int CheckViewSizeW {
+            get {
+                return ((int)(this["CheckViewSizeW"]));
+            }
+            set {
+                this["CheckViewSizeW"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("200")]
+        public int img3Width {
+            get {
+                return ((int)(this["img3Width"]));
+            }
+            set {
+                this["img3Width"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("270")]
+        public int img3Height {
+            get {
+                return ((int)(this["img3Height"]));
+            }
+            set {
+                this["img3Height"] = value;
+            }
+        }
     }
 }
