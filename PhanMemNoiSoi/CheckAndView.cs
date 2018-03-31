@@ -1,4 +1,5 @@
 ﻿using DirectX.Capture;
+using PhanMemNoiSoi.CaptureCamera;
 using PhanMemNoiSoi.Properties;
 using System;
 using System.ComponentModel;
@@ -13,14 +14,8 @@ namespace PhanMemNoiSoi
     public partial class CheckAndView : Form
     {
         #region Capture camera variable
-        int vDeviceIndex;
-        int vCompressIndex;
-        int vSourceIndex;
-        int vFrameSizeX;
-        int vFrameSizeY;
-        double vFrameRate;
         private Capture capture = null;
-        private Filters filters;
+        private Filters filters = new Filters();
         Capture.HeFrame heFrame = null;
         Image imgCapture = null;
         #endregion
@@ -35,13 +30,13 @@ namespace PhanMemNoiSoi
         string[] imagesPatient = { };
         string DEFAULT_IMG_FOLDER = @"D:\QLKB";
         string checkId;
+        CaptureWrapper capWrapper;
 
         public CheckAndView()
         {
             InitializeComponent();
+            capWrapper = new CaptureWrapper();
             this.Size = new Size(Settings.Default.CheckViewSizeW, Settings.Default.CheckViewSizeH);
-            // Set KeyPreview object to true to allow the form to process 
-            // the key before the control with focus processes it.
             this.KeyPreview = true;
         }
 
@@ -49,15 +44,6 @@ namespace PhanMemNoiSoi
                              string cause, string doctor, string folderImgPath)
         {
             InitializeComponent();
-            this.Size = new Size(Settings.Default.CheckViewSizeW, Settings.Default.CheckViewSizeH);
-
-            #region reset field on GUI
-            lbPhieu.Text = "";
-            lbName.Text = "";
-            lbAge.Text = "";
-            lbCause.Text = "";
-            lbdoc.Text = "";
-            #endregion
             myHelper = new Helper();
             this.pId = patientId;
             this.pName = pName;
@@ -71,62 +57,38 @@ namespace PhanMemNoiSoi
             lbdoc.Text = Session.Instance.UserName;
             lbDate.Text = DateTime.Today.ToShortDateString();
             #endregion
-            // Set KeyPreview object to true to allow the form to process 
-            // the key before the control with focus processes it.
+            capWrapper = new CaptureWrapper();
+            this.Size = new Size(Settings.Default.CheckViewSizeW, Settings.Default.CheckViewSizeH);
             this.KeyPreview = true;
         }
 
         public bool initCamera(PictureBox pbox)
         {
-            filters = new Filters();
             bool exitCode = false;
-            #region get value from configuration file 
-            vDeviceIndex = Properties.Settings.Default.vDeviceIndex;
-            vFrameSizeX = Properties.Settings.Default.vFrameSizeX;
-            vFrameSizeY = Properties.Settings.Default.vFrameSizeY;
-            vFrameRate = Properties.Settings.Default.vFrameRate;
-            vCompressIndex = Properties.Settings.Default.vCompressIndex;
-            vSourceIndex = Properties.Settings.Default.vSourceIndex;
-            #endregion
             try
             {
-                // Get current devices and dispose of capture object
-                // because the video and audio device can only be changed
-                // by creating a new Capture object.
-                Filter videoDevice = null;
-                if (capture != null)
+                if(capture != null)
                 {
-                    videoDevice = capture.VideoDevice;
                     capture.Dispose();
-                    capture = null;
                 }
-
                 // Get new video device
-                if (vDeviceIndex < filters.VideoInputDevices.Count && vDeviceIndex >= 0)
+                if (capWrapper.vDeviceIndex >= filters.VideoInputDevices.Count || capWrapper.vDeviceIndex < 0)
                 {
-                    videoDevice = filters.VideoInputDevices[vDeviceIndex];
-                }
-                else
-                {
-                    videoDevice = filters.VideoInputDevices[0];
+                    capWrapper.vDeviceIndex = 0;
                 }
 
-                // Create capture object
-                if ((videoDevice != null))
-                {
-                    capture = new Capture(videoDevice);
-                    int vCompressIndex = Properties.Settings.Default.vCompressIndex;
-                    capture.VideoCompressor = (vCompressIndex > 0 ? filters.VideoCompressors[vCompressIndex - 1] : null);
-                    capture.FrameRate = vFrameRate;
-                    Size size = new Size(vFrameSizeX, vFrameSizeY);
-                    capture.FrameSize = size;
-                    capture.PreviewWindowFrame = pbox;
-
-                    exitCode = true;
-                }
+                capture = new Capture(filters.VideoInputDevices[capWrapper.vDeviceIndex]);
+                //Set capture property
+                int vCompressIndex = Properties.Settings.Default.vCompressIndex;
+                capture.VideoCompressor = (vCompressIndex > 0 ? filters.VideoCompressors[vCompressIndex - 1] : null);
+                capture.FrameRate = capWrapper.vFrameRate;
+                Size size = new Size(capWrapper.vFrameSizeX, capWrapper.vFrameSizeY);
+                capture.FrameSize = size;
+                capture.PreviewWindowFrame = pbox;
                 heFrame = new Capture.HeFrame(CaptureComplete);
                 capture.FrameEvent2 += heFrame;
                 capture.GrapImg();
+                exitCode = true;
             }
             catch (Exception ex)
             {
@@ -189,7 +151,6 @@ namespace PhanMemNoiSoi
                     Image img = Image.FromFile(imagesPatient[i]);
                     imageList.Images.Add(img);
                     ListViewItem item = new ListViewItem();
-                    //item.ImageIndex = imageList.Images.Count - 1;
                     item.ImageIndex = i;
                     item.Name = Path.GetFileName(imagesPatient[i]);
                     listImage.Items.Add(item);
@@ -200,7 +161,7 @@ namespace PhanMemNoiSoi
 
         private void listImage_Click(object sender, MouseEventArgs e)
         {
-            if(sender == null || e == null)
+            if (sender == null || e == null)
             {
                 return;
             }
@@ -302,8 +263,6 @@ namespace PhanMemNoiSoi
                 else
                 {
                     // pause camera
-                    heFrame = new Capture.HeFrame(CaptureComplete);
-                    capture.FrameEvent2 += heFrame;
                     capture.GrapImg();
                     capture.PreviewWindowFrame = null;
                     pbVideo.Image = imgCapture;
@@ -317,8 +276,6 @@ namespace PhanMemNoiSoi
         {
             try
             {
-                heFrame = new Capture.HeFrame(CaptureComplete);
-                capture.FrameEvent2 += heFrame;
                 capture.GrapImg();
                 if (imgCapture != null)
                 {
@@ -364,7 +321,8 @@ namespace PhanMemNoiSoi
             {
                 btnFullScreen_Click_1(null, null);
             }
-            else{
+            else
+            {
                 Console.WriteLine("Unknow key");
             }
         }
@@ -395,10 +353,7 @@ namespace PhanMemNoiSoi
                 //stop record video
                 try
                 {
-                    if (capture == null)
-                        throw new ApplicationException("Please select a video and/or audio device.");
                     capture.Stop();
-                    //initCamera();
                     btnSaveVideo.Text = "  Quay Video";
                     btnSaveVideo.Image = Properties.Resources.camera_24;
                     btnSaveVideo.ImageAlign = ContentAlignment.MiddleLeft;
@@ -416,9 +371,6 @@ namespace PhanMemNoiSoi
             {
                 try
                 {
-                    // record video
-                    if (capture == null)
-                        throw new ApplicationException("Please select a video and/or audio device.");
                     if (!capture.Cued)
                         capture.Filename = folderImgPath + pId + "_" + DateTime.Now.Millisecond + ".mp4";
                     btnSaveVideo.Text = "  Dừng Quay";

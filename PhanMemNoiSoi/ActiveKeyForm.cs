@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace PhanMemNoiSoi
 {
@@ -43,11 +44,12 @@ namespace PhanMemNoiSoi
             {
                 if(string.Equals(sysKey, userKey))
                 {
-                    MessageBox.Show("Kích hoạt bản quyền thành công!", "Thông báo",
+                    MessageBox.Show("Kích hoạt bản quyền thành công! Phần mềm sẽ tự động khởi động lại", "Thông báo",
                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Properties.Settings.Default.softwareLicense = sysKey;
                     Properties.Settings.Default.Save();
-                    this.Close();
+                    Application.Restart();
+                    Environment.Exit(0);
                 }else
                 {
                     MessageBox.Show("Kích hoạt bản quyền thất bại! Mã bản quyền không chính xác.", "Thông báo",
@@ -78,7 +80,7 @@ namespace PhanMemNoiSoi
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            clientKey = fp.GenKey(fp.cpuId() + fp.macId());
+            clientKey = fp.GenKey(fp.cpuId() + fp.baseId());
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)

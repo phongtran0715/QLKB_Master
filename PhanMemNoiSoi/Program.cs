@@ -8,12 +8,23 @@ namespace PhanMemNoiSoi
 {
     static class Program
     {
+        private static Mutex mutex = null;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
+            const string appName = "QLKB";
+            bool createdNew;
+            mutex = new Mutex(true, appName, out createdNew);
+            if (!createdNew)
+            {
+                Console.WriteLine("Chương trình " + appName + " đang chạy ! Vui lòng thoát chương trình đang chạy trước.");
+                Console.ReadKey();
+                return;
+            }
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Helper helper = new Helper();
@@ -22,7 +33,7 @@ namespace PhanMemNoiSoi
             FingerPrint print = new FingerPrint();
             Splasher.Status = "Đang khởi tạo dữ liệu...";
             //Check key license
-            string inputString = print.GenKey(print.cpuId() + print.macId());
+            string inputString = print.GenKey(print.cpuId() + print.baseId());
             string keyGen = print.GenKey(helper.RemoveWhitespace(inputString));
             string softwareLicense = Settings.Default.softwareLicense;
             Session.Instance.ActiveLicense = string.Equals(keyGen, softwareLicense);

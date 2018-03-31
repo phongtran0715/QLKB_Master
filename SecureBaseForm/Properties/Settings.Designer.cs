@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace QLKBKeyGen.Properties {
+namespace OD.Forms.Security.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

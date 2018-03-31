@@ -513,7 +513,6 @@
             this.MainMenuStrip = this.menuStrip1;
             this.MinimizeBox = false;
             this.Name = "CheckAndView";
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Khám bệnh";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CheckAndView_FormClosed);

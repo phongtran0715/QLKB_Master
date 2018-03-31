@@ -119,15 +119,17 @@ namespace PhanMemNoiSoi
                 command.ExecuteNonQuery();
 
                 //update sick data grid view
-                tbSick.Rows.Add(sickNum,
-                                txtName.Text.Trim(),
-                                txtAge.Text.Trim(),
-                                txtAddress.Text.Trim(),
-                                txtJob.Text.Trim(),
-                                txtTelephone.Text.Trim(),
-                                txtInsureId.Text.Trim(),
-                                sex,
-                                txtCauseCheck.Text.Trim());
+                DataRow newRow = tbSick.NewRow();
+                newRow["SickNum"] = sickNum;
+                newRow["SickName"] = txtName.Text.Trim();
+                newRow["Age"] = txtAge.Text.Trim();
+                newRow["Address"] = txtAddress.Text.Trim();
+                newRow["Occupation"] = txtJob.Text.Trim();
+                newRow["Telephone"] = txtTelephone.Text.Trim();
+                newRow["InsuranceId"] = txtInsureId.Text.Trim();
+                newRow["Sex"] = sex;
+                newRow["CauseCheck"] = txtCauseCheck.Text.Trim();
+                tbSick.Rows.InsertAt(newRow, 0);
                 dgvBenhNhan.DataSource = tbSick;
                 dgvBenhNhan.Refresh();
             }
@@ -147,7 +149,7 @@ namespace PhanMemNoiSoi
             creatPatientFolder(sickNum);
             helper.setRowNumberDgvSick(dgvBenhNhan);
             //set focus to new row
-            //dgvBenhNhan.Rows[dgvBenhNhan.RowCount - 1].Selected = true;
+
             for (int i = 0; i < dgvBenhNhan.RowCount; i++)
             {
                 if (string.Equals(dgvBenhNhan.Rows[i].Cells["SickNum"].Value, sickNum))
@@ -248,7 +250,7 @@ namespace PhanMemNoiSoi
             string createTime = DateTime.Today.ToString("yyyy-MM-dd");
             string query = string.Format("SELECT SickNum,SickName, Age, Address, Occupation, Telephone, InsuranceId, Sex, CauseCheck "
                                             + " FROM SickData WHERE Createtime = '"
-                                            + createTime + "'");
+                                            + createTime + "' ORDER BY SickNum DESC");
             dtaSick = new SqlDataAdapter(query, DBConnection.Instance.sqlConn);
             SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dtaSick);
             tbSick = new DataTable();

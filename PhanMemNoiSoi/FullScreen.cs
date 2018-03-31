@@ -29,10 +29,6 @@ namespace PhanMemNoiSoi
 
         private void FullScreen_Load(object sender, EventArgs e)
         {
-            //this.capture.Stop();
-            //this.capture.Cue();
-            //this.capture.PreviewWindowFrame = pictureBox1;
-            //this.capture.Start();
         }
     }
 }

@@ -207,7 +207,8 @@ namespace PhanMemNoiSoi
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            if(Session.Instance.ActiveLicense == false)
+            /*
+            if (Session.Instance.ActiveLicense == false)
             {
                 using (CountDownForm formOptions = new CountDownForm())
                 {
@@ -220,6 +221,7 @@ namespace PhanMemNoiSoi
                     }
                 }
             }
+            */
             rp = new ReportWord();
 
             //check number image select

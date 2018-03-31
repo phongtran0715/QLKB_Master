@@ -74,6 +74,7 @@
             this.dgvPatient = new System.Windows.Forms.DataGridView();
             this.btnOpenFolder = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
+            this.STT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -325,33 +326,33 @@
             // 
             // txtBirthday
             // 
-            this.txtBirthday.Enabled = false;
             this.txtBirthday.Location = new System.Drawing.Point(318, 28);
             this.txtBirthday.Name = "txtBirthday";
+            this.txtBirthday.ReadOnly = true;
             this.txtBirthday.Size = new System.Drawing.Size(118, 26);
             this.txtBirthday.TabIndex = 29;
             // 
             // txtCreatetime
             // 
-            this.txtCreatetime.Enabled = false;
             this.txtCreatetime.Location = new System.Drawing.Point(318, 116);
             this.txtCreatetime.Name = "txtCreatetime";
+            this.txtCreatetime.ReadOnly = true;
             this.txtCreatetime.Size = new System.Drawing.Size(118, 26);
             this.txtCreatetime.TabIndex = 28;
             // 
             // txtMarred
             // 
-            this.txtMarred.Enabled = false;
             this.txtMarred.Location = new System.Drawing.Point(84, 71);
             this.txtMarred.Name = "txtMarred";
+            this.txtMarred.ReadOnly = true;
             this.txtMarred.Size = new System.Drawing.Size(120, 26);
             this.txtMarred.TabIndex = 27;
             // 
             // txtJob
             // 
-            this.txtJob.Enabled = false;
             this.txtJob.Location = new System.Drawing.Point(318, 159);
             this.txtJob.Name = "txtJob";
+            this.txtJob.ReadOnly = true;
             this.txtJob.Size = new System.Drawing.Size(118, 26);
             this.txtJob.TabIndex = 26;
             // 
@@ -366,42 +367,42 @@
             // 
             // txtNote
             // 
-            this.txtNote.Enabled = false;
             this.txtNote.Location = new System.Drawing.Point(84, 199);
             this.txtNote.Multiline = true;
             this.txtNote.Name = "txtNote";
+            this.txtNote.ReadOnly = true;
             this.txtNote.Size = new System.Drawing.Size(352, 62);
             this.txtNote.TabIndex = 20;
             // 
             // txtAge
             // 
-            this.txtAge.Enabled = false;
             this.txtAge.Location = new System.Drawing.Point(318, 71);
             this.txtAge.Name = "txtAge";
+            this.txtAge.ReadOnly = true;
             this.txtAge.Size = new System.Drawing.Size(118, 26);
             this.txtAge.TabIndex = 17;
             // 
             // txtTelephone
             // 
-            this.txtTelephone.Enabled = false;
             this.txtTelephone.Location = new System.Drawing.Point(83, 159);
             this.txtTelephone.Name = "txtTelephone";
+            this.txtTelephone.ReadOnly = true;
             this.txtTelephone.Size = new System.Drawing.Size(121, 26);
             this.txtTelephone.TabIndex = 15;
             // 
             // txtIdCode
             // 
-            this.txtIdCode.Enabled = false;
             this.txtIdCode.Location = new System.Drawing.Point(84, 116);
             this.txtIdCode.Name = "txtIdCode";
+            this.txtIdCode.ReadOnly = true;
             this.txtIdCode.Size = new System.Drawing.Size(120, 26);
             this.txtIdCode.TabIndex = 14;
             // 
             // txtName
             // 
-            this.txtName.Enabled = false;
             this.txtName.Location = new System.Drawing.Point(83, 28);
             this.txtName.Name = "txtName";
+            this.txtName.ReadOnly = true;
             this.txtName.Size = new System.Drawing.Size(121, 26);
             this.txtName.TabIndex = 12;
             // 
@@ -538,6 +539,8 @@
             this.dgvPatient.AllowUserToResizeRows = false;
             this.dgvPatient.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvPatient.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
+            this.dgvPatient.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.STT});
             this.dgvPatient.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPatient.Location = new System.Drawing.Point(3, 22);
             this.dgvPatient.MultiSelect = false;
@@ -574,6 +577,12 @@
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.button4_Click);
             // 
+            // STT
+            // 
+            this.STT.HeaderText = "STT";
+            this.STT.Name = "STT";
+            this.STT.ReadOnly = true;
+            // 
             // Search
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -594,8 +603,6 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tìm kiếm bệnh nhân";
-            this.UserIsAllowed += new System.EventHandler(this.Search_UserIsAllowed);
-            this.UserIsDenied += new System.EventHandler(this.Search_UserIsDenied);
             this.Load += new System.EventHandler(this.Search_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -657,5 +664,6 @@
         private System.Windows.Forms.TextBox txtPhone;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button btnOpenFolder;
+        private System.Windows.Forms.DataGridViewTextBoxColumn STT;
     }
 }

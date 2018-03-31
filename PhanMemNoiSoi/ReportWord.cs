@@ -164,7 +164,15 @@ namespace PhanMemNoiSoi
                     {
                         object oRange = objTab1.Cell(iRow, iCols).Range;
                         string tmpPath = Log.Instance.GetTempPath() + "tmp.jpg";
-                        Image image = Image.FromFile(images[iRow - 1 + iCols - 1]);
+                        Image image;
+                        if (Session.Instance.ActiveLicense == false)
+                        {
+                            image = Properties.Resources.img_default;
+                        }
+                        else
+                        {
+                            image = Image.FromFile(images[iRow - 1 + iCols - 1]);
+                        }  
                         Image resizedImg = this.helper.ResizeImage(image, imgSize.Width, imgSize.Height);
                         resizedImg.Save(tmpPath);
                         this.wordDoc.InlineShapes.AddPicture(tmpPath, ref missing, true, ref oRange);

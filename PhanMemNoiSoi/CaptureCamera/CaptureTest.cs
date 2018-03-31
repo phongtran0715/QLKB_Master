@@ -9,6 +9,7 @@
 // ------------------------------------------------------------------
 
 using DirectX.Capture;
+using PhanMemNoiSoi.CaptureCamera;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -19,14 +20,9 @@ namespace PhanMemNoiSoi
 {
     public class CaptureTest : Form
     {
-        int vDeviceIndex;
-        int vCompressIndex;
-        int vSourceIndex;
-        int vFrameSizeX;
-        int vFrameSizeY;
-        double vFrameRate;
+        CaptureWrapper capWrapper;
         private Capture capture = null;
-        private Filters filters;
+        private Filters filters = new Filters();
 
         #region variable auto generate
         private System.Windows.Forms.Button btnSave;
@@ -52,27 +48,27 @@ namespace PhanMemNoiSoi
         public CaptureTest()
         {
             InitializeComponent();
-            try
-            {
-                filters = new Filters();
-                initCamera();
-                if (capture.PreviewWindow == null)
-                {
-                    capture.PreviewWindow = panelVideo;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message + "\n" + ex.ToString(), "Thông báo",
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
+            capWrapper = new CaptureWrapper();
+            initCamera();
             // Update the main menu
             // Much of the interesting work of this sample occurs here
             try { updateMenu(); } catch { }
         }
 
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		protected override void Dispose( bool disposing )
+		{
+			if( disposing )
+			{
+				if(components != null)
+				{
+					components.Dispose();
+				}
+			}
+			base.Dispose( disposing );
+		}
 
         #region Windows Form Designer generated code
         /// <summary>
@@ -310,12 +306,12 @@ namespace PhanMemNoiSoi
                 if (capture != null)
                 {
                     //Save information
-                    Properties.Settings.Default.vDeviceIndex = vDeviceIndex;
-                    Properties.Settings.Default.vCompressIndex = vCompressIndex;
-                    Properties.Settings.Default.vSourceIndex = vSourceIndex;
-                    Properties.Settings.Default.vFrameSizeX = vFrameSizeX;
-                    Properties.Settings.Default.vFrameSizeY = vFrameSizeY;
-                    Properties.Settings.Default.vFrameRate = vFrameRate;
+                    Properties.Settings.Default.vDeviceIndex = capWrapper.vDeviceIndex;
+                    Properties.Settings.Default.vCompressIndex = capWrapper.vCompressIndex;
+                    Properties.Settings.Default.vSourceIndex = capWrapper.vSourceIndex;
+                    Properties.Settings.Default.vFrameSizeX = capWrapper.vFrameSizeX;
+                    Properties.Settings.Default.vFrameSizeY = capWrapper.vFrameSizeY;
+                    Properties.Settings.Default.vFrameRate = capWrapper.vFrameRate;
                     Properties.Settings.Default.Save();
                     capture.Dispose();
                 }
@@ -488,7 +484,7 @@ namespace PhanMemNoiSoi
                     {
                         capture.PreviewWindow = panelVideo;
                     }
-                    this.vDeviceIndex = m.Index;
+                    capWrapper.vDeviceIndex = m.Index;
                 }
 
                 // Update the menu
@@ -508,7 +504,7 @@ namespace PhanMemNoiSoi
                 // We subtract 1 from m.Index beacuse the first item is (None)
                 MenuItem m = sender as MenuItem;
                 capture.VideoCompressor = (m.Index > 0 ? filters.VideoCompressors[m.Index - 1] : null);
-                this.vCompressIndex = m.Index;
+                capWrapper.vCompressIndex = m.Index;
                 updateMenu();
             }
             catch (Exception ex)
@@ -567,8 +563,8 @@ namespace PhanMemNoiSoi
                 // Update the menu
                 updateMenu();
 
-                this.vFrameSizeX = int.Parse(s[0]);
-                this.vFrameSizeY = int.Parse(s[1]);
+                capWrapper.vFrameSizeX = int.Parse(s[0]);
+                capWrapper.vFrameSizeY = int.Parse(s[1]);
 
                 // Restore previous preview setting
                 capture.PreviewWindow = (preview ? panelVideo : null);
@@ -587,12 +583,11 @@ namespace PhanMemNoiSoi
                 MenuItem m = sender as MenuItem;
                 string[] s = m.Text.Split(' ');
                 capture.FrameRate = double.Parse(s[0]);
-                vFrameRate = double.Parse(s[0]);
-                //updateMenu();
+                capWrapper.vFrameRate = double.Parse(s[0]);
+                updateMenu();
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("Tốc độ khung hình không được hỗ trợ.\n\n" + ex.Message + "\n\n" + ex.ToString());
                 MessageBox.Show("Tốc độ khung hình không được hỗ trợ.\n\n" + ex.Message);
             }
         }
@@ -672,48 +667,22 @@ namespace PhanMemNoiSoi
         private bool initCamera()
         {
             bool exitCode = false;
-            vDeviceIndex = Properties.Settings.Default.vDeviceIndex;
-            vFrameSizeX = Properties.Settings.Default.vFrameSizeX;
-            vFrameSizeY = Properties.Settings.Default.vFrameSizeY;
-            vFrameRate = Properties.Settings.Default.vFrameRate;
-            vCompressIndex = Properties.Settings.Default.vCompressIndex;
-            vSourceIndex = Properties.Settings.Default.vSourceIndex;
             try
             {
-                // Get current devices and dispose of capture object
-                // because the video and audio device can only be changed
-                // by creating a new Capture object.
-                Filter videoDevice = null;
-                if (capture != null)
+                if (capWrapper.vDeviceIndex >= filters.VideoInputDevices.Count || capWrapper.vDeviceIndex < 0)
                 {
-                    videoDevice = capture.VideoDevice;
-                    capture.Dispose();
-                    capture = null;
+                    capWrapper.vDeviceIndex = 0;
                 }
 
-                // Get new video device
-                if (vDeviceIndex < filters.VideoInputDevices.Count && vDeviceIndex >= 0)
-                {
-                    videoDevice = filters.VideoInputDevices[vDeviceIndex];
-                }
-                else
-                {
-                    videoDevice = filters.VideoInputDevices[0];
-                }
-
-                // Create capture object
-                if ((videoDevice != null))
-                {
-                    capture = new Capture(videoDevice);
-                    capture.FrameRate = vFrameRate;
-                    Size size = new Size(vFrameSizeX, vFrameSizeY);
-                    capture.FrameSize = size;
-                    exitCode = true;
-                }
+                capture = new Capture(filters.VideoInputDevices[capWrapper.vDeviceIndex]);
+                capture.CaptureComplete += new EventHandler(OnCaptureComplete);
+                capture.PreviewWindow = panelVideo;
+                exitCode = true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Video device not supported.\n\n" + ex.Message + "\n\n" + ex.ToString());
+                exitCode = false;
                 //MessageBox.Show("Thiết bị thu video không được hỗ trợ. Vui lòng kiểm tra camera \n\n" + ex.Message);
             }
             return exitCode;
