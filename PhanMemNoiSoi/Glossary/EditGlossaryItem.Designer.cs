@@ -143,7 +143,6 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "EditGlossaryItem";
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Chỉnh sửa danh mục";
             this.Load += new System.EventHandler(this.EditGlossary_Load);

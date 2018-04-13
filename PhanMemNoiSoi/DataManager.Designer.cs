@@ -135,7 +135,6 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "DataManager";
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản lý dữ liệu";
             this.UserIsDenied += new System.EventHandler(this.DataManager_UserIsDenied);

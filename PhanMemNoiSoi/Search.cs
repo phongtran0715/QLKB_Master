@@ -54,7 +54,7 @@ namespace PhanMemNoiSoi
         {
             // load data for data grid view
             string str = Settings.Default.maxRowDisplay.ToString();
-            string query = "SELECT TOP " + str + " SickNum,SickName, Age, Birthday, Createtime FROM SickData ORDER BY SickNum DESC;";
+            string query = "SELECT TOP " + str + " SickNum,SickName, Age,IDCode, Createtime FROM SickData ORDER BY SickNum DESC;";
             dtaPatient = new SqlDataAdapter(query, DBConnection.Instance.sqlConn);
 
             SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dtaPatient);
@@ -69,28 +69,34 @@ namespace PhanMemNoiSoi
                 DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
             dgvPatient.DataSource = bsPatient;
             dgvPatient.Columns["SickNum"].Visible = false;
-            dgvPatient.Columns["STT"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvPatient.Columns["SickName"].HeaderText = "Tên";
             dgvPatient.Columns["Age"].HeaderText = "Tuổi";
             dgvPatient.Columns["Age"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgvPatient.Columns["Birthday"].HeaderText = "Ngày sinh";
-            dgvPatient.Columns["Birthday"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvPatient.Columns["IDCode"].HeaderText = "CMTND";
+            dgvPatient.Columns["IDCode"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvPatient.Columns["Createtime"].HeaderText = "Ngày khám";
             dgvPatient.Columns["Createtime"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvPatient.Columns["Createtime"].DefaultCellStyle.Format = helper.getDateFormat(Settings.Default.datetimeFormat);
 
-            dgvPatient.Columns["STT"].Width = dgvPatient.Width / 10;
             dgvPatient.Columns["SickName"].Width = dgvPatient.Width * 4 / 10;
             dgvPatient.Columns["Age"].Width = dgvPatient.Width / 10;
-            dgvPatient.Columns["Birthday"].Width = dgvPatient.Width * 2 / 10;
-            dgvPatient.Columns["Createtime"].Width = dgvPatient.Width * 2 / 9;
+            dgvPatient.Columns["IDCode"].Width = dgvPatient.Width *2 / 10;
+            dgvPatient.Columns["Createtime"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             foreach (DataGridViewColumn col in dgvPatient.Columns)
             {
                 col.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 col.HeaderCell.Style.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Pixel);
                 col.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
-            helper.setRowNumberDgvSick(dgvPatient);
+            helper.setRowNumber(dgvPatient);
+            if(dgvPatient.Rows.Count > 0)
+            {
+                setFieldEnable(true);
+            }
+            else
+            {
+                setFieldEnable(false);
+            }
         }
         private void rbThang_CheckedChanged(object sender, EventArgs e)
         {
@@ -141,7 +147,7 @@ namespace PhanMemNoiSoi
             
             // create sql command
             bool isAnd = false;
-            string query = "SELECT SickNum,SickName, Age, Birthday, Createtime FROM SickData ";
+            string query = "SELECT SickNum,SickName, Age, IDCode, Createtime FROM SickData ";
             if (!string.IsNullOrEmpty(txtTenSearch.Text.Trim()))
             {
                 query += " WHERE SickName LIKE N'%" + txtTenSearch.Text.Trim() + "%'";
@@ -200,13 +206,13 @@ namespace PhanMemNoiSoi
             dgvPatient.Columns["SickNum"].Visible = false;
             dgvPatient.Columns["SickName"].HeaderText = "Tên";
             dgvPatient.Columns["Age"].HeaderText = "Tuổi";
-            dgvPatient.Columns["Birthday"].HeaderText = "Ngày sinh";
+            dgvPatient.Columns["IDCode"].HeaderText = "CMTND";
             dgvPatient.Columns["Createtime"].HeaderText = "Ngày khám";
 
             dgvPatient.Columns["SickName"].Width = dgvPatient.Width * 4 / 10;
             dgvPatient.Columns["Age"].Width = dgvPatient.Width / 10;
-            dgvPatient.Columns["Birthday"].Width = dgvPatient.Width * 2 / 10;
-            dgvPatient.Columns["Createtime"].Width = dgvPatient.Width * 2 / 9;
+            dgvPatient.Columns["IDCode"].Width = dgvPatient.Width * 2 / 10;
+            dgvPatient.Columns["Createtime"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             foreach (DataGridViewColumn col in dgvPatient.Columns)
             {
                 col.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -214,6 +220,14 @@ namespace PhanMemNoiSoi
                 col.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
             helper.setRowNumber(dgvPatient);
+            if (dgvPatient.Rows.Count > 0)
+            {
+                setFieldEnable(true);
+            }
+            else
+            {
+                setFieldEnable(false);
+            }
             //update number record to label
             gbResult.Text = "Danh sách bệnh nhân (" + tbPatient.Rows.Count + " kết quả)";
         }
@@ -364,7 +378,15 @@ namespace PhanMemNoiSoi
                 }
                 //update number patient in label
                 gbResult.Text = "Danh sách bệnh nhân ( " + tbPatient.Rows.Count + " kết quả)";
-                helper.setRowNumberDgvSick(dgvPatient);
+                helper.setRowNumber(dgvPatient);
+                if (dgvPatient.Rows.Count > 0)
+                {
+                    setFieldEnable(true);
+                }
+                else
+                {
+                    setFieldEnable(false);
+                }
             }
         }
 
@@ -451,5 +473,13 @@ namespace PhanMemNoiSoi
             }
         }
         
+        private void setFieldEnable(bool enableState)
+        {
+            btnReCheck.Enabled = enableState;
+            btnDeleteSick.Enabled = enableState;
+            btnOpenFolder.Enabled = enableState;
+            btnNextImg.Enabled = enableState;
+            btnPrevImg.Enabled = enableState;
+        }
     }
 }

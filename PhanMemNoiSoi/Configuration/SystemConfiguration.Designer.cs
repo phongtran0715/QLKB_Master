@@ -562,7 +562,6 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SystemConfiguration";
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cấu hình hệ thống";
             this.UserIsDenied += new System.EventHandler(this.SystemConfiguration_UserIsDenied);

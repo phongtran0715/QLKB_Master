@@ -187,7 +187,6 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ActiveKeyForm";
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Kích hoạt phần mềm";
             this.Load += new System.EventHandler(this.ActiveKey_Load);

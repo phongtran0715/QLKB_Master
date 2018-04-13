@@ -156,7 +156,6 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CheckItem";
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Danh mục lựa chọn";
             this.Load += new System.EventHandler(this.CheckItem_Load);

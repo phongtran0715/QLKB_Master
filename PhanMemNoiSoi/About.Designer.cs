@@ -88,7 +88,6 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "About";
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Giới thiệu";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

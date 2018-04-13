@@ -114,7 +114,6 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "InfoReportList";
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Thứ tự danh mục";
             this.Load += new System.EventHandler(this.InfoReportList_Load);

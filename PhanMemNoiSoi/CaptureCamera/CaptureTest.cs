@@ -239,7 +239,6 @@ namespace PhanMemNoiSoi
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Menu = this.mainMenu;
             this.Name = "CaptureTest";
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cấu hình camera";
             ((System.ComponentModel.ISupportInitialize)(this.panelVideo)).EndInit();

@@ -222,6 +222,8 @@ namespace PhanMemNoiSoi
             //update dgv
             tbAdap[(int)dataTable.DTA_CONTENT].Rows.Add(newItemCode, msg);
             dgvCheck.DataSource = tbAdap[(int)dataTable.DTA_CONTENT];
+            //set focus to newest insert row
+            setFocusContent(dgvCheck.Rows.Count -1, 1);
             helper.setRowNumber(dgvCheck);
         }
 
@@ -296,6 +298,8 @@ namespace PhanMemNoiSoi
             //update dgv
             tbAdap[(int)dataTable.DTA_CONTENT_DETAIL].Rows.Add(contentCode, msg);
             dgvCheckContentDetail.DataSource = tbAdap[(int)dataTable.DTA_CONTENT_DETAIL];
+            //set focus
+            setFocusContentDetail(dgvCheckContentDetail.Rows.Count -1 , 1);
             helper.setRowNumber(dgvCheckContentDetail);
         }
 
@@ -358,6 +362,8 @@ namespace PhanMemNoiSoi
             dgvCheck.DataSource = bsAdap[(int)bindSource.DTA_CONTENT];
             dgvCheck.Update();
             dgvCheck.Refresh();
+            // set focus to another row
+            setFocusContent(0, 1);
             helper.setRowNumber(dgvCheck);
         }
 
@@ -404,7 +410,10 @@ namespace PhanMemNoiSoi
             dgvCheckContentDetail.DataSource = bsAdap[(int)bindSource.DTA_CONTENT_DETAIL];
             dgvCheckContentDetail.Update();
             dgvCheckContentDetail.Refresh();
-            helper.setRowNumber(dgvCheck);
+
+            // set focus to another row
+            setFocusContentDetail(0, 1);
+            helper.setRowNumber(dgvCheckContentDetail);
         }
 
         private void btnThem_ND_Click(object sender, EventArgs e)
@@ -420,7 +429,6 @@ namespace PhanMemNoiSoi
                 dgvCheckContentDetail.Rows.GetRowCount(DataGridViewElementStates.Selected);
             if (selectedRowCount <= 0)
             {
-                MessageBox.Show("now row select");
                 return;
             }
 
@@ -436,8 +444,6 @@ namespace PhanMemNoiSoi
 
         private void dgDanhMuc_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            //dgDanhMuc.Rows[0].Selected = true;
-            //currRowIndexDM = 0;
             foreach (DataGridViewColumn column in dgvCheck.Columns)
             {
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -521,6 +527,8 @@ namespace PhanMemNoiSoi
             dgvCheck.DataSource = bsAdap[(int)bindSource.DTA_CONTENT];
             dgvCheck.Columns["ItemCode"].Visible = false;
             dgvCheck.Columns["Content"].HeaderText = "Danh Mục";
+            //set focus
+            setFocusContent(0, 1);
             helper.setRowNumber(dgvCheck);
         }
 
@@ -541,9 +549,10 @@ namespace PhanMemNoiSoi
             // Resize the DataGridView columns to fit the newly loaded content.
             dgvInfo.DataSource = bsAdap[(int)bindSource.DTA_INFO_REPORT];
             dgvInfo.Columns["ItemCode"].Visible = false;
+            dgvInfo.Columns["ShowNum"].Visible = false;
             dgvInfo.Columns["Content"].HeaderText = "Danh Mục";
-            dgvInfo.Columns["ShowNum"].HeaderText = "STT";
-            dgvInfo.Columns["ShowNum"].DisplayIndex = 0;
+            dgvInfo.Columns["Content"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            helper.setRowNumber(dgvInfo);
         }
 
         private void btnThoat_Click_1(object sender, EventArgs e)
@@ -742,7 +751,7 @@ namespace PhanMemNoiSoi
                 setSelectedRow(dgvInfo, currRowIndexCheck - 1);
                 setStateOrderButon(currRowIndexCheck - 1);
             }
-            ArrangeDgvCol();
+            //ArrangeDgvCol();
         }
 
         private void btnMoveDown_Click(object sender, EventArgs e)
@@ -775,7 +784,7 @@ namespace PhanMemNoiSoi
                 setSelectedRow(dgvInfo, currRowIndexCheck + 1);
                 setStateOrderButon(currRowIndexCheck + 1);
             }
-            ArrangeDgvCol();
+            //ArrangeDgvCol();
         }
 
         /// <summary>
@@ -834,7 +843,8 @@ namespace PhanMemNoiSoi
 
         private void dgvInfo_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            ArrangeDgvCol();
+            helper.setRowNumber(dgvInfo);
+            //ArrangeDgvCol();
         }
 
         private void ArrangeDgvCol()
@@ -896,6 +906,25 @@ namespace PhanMemNoiSoi
                 //call back function update data grid
                 glossItemContentFr.updateData += updateDgvNoiDung;
                 glossItemContentFr.ShowDialog();
+            }
+        }
+
+        private void setFocusContent(int rowIndex, int cellIndex = 1)
+        {
+            if (dgvCheck.Rows.Count > 0)
+            {
+                dgvCheck.CurrentCell = dgvCheck.Rows[rowIndex].Cells[cellIndex];
+            }else
+            {
+                Console.WriteLine(" num rows = " + dgvCheck.Rows.Count);
+            }
+        }
+
+        private void setFocusContentDetail(int rowIndex, int cellIndex = 1)
+        {
+            if (dgvCheckContentDetail.Rows.Count > 0)
+            {
+                dgvCheckContentDetail.CurrentCell = dgvCheckContentDetail.Rows[rowIndex].Cells[cellIndex];
             }
         }
     }

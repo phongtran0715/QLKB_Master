@@ -87,7 +87,7 @@ namespace PhanMemNoiSoi
                     dgvBenhNhan.Rows[currRowIndex].Cells["Sex"].Value = sex;
                     dgvBenhNhan.Rows[currRowIndex].Cells["CauseCheck"].Value = txtCauseCheck.Text.Trim();
 
-                    helper.setRowNumberDgvSick(dgvBenhNhan);
+                    helper.setRowNumber(dgvBenhNhan, 20);
                     return;
                 }
                 catch (Exception ex)
@@ -147,7 +147,7 @@ namespace PhanMemNoiSoi
             updateNumSick(dgvBenhNhan.Rows.Count - 1);
             //create folder to store patient data
             creatPatientFolder(sickNum);
-            helper.setRowNumberDgvSick(dgvBenhNhan);
+            helper.setRowNumber(dgvBenhNhan, 20);
             //set focus to new row
 
             for (int i = 0; i < dgvBenhNhan.RowCount; i++)
@@ -260,10 +260,8 @@ namespace PhanMemNoiSoi
 
             dgvBenhNhan.DataSource = bsSick;
             dgvBenhNhan.Columns["SickNum"].Visible = false;
-            dgvBenhNhan.Columns["STT"].Width = dgvBenhNhan.Width / 18 ;
-            dgvBenhNhan.Columns["STT"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvBenhNhan.Columns["SickName"].HeaderText = "Tên bệnh nhân";
-            dgvBenhNhan.Columns["SickName"].Width = dgvBenhNhan.Width / 9;
+            dgvBenhNhan.Columns["SickName"].Width = dgvBenhNhan.Width / 8;
             dgvBenhNhan.Columns["Age"].HeaderText = "Tuổi";
             dgvBenhNhan.Columns["Age"].Width = dgvBenhNhan.Width / 18;
             dgvBenhNhan.Columns["Age"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -280,10 +278,9 @@ namespace PhanMemNoiSoi
             dgvBenhNhan.Columns["Sex"].Width = dgvBenhNhan.Width / 15;
             dgvBenhNhan.Columns["Sex"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvBenhNhan.Columns["CauseCheck"].HeaderText = "Lý do khám";
-            dgvBenhNhan.Columns["CauseCheck"].Width = (dgvBenhNhan.Width * 3) / 9;
+            dgvBenhNhan.Columns["CauseCheck"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
-
-            helper.setRowNumberDgvSick(dgvBenhNhan);
+            helper.setRowNumber(dgvBenhNhan, 20);
             foreach (DataGridViewColumn col in dgvBenhNhan.Columns)
             {
                 col.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -365,7 +362,7 @@ namespace PhanMemNoiSoi
             }
             currRowIndex = lastRowIndex;
             selectRowInDgv(dgvBenhNhan, lastRowIndex);
-            helper.setRowNumberDgvSick(dgvBenhNhan);
+            helper.setRowNumber(dgvBenhNhan, 20);
         }
 
         private void dgvBenhNhan_SelectionChanged(object sender, EventArgs e)
@@ -568,7 +565,6 @@ namespace PhanMemNoiSoi
 
         private void NewCheck_SizeChanged(object sender, EventArgs e)
         {
-            dgvBenhNhan.Columns["STT"].Width = dgvBenhNhan.Width / 18;
             dgvBenhNhan.Columns["SickName"].HeaderText = "Tên bệnh nhân";
             dgvBenhNhan.Columns["SickName"].Width = dgvBenhNhan.Width / 9;
             dgvBenhNhan.Columns["Age"].HeaderText = "Tuổi";
@@ -584,7 +580,7 @@ namespace PhanMemNoiSoi
             dgvBenhNhan.Columns["Sex"].HeaderText = "Giới tính";
             dgvBenhNhan.Columns["Sex"].Width = dgvBenhNhan.Width / 15;
             dgvBenhNhan.Columns["CauseCheck"].HeaderText = "Lý do khám";
-            dgvBenhNhan.Columns["CauseCheck"].Width = (dgvBenhNhan.Width * 3) / 9;
+            dgvBenhNhan.Columns["CauseCheck"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
     }
 }

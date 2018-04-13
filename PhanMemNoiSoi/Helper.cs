@@ -149,27 +149,14 @@ namespace PhanMemNoiSoi
         /// auto set row index for data grid view
         /// </summary>
         /// <param name="dgv"></param>
-        public void setRowNumberDgvSick(DataGridView dgv)
-        {
-            for(int i = 0; i < dgv.Rows.Count; i++)
-            {
-                dgv.Rows[i].Cells["STT"].Value = String.Format("{0}", i + 1);
-            }           
-        }
-
-        /// <summary>
-        /// auto set row index for data grid view
-        /// </summary>
-        /// <param name="dgv"></param>
-        public void setRowNumber(DataGridView dgv)
+        public void setRowNumber(DataGridView dgv, int ratioSize = 12)
         {
             foreach (DataGridViewRow row in dgv.Rows)
             {
                 row.HeaderCell.Value = String.Format("{0}", row.Index + 1);
-
             }
-            dgv.RowHeadersWidth = dgv.Width / 12;
-            dgv.RowHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 11f);
+            dgv.RowHeadersWidth = dgv.Width / ratioSize;
+            dgv.RowHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 12f);
         }
 
         /// <summary>

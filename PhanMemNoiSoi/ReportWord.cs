@@ -147,8 +147,9 @@ namespace PhanMemNoiSoi
 
         public void createImageTable(string name, List<String> images)
         {
-            int numRows = getImgTableSize(images.Count)[0];
-            int numCols = getImgTableSize(images.Count)[1];
+            int[] dimension = getImgTableSize(images.Count);
+            int numRows = dimension[0];
+            int numCols = dimension[1];
             Size imgSize = getImgSize(images.Count);
             Word.Table objTab1; //create table object
             Word.Range objWordRng = wordDoc.Range(0, 0);
@@ -158,10 +159,15 @@ namespace PhanMemNoiSoi
                 objTab1 = wordDoc.Tables.Add(objWordRng, numRows, numCols, ref missing, ref missing);
                 objTab1.AllowAutoFit = false;
                 int iRow, iCols;
+                int imgIndex = 0;
                 for (iRow = 1; iRow <= numRows; iRow++)
                 {
                     for (iCols = 1; iCols <= numCols; iCols++)
                     {
+                        if(imgIndex >= images.Count)
+                        {
+                            break;
+                        }
                         object oRange = objTab1.Cell(iRow, iCols).Range;
                         string tmpPath = Log.Instance.GetTempPath() + "tmp.jpg";
                         Image image;
@@ -171,11 +177,12 @@ namespace PhanMemNoiSoi
                         }
                         else
                         {
-                            image = Image.FromFile(images[iRow - 1 + iCols - 1]);
+                            image = Image.FromFile(images[imgIndex]);
                         }  
                         Image resizedImg = this.helper.ResizeImage(image, imgSize.Width, imgSize.Height);
                         resizedImg.Save(tmpPath);
                         this.wordDoc.InlineShapes.AddPicture(tmpPath, ref missing, true, ref oRange);
+                        imgIndex++;
                     }
                 }
             }
@@ -230,18 +237,11 @@ namespace PhanMemNoiSoi
                     dimension[0] = 2;
                     dimension[1] = 2;
                     break;
-                case 5:
-                case 6:
+                default:
                     dimension[0] = 2;
                     dimension[1] = 3;
                     break;
-                default:
-                    dimension[0] = 2;
-                    dimension[1] = 2;
-                    break;
-
             }
-
             return dimension;
         }
         private void DocumentBeforeClose()

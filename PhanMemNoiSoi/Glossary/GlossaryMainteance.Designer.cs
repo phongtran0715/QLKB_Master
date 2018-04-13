@@ -365,7 +365,6 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "GlossaryMainteance";
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản lý danh mục";
             this.UserIsAllowed += new System.EventHandler(this.GlossaryMainteance_UserIsAllowed);

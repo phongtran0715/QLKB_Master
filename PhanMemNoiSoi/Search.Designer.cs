@@ -74,7 +74,6 @@
             this.dgvPatient = new System.Windows.Forms.DataGridView();
             this.btnOpenFolder = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
-            this.STT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -539,8 +538,6 @@
             this.dgvPatient.AllowUserToResizeRows = false;
             this.dgvPatient.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvPatient.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
-            this.dgvPatient.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.STT});
             this.dgvPatient.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPatient.Location = new System.Drawing.Point(3, 22);
             this.dgvPatient.MultiSelect = false;
@@ -577,12 +574,6 @@
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.button4_Click);
             // 
-            // STT
-            // 
-            this.STT.HeaderText = "STT";
-            this.STT.Name = "STT";
-            this.STT.ReadOnly = true;
-            // 
             // Search
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -600,7 +591,6 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Search";
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tìm kiếm bệnh nhân";
             this.Load += new System.EventHandler(this.Search_Load);
@@ -664,6 +654,5 @@
         private System.Windows.Forms.TextBox txtPhone;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button btnOpenFolder;
-        private System.Windows.Forms.DataGridViewTextBoxColumn STT;
     }
 }

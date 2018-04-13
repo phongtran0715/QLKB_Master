@@ -294,6 +294,41 @@ namespace PhanMemNoiSoi
             ComboBox cmb = (ComboBox)sender;
             cbSelectedItem = (ComboboxItem)cmb.SelectedItem;
         }
+
+        private void btnDeletAll_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Bạn có chắc muốn xóa toàn bộ log hệ thống ?", "Thông báo",
+                                                    MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (result == DialogResult.OK)
+            {
+                //delete from database
+                try
+                {
+                    string sqlCommand = "DELETE FROM WorkLog";
+                    SqlCommand mySQL = new SqlCommand(sqlCommand, DBConnection.Instance.sqlConn);
+   
+                    mySQL.ExecuteReader();
+                    // delete data grid view
+                    tbLog.Clear();
+                    bsLog.DataSource = tbLog;
+                    dgLogView.DataSource = bsLog;
+                    dgLogView.Update();
+                    dgLogView.Refresh();
+                    helper.setRowNumber(dgLogView);
+                }
+                catch (System.Exception ex)
+                {
+                    MessageBox.Show("Không kết nối được đến cơ sở dữ liệu. Vui lòng thử lại sau! \n " + ex.ToString(),
+                        "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void LogManager_UserIsDenied_1(object sender, EventArgs e)
+        {
+            MessageBox.Show("Bạn không có quyền truy cập vào danh mục này.\nVui lòng liên hệ với admin!",
+                            "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 
     public class ComboboxItem

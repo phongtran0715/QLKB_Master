@@ -275,7 +275,6 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "UserManager";
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản lý người dùng";
             this.UserIsAllowed += new System.EventHandler(this.UserManager_UserIsAllowed);

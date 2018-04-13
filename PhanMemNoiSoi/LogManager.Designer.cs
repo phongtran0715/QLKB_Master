@@ -33,6 +33,7 @@
             this.rbThang = new System.Windows.Forms.RadioButton();
             this.rbNgay = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnDeletAll = new System.Windows.Forms.Button();
             this.txtContent = new System.Windows.Forms.TextBox();
             this.btnClearLog = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -96,6 +97,7 @@
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.btnDeletAll);
             this.groupBox2.Controls.Add(this.txtContent);
             this.groupBox2.Controls.Add(this.btnClearLog);
             this.groupBox2.Controls.Add(this.label1);
@@ -115,6 +117,20 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Bộ lọc";
             // 
+            // btnDeletAll
+            // 
+            this.btnDeletAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDeletAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeletAll.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
+            this.btnDeletAll.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDeletAll.Location = new System.Drawing.Point(549, 128);
+            this.btnDeletAll.Name = "btnDeletAll";
+            this.btnDeletAll.Size = new System.Drawing.Size(110, 35);
+            this.btnDeletAll.TabIndex = 19;
+            this.btnDeletAll.Text = "     Xóa hết";
+            this.btnDeletAll.UseVisualStyleBackColor = true;
+            this.btnDeletAll.Click += new System.EventHandler(this.btnDeletAll_Click);
+            // 
             // txtContent
             // 
             this.txtContent.Location = new System.Drawing.Point(460, 31);
@@ -128,9 +144,9 @@
             this.btnClearLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClearLog.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
             this.btnClearLog.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClearLog.Location = new System.Drawing.Point(562, 128);
+            this.btnClearLog.Location = new System.Drawing.Point(419, 128);
             this.btnClearLog.Name = "btnClearLog";
-            this.btnClearLog.Size = new System.Drawing.Size(98, 35);
+            this.btnClearLog.Size = new System.Drawing.Size(110, 35);
             this.btnClearLog.TabIndex = 13;
             this.btnClearLog.Text = "     Xóa Log";
             this.btnClearLog.UseVisualStyleBackColor = true;
@@ -162,9 +178,9 @@
             this.btnTatCa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTatCa.Image = ((System.Drawing.Image)(resources.GetObject("btnTatCa.Image")));
             this.btnTatCa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTatCa.Location = new System.Drawing.Point(441, 128);
+            this.btnTatCa.Location = new System.Drawing.Point(289, 128);
             this.btnTatCa.Name = "btnTatCa";
-            this.btnTatCa.Size = new System.Drawing.Size(98, 35);
+            this.btnTatCa.Size = new System.Drawing.Size(110, 35);
             this.btnTatCa.TabIndex = 14;
             this.btnTatCa.Text = "   Tất cả";
             this.btnTatCa.UseVisualStyleBackColor = true;
@@ -176,9 +192,9 @@
             this.btnTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTimKiem.Image = ((System.Drawing.Image)(resources.GetObject("btnTimKiem.Image")));
             this.btnTimKiem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTimKiem.Location = new System.Drawing.Point(317, 128);
+            this.btnTimKiem.Location = new System.Drawing.Point(161, 128);
             this.btnTimKiem.Name = "btnTimKiem";
-            this.btnTimKiem.Size = new System.Drawing.Size(98, 35);
+            this.btnTimKiem.Size = new System.Drawing.Size(110, 35);
             this.btnTimKiem.TabIndex = 13;
             this.btnTimKiem.Text = "    Tìm kiếm";
             this.btnTimKiem.UseVisualStyleBackColor = true;
@@ -291,9 +307,9 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LogManager";
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tìm kiếm";
+            this.UserIsDenied += new System.EventHandler(this.LogManager_UserIsDenied_1);
             this.Load += new System.EventHandler(this.LogManager_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -325,5 +341,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtContent;
         private System.Windows.Forms.DataGridView dgLogView;
+        private System.Windows.Forms.Button btnDeletAll;
     }
 }

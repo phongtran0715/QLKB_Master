@@ -102,10 +102,19 @@ namespace PhanMemNoiSoi
                 while (rdr.Read())
                 {
                     gbList[index] = new System.Windows.Forms.GroupBox();
-                    gbList[index].Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                    gbList[index].Location = new System.Drawing.Point(8, 23 + index * 80);
+                    gbList[index].Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, 
+                        System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                    if(index == 0)
+                    {
+                        gbList[index].Location = new System.Drawing.Point(8, 5 + index * (550 / numRecord));
+                    }
+                    else
+                    {
+                        gbList[index].Location = new System.Drawing.Point(8, 20 + index * (550 / numRecord));
+                    }
+                    
                     gbList[index].Name = rdr["ItemCode"].ToString();
-                    gbList[index].Size = new System.Drawing.Size(groupBox1.Width * 98 / 100, 76);
+                    gbList[index].Size = new System.Drawing.Size(groupBox1.Width * 98 / 100, 550 / numRecord);
                     gbList[index].TabIndex = 1;
                     gbList[index].TabStop = false;
                     gbList[index].Text = rdr["Content"].ToString();
@@ -127,7 +136,7 @@ namespace PhanMemNoiSoi
                     txtList[index].ScrollBars = System.Windows.Forms.ScrollBars.Both;
                     txtList[index].MouseClick += new System.Windows.Forms.MouseEventHandler(textbox_MouseClick);
                     txtList[index].ForeColor = Color.Blue;
-
+                    
                     contentShowRp[index] = rdr["Content"].ToString();
                     //increase index for next round
                     index++;
@@ -207,33 +216,23 @@ namespace PhanMemNoiSoi
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            /*
-            if (Session.Instance.ActiveLicense == false)
-            {
-                using (CountDownForm formOptions = new CountDownForm())
-                {
-                    formOptions.ShowDialog();
-
-                    bool result = formOptions.GetMyResult();
-                    if(result == false)
-                    {
-                        return;
-                    }
-                }
-            }
-            */
             rp = new ReportWord();
 
             //check number image select
-            int numImg = 0;
-            for (int i = 0; i < listImage.Items.Count; i++)
+            List<String> iList = new List<String>();
+            if (listImage != null)
             {
-                if (listImage.Items[i].Checked)
+                int imgCount = listImage.Items.Count;
+                for (int i = 0; i < imgCount; i++)
                 {
-                    numImg++;
+                    if (listImage.Items[i].Checked)
+                    {
+                        iList.Add(imagePath + listImage.Items[i].Name);
+                    }
                 }
             }
-            if (numImg == 0)
+
+            if (iList.Count == 0)
             {
                 DialogResult result = MessageBox.Show("Bạn chưa chọn ảnh. Bạn có muốn tiếp tục xem báo cáo?", "Thông báo",
                                 MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
@@ -244,12 +243,12 @@ namespace PhanMemNoiSoi
             }
 
             rp.openTemplateFile();
-            fillReport(rp, numImg);
+            fillReport(rp, iList);
             string tmp = Log.Instance.GetTempPath() + "tmp.docx";
             rp.saveFile(tmp, true);           
         }
 
-        private void fillReport(ReportWord rp, int rpMode)
+        private void fillReport(ReportWord rp, List<String> iList)
         {
             Patient patientInfo = new Patient().getPatientByNum(this.patientId);
             rp.insertText("NumId", this.checkId);
@@ -280,20 +279,6 @@ namespace PhanMemNoiSoi
                 }
             }
             rp.createTable("table", data);
-
-            //insert image 
-            List<String> iList = new List<String>();
-            if(listImage != null)
-            {
-                int imgCount = listImage.Items.Count;
-                for (int i = 0; i < imgCount; i++)
-                {
-                    if (listImage.Items[i].Checked)
-                    {
-                        iList.Add(imagePath + listImage.Items[i].Name);
-                    }
-                }
-            }
             rp.createImageTable("images", iList);
 
             rp.insertText("Date", DateTime.Now.Day.ToString());
