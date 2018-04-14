@@ -588,6 +588,7 @@ namespace PhanMemNoiSoi
             catch (Exception ex)
             {
                 MessageBox.Show("Tốc độ khung hình không được hỗ trợ.\n\n" + ex.Message);
+                initCamera();
             }
         }
 

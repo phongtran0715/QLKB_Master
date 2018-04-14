@@ -83,6 +83,16 @@ namespace PhanMemNoiSoi.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap About {
+            get {
+                object obj = ResourceManager.GetObject("About", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap About_icon {
             get {
                 object obj = ResourceManager.GetObject("About-icon", resourceCulture);
@@ -96,16 +106,6 @@ namespace PhanMemNoiSoi.Properties {
         internal static System.Drawing.Bitmap About_us {
             get {
                 object obj = ResourceManager.GetObject("About us", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap About3 {
-            get {
-                object obj = ResourceManager.GetObject("About3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -306,6 +306,16 @@ namespace PhanMemNoiSoi.Properties {
         internal static System.Drawing.Bitmap e2edc731cbfc {
             get {
                 object obj = ResourceManager.GetObject("e2edc731cbfc", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap edit_1103599_960_720 {
+            get {
+                object obj = ResourceManager.GetObject("edit-1103599_960_720", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -516,6 +526,26 @@ namespace PhanMemNoiSoi.Properties {
         internal static System.Drawing.Bitmap trash_24x24 {
             get {
                 object obj = ResourceManager.GetObject("trash_24x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap trash_circle_red_512 {
+            get {
+                object obj = ResourceManager.GetObject("trash-circle-red-512", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap trash_circle_red_5121 {
+            get {
+                object obj = ResourceManager.GetObject("trash-circle-red-5121", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -67,10 +67,11 @@ namespace PhanMemNoiSoi
             bool exitCode = false;
             try
             {
-                if(capture != null)
+                if (capture != null)
                 {
                     capture.Dispose();
                 }
+
                 // Get new video device
                 if (capWrapper.vDeviceIndex >= filters.VideoInputDevices.Count || capWrapper.vDeviceIndex < 0)
                 {

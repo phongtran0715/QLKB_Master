@@ -54,7 +54,7 @@ namespace PhanMemNoiSoi
         {
             // load data for data grid view
             string str = Settings.Default.maxRowDisplay.ToString();
-            string query = "SELECT TOP " + str + " SickNum,SickName, Age,IDCode, Createtime FROM SickData ORDER BY SickNum DESC;";
+            string query = "SELECT TOP " + str + " SickNum,SickName, Age,IDCode, Createtime FROM SickData ORDER BY Createtime DESC;";
             dtaPatient = new SqlDataAdapter(query, DBConnection.Instance.sqlConn);
 
             SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dtaPatient);

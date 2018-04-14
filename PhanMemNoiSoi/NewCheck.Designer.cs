@@ -227,7 +227,7 @@
             // 
             this.btnChupHinh.Image = ((System.Drawing.Image)(resources.GetObject("btnChupHinh.Image")));
             this.btnChupHinh.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnChupHinh.Location = new System.Drawing.Point(930, 160);
+            this.btnChupHinh.Location = new System.Drawing.Point(1010, 163);
             this.btnChupHinh.Name = "btnChupHinh";
             this.btnChupHinh.Size = new System.Drawing.Size(112, 35);
             this.btnChupHinh.TabIndex = 13;

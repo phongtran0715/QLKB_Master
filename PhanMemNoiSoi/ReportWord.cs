@@ -158,6 +158,7 @@ namespace PhanMemNoiSoi
                 // range is now set to bounds of the word "<table>"
                 objTab1 = wordDoc.Tables.Add(objWordRng, numRows, numCols, ref missing, ref missing);
                 objTab1.AllowAutoFit = false;
+                objTab1.BottomPadding = 5;
                 int iRow, iCols;
                 int imgIndex = 0;
                 for (iRow = 1; iRow <= numRows; iRow++)
