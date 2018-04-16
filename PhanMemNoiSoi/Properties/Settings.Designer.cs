@@ -110,30 +110,30 @@ namespace PhanMemNoiSoi.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("640")]
-        public int vFrameSizeX {
+        public int vFrameSizeHigh {
             get {
-                return ((int)(this["vFrameSizeX"]));
+                return ((int)(this["vFrameSizeHigh"]));
             }
             set {
-                this["vFrameSizeX"] = value;
+                this["vFrameSizeHigh"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("480")]
-        public int vFrameSizeY {
+        public int vFrameSizeWidth {
             get {
-                return ((int)(this["vFrameSizeY"]));
+                return ((int)(this["vFrameSizeWidth"]));
             }
             set {
-                this["vFrameSizeY"] = value;
+                this["vFrameSizeWidth"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("29.997")]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
         public double vFrameRate {
             get {
                 return ((double)(this["vFrameRate"]));

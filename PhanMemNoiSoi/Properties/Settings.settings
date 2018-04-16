@@ -23,14 +23,14 @@
     <Setting Name="vDeviceIndex" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="vFrameSizeX" Type="System.Int32" Scope="User">
+    <Setting Name="vFrameSizeHigh" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">640</Value>
     </Setting>
-    <Setting Name="vFrameSizeY" Type="System.Int32" Scope="User">
+    <Setting Name="vFrameSizeWidth" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">480</Value>
     </Setting>
     <Setting Name="vFrameRate" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">29.997</Value>
+      <Value Profile="(Default)">30</Value>
     </Setting>
     <Setting Name="vCompressIndex" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>

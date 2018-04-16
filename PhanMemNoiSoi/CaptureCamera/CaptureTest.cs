@@ -11,6 +11,7 @@
 using DirectX.Capture;
 using PhanMemNoiSoi.CaptureCamera;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
@@ -21,8 +22,6 @@ namespace PhanMemNoiSoi
     public class CaptureTest : Form
     {
         CaptureWrapper capWrapper;
-        private Capture capture = null;
-        private Filters filters = new Filters();
 
         #region variable auto generate
         private System.Windows.Forms.Button btnSave;
@@ -48,8 +47,8 @@ namespace PhanMemNoiSoi
         public CaptureTest()
         {
             InitializeComponent();
-            capWrapper = new CaptureWrapper();
-            initCamera();
+            capWrapper = CaptureWrapper.Instance;
+            capWrapper.initTestCamera(panelVideo);
             // Update the main menu
             // Much of the interesting work of this sample occurs here
             try { updateMenu(); } catch { }
@@ -225,7 +224,7 @@ namespace PhanMemNoiSoi
             this.btnSave.Size = new System.Drawing.Size(130, 35);
             this.btnSave.TabIndex = 3;
             this.btnSave.Text = "     Lưu và thoát";
-            this.btnSave.Click += new System.EventHandler(this.btnStop_Click);
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // CaptureTest
             // 
@@ -249,11 +248,11 @@ namespace PhanMemNoiSoi
 
         private void btnExit_Click(object sender, System.EventArgs e)
         {
-            if (capture != null)
+            if (capWrapper.capture != null)
             {
                 try
                 {
-                    capture.Dispose();
+                    capWrapper.capture.Dispose();
                 }
                 catch (Exception)
                 {
@@ -268,9 +267,9 @@ namespace PhanMemNoiSoi
         {
             try
             {
-                if (capture == null)
+                if (capWrapper.capture == null)
                     throw new ApplicationException("Please select a video and/or audio device.");
-                capture.Cue();
+                capWrapper.capture.Cue();
                 //MessageBox.Show("Ready to capture.\n\nUse Cue() before Start() to " +
                 //    "do all the preparation work that needs to be done to start a " +
                 //    "capture. Now, when you click Start the capture will begin faster " +
@@ -288,9 +287,9 @@ namespace PhanMemNoiSoi
         {
             try
             {
-                if (capture == null)
+                if (capWrapper.capture == null)
                     throw new ApplicationException("Please select a video and/or audio device.");
-                capture.Start();
+                capWrapper.capture.Start();
             }
             catch (Exception ex)
             {
@@ -298,21 +297,22 @@ namespace PhanMemNoiSoi
             }
         }
 
-        private void btnStop_Click(object sender, System.EventArgs e)
+        private void btnSave_Click(object sender, System.EventArgs e)
         {
             try
             {
-                if (capture != null)
+                if (capWrapper.capture != null)
                 {
                     //Save information
-                    Properties.Settings.Default.vDeviceIndex = capWrapper.vDeviceIndex;
-                    Properties.Settings.Default.vCompressIndex = capWrapper.vCompressIndex;
-                    Properties.Settings.Default.vSourceIndex = capWrapper.vSourceIndex;
-                    Properties.Settings.Default.vFrameSizeX = capWrapper.vFrameSizeX;
-                    Properties.Settings.Default.vFrameSizeY = capWrapper.vFrameSizeY;
-                    Properties.Settings.Default.vFrameRate = capWrapper.vFrameRate;
+                    Properties.Settings.Default.vDeviceIndex    = capWrapper.vDeviceIndex;
+                    Properties.Settings.Default.vCompressIndex  = capWrapper.vCompressIndex;
+                    Properties.Settings.Default.vFrameSizeHigh  = capWrapper.capture.FrameSize.Height;
+                    Properties.Settings.Default.vFrameSizeWidth = capWrapper.capture.FrameSize.Width;
+                    Properties.Settings.Default.vFrameRate      = capWrapper.capture.FrameRate;
                     Properties.Settings.Default.Save();
-                    capture.Dispose();
+                    capWrapper.syncProperty();
+                    //TODO: check dispose condition 
+                    capWrapper.capture.Dispose();
                 }
             }
             catch (Exception ex)
@@ -332,41 +332,41 @@ namespace PhanMemNoiSoi
             Control oldPreviewWindow = null;
 
             // Disable preview to avoid additional flashes (optional)
-            if (capture != null)
+            if (capWrapper.capture != null)
             {
-                oldPreviewWindow = capture.PreviewWindow;
-                capture.PreviewWindow = null;
+                oldPreviewWindow = capWrapper.capture.PreviewWindow;
+                capWrapper.capture.PreviewWindow = null;
             }
 
             // Load video devices
             Filter videoDevice = null;
-            if (capture != null)
-                videoDevice = capture.VideoDevice;
+            if (capWrapper.capture != null)
+                videoDevice = capWrapper.capture.VideoDevice;
             mnuVideoDevices.MenuItems.Clear();
-            for (int c = 0; c < filters.VideoInputDevices.Count; c++)
+            for (int c = 0; c < capWrapper.filters.VideoInputDevices.Count; c++)
             {
-                f = filters.VideoInputDevices[c];
+                f = capWrapper.filters.VideoInputDevices[c];
                 m = new MenuItem(f.Name, new EventHandler(mnuVideoDevices_Click));
                 m.Checked = (videoDevice == f);
                 mnuVideoDevices.MenuItems.Add(m);
             }
-            mnuVideoDevices.Enabled = (filters.VideoInputDevices.Count > 0);
+            mnuVideoDevices.Enabled = (capWrapper.filters.VideoInputDevices.Count > 0);
 
             // Load video compressors
             try
             {
                 mnuVideoCompressors.MenuItems.Clear();
                 m = new MenuItem("(None)", new EventHandler(mnuVideoCompressors_Click));
-                m.Checked = (capture.VideoCompressor == null);
+                m.Checked = (capWrapper.capture.VideoCompressor == null);
                 mnuVideoCompressors.MenuItems.Add(m);
-                for (int c = 0; c < filters.VideoCompressors.Count; c++)
+                for (int c = 0; c < capWrapper.filters.VideoCompressors.Count; c++)
                 {
-                    f = filters.VideoCompressors[c];
+                    f = capWrapper.filters.VideoCompressors[c];
                     m = new MenuItem(f.Name, new EventHandler(mnuVideoCompressors_Click));
-                    m.Checked = (capture.VideoCompressor == f);
+                    m.Checked = (capWrapper.capture.VideoCompressor == f);
                     mnuVideoCompressors.MenuItems.Add(m);
                 }
-                mnuVideoCompressors.Enabled = ((capture.VideoDevice != null) && (filters.VideoCompressors.Count > 0));
+                mnuVideoCompressors.Enabled = ((capWrapper.capture.VideoDevice != null) && (capWrapper.filters.VideoCompressors.Count > 0));
             }
             catch { mnuVideoCompressors.Enabled = false; }
 
@@ -374,63 +374,29 @@ namespace PhanMemNoiSoi
             try
             {
                 mnuVideoSources.MenuItems.Clear();
-                current = capture.VideoSource;
-                for (int c = 0; c < capture.VideoSources.Count; c++)
+                current = capWrapper.capture.VideoSource;
+                for (int c = 0; c < capWrapper.capture.VideoSources.Count; c++)
                 {
-                    s = capture.VideoSources[c];
+                    s = capWrapper.capture.VideoSources[c];
                     m = new MenuItem(s.Name, new EventHandler(mnuVideoSources_Click));
                     m.Checked = (current == s);
                     mnuVideoSources.MenuItems.Add(m);
                 }
-                mnuVideoSources.Enabled = (capture.VideoSources.Count > 0);
+                mnuVideoSources.Enabled = (capWrapper.capture.VideoSources.Count > 0);
             }
             catch { mnuVideoSources.Enabled = false; }
 
             // Load frame rates
             try
             {
-                mnuFrameRates.MenuItems.Clear();
-                int frameRate = (int)(capture.FrameRate * 1000);
-                m = new MenuItem("15 fps", new EventHandler(mnuFrameRates_Click));
-                m.Checked = (frameRate == 15000);
-                mnuFrameRates.MenuItems.Add(m);
-                m = new MenuItem("24 fps (Film)", new EventHandler(mnuFrameRates_Click));
-                m.Checked = (frameRate == 24000);
-                mnuFrameRates.MenuItems.Add(m);
-                m = new MenuItem("25 fps (PAL)", new EventHandler(mnuFrameRates_Click));
-                m.Checked = (frameRate == 25000);
-                mnuFrameRates.MenuItems.Add(m);
-                m = new MenuItem("29.997 fps (NTSC)", new EventHandler(mnuFrameRates_Click));
-                m.Checked = (frameRate == 29997);
-                mnuFrameRates.MenuItems.Add(m);
-                m = new MenuItem("30 fps (~NTSC)", new EventHandler(mnuFrameRates_Click));
-                m.Checked = (frameRate == 30000);
-                mnuFrameRates.MenuItems.Add(m);
-                m = new MenuItem("59.994 fps (2xNTSC)", new EventHandler(mnuFrameRates_Click));
-                m.Checked = (frameRate == 59994);
-                mnuFrameRates.MenuItems.Add(m);
-                mnuFrameRates.Enabled = true;
+                createFrameRateList();
             }
             catch { mnuFrameRates.Enabled = false; }
 
             // Load frame sizes
             try
             {
-                mnuFrameSizes.MenuItems.Clear();
-                Size frameSize = capture.FrameSize;
-                m = new MenuItem("160 x 120", new EventHandler(mnuFrameSizes_Click));
-                m.Checked = (frameSize == new Size(160, 120));
-                mnuFrameSizes.MenuItems.Add(m);
-                m = new MenuItem("320 x 240", new EventHandler(mnuFrameSizes_Click));
-                m.Checked = (frameSize == new Size(320, 240));
-                mnuFrameSizes.MenuItems.Add(m);
-                m = new MenuItem("640 x 480", new EventHandler(mnuFrameSizes_Click));
-                m.Checked = (frameSize == new Size(640, 480));
-                mnuFrameSizes.MenuItems.Add(m);
-                m = new MenuItem("1024 x 768", new EventHandler(mnuFrameSizes_Click));
-                m.Checked = (frameSize == new Size(1024, 768));
-                mnuFrameSizes.MenuItems.Add(m);
-                mnuFrameSizes.Enabled = true;
+                createFrameSizeList();
             }
             catch { mnuFrameSizes.Enabled = false; }
 
@@ -438,22 +404,79 @@ namespace PhanMemNoiSoi
             try
             {
                 mnuPropertyPages.MenuItems.Clear();
-                for (int c = 0; c < capture.PropertyPages.Count; c++)
+                for (int c = 0; c < capWrapper.capture.PropertyPages.Count; c++)
                 {
-                    p = capture.PropertyPages[c];
+                    p = capWrapper.capture.PropertyPages[c];
                     m = new MenuItem(p.Name + "...", new EventHandler(mnuPropertyPages_Click));
                     mnuPropertyPages.MenuItems.Add(m);
                 }
-                mnuPropertyPages.Enabled = (capture.PropertyPages.Count > 0);
+                mnuPropertyPages.Enabled = (capWrapper.capture.PropertyPages.Count > 0);
             }
             catch { mnuPropertyPages.Enabled = false; }
 
             // Enable/disable caps
-            mnuVideoCaps.Enabled = ((capture != null) && (capture.VideoCaps != null));
+            mnuVideoCaps.Enabled = ((capWrapper.capture != null) && (capWrapper.capture.VideoCaps != null));
 
             // Reenable preview if it was enabled before
-            if (capture != null)
-                capture.PreviewWindow = oldPreviewWindow;
+            if (capWrapper.capture != null)
+                capWrapper.capture.PreviewWindow = oldPreviewWindow;
+        }
+
+        private void createFrameRateList()
+        {
+            MenuItem m;
+            List<double> listFr = new List<double>(new double[] { 15 , 23.98 , 25 , 29.97, 30, 50, 59.94, 60 });
+            string strMaxFr = capWrapper.capture.VideoCaps.MaxFrameRate.ToString("0.000");
+            string strMinFr = capWrapper.capture.VideoCaps.MinFrameRate.ToString("0.000");
+            int maxFrame = (int)(capWrapper.capture.VideoCaps.MaxFrameRate * 1000);
+            int minFrame = (int)(capWrapper.capture.VideoCaps.MinFrameRate * 1000);
+            mnuFrameRates.MenuItems.Clear();
+            int frameRate = (int)(capWrapper.capture.FrameRate * 1000);
+            m = new MenuItem(strMinFr + " fps (Tốc độ khung hình tối thiểu)", new EventHandler(mnuFrameRates_Click));
+            m.Checked = (frameRate == minFrame);
+            mnuFrameRates.MenuItems.Add(m);
+            for (int i =0; i< listFr.Count; i++)
+            {
+                int frValue = (int)(listFr[i] * 1000);
+                if ( (frValue > minFrame) && (frValue < maxFrame))
+                {
+                    m = new MenuItem(listFr[i].ToString() + " fps", new EventHandler(mnuFrameRates_Click));
+                    m.Checked = (frameRate == frValue);
+                    mnuFrameRates.MenuItems.Add(m);
+                }
+            }
+            m = new MenuItem(strMaxFr + " fps (Tốc độ khung hình tối đa)", new EventHandler(mnuFrameRates_Click));
+            m.Checked = (frameRate == maxFrame);
+            mnuFrameRates.MenuItems.Add(m);
+            mnuFrameRates.Enabled = true;
+        }
+
+        private void createFrameSizeList()
+        {
+            MenuItem m;
+            List<Size> listFr = new List<Size>(new Size[] {
+                new Size(160,120), new Size (320,240),
+                new Size(640, 480), new Size (720,480),
+                new Size(1024, 768), new Size(1280, 720),
+                new Size (1920, 1080)});
+            Size maxFrSize = new Size(capWrapper.capture.VideoCaps.MaxFrameSize.Width, capWrapper.capture.VideoCaps.MaxFrameSize.Height);
+            mnuFrameSizes.MenuItems.Clear();
+            Size frameSize = capWrapper.capture.FrameSize;
+            for(int i = 0; i< listFr.Count; i++)
+            {
+                String content = listFr[i].Width.ToString() + " x " + listFr[i].Height.ToString();
+                m = new MenuItem(content , new EventHandler(mnuFrameSizes_Click));
+                if((listFr[i].Width < maxFrSize.Width) && (listFr[i].Height < maxFrSize.Height))
+                {
+                    m.Checked = (frameSize == listFr[i]);
+                    mnuFrameSizes.MenuItems.Add(m);
+                }
+            }
+            m = new MenuItem(maxFrSize.Width.ToString() + " x " + maxFrSize.Height.ToString() + 
+                " (Kích thước khung tối đa)", new EventHandler(mnuFrameSizes_Click));
+            m.Checked = (frameSize == new Size(maxFrSize.Width, maxFrSize.Height));
+            mnuFrameSizes.MenuItems.Add(m);
+            mnuFrameSizes.Enabled = true;
         }
 
         private void mnuVideoDevices_Click(object sender, System.EventArgs e)
@@ -464,24 +487,24 @@ namespace PhanMemNoiSoi
                 // because the video and audio device can only be changed
                 // by creating a new Capture object.
                 Filter videoDevice = null;
-                if (capture != null)
+                if (capWrapper.capture != null)
                 {
-                    videoDevice = capture.VideoDevice;
-                    capture.Dispose();
-                    capture = null;
+                    videoDevice = capWrapper.capture.VideoDevice;
+                    capWrapper.capture.Dispose();
+                    capWrapper.capture = null;
                 }
 
                 // Get new video device
                 MenuItem m = sender as MenuItem;
-                videoDevice = (m.Index >= 0 ? filters.VideoInputDevices[m.Index] : null);
+                videoDevice = (m.Index >= 0 ? capWrapper.filters.VideoInputDevices[m.Index] : null);
 
                 // Create capture object
                 if ((videoDevice != null))
                 {
-                    capture = new Capture(videoDevice);
-                    if (capture.PreviewWindow == null)
+                    capWrapper.capture = new Capture(videoDevice);
+                    if (capWrapper.capture.PreviewWindow == null)
                     {
-                        capture.PreviewWindow = panelVideo;
+                        capWrapper.capture.PreviewWindow = panelVideo;
                     }
                     capWrapper.vDeviceIndex = m.Index;
                 }
@@ -502,7 +525,7 @@ namespace PhanMemNoiSoi
                 // Change the video compressor
                 // We subtract 1 from m.Index beacuse the first item is (None)
                 MenuItem m = sender as MenuItem;
-                capture.VideoCompressor = (m.Index > 0 ? filters.VideoCompressors[m.Index - 1] : null);
+                capWrapper.capture.VideoCompressor = (m.Index > 0 ? capWrapper.filters.VideoCompressors[m.Index - 1] : null);
                 capWrapper.vCompressIndex = m.Index;
                 updateMenu();
             }
@@ -520,7 +543,7 @@ namespace PhanMemNoiSoi
                 // Choose the video source
                 // If the device only has one source, this menu item will be disabled
                 MenuItem m = sender as MenuItem;
-                capture.VideoSource = capture.VideoSources[m.Index];
+                capWrapper.capture.VideoSource = capWrapper.capture.VideoSources[m.Index];
                 updateMenu();
             }
             catch (Exception ex)
@@ -531,11 +554,11 @@ namespace PhanMemNoiSoi
 
         private void mnuExit_Click(object sender, System.EventArgs e)
         {
-            if (capture != null)
+            if (capWrapper.capture != null)
             {
                 try
                 {
-                    capture.Stop();
+                    capWrapper.capture.Stop();
                 }
                 catch (Exception ex)
                 {
@@ -550,28 +573,27 @@ namespace PhanMemNoiSoi
             try
             {
                 // Disable preview to avoid additional flashes (optional)
-                bool preview = (capture.PreviewWindow != null);
-                capture.PreviewWindow = null;
+                bool preview = (capWrapper.capture.PreviewWindow != null);
+                capWrapper.capture.PreviewWindow = null;
 
                 // Update the frame size
                 MenuItem m = sender as MenuItem;
                 string[] s = m.Text.Split('x');
-                Size size = new Size(int.Parse(s[0]), int.Parse(s[1]));
-                capture.FrameSize = size;
+                string aaa = s[1].Split(' ')[1];
+                Size size = new Size(int.Parse(s[0]), int.Parse(s[1].Split(' ')[1]));
+                capWrapper.capture.FrameSize = size;
 
                 // Update the menu
                 updateMenu();
 
-                capWrapper.vFrameSizeX = int.Parse(s[0]);
-                capWrapper.vFrameSizeY = int.Parse(s[1]);
-
                 // Restore previous preview setting
-                capture.PreviewWindow = (preview ? panelVideo : null);
+                capWrapper.capture.PreviewWindow = (preview ? panelVideo : null);
             }
             catch (Exception ex)
             {
                 //MessageBox.Show("Frame size not supported.\n\n" + ex.Message + "\n\n" + ex.ToString());
-                MessageBox.Show("Kích thước khung hình không được hỗ trợ.\n\n" + ex.Message);
+                MessageBox.Show("Kích thước khung hình không được hỗ trợ.\n Vui lòng chọn kích thước khác!");
+                capWrapper.initTestCamera(panelVideo);
             }
         }
 
@@ -581,14 +603,14 @@ namespace PhanMemNoiSoi
             {
                 MenuItem m = sender as MenuItem;
                 string[] s = m.Text.Split(' ');
-                capture.FrameRate = double.Parse(s[0]);
+                capWrapper.capture.FrameRate = double.Parse(s[0]);
                 capWrapper.vFrameRate = double.Parse(s[0]);
                 updateMenu();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Tốc độ khung hình không được hỗ trợ.\n\n" + ex.Message);
-                initCamera();
+                MessageBox.Show("Tốc độ khung hình không được hỗ trợ.\n Vui lòng chọn giá trị khác!");
+                capWrapper.initTestCamera(panelVideo);
             }
         }
 
@@ -596,13 +618,13 @@ namespace PhanMemNoiSoi
         {
             try
             {
-                if (capture.PreviewWindow == null)
+                if (capWrapper.capture.PreviewWindow == null)
                 {
-                    capture.PreviewWindow = panelVideo;
+                    capWrapper.capture.PreviewWindow = panelVideo;
                 }
                 else
                 {
-                    capture.PreviewWindow = null;
+                    capWrapper.capture.PreviewWindow = null;
                 }
             }
             catch (Exception ex)
@@ -616,7 +638,7 @@ namespace PhanMemNoiSoi
             try
             {
                 MenuItem m = sender as MenuItem;
-                capture.PropertyPages[m.Index].Show(this);
+                capWrapper.capture.PropertyPages[m.Index].Show(this);
                 updateMenu();
             }
             catch (Exception ex)
@@ -642,13 +664,13 @@ namespace PhanMemNoiSoi
                     "\n" +
                     "Min Frame Rate:\t\t{8:0.000} fps\n" +
                     "Max Frame Rate:\t\t{9:0.000} fps\n",
-                    capture.VideoCaps.InputSize.Width, capture.VideoCaps.InputSize.Height,
-                    capture.VideoCaps.MinFrameSize.Width, capture.VideoCaps.MinFrameSize.Height,
-                    capture.VideoCaps.MaxFrameSize.Width, capture.VideoCaps.MaxFrameSize.Height,
-                    capture.VideoCaps.FrameSizeGranularityX,
-                    capture.VideoCaps.FrameSizeGranularityY,
-                    capture.VideoCaps.MinFrameRate,
-                    capture.VideoCaps.MaxFrameRate);
+                    capWrapper.capture.VideoCaps.InputSize.Width, capWrapper.capture.VideoCaps.InputSize.Height,
+                    capWrapper.capture.VideoCaps.MinFrameSize.Width, capWrapper.capture.VideoCaps.MinFrameSize.Height,
+                    capWrapper.capture.VideoCaps.MaxFrameSize.Width, capWrapper.capture.VideoCaps.MaxFrameSize.Height,
+                    capWrapper.capture.VideoCaps.FrameSizeGranularityX,
+                    capWrapper.capture.VideoCaps.FrameSizeGranularityY,
+                    capWrapper.capture.VideoCaps.MinFrameRate,
+                    capWrapper.capture.VideoCaps.MaxFrameRate);
                 MessageBox.Show(s);
 
             }
@@ -656,36 +678,6 @@ namespace PhanMemNoiSoi
             {
                 MessageBox.Show("Unable display video capabilities. Please submit a bug report.\n\n" + ex.Message + "\n\n" + ex.ToString());
             }
-        }
-
-        private void OnCaptureComplete(object sender, EventArgs e)
-        {
-            // Demonstrate the Capture.CaptureComplete event.
-            Debug.WriteLine("Capture complete.");
-        }
-
-        private bool initCamera()
-        {
-            bool exitCode = false;
-            try
-            {
-                if (capWrapper.vDeviceIndex >= filters.VideoInputDevices.Count || capWrapper.vDeviceIndex < 0)
-                {
-                    capWrapper.vDeviceIndex = 0;
-                }
-
-                capture = new Capture(filters.VideoInputDevices[capWrapper.vDeviceIndex]);
-                capture.CaptureComplete += new EventHandler(OnCaptureComplete);
-                capture.PreviewWindow = panelVideo;
-                exitCode = true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Video device not supported.\n\n" + ex.Message + "\n\n" + ex.ToString());
-                exitCode = false;
-                //MessageBox.Show("Thiết bị thu video không được hỗ trợ. Vui lòng kiểm tra camera \n\n" + ex.Message);
-            }
-            return exitCode;
         }
     }
 }
