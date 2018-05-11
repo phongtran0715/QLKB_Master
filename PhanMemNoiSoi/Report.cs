@@ -20,8 +20,8 @@ namespace PhanMemNoiSoi
         string patientId;
 
         TextBox adapTxtBox = new TextBox();
-        GroupBox[] gbList = null;
-        TextBox[] txtList = null;
+        GroupBox[] gbList = new GroupBox[] { };
+        TextBox[] txtList = new TextBox[] { };
         string[] contentShowRp = null;
         object missing = Missing.Value;
         string imagePath = null;
@@ -262,25 +262,25 @@ namespace PhanMemNoiSoi
             rp.insertText("Cause", patientInfo.CauseCheckProperty);
             rp.insertText("Doctor", Session.Instance.UserName);
             rp.insertText("CreateTime", patientInfo.CreateTimeProperty.ToString(helper.getDateFormat(Settings.Default.datetimeFormat)));
-
-            string[,] data = new string[txtList.Length, 2];
-            if(txtList != null)
-            {
-                for (int i = 0; i < txtList.Length; i++)
+                string[,] data = new string[txtList.Length, 2];
+                if (txtList != null)
                 {
-                    string header = contentShowRp[i].Trim() + " : ";
-                    data[i, 0] = header;
-                    string content = txtList[i].Text.Trim();
-                    if (content.EndsWith(","))
+                    for (int i = 0; i < txtList.Length; i++)
                     {
-                        content = content.Remove(content.Length - 1);
+                        string header = contentShowRp[i].Trim() + " : ";
+                        data[i, 0] = header;
+                        string content = txtList[i].Text.Trim();
+                        if (content.EndsWith(","))
+                        {
+                            content = content.Remove(content.Length - 1);
+                        }
+                        data[i, 1] = content;
                     }
-                    data[i, 1] = content;
                 }
-            }
-            rp.createTable("table", data);
+                rp.createTable("table", data);
+            
             rp.createImageTable("images", iList);
-
+            
             rp.insertText("Date", DateTime.Now.Day.ToString());
             rp.insertText("Month", DateTime.Now.Month.ToString());
             rp.insertText("Year", DateTime.Now.Year.ToString());

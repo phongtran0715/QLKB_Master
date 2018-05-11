@@ -259,6 +259,7 @@ namespace PhanMemNoiSoi
             bsSick.DataSource = tbSick;
 
             dgvBenhNhan.DataSource = bsSick;
+
             dgvBenhNhan.Columns["SickNum"].Visible = false;
             dgvBenhNhan.Columns["SickName"].HeaderText = "Tên bệnh nhân";
             dgvBenhNhan.Columns["SickName"].Width = dgvBenhNhan.Width / 8;
@@ -271,12 +272,12 @@ namespace PhanMemNoiSoi
             dgvBenhNhan.Columns["Occupation"].Width = dgvBenhNhan.Width / 9;
             dgvBenhNhan.Columns["Telephone"].HeaderText = "Điện thoại";
             dgvBenhNhan.Columns["Telephone"].Width = dgvBenhNhan.Width / 9;
-            dgvBenhNhan.Columns["Telephone"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            //dgvBenhNhan.Columns["Telephone"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvBenhNhan.Columns["InsuranceId"].HeaderText = "Số BHYT";
             dgvBenhNhan.Columns["InsuranceId"].Width = dgvBenhNhan.Width / 9;
             dgvBenhNhan.Columns["Sex"].HeaderText = "Giới tính";
             dgvBenhNhan.Columns["Sex"].Width = dgvBenhNhan.Width / 15;
-            dgvBenhNhan.Columns["Sex"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            //dgvBenhNhan.Columns["Sex"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvBenhNhan.Columns["CauseCheck"].HeaderText = "Lý do khám";
             dgvBenhNhan.Columns["CauseCheck"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
@@ -361,7 +362,7 @@ namespace PhanMemNoiSoi
                 btnChiTiet.Enabled = true;
             }
             currRowIndex = lastRowIndex;
-            selectRowInDgv(dgvBenhNhan, lastRowIndex);
+            //selectRowInDgv(dgvBenhNhan, lastRowIndex);
             helper.setRowNumber(dgvBenhNhan, 20);
         }
 
@@ -428,7 +429,7 @@ namespace PhanMemNoiSoi
                 currRowIndex = nRowIndex;
                 dgvBenhNhan.Rows[nRowIndex].Selected = true;
                 //In case if you want to scroll down as well.
-                dgvBenhNhan.FirstDisplayedScrollingRowIndex = nRowIndex;
+                //dgvBenhNhan.FirstDisplayedScrollingRowIndex = nRowIndex;
             }
         }
 

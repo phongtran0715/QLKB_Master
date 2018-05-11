@@ -147,6 +147,10 @@ namespace PhanMemNoiSoi
 
         public void createImageTable(string name, List<String> images)
         {
+            if(images == null)
+            {
+                return;
+            }
             int[] dimension = getImgTableSize(images.Count);
             int numRows = dimension[0];
             int numCols = dimension[1];

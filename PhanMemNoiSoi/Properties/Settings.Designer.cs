@@ -97,13 +97,13 @@ namespace PhanMemNoiSoi.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int vDeviceIndex {
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string vDevice {
             get {
-                return ((int)(this["vDeviceIndex"]));
+                return ((string)(this["vDevice"]));
             }
             set {
-                this["vDeviceIndex"] = value;
+                this["vDevice"] = value;
             }
         }
         
@@ -133,7 +133,7 @@ namespace PhanMemNoiSoi.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        [global::System.Configuration.DefaultSettingValueAttribute("29.97")]
         public double vFrameRate {
             get {
                 return ((double)(this["vFrameRate"]));
@@ -145,13 +145,13 @@ namespace PhanMemNoiSoi.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int vCompressIndex {
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string vCompress {
             get {
-                return ((int)(this["vCompressIndex"]));
+                return ((string)(this["vCompress"]));
             }
             set {
-                this["vCompressIndex"] = value;
+                this["vCompress"] = value;
             }
         }
         

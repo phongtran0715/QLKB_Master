@@ -54,7 +54,7 @@ namespace PhanMemNoiSoi
         {
             // load data for data grid view
             string str = Settings.Default.maxRowDisplay.ToString();
-            string query = "SELECT TOP " + str + " SickNum,SickName, Age,IDCode, Createtime FROM SickData ORDER BY Createtime DESC;";
+            string query = "SELECT TOP " + str + " SickNum,SickName, Age, Telephone, Createtime FROM SickData ORDER BY SickNum DESC;";
             dtaPatient = new SqlDataAdapter(query, DBConnection.Instance.sqlConn);
 
             SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dtaPatient);
@@ -72,15 +72,15 @@ namespace PhanMemNoiSoi
             dgvPatient.Columns["SickName"].HeaderText = "Tên";
             dgvPatient.Columns["Age"].HeaderText = "Tuổi";
             dgvPatient.Columns["Age"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgvPatient.Columns["IDCode"].HeaderText = "CMTND";
-            dgvPatient.Columns["IDCode"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvPatient.Columns["Telephone"].HeaderText = "SĐT";
+            dgvPatient.Columns["Telephone"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvPatient.Columns["Createtime"].HeaderText = "Ngày khám";
             dgvPatient.Columns["Createtime"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvPatient.Columns["Createtime"].DefaultCellStyle.Format = helper.getDateFormat(Settings.Default.datetimeFormat);
 
             dgvPatient.Columns["SickName"].Width = dgvPatient.Width * 4 / 10;
             dgvPatient.Columns["Age"].Width = dgvPatient.Width / 10;
-            dgvPatient.Columns["IDCode"].Width = dgvPatient.Width *2 / 10;
+            dgvPatient.Columns["Telephone"].Width = dgvPatient.Width *2 / 10;
             dgvPatient.Columns["Createtime"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             foreach (DataGridViewColumn col in dgvPatient.Columns)
             {
@@ -147,7 +147,7 @@ namespace PhanMemNoiSoi
             
             // create sql command
             bool isAnd = false;
-            string query = "SELECT SickNum,SickName, Age, IDCode, Createtime FROM SickData ";
+            string query = "SELECT SickNum,SickName, Age, Telephone, Createtime FROM SickData ";
             if (!string.IsNullOrEmpty(txtTenSearch.Text.Trim()))
             {
                 query += " WHERE SickName LIKE N'%" + txtTenSearch.Text.Trim() + "%'";
@@ -206,12 +206,12 @@ namespace PhanMemNoiSoi
             dgvPatient.Columns["SickNum"].Visible = false;
             dgvPatient.Columns["SickName"].HeaderText = "Tên";
             dgvPatient.Columns["Age"].HeaderText = "Tuổi";
-            dgvPatient.Columns["IDCode"].HeaderText = "CMTND";
+            dgvPatient.Columns["Telephone"].HeaderText = "SĐT";
             dgvPatient.Columns["Createtime"].HeaderText = "Ngày khám";
 
             dgvPatient.Columns["SickName"].Width = dgvPatient.Width * 4 / 10;
             dgvPatient.Columns["Age"].Width = dgvPatient.Width / 10;
-            dgvPatient.Columns["IDCode"].Width = dgvPatient.Width * 2 / 10;
+            dgvPatient.Columns["Telephone"].Width = dgvPatient.Width * 2 / 10;
             dgvPatient.Columns["Createtime"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             foreach (DataGridViewColumn col in dgvPatient.Columns)
             {
@@ -239,7 +239,6 @@ namespace PhanMemNoiSoi
             lbimgCount.Text = "0 / 0";
             if (e.RowIndex != -1)
             {
-                resetPatientDetail();
                 string sickNum = dgvPatient.Rows[e.RowIndex].Cells["SickNum"].Value.ToString().Trim();
                 Patient patient = new Patient().getPatientByNum(sickNum);
                 curImgFolder = helper.getImgFolderById(sickNum);
@@ -264,28 +263,10 @@ namespace PhanMemNoiSoi
             txtJob.Text = patient.JobProperty;
             txtNote.Text = patient.NoteProperty;
             txtName.Text = patient.NameProperty;
-            txtMarred.Text = patient.CauseCheckProperty;
-            txtIdCode.Text = patient.IdCodeProperty;
             txtAge.Text = patient.AgeProperty.ToString();
             txtTelephone.Text = patient.TelephoneProperty;
+            txtAddr.Text = patient.AddrProperty;
             txtCreatetime.Text = patient.CreateTimeProperty.ToShortDateString();
-            if (patient.BirthdayProperty != DateTime.MinValue)
-            {
-                txtBirthday.Text = patient.BirthdayProperty.ToShortDateString();
-            }
-        }
-
-        private void resetPatientDetail()
-        {
-            txtIdCode.Text = "";
-            txtName.Text = "";
-            txtAge.Text = "";
-            txtTelephone.Text = "";
-            txtMarred.Text = "";
-            txtCreatetime.Text = "";
-            txtBirthday.Text = "";
-            txtJob.Text = "";
-            txtNote.Text = "";
         }
 
         private void btnNextImg_Click(object sender, EventArgs e)
@@ -298,8 +279,17 @@ namespace PhanMemNoiSoi
                     {
                         imgIndex += 1;
                     }
-                    pbPatient.Image = Image.FromFile(imagesPatient[imgIndex]);
-                    lbimgCount.Text = (imgIndex + 1).ToString() + " / " + imagesPatient.Length;
+                    try
+                    {
+                        pbPatient.Image = Image.FromFile(imagesPatient[imgIndex]);
+                        lbimgCount.Text = (imgIndex + 1).ToString() + " / " + imagesPatient.Length;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("File ảnh không còn tồn tại! Vui lòng kiểm tra lại thư mục lưu ảnh hoặc khởi động lại phần mềm để cập nhập.",
+                            "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Console.WriteLine(ex.ToString());
+                    }
                 }
             }
         }
@@ -314,11 +304,19 @@ namespace PhanMemNoiSoi
                     {
                         imgIndex -= 1;
                     }
-                    pbPatient.Image = Image.FromFile(imagesPatient[imgIndex]);
-                    lbimgCount.Text = (imgIndex + 1).ToString() + " / " + imagesPatient.Length;
+                    try
+                    {
+                        pbPatient.Image = Image.FromFile(imagesPatient[imgIndex]);
+                        lbimgCount.Text = (imgIndex + 1).ToString() + " / " + imagesPatient.Length;
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show("File ảnh không còn tồn tại! Vui lòng kiểm tra lại thư mục lưu ảnh hoặc khởi động lại phần mềm để cập nhập.",
+                            "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Console.WriteLine(ex.ToString());
+                    }
                 }
             }
-
         }
 
         private void btnDeleteSick_Click(object sender, EventArgs e)
@@ -393,13 +391,11 @@ namespace PhanMemNoiSoi
         private void resetPatientField()
         {
             txtName.Text = "";
-            txtBirthday.Text = "";
-            txtMarred.Text = "";
             txtAge.Text = "";
-            txtIdCode.Text = "";
             txtCreatetime.Text = "";
-            txtPhone.Text = "";
+            txtTelephone.Text = "";
             txtJob.Text = "";
+            txtAddr.Text = "";
             txtNote.Text = "";
             pbPatient.Image = null;
         }

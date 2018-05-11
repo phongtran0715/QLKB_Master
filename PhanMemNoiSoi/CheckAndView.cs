@@ -1,5 +1,4 @@
 ﻿using DirectX.Capture;
-using PhanMemNoiSoi.CaptureCamera;
 using PhanMemNoiSoi.Properties;
 using System;
 using System.ComponentModel;
@@ -14,6 +13,8 @@ namespace PhanMemNoiSoi
     public partial class CheckAndView : Form
     {
         #region Capture camera variable
+        private Capture capture = null;
+        private Filters filters = new Filters();
         Capture.HeFrame heFrame = null;
         Image imgCapture = null;
         #endregion
@@ -28,15 +29,6 @@ namespace PhanMemNoiSoi
         string[] imagesPatient = { };
         string DEFAULT_IMG_FOLDER = @"D:\QLKB";
         string checkId;
-        CaptureWrapper capWrapper;
-
-        public CheckAndView()
-        {
-            InitializeComponent();
-            capWrapper = CaptureWrapper.Instance;
-            this.Size = new Size(Settings.Default.CheckViewSizeW, Settings.Default.CheckViewSizeH);
-            this.KeyPreview = true;
-        }
 
         public CheckAndView(string checkId, string patientId, string pName, string pAge,
                              string cause, string doctor, string folderImgPath)
@@ -55,52 +47,86 @@ namespace PhanMemNoiSoi
             lbdoc.Text = Session.Instance.UserName;
             lbDate.Text = DateTime.Today.ToShortDateString();
             #endregion
-            capWrapper = CaptureWrapper.Instance;
             this.Size = new Size(Settings.Default.CheckViewSizeW, Settings.Default.CheckViewSizeH);
             this.KeyPreview = true;
         }
 
-        public bool initCamera(PictureBox pbox)
+        public bool initCamera(PictureBox pBox)
         {
-            bool exitCode = false;
+            bool isSucess = false;
+            if (capture != null)
+            {
+                capture.Dispose();
+            }
+            //Init with config param loaded from DB
             try
             {
-                if(capWrapper.capture != null)
-                {
-                    capWrapper.capture.Dispose();
-                }
-                // Get new video device
-                if (capWrapper.vDeviceIndex >= capWrapper.filters.VideoInputDevices.Count || capWrapper.vDeviceIndex < 0)
-                {
-                    capWrapper.vDeviceIndex = 0;
-                }
+                //Load config from DB
+                string videoDevice = Settings.Default.vDevice;
+                string videoCompressor = Settings.Default.vCompress;
+                capture = new Capture(new Filter(videoDevice));
+                capture.VideoCompressor = new Filter(videoCompressor);
 
-                capWrapper.capture = new Capture(capWrapper.filters.VideoInputDevices[capWrapper.vDeviceIndex]);
-                //Set capture property
-                int vCompressIndex = Properties.Settings.Default.vCompressIndex;
-                capWrapper.capture.VideoCompressor = (vCompressIndex > 0 ? capWrapper.filters.VideoCompressors[vCompressIndex - 1] : null);
-                capWrapper.capture.FrameRate = capWrapper.vFrameRate;
-                Size size = new Size(capWrapper.vFrameSizeWidth, capWrapper.vFrameSizeHeigh);
-                capWrapper.capture.FrameSize = size;
-                capWrapper.capture.PreviewWindowFrame = pbox;
-                heFrame = new Capture.HeFrame(CaptureComplete);
-                capWrapper.capture.FrameEvent2 += heFrame;
-                capWrapper.capture.GrapImg();
-                exitCode = true;
+                //TODO: restore framerate, framesize
+                /*
+                double frameRate = Properties.Settings.Default.vFrameRate;
+                Size freameSize = new Size(Properties.Settings.Default.vFrameSizeWidth,
+                    Properties.Settings.Default.vFrameSizeHigh);
+                //capture.FrameRate = frameRate;
+                //capture.FrameSize = freameSize;
+                */
+                capture.PreviewWindowFrame = pBox;
+                isSucess = true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Thiết bị thu video không được hỗ trợ. Vui lòng kiểm tra lại camera!", "Thông báo",
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine(ex.ToString());
+                isSucess = false;
             }
-            return exitCode;
+
+            if (isSucess == false)
+            {
+                //Auto reinit camera with default param
+                try
+                {
+                    capture = new Capture(filters.VideoInputDevices[0]);
+                    capture.PreviewWindow = pBox;
+                    //Save new config param 
+                    Settings.Default.vDevice = capture.VideoDevice.MonikerString;
+                    Settings.Default.vCompress = capture.VideoCompressor.MonikerString;
+                    Settings.Default.vFrameRate = capture.FrameRate;
+                    Settings.Default.vFrameSizeWidth = capture.FrameSize.Width;
+                    Settings.Default.vFrameSizeHigh = capture.FrameSize.Height;
+                    isSucess = true;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                    isSucess = false;
+                }
+            }
+
+            //init for capture frame
+            if(isSucess)
+            {
+                try
+                {
+                    heFrame = new Capture.HeFrame(CaptureComplete);
+                    capture.FrameEvent2 += heFrame;
+                    capture.GrapImg();
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
+            }
+            return isSucess;
         }
 
         private void btnThoat_Click(object sender, EventArgs e)
         {
-            if (capWrapper.capture != null)
-                capWrapper.capture.Dispose();
+            if (capture != null)
+                capture.Dispose();
             Close();
         }
 
@@ -205,17 +231,17 @@ namespace PhanMemNoiSoi
             {
                 try
                 {
-                    if (capWrapper.capture == null)
+                    if (capture == null)
                     {
                         MessageBox.Show("Chưa kết nối thiết bị thu video. Vui lòng kiểm tra lại camera.", "Thông báo",
                                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                     heFrame = new Capture.HeFrame(CaptureComplete);
-                    capWrapper.capture.FrameEvent2 += heFrame;
-                    capWrapper.capture.GrapImg();
+                    capture.FrameEvent2 += heFrame;
+                    capture.GrapImg();
 
-                    capWrapper.capture.PreviewWindowFrame = null;
+                    capture.PreviewWindowFrame = null;
                     pbVideo.Image = imgCapture;
                     btnDungHinh.Text = "Tiếp tục";
                     btnDungHinh.Image = Properties.Resources.continue_24;
@@ -224,14 +250,17 @@ namespace PhanMemNoiSoi
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message + "\n\n" + ex.ToString());
+                    MessageBox.Show("Dừng hình thất bại. Vui lòng kiểm tra lại thông số cài đặt video!", "Thông báo", 
+                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    initCamera(pbVideo);
+                    Console.WriteLine(ex.Message + "\n\n" + ex.ToString());
                 }
             }
             else
             {
-                if (capWrapper.capture == null)
+                if (capture == null)
                 {
-                    MessageBox.Show("Chưa kết nối thiết bị thu video. Vui lòng kiểm tra lại camera.", "Thông báo",
+                    MessageBox.Show("Chưa kết nối thiết bị thu video. Vui lòng kiểm tra lại kết nối camera!", "Thông báo",
                                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
@@ -261,8 +290,8 @@ namespace PhanMemNoiSoi
                 else
                 {
                     // pause camera
-                    capWrapper.capture.GrapImg();
-                    capWrapper.capture.PreviewWindowFrame = null;
+                    capture.GrapImg();
+                    capture.PreviewWindowFrame = null;
                     pbVideo.Image = imgCapture;
                     captureFrame();
                     captureStatic = true;
@@ -274,7 +303,7 @@ namespace PhanMemNoiSoi
         {
             try
             {
-                capWrapper.capture.GrapImg();
+                capture.GrapImg();
                 if (imgCapture != null)
                 {
                     //add to imageList
@@ -299,13 +328,13 @@ namespace PhanMemNoiSoi
         private void CaptureComplete(System.Drawing.Bitmap e)
         {
             imgCapture = (Image)e;
-            capWrapper.capture.FrameEvent2 -= heFrame;
+            capture.FrameEvent2 -= heFrame;
         }
 
         private void CheckAndView_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (capWrapper.capture != null)
-                capWrapper.capture.Dispose();
+            if (capture != null)
+                capture.Dispose();
         }
 
         private void CheckAndView_KeyDown(object sender, KeyEventArgs e)
@@ -336,8 +365,8 @@ namespace PhanMemNoiSoi
         private void caifToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
-            if (capWrapper.capture != null)
-                capWrapper.capture.Dispose();
+            if (capture != null)
+                capture.Dispose();
             CaptureTest capTestFr = new CaptureTest();
             capTestFr.ShowDialog();
             this.Close();
@@ -351,7 +380,7 @@ namespace PhanMemNoiSoi
                 //stop record video
                 try
                 {
-                    capWrapper.capture.Stop();
+                    capture.Stop();
                     btnSaveVideo.Text = "  Quay Video";
                     btnSaveVideo.Image = Properties.Resources.camera_24;
                     btnSaveVideo.ImageAlign = ContentAlignment.MiddleLeft;
@@ -362,15 +391,19 @@ namespace PhanMemNoiSoi
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message + "\n\n" + ex.ToString());
+                    Console.WriteLine(ex.Message + "\n\n" + ex.ToString());
+                    MessageBox.Show("Dừng quay video thất bại. Vui lòng kiểm tra lại thông số cài đặt video!", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    initCamera(pbVideo);
                 }
             }
             else
             {
                 try
                 {
-                    if (!capWrapper.capture.Cued)
-                        capWrapper.capture.Filename = folderImgPath + pId + "_" + DateTime.Now.Millisecond + ".mp4";
+                    if (!capture.Cued)
+                        capture.Filename = folderImgPath + pId + "_" + DateTime.Now.Millisecond + ".mp4";
+                    capture.Start();
                     btnSaveVideo.Text = "  Dừng Quay";
                     btnSaveVideo.Image = Properties.Resources.pause_24;
                     btnSaveVideo.ImageAlign = ContentAlignment.MiddleLeft;
@@ -378,11 +411,13 @@ namespace PhanMemNoiSoi
                     pbRecordIcon.Visible = true;
                     lbRecord.Visible = true;
                     btnDungHinh.Enabled = false;
-                    capWrapper.capture.Start();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message + "\n\n" + ex.ToString());
+                    Console.WriteLine(ex.Message + "\n\n" + ex.ToString());
+                    MessageBox.Show("Quay video thất bại.Vui lòng kiểm tra lại thông số cài đặt video!", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    initCamera(pbVideo);
                 }
             }
         }

@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheckAndView));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.pbVideo = new System.Windows.Forms.PictureBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.listImage = new System.Windows.Forms.ListView();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -51,6 +52,10 @@
             this.lbpBirthday = new System.Windows.Forms.Label();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.caifToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemOpenFolder = new System.Windows.Forms.ToolStripMenuItem();
+            this.aToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnSetFormSize = new System.Windows.Forms.ToolStripMenuItem();
             this.càiĐặtKhungHìnhToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lbRecord = new System.Windows.Forms.Label();
             this.btnFullScreen = new System.Windows.Forms.Button();
@@ -60,17 +65,12 @@
             this.btnBaoCao = new System.Windows.Forms.Button();
             this.btnChupHinh = new System.Windows.Forms.Button();
             this.btnDungHinh = new System.Windows.Forms.Button();
-            this.pbVideo = new System.Windows.Forms.PictureBox();
-            this.caifToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.itemOpenFolder = new System.Windows.Forms.ToolStripMenuItem();
-            this.aToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnSetFormSize = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbVideo)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbRecordIcon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbVideo)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -86,6 +86,17 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Video";
+            // 
+            // pbVideo
+            // 
+            this.pbVideo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbVideo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbVideo.Location = new System.Drawing.Point(3, 22);
+            this.pbVideo.Name = "pbVideo";
+            this.pbVideo.Size = new System.Drawing.Size(806, 574);
+            this.pbVideo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbVideo.TabIndex = 0;
+            this.pbVideo.TabStop = false;
             // 
             // groupBox2
             // 
@@ -147,6 +158,7 @@
             this.lbdoc.AutoSize = true;
             this.lbdoc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.lbdoc.Location = new System.Drawing.Point(648, 96);
+            this.lbdoc.MaximumSize = new System.Drawing.Size(200, 50);
             this.lbdoc.Name = "lbdoc";
             this.lbdoc.Size = new System.Drawing.Size(59, 20);
             this.lbdoc.TabIndex = 22;
@@ -160,6 +172,7 @@
             this.lbDate.AutoSize = true;
             this.lbDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.lbDate.Location = new System.Drawing.Point(648, 42);
+            this.lbDate.MaximumSize = new System.Drawing.Size(200, 30);
             this.lbDate.Name = "lbDate";
             this.lbDate.Size = new System.Drawing.Size(59, 20);
             this.lbDate.TabIndex = 21;
@@ -173,6 +186,7 @@
             this.lbCause.AutoSize = true;
             this.lbCause.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.lbCause.Location = new System.Drawing.Point(378, 96);
+            this.lbCause.MaximumSize = new System.Drawing.Size(150, 30);
             this.lbCause.Name = "lbCause";
             this.lbCause.Size = new System.Drawing.Size(59, 20);
             this.lbCause.TabIndex = 20;
@@ -186,6 +200,7 @@
             this.lbAge.AutoSize = true;
             this.lbAge.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.lbAge.Location = new System.Drawing.Point(337, 42);
+            this.lbAge.MaximumSize = new System.Drawing.Size(100, 0);
             this.lbAge.Name = "lbAge";
             this.lbAge.Size = new System.Drawing.Size(59, 20);
             this.lbAge.TabIndex = 19;
@@ -199,6 +214,7 @@
             this.lbName.AutoSize = true;
             this.lbName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.lbName.Location = new System.Drawing.Point(107, 96);
+            this.lbName.MaximumSize = new System.Drawing.Size(150, 30);
             this.lbName.Name = "lbName";
             this.lbName.Size = new System.Drawing.Size(59, 20);
             this.lbName.TabIndex = 18;
@@ -212,6 +228,7 @@
             this.lbPhieu.AutoSize = true;
             this.lbPhieu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.lbPhieu.Location = new System.Drawing.Point(107, 42);
+            this.lbPhieu.MaximumSize = new System.Drawing.Size(150, 30);
             this.lbPhieu.Name = "lbPhieu";
             this.lbPhieu.Size = new System.Drawing.Size(59, 20);
             this.lbPhieu.TabIndex = 17;
@@ -335,6 +352,42 @@
             this.menuStrip1.TabIndex = 8;
             this.menuStrip1.Text = "menuStrip1";
             // 
+            // caifToolStripMenuItem
+            // 
+            this.caifToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.caifToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("caifToolStripMenuItem.Image")));
+            this.caifToolStripMenuItem.Name = "caifToolStripMenuItem";
+            this.caifToolStripMenuItem.Size = new System.Drawing.Size(141, 25);
+            this.caifToolStripMenuItem.Text = "Cài đặt camera";
+            this.caifToolStripMenuItem.Click += new System.EventHandler(this.caifToolStripMenuItem_Click);
+            // 
+            // itemOpenFolder
+            // 
+            this.itemOpenFolder.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.itemOpenFolder.Image = global::PhanMemNoiSoi.Properties.Resources.open_icon_24x24;
+            this.itemOpenFolder.Name = "itemOpenFolder";
+            this.itemOpenFolder.Size = new System.Drawing.Size(167, 25);
+            this.itemOpenFolder.Text = "Mở thư mục dữ liệu";
+            this.itemOpenFolder.Click += new System.EventHandler(this.itemOpenFolder_Click);
+            // 
+            // aToolStripMenuItem
+            // 
+            this.aToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnSetFormSize});
+            this.aToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.aToolStripMenuItem.Image = global::PhanMemNoiSoi.Properties.Resources.edit_1103599_960_720;
+            this.aToolStripMenuItem.Name = "aToolStripMenuItem";
+            this.aToolStripMenuItem.Size = new System.Drawing.Size(99, 25);
+            this.aToolStripMenuItem.Text = "Tùy chỉnh";
+            // 
+            // btnSetFormSize
+            // 
+            this.btnSetFormSize.Image = global::PhanMemNoiSoi.Properties.Resources.save_24;
+            this.btnSetFormSize.Name = "btnSetFormSize";
+            this.btnSetFormSize.Size = new System.Drawing.Size(303, 24);
+            this.btnSetFormSize.Text = "Lưu kích thước khung hình hiện tại";
+            this.btnSetFormSize.Click += new System.EventHandler(this.btnSetFormSize_Click);
+            // 
             // càiĐặtKhungHìnhToolStripMenuItem
             // 
             this.càiĐặtKhungHìnhToolStripMenuItem.Name = "càiĐặtKhungHìnhToolStripMenuItem";
@@ -445,53 +498,6 @@
             this.btnDungHinh.UseVisualStyleBackColor = true;
             this.btnDungHinh.Click += new System.EventHandler(this.btnDungHinh_Click);
             // 
-            // pbVideo
-            // 
-            this.pbVideo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbVideo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbVideo.Location = new System.Drawing.Point(3, 22);
-            this.pbVideo.Name = "pbVideo";
-            this.pbVideo.Size = new System.Drawing.Size(806, 574);
-            this.pbVideo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbVideo.TabIndex = 0;
-            this.pbVideo.TabStop = false;
-            // 
-            // caifToolStripMenuItem
-            // 
-            this.caifToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.caifToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("caifToolStripMenuItem.Image")));
-            this.caifToolStripMenuItem.Name = "caifToolStripMenuItem";
-            this.caifToolStripMenuItem.Size = new System.Drawing.Size(141, 25);
-            this.caifToolStripMenuItem.Text = "Cài đặt camera";
-            this.caifToolStripMenuItem.Click += new System.EventHandler(this.caifToolStripMenuItem_Click);
-            // 
-            // itemOpenFolder
-            // 
-            this.itemOpenFolder.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.itemOpenFolder.Image = global::PhanMemNoiSoi.Properties.Resources.open_icon_24x24;
-            this.itemOpenFolder.Name = "itemOpenFolder";
-            this.itemOpenFolder.Size = new System.Drawing.Size(167, 25);
-            this.itemOpenFolder.Text = "Mở thư mục dữ liệu";
-            this.itemOpenFolder.Click += new System.EventHandler(this.itemOpenFolder_Click);
-            // 
-            // aToolStripMenuItem
-            // 
-            this.aToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnSetFormSize});
-            this.aToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.aToolStripMenuItem.Image = global::PhanMemNoiSoi.Properties.Resources.edit_1103599_960_720;
-            this.aToolStripMenuItem.Name = "aToolStripMenuItem";
-            this.aToolStripMenuItem.Size = new System.Drawing.Size(99, 25);
-            this.aToolStripMenuItem.Text = "Tùy chỉnh";
-            // 
-            // btnSetFormSize
-            // 
-            this.btnSetFormSize.Image = global::PhanMemNoiSoi.Properties.Resources.save_24;
-            this.btnSetFormSize.Name = "btnSetFormSize";
-            this.btnSetFormSize.Size = new System.Drawing.Size(259, 22);
-            this.btnSetFormSize.Text = "Lưu kích thước khung hình hiện tại";
-            this.btnSetFormSize.Click += new System.EventHandler(this.btnSetFormSize_Click);
-            // 
             // CheckAndView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -521,13 +527,13 @@
             this.Load += new System.EventHandler(this.CheckAndView_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CheckAndView_KeyDown);
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbVideo)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbRecordIcon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbVideo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

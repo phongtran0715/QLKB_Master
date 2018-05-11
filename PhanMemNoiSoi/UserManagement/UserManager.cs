@@ -13,17 +13,16 @@ namespace PhanMemNoiSoi
         private SqlDataAdapter dta = new SqlDataAdapter();
         private BindingSource bSource = new BindingSource();
         DataTable table = new DataTable();
-        private string hospitalName = null;
-        private string hospitalAddr = null;
-        bool isHasHospitalInfo = false;
         IPrincipal userPrincipal = new GenericPrincipal(WindowsIdentity.GetCurrent(),
                                            Session.Instance.UserRole);
+        Helper helper;
 
         public UserManager(IPrincipal userPrincipal) 
             : base(Session.Instance.UserRole, userPrincipal)
         {
             InitializeComponent();
             InitDataGrid();
+            helper = new Helper();
         }
 
         private void btnThoat_Click(object sender, EventArgs e)
@@ -84,8 +83,8 @@ namespace PhanMemNoiSoi
 
         private void InitDataGrid()
         {
-            this.dgvUserList.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 12f);
-            this.dgvUserList.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 12f);
+            this.dgvUserList.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 11f);
+            this.dgvUserList.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 11f);
         }
 
         private void btnXoaMK_Click(object sender, EventArgs e)
@@ -106,7 +105,7 @@ namespace PhanMemNoiSoi
                 //Clear password
                 try
                 {
-                    string newPass = "";
+                    string newPass = helper.ComputeHash("", "SHA512", null);
                     string sqlCommand = "UPDATE UserList SET Password = @pass WHERE UserId = @id ;" ;
                     SqlCommand mySQL = new SqlCommand(sqlCommand, DBConnection.Instance.sqlConn);
                     mySQL.Parameters.Add("@pass", SqlDbType.NChar).Value = newPass;
@@ -233,10 +232,6 @@ namespace PhanMemNoiSoi
         public void addNewItemOnDg()
         {
             loadDgvUser();
-        }
-
-        private void UserManager_FormClosed(object sender, FormClosedEventArgs e)
-        {
         }
 
         private void UserManager_UserIsDenied(object sender, EventArgs e)
@@ -452,23 +447,6 @@ namespace PhanMemNoiSoi
                 }
             }
         }
-
-        private void dgvUserList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            /*
-            if (e.RowIndex != -1)
-            {
-                int rowIndex = e.RowIndex;
-                string userId = dgvUserList.Rows[rowIndex].Cells["UserId"].Value.ToString().Trim();
-                string userName = dgvUserList.Rows[rowIndex].Cells["UserName"].Value.ToString().Trim();
-                string group = dgvUserList.Rows[rowIndex].Cells["WorkGroupId"].Value.ToString().Trim();
-                ModifyUser mUserFr = new ModifyUser(userPrincipal, userId, userName, group);
-                mUserFr.updateUserInfo += updateUserInfo;
-                mUserFr.ShowDialog();
-            }
-            */
-        }
-
         private void dgvWorkGroup_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex != -1)

@@ -141,7 +141,6 @@
     <Compile Include="CaptureCamera\CaptureTest.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CaptureCamera\CaptureWrapper.cs" />
     <Compile Include="Configuration\ConfigDB.cs">
       <SubType>Form</SubType>
     </Compile>

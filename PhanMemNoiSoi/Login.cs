@@ -8,6 +8,7 @@ namespace PhanMemNoiSoi
 {
     public partial class Login : Form
     {
+        Helper helper;
         private SqlDataAdapter dataAdapter = new SqlDataAdapter();
         private BindingSource bindingSource = new BindingSource();
         int userId = 0;
@@ -17,6 +18,7 @@ namespace PhanMemNoiSoi
         {
             InitializeComponent();
             Splasher.Close();
+            helper = new Helper();
         }
 
         private void Login_Load(object sender, EventArgs e)
@@ -111,6 +113,8 @@ namespace PhanMemNoiSoi
         private void btnOk_Click(object sender, EventArgs e)
         {
             bool loginSuccessful = false;
+            string dbUserName = null;
+            string dbPassword = null;
             //Check Login information
             try
             {
@@ -129,11 +133,11 @@ namespace PhanMemNoiSoi
                     while (rdrUser.Read())
                     {
                         //check password
-                        string uname = rdrUser["UserName"].ToString().Trim();
-                        string pass = rdrUser["Password"].ToString().Trim();
+                        dbUserName = rdrUser["UserName"].ToString().Trim();
+                        dbPassword = rdrUser["Password"].ToString().Trim();
 
-                        if (string.Equals(uname, txtUser.Text.Trim()) 
-                            && string.Equals(pass, txtPass.Text.Trim()))
+                        if (string.Equals(dbUserName, txtUser.Text.Trim()) 
+                            && helper.VerifyHash(txtPass.Text.Trim(), "SHA512", dbPassword))
                         {
                             loginSuccessful = true;
                             break;
@@ -151,7 +155,7 @@ namespace PhanMemNoiSoi
                     if (cbDefault.Checked == true)
                     {
                         Properties.Settings.Default.rememberAccount = true;
-                        Properties.Settings.Default.lastUserName = txtUser.Text.Trim();
+                        Properties.Settings.Default.lastUserName = dbUserName;
                         Properties.Settings.Default.lastUserId = this.userId;
                         Properties.Settings.Default.lastUserType = this.uWorkGroup;
                     }
@@ -163,8 +167,8 @@ namespace PhanMemNoiSoi
                     
                     //Update session information
                     this.Hide();
-                    Session.Instance.UserName = txtUser.Text.Trim();
-                    Session.Instance.Password = txtPass.Text.Trim();
+                    Session.Instance.UserName = dbUserName;
+                    Session.Instance.Password = dbPassword;
                     Session.Instance.UserId = this.userId;
                     Session.Instance.WorkGroup = this.uWorkGroup;
                     Session.Instance.UserRole = RolesList.Instance.getRoleByUser(this.uWorkGroup, this.userId);

@@ -9,6 +9,7 @@ namespace PhanMemNoiSoi
 {
     public partial class ChangePassword : SecureBaseForm
     {
+        Helper helper;
         public ChangePassword(IPrincipal userPrincipal) :
             base(RolesList.Instance.roleList.ToArray(), userPrincipal)
         {
@@ -16,12 +17,14 @@ namespace PhanMemNoiSoi
             txtOldPass.Text = "";
             txtNewPass.Text = "";
             txtNewPassConfirm.Text = "";
+            helper = new Helper();
         }
 
         private void btnOk_Click(object sender, EventArgs e)
         {
             //check old password
-            if (txtOldPass.Text.Trim() != Session.Instance.Password)
+            String hashPassword = helper.ComputeHash(txtOldPass.Text.Trim(), "SHA512", null);
+            if (helper.VerifyHash(txtOldPass.Text.Trim(), "SHA512", Session.Instance.Password) == false)
             {
                 MessageBox.Show("Mật khẩu cũ không đúng, vui lòng nhập lại", "Thông báo", 
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -43,7 +46,8 @@ namespace PhanMemNoiSoi
                     {
                         string sqlQuery = "UPDATE UserList SET Password = @pass WHERE UserId = @id;";
                         SqlCommand mySQL = new SqlCommand(sqlQuery, DBConnection.Instance.sqlConn);
-                        mySQL.Parameters.Add("@pass", SqlDbType.NChar).Value = txtNewPass.Text.Trim();
+                        String newHashPass = helper.ComputeHash (txtNewPass.Text.Trim(), "SHA512", null);
+                        mySQL.Parameters.Add("@pass", SqlDbType.NChar).Value = newHashPass;
                         mySQL.Parameters.Add("@id", SqlDbType.Int).Value = Session.Instance.UserId;
                         mySQL.ExecuteNonQuery();
                         string msg = "Thay đổi mật khẩu tài khoản '" + Session.Instance.UserName + "'";

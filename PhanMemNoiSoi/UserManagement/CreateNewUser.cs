@@ -11,6 +11,7 @@ namespace PhanMemNoiSoi
     {
         public delegate void DoEvent();
         public event DoEvent RefreshDgv;
+        Helper helper;
 
         public CreateNewUser(IPrincipal userPrincipal) :
             base(Session.Instance.UserRole, userPrincipal)
@@ -19,6 +20,7 @@ namespace PhanMemNoiSoi
             txtUserName.Text = "";
             txtPass.Text = "";
             txtPassConfirm.Text = "";
+            helper = new Helper();
         }
 
         private void btnHuy_Click(object sender, EventArgs e)
@@ -60,7 +62,9 @@ namespace PhanMemNoiSoi
                 SqlCommand mySQL = new SqlCommand(sqlCommand, DBConnection.Instance.sqlConn);
                 mySQL.Parameters.Add("@UserName", SqlDbType.NChar).Value = txtUserName.Text.Trim();
                 mySQL.Parameters.Add("@Sex", SqlDbType.NChar).Value = "male";
-                mySQL.Parameters.Add("@Password", SqlDbType.NChar).Value = txtPass.Text.Trim();
+                //Encrypt password
+                string hashPassword = helper.ComputeHash(txtPass.Text.Trim(), "SHA512", null);
+                mySQL.Parameters.Add("@Password", SqlDbType.NChar).Value = hashPassword;
                 mySQL.Parameters.Add("@groupId", SqlDbType.NChar).Value = getUGroupByNum(cbGroup.SelectedIndex);
                 mySQL.ExecuteNonQuery();
 
