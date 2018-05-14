@@ -345,6 +345,7 @@
             this.dgvBenhNhan.MultiSelect = false;
             this.dgvBenhNhan.Name = "dgvBenhNhan";
             this.dgvBenhNhan.ReadOnly = true;
+            this.dgvBenhNhan.RowTemplate.Height = 24;
             this.dgvBenhNhan.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvBenhNhan.Size = new System.Drawing.Size(1127, 378);
             this.dgvBenhNhan.TabIndex = 22;

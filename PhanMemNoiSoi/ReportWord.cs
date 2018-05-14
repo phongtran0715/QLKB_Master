@@ -193,6 +193,26 @@ namespace PhanMemNoiSoi
             }
         }
 
+        public void searchReplace(string findText, string replaceText)
+        {
+            try
+            {
+                Word.Find findObject = wordApp.Selection.Find;
+                findObject.ClearFormatting();
+                findObject.Text = findText;
+                findObject.Replacement.ClearFormatting();
+                findObject.Replacement.Text = replaceText;
+
+                object replaceAll = Word.WdReplace.wdReplaceAll;
+                findObject.Execute(ref missing, ref missing, ref missing, ref missing, ref missing,
+                    ref missing, ref missing, ref missing, ref missing, ref missing,
+                    ref replaceAll, ref missing, ref missing, ref missing, ref missing);
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+
         private Size getImgSize(int numImgs)
         {
             Size imgSize = new Size();
@@ -248,10 +268,6 @@ namespace PhanMemNoiSoi
                     break;
             }
             return dimension;
-        }
-        private void DocumentBeforeClose()
-        {
-            //Do some thing
         }
     }
 }

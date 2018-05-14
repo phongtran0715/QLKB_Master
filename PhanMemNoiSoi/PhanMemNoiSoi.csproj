@@ -488,6 +488,7 @@
     <None Include="Resources\background %281%29.jpg" />
     <Content Include="Doctor.ico" />
     <None Include="Resources\About1.png" />
+    <None Include="Resources\About2.png" />
     <Content Include="Resources\continue_24.png" />
     <None Include="Resources\save_24.png" />
     <None Include="Resources\pause_24.png" />

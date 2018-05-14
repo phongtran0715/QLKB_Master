@@ -41,23 +41,29 @@ namespace PhanMemNoiSoi
         private void GlossaryMainteance_Load(object sender, EventArgs e)
         {
             // load data for data grid view
-            string selectCommand = "SELECT ItemCode,Content FROM CheckItem;";
-            dtaAdap[(int)dataAdapter.DTA_CONTENT] = new SqlDataAdapter(selectCommand, DBConnection.Instance.sqlConn);
+            try
+            {
+                string selectCommand = "SELECT ItemCode,Content FROM CheckItem;";
+                dtaAdap[(int)dataAdapter.DTA_CONTENT] = new SqlDataAdapter(selectCommand, DBConnection.Instance.sqlConn);
 
-            SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dtaAdap[(int)dataAdapter.DTA_CONTENT]);
+                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dtaAdap[(int)dataAdapter.DTA_CONTENT]);
 
-            tbAdap[(int)dataTable.DTA_CONTENT].Locale = System.Globalization.CultureInfo.InvariantCulture;
-            dtaAdap[(int)dataAdapter.DTA_CONTENT].Fill(tbAdap[(int)dataTable.DTA_CONTENT]);
-            bsAdap[(int)bindSource.DTA_CONTENT].DataSource = tbAdap[(int)dataTable.DTA_CONTENT];
+                tbAdap[(int)dataTable.DTA_CONTENT].Locale = System.Globalization.CultureInfo.InvariantCulture;
+                dtaAdap[(int)dataAdapter.DTA_CONTENT].Fill(tbAdap[(int)dataTable.DTA_CONTENT]);
+                bsAdap[(int)bindSource.DTA_CONTENT].DataSource = tbAdap[(int)dataTable.DTA_CONTENT];
 
-            // Resize the DataGridView columns to fit the newly loaded content.
-            dgvCheck.DataSource = bsAdap[(int)bindSource.DTA_CONTENT];
-            dgvCheck.Columns[0].Visible = false;
-            dgvCheck.Columns[1].HeaderText = "Danh Mục";
-            dgvCheck.Columns[1].Width = this.dgvCheck.Size.Width;
+                // Resize the DataGridView columns to fit the newly loaded content.
+                dgvCheck.DataSource = bsAdap[(int)bindSource.DTA_CONTENT];
+                dgvCheck.Columns[0].Visible = false;
+                dgvCheck.Columns[1].HeaderText = "Danh Mục";
+                dgvCheck.Columns[1].Width = this.dgvCheck.Size.Width;
 
-            helper.setRowNumber(dgvCheck);
-            helper.setRowNumber(dgvCheckContentDetail);
+                helper.setRowNumber(dgvCheck);
+                helper.setRowNumber(dgvCheckContentDetail);
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
 
         private void Init()
@@ -108,32 +114,35 @@ namespace PhanMemNoiSoi
             }
 
             int currRowIndexCheck = dgvCheck.SelectedRows[selectedRowCount - 1].Index;
-
             string itemCode = dgvCheck.Rows[currRowIndexCheck].Cells[0].Value.ToString().Trim();
-
             string selectCommand = "SELECT ContentCode,Content FROM CheckItemContent WHERE ItemCode = '" + itemCode + "'";
+            try
+            {
+                //Load data from data base
+                dtaAdap[(int)dataAdapter.DTA_CONTENT_DETAIL] = new SqlDataAdapter(selectCommand, DBConnection.Instance.sqlConn);
 
-            //Load data from data base
-            dtaAdap[(int)dataAdapter.DTA_CONTENT_DETAIL] = new SqlDataAdapter(selectCommand, DBConnection.Instance.sqlConn);
+                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dtaAdap[(int)dataAdapter.DTA_CONTENT_DETAIL]);
 
-            SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dtaAdap[(int)dataAdapter.DTA_CONTENT_DETAIL]);
+                tbAdap[(int)dataTable.DTA_CONTENT_DETAIL] = new DataTable();
+                tbAdap[(int)dataTable.DTA_CONTENT_DETAIL].Locale = System.Globalization.CultureInfo.InvariantCulture;
 
-            tbAdap[(int)dataTable.DTA_CONTENT_DETAIL] = new DataTable();
-            tbAdap[(int)dataTable.DTA_CONTENT_DETAIL].Locale = System.Globalization.CultureInfo.InvariantCulture;
+                dtaAdap[(int)dataAdapter.DTA_CONTENT_DETAIL].Fill(tbAdap[(int)dataTable.DTA_CONTENT_DETAIL]);
+                bsAdap[(int)bindSource.DTA_CONTENT_DETAIL].DataSource = tbAdap[(int)dataTable.DTA_CONTENT_DETAIL];
 
-            dtaAdap[(int)dataAdapter.DTA_CONTENT_DETAIL].Fill(tbAdap[(int)dataTable.DTA_CONTENT_DETAIL]);
-            bsAdap[(int)bindSource.DTA_CONTENT_DETAIL].DataSource = tbAdap[(int)dataTable.DTA_CONTENT_DETAIL];
+                // Resize the DataGridView columns to fit the newly loaded content.
+                dgvCheckContentDetail.AutoResizeColumns(
+                    DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
 
-            // Resize the DataGridView columns to fit the newly loaded content.
-            dgvCheckContentDetail.AutoResizeColumns(
-                DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
-
-            dgvCheckContentDetail.DataSource = bsAdap[(int)bindSource.DTA_CONTENT_DETAIL];
-            dgvCheckContentDetail.Columns[0].Visible = false;
-            dgvCheckContentDetail.Columns[1].HeaderText = "Nội Dung";
-            dgvCheckContentDetail.Columns[1].Width = this.dgvCheckContentDetail.Size.Width;
-            helper.setRowNumber(dgvCheck);
-            helper.setRowNumber(dgvCheckContentDetail);
+                dgvCheckContentDetail.DataSource = bsAdap[(int)bindSource.DTA_CONTENT_DETAIL];
+                dgvCheckContentDetail.Columns[0].Visible = false;
+                dgvCheckContentDetail.Columns[1].HeaderText = "Nội Dung";
+                dgvCheckContentDetail.Columns[1].Width = this.dgvCheckContentDetail.Size.Width;
+                helper.setRowNumber(dgvCheck);
+                helper.setRowNumber(dgvCheckContentDetail);
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
 
         private void btnSua_DM_Click(object sender, EventArgs e)
@@ -460,8 +469,6 @@ namespace PhanMemNoiSoi
 
         private void dgNoiDung_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            //dgNoiDung.Rows[0].Selected = true;
-            //currRowIndexND = 0;
             foreach (DataGridViewColumn column in dgvCheckContentDetail.Columns)
             {
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -509,50 +516,62 @@ namespace PhanMemNoiSoi
 
         private void loadCheckRecordData()
         {
-            // load data for data grid view
-            string query = "SELECT ItemCode,Content FROM CheckItem;";
+            try
+            {
+                // load data for data grid view
+                string query = "SELECT ItemCode,Content FROM CheckItem;";
 
-            dtaAdap[(int)dataAdapter.DTA_CONTENT] = new SqlDataAdapter(query, DBConnection.Instance.sqlConn);
+                dtaAdap[(int)dataAdapter.DTA_CONTENT] = new SqlDataAdapter(query, DBConnection.Instance.sqlConn);
 
-            SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dtaAdap[(int)dataAdapter.DTA_CONTENT]);
-            tbAdap[(int)dataTable.DTA_CONTENT] = new DataTable();
+                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dtaAdap[(int)dataAdapter.DTA_CONTENT]);
+                tbAdap[(int)dataTable.DTA_CONTENT] = new DataTable();
 
-            tbAdap[(int)dataTable.DTA_CONTENT].Locale = System.Globalization.CultureInfo.InvariantCulture;
-            dtaAdap[(int)dataAdapter.DTA_CONTENT].Fill(tbAdap[(int)dataTable.DTA_CONTENT]);
-            bsAdap[(int)bindSource.DTA_CONTENT].DataSource = tbAdap[(int)dataTable.DTA_CONTENT];
+                tbAdap[(int)dataTable.DTA_CONTENT].Locale = System.Globalization.CultureInfo.InvariantCulture;
+                dtaAdap[(int)dataAdapter.DTA_CONTENT].Fill(tbAdap[(int)dataTable.DTA_CONTENT]);
+                bsAdap[(int)bindSource.DTA_CONTENT].DataSource = tbAdap[(int)dataTable.DTA_CONTENT];
 
-            // Resize the DataGridView columns to fit the newly loaded content.
-            dgvCheck.AutoResizeColumns(
-                DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
-            dgvCheck.DataSource = bsAdap[(int)bindSource.DTA_CONTENT];
-            dgvCheck.Columns["ItemCode"].Visible = false;
-            dgvCheck.Columns["Content"].HeaderText = "Danh Mục";
-            //set focus
-            setFocusContent(0, 1);
-            helper.setRowNumber(dgvCheck);
+                // Resize the DataGridView columns to fit the newly loaded content.
+                dgvCheck.AutoResizeColumns(
+                    DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
+                dgvCheck.DataSource = bsAdap[(int)bindSource.DTA_CONTENT];
+                dgvCheck.Columns["ItemCode"].Visible = false;
+                dgvCheck.Columns["Content"].HeaderText = "Danh Mục";
+                //set focus
+                setFocusContent(0, 1);
+                helper.setRowNumber(dgvCheck);
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
 
         private void loadInfoReport()
         {
-            // load data for data grid view
-            string query = "SELECT ShowNum,ItemCode,Content FROM CheckItem WHERE IsDisplay = '1' ORDER BY ShowNum ASC;";
+            try
+            {
+                // load data for data grid view
+                string query = "SELECT ShowNum,ItemCode,Content FROM CheckItem WHERE IsDisplay = '1' ORDER BY ShowNum ASC;";
 
-            dtaAdap[(int)dataAdapter.DTA_INFO_REPORT] = new SqlDataAdapter(query, DBConnection.Instance.sqlConn);
+                dtaAdap[(int)dataAdapter.DTA_INFO_REPORT] = new SqlDataAdapter(query, DBConnection.Instance.sqlConn);
 
-            SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dtaAdap[(int)dataAdapter.DTA_INFO_REPORT]);
-            tbAdap[(int)dataTable.DTA_INFO_REPORT] = new DataTable();
+                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dtaAdap[(int)dataAdapter.DTA_INFO_REPORT]);
+                tbAdap[(int)dataTable.DTA_INFO_REPORT] = new DataTable();
 
-            tbAdap[(int)dataTable.DTA_INFO_REPORT].Locale = System.Globalization.CultureInfo.InvariantCulture;
-            dtaAdap[(int)dataAdapter.DTA_INFO_REPORT].Fill(tbAdap[(int)dataTable.DTA_INFO_REPORT]);
-            bsAdap[(int)bindSource.DTA_INFO_REPORT].DataSource = tbAdap[(int)dataTable.DTA_INFO_REPORT];
+                tbAdap[(int)dataTable.DTA_INFO_REPORT].Locale = System.Globalization.CultureInfo.InvariantCulture;
+                dtaAdap[(int)dataAdapter.DTA_INFO_REPORT].Fill(tbAdap[(int)dataTable.DTA_INFO_REPORT]);
+                bsAdap[(int)bindSource.DTA_INFO_REPORT].DataSource = tbAdap[(int)dataTable.DTA_INFO_REPORT];
 
-            // Resize the DataGridView columns to fit the newly loaded content.
-            dgvInfo.DataSource = bsAdap[(int)bindSource.DTA_INFO_REPORT];
-            dgvInfo.Columns["ItemCode"].Visible = false;
-            dgvInfo.Columns["ShowNum"].Visible = false;
-            dgvInfo.Columns["Content"].HeaderText = "Danh Mục";
-            dgvInfo.Columns["Content"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            helper.setRowNumber(dgvInfo);
+                // Resize the DataGridView columns to fit the newly loaded content.
+                dgvInfo.DataSource = bsAdap[(int)bindSource.DTA_INFO_REPORT];
+                dgvInfo.Columns["ItemCode"].Visible = false;
+                dgvInfo.Columns["ShowNum"].Visible = false;
+                dgvInfo.Columns["Content"].HeaderText = "Danh Mục";
+                dgvInfo.Columns["Content"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                helper.setRowNumber(dgvInfo);
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }   
         }
 
         private void btnThoat_Click_1(object sender, EventArgs e)
@@ -733,23 +752,29 @@ namespace PhanMemNoiSoi
             int index = int.Parse(dgvInfo.Rows[currRowIndexCheck].Cells["ShowNum"].Value.ToString().Trim());
             if (index > 0)
             {
-                string itemCode = dgvInfo.Rows[currRowIndexCheck].Cells["ItemCode"].Value.ToString().Trim();
+                try
+                {
+                    string itemCode = dgvInfo.Rows[currRowIndexCheck].Cells["ItemCode"].Value.ToString().Trim();
+                    //update to increase previous item position in database
+                    string uQuery = "UPDATE CheckItem SET ShowNum = '" + index +
+                                    "' WHERE ItemCode = (SELECT ItemCode FROM CheckItem WHERE ShowNum = '" + (index - 1) + "' AND IsDisplay = 1)";
+                    SqlCommand uSQL = new SqlCommand(uQuery, DBConnection.Instance.sqlConn);
+                    uSQL.ExecuteReader();
 
-                //update to increase previous item position in database
-                string uQuery = "UPDATE CheckItem SET ShowNum = '" + index +
-                                "' WHERE ItemCode = (SELECT ItemCode FROM CheckItem WHERE ShowNum = '" + (index - 1) + "' AND IsDisplay = 1)";
-                SqlCommand uSQL = new SqlCommand(uQuery, DBConnection.Instance.sqlConn);
-                uSQL.ExecuteReader();
+                    //update to decrease current item position in database
+                    uQuery = "UPDATE CheckItem SET ShowNum = '" + (index - 1).ToString() +
+                                    "' WHERE ItemCode = '" + itemCode + "';";
+                    uSQL = new SqlCommand(uQuery, DBConnection.Instance.sqlConn);
+                    uSQL.ExecuteReader();
 
-                //update to decrease current item position in database
-                uQuery = "UPDATE CheckItem SET ShowNum = '" + (index - 1).ToString() +
-                                "' WHERE ItemCode = '" + itemCode + "';";
-                uSQL = new SqlCommand(uQuery, DBConnection.Instance.sqlConn);
-                uSQL.ExecuteReader();
-
-                loadInfoReport();
-                setSelectedRow(dgvInfo, currRowIndexCheck - 1);
-                setStateOrderButon(currRowIndexCheck - 1);
+                    loadInfoReport();
+                    setSelectedRow(dgvInfo, currRowIndexCheck - 1);
+                    setStateOrderButon(currRowIndexCheck - 1);
+                }catch(Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
+                
             }
             //ArrangeDgvCol();
         }
@@ -766,25 +791,27 @@ namespace PhanMemNoiSoi
             int index = int.Parse(dgvInfo.Rows[currRowIndexCheck].Cells["ShowNum"].Value.ToString().Trim());
             if (index >= 0)
             {
-                string itemCode = dgvInfo.Rows[currRowIndexCheck].Cells["ItemCode"].Value.ToString().Trim();
-
-                //update to decrease after item position in database
-                string uQuery = "UPDATE CheckItem SET ShowNum = '" + index +
-                                "' WHERE ItemCode = (SELECT ItemCode FROM CheckItem WHERE ShowNum = '" + (index + 1) + "' AND IsDisplay = 1);";
-                SqlCommand uSQL = new SqlCommand(uQuery, DBConnection.Instance.sqlConn);
-                uSQL.ExecuteReader();
-
-                //update to decrease current item position in database
-                uQuery = "UPDATE CheckItem SET ShowNum = '" + (index + 1).ToString() +
-                                "' WHERE ItemCode = '" + itemCode + "';";
-                uSQL = new SqlCommand(uQuery, DBConnection.Instance.sqlConn);
-                uSQL.ExecuteReader();
-
-                loadInfoReport();
-                setSelectedRow(dgvInfo, currRowIndexCheck + 1);
-                setStateOrderButon(currRowIndexCheck + 1);
+                try
+                {
+                    string itemCode = dgvInfo.Rows[currRowIndexCheck].Cells["ItemCode"].Value.ToString().Trim();
+                    //update to decrease after item position in database
+                    string uQuery = "UPDATE CheckItem SET ShowNum = '" + index +
+                                    "' WHERE ItemCode = (SELECT ItemCode FROM CheckItem WHERE ShowNum = '" + (index + 1) + "' AND IsDisplay = 1);";
+                    SqlCommand uSQL = new SqlCommand(uQuery, DBConnection.Instance.sqlConn);
+                    uSQL.ExecuteReader();
+                    //update to decrease current item position in database
+                    uQuery = "UPDATE CheckItem SET ShowNum = '" + (index + 1).ToString() +
+                                    "' WHERE ItemCode = '" + itemCode + "';";
+                    uSQL = new SqlCommand(uQuery, DBConnection.Instance.sqlConn);
+                    uSQL.ExecuteReader();
+                    loadInfoReport();
+                    setSelectedRow(dgvInfo, currRowIndexCheck + 1);
+                    setStateOrderButon(currRowIndexCheck + 1);
+                }catch(Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
             }
-            //ArrangeDgvCol();
         }
 
         /// <summary>

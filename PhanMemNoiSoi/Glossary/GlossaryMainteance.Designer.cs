@@ -171,6 +171,7 @@
             this.dgvInfo.MultiSelect = false;
             this.dgvInfo.Name = "dgvInfo";
             this.dgvInfo.ReadOnly = true;
+            this.dgvInfo.RowTemplate.Height = 24;
             this.dgvInfo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvInfo.Size = new System.Drawing.Size(566, 345);
             this.dgvInfo.TabIndex = 2;
@@ -293,6 +294,7 @@
             this.dgvCheckContentDetail.Location = new System.Drawing.Point(7, 295);
             this.dgvCheckContentDetail.Name = "dgvCheckContentDetail";
             this.dgvCheckContentDetail.ReadOnly = true;
+            this.dgvCheckContentDetail.RowTemplate.Height = 24;
             this.dgvCheckContentDetail.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCheckContentDetail.Size = new System.Drawing.Size(550, 180);
             this.dgvCheckContentDetail.TabIndex = 3;
@@ -322,6 +324,7 @@
             this.dgvCheck.MultiSelect = false;
             this.dgvCheck.Name = "dgvCheck";
             this.dgvCheck.ReadOnly = true;
+            this.dgvCheck.RowTemplate.Height = 24;
             this.dgvCheck.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCheck.Size = new System.Drawing.Size(550, 180);
             this.dgvCheck.TabIndex = 1;

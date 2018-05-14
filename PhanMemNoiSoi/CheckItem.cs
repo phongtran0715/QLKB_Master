@@ -23,11 +23,12 @@ namespace PhanMemNoiSoi
             InitializeComponent();
         }
 
-        public CheckItem(string itemCode, string patientId)
+        public CheckItem(string itemCode, string patientId, string currentText)
         {
             InitializeComponent();
             this.patientId = patientId;
             this.itemCode = itemCode;
+            //txtSelected.Text = currentText;
         }
 
         private void CheckItem_Load(object sender, EventArgs e)
@@ -38,59 +39,59 @@ namespace PhanMemNoiSoi
             string query = "SELECT ContentCode, Content FROM CheckItemContent WHERE ItemCode = '" + this.itemCode + "';";
 
             //Load data from data base
-            dta = new SqlDataAdapter(query, DBConnection.Instance.sqlConn);
-
-            SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dta);
-
-            table = new DataTable();
-            table.Locale = System.Globalization.CultureInfo.InvariantCulture;
-
-            dta.Fill(table);
-
-            bindSource = new BindingSource();
-            bindSource.DataSource = table;
-
-            dgvContentDetail.DataSource = bindSource;
-
-            dgvContentDetail.Columns["ContentCode"].Visible = false;
-
-            dgvContentDetail.Columns["Content"].HeaderText = "Nội Dung";
-
-            helper.setRowNumber(dgvContentDetail);
-
-            //init checkbox on datagridview
-            foreach (DataGridViewRow row in dgvContentDetail.Rows)
+            try
             {
-                DataGridViewCheckBoxCell chk = (DataGridViewCheckBoxCell)row.Cells["X"];
-                chk.Value = chk.FalseValue;
-            }
-            //finish init check box
-
-            // check item selected
-            query = "SELECT ItemContentCode FROM CheckRecord WHERE CheckNum = @patientId AND ItemCode = @itemCode";
-            SqlCommand sqlItemContent = new SqlCommand(query, DBConnection.Instance.sqlConn);
-            sqlItemContent.Parameters.Add("@patientId", SqlDbType.NChar).Value = patientId;
-            sqlItemContent.Parameters.Add("@itemCode", SqlDbType.NChar).Value = itemCode;
-            SqlDataReader rdrItemContent = sqlItemContent.ExecuteReader();
-
-            while (rdrItemContent.Read())
-            {
-                string itemContentCode = rdrItemContent["ItemContentCode"].ToString().Trim();
-                // update selected value on data grid
+                dta = new SqlDataAdapter(query, DBConnection.Instance.sqlConn);
+                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dta);
+                table = new DataTable();
+                table.Locale = System.Globalization.CultureInfo.InvariantCulture;
+                dta.Fill(table);
+                bindSource = new BindingSource();
+                bindSource.DataSource = table;
+                dgvContentDetail.DataSource = bindSource;
+                dgvContentDetail.Columns["ContentCode"].Visible = false;
+                dgvContentDetail.Columns["Content"].HeaderText = "Nội Dung";
+                helper.setRowNumber(dgvContentDetail);
+                //init checkbox on datagridview
                 foreach (DataGridViewRow row in dgvContentDetail.Rows)
                 {
-                    if (row.Cells["ContentCode"].Value.ToString().Trim() == itemContentCode)
+                    DataGridViewCheckBoxCell chk = (DataGridViewCheckBoxCell)row.Cells["X"];
+                    chk.Value = chk.FalseValue;
+                }
+                //finish init check box
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            // check item selected
+            try
+            {
+                query = "SELECT ItemContentCode FROM CheckRecord WHERE CheckNum = @patientId AND ItemCode = @itemCode";
+                SqlCommand sqlItemContent = new SqlCommand(query, DBConnection.Instance.sqlConn);
+                sqlItemContent.Parameters.Add("@patientId", SqlDbType.NChar).Value = patientId;
+                sqlItemContent.Parameters.Add("@itemCode", SqlDbType.NChar).Value = itemCode;
+                SqlDataReader rdrItemContent = sqlItemContent.ExecuteReader();
+
+                while (rdrItemContent.Read())
+                {
+                    string itemContentCode = rdrItemContent["ItemContentCode"].ToString().Trim();
+                    // update selected value on data grid
+                    foreach (DataGridViewRow row in dgvContentDetail.Rows)
                     {
-                        DataGridViewCheckBoxCell chk = (DataGridViewCheckBoxCell)row.Cells["X"];
-                        chk.Value = chk.TrueValue;
+                        if (row.Cells["ContentCode"].Value.ToString().Trim() == itemContentCode)
+                        {
+                            DataGridViewCheckBoxCell chk = (DataGridViewCheckBoxCell)row.Cells["X"];
+                            chk.Value = chk.TrueValue;
+                        }
                     }
                 }
             }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            this.Close();
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

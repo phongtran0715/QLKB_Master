@@ -113,6 +113,16 @@ namespace PhanMemNoiSoi.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap About1 {
+            get {
+                object obj = ResourceManager.GetObject("About1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Actions_contact_new_icon {
             get {
                 object obj = ResourceManager.GetObject("Actions-contact-new-icon", resourceCulture);

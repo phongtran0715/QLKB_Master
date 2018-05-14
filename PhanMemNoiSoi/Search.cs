@@ -21,7 +21,6 @@ namespace PhanMemNoiSoi
         int imgIndex = 0;
         string BASE_IMG_FOLDER;
         Helper helper = new Helper();
-        string curImgFolder;
 
         public Search(IPrincipal userPrincipal) 
             :base(Session.Instance.UserRole, userPrincipal)
@@ -54,9 +53,9 @@ namespace PhanMemNoiSoi
         {
             // load data for data grid view
             string str = Settings.Default.maxRowDisplay.ToString();
-            string query = "SELECT TOP " + str + " SickNum,SickName, Age, Telephone, Createtime FROM SickData ORDER BY SickNum DESC;";
+            string query = "SELECT TOP " + str + " SickNum, SickName, Age, Telephone, Createtime, " + 
+                " DataPath FROM SickData ORDER BY SickNum DESC;";
             dtaPatient = new SqlDataAdapter(query, DBConnection.Instance.sqlConn);
-
             SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dtaPatient);
 
             tbPatient = new DataTable();
@@ -69,6 +68,7 @@ namespace PhanMemNoiSoi
                 DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
             dgvPatient.DataSource = bsPatient;
             dgvPatient.Columns["SickNum"].Visible = false;
+            dgvPatient.Columns["DataPath"].Visible = false;
             dgvPatient.Columns["SickName"].HeaderText = "Tên";
             dgvPatient.Columns["Age"].HeaderText = "Tuổi";
             dgvPatient.Columns["Age"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -191,45 +191,54 @@ namespace PhanMemNoiSoi
             }
             query += " ORDER BY Createtime DESC;";
             Console.WriteLine(query);
-            dtaPatient = new SqlDataAdapter(query, DBConnection.Instance.sqlConn);
-
-            SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dtaPatient);
-            tbPatient = new DataTable();
-            tbPatient.Locale = System.Globalization.CultureInfo.InvariantCulture;
-            dtaPatient.Fill(tbPatient);
-            bsPatient.DataSource = tbPatient;
-
-            // Resize the DataGridView columns to fit the newly loaded content
-            dgvPatient.AutoResizeColumns(
-                DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
-            dgvPatient.DataSource = bsPatient;
-            dgvPatient.Columns["SickNum"].Visible = false;
-            dgvPatient.Columns["SickName"].HeaderText = "Tên";
-            dgvPatient.Columns["Age"].HeaderText = "Tuổi";
-            dgvPatient.Columns["Telephone"].HeaderText = "SĐT";
-            dgvPatient.Columns["Createtime"].HeaderText = "Ngày khám";
-
-            dgvPatient.Columns["SickName"].Width = dgvPatient.Width * 4 / 10;
-            dgvPatient.Columns["Age"].Width = dgvPatient.Width / 10;
-            dgvPatient.Columns["Telephone"].Width = dgvPatient.Width * 2 / 10;
-            dgvPatient.Columns["Createtime"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            foreach (DataGridViewColumn col in dgvPatient.Columns)
+            try
             {
-                col.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                col.HeaderCell.Style.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Pixel);
-                col.SortMode = DataGridViewColumnSortMode.NotSortable;
+                dtaPatient = new SqlDataAdapter(query, DBConnection.Instance.sqlConn);
+
+                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dtaPatient);
+                tbPatient = new DataTable();
+                tbPatient.Locale = System.Globalization.CultureInfo.InvariantCulture;
+                dtaPatient.Fill(tbPatient);
+                bsPatient.DataSource = tbPatient;
+
+                // Resize the DataGridView columns to fit the newly loaded content
+                dgvPatient.AutoResizeColumns(
+                    DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
+                dgvPatient.DataSource = bsPatient;
+                dgvPatient.Columns["SickNum"].Visible = false;
+                dgvPatient.Columns["SickName"].HeaderText = "Tên";
+                dgvPatient.Columns["Age"].HeaderText = "Tuổi";
+                dgvPatient.Columns["Telephone"].HeaderText = "SĐT";
+                dgvPatient.Columns["Createtime"].HeaderText = "Ngày khám";
+
+                dgvPatient.Columns["SickName"].Width = dgvPatient.Width * 4 / 10;
+                dgvPatient.Columns["Age"].Width = dgvPatient.Width / 10;
+                dgvPatient.Columns["Telephone"].Width = dgvPatient.Width * 2 / 10;
+                dgvPatient.Columns["Createtime"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                foreach (DataGridViewColumn col in dgvPatient.Columns)
+                {
+                    col.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    col.HeaderCell.Style.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Pixel);
+                    col.SortMode = DataGridViewColumnSortMode.NotSortable;
+                }
+                helper.setRowNumber(dgvPatient);
+                if (dgvPatient.Rows.Count > 0)
+                {
+                    setFieldEnable(true);
+                }
+                else
+                {
+                    setFieldEnable(false);
+                }
+                //update number record to label
+                gbResult.Text = "Danh sách bệnh nhân (" + tbPatient.Rows.Count + " kết quả)";
             }
-            helper.setRowNumber(dgvPatient);
-            if (dgvPatient.Rows.Count > 0)
+            catch(Exception ex)
             {
-                setFieldEnable(true);
+                Console.WriteLine(ex.ToString());
+                MessageBox.Show("Câu truy vấn không thành công. Vui lòng xem lại giá trị tìm kiếm đầu vào!",
+                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else
-            {
-                setFieldEnable(false);
-            }
-            //update number record to label
-            gbResult.Text = "Danh sách bệnh nhân (" + tbPatient.Rows.Count + " kết quả)";
         }
 
         private void dgPatient_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -240,11 +249,11 @@ namespace PhanMemNoiSoi
             if (e.RowIndex != -1)
             {
                 string sickNum = dgvPatient.Rows[e.RowIndex].Cells["SickNum"].Value.ToString().Trim();
+                string dataPath = dgvPatient.Rows[e.RowIndex].Cells["DataPath"].Value.ToString().Trim();
                 Patient patient = new Patient().getPatientByNum(sickNum);
-                curImgFolder = helper.getImgFolderById(sickNum);
-                if (Directory.Exists(curImgFolder))
+                if (Directory.Exists(dataPath))
                 {
-                    imagesPatient = Directory.GetFiles(curImgFolder, "*.jpg", SearchOption.AllDirectories);
+                    imagesPatient = Directory.GetFiles(dataPath, "*.jpg", SearchOption.AllDirectories);
                     if (imagesPatient.Length > 0)
                     {
                         using (FileStream stream = new FileStream(imagesPatient[0], FileMode.Open, FileAccess.Read))
@@ -334,6 +343,7 @@ namespace PhanMemNoiSoi
                 int currRowIndexCheck = dgvPatient.SelectedRows[selectedRowCount - 1].Index;
                 string sickNum = dgvPatient.Rows[currRowIndexCheck].Cells["SickNum"].Value.ToString().Trim();
                 string sickName = dgvPatient.Rows[currRowIndexCheck].Cells["SickName"].Value.ToString().Trim();
+                string dataPath = dgvPatient.Rows[currRowIndexCheck].Cells["DataPath"].Value.ToString().Trim();
                 //delete from database
                 try
                 {
@@ -363,11 +373,11 @@ namespace PhanMemNoiSoi
                 }
                 resetPatientField();
                 //delete data in disk
-                if (Directory.Exists(curImgFolder))
+                if (Directory.Exists(dataPath))
                 {
                     try
                     {
-                        Directory.Delete(curImgFolder, true);
+                        Directory.Delete(dataPath, true);
                     }
                     catch (Exception ex)
                     {
@@ -416,7 +426,7 @@ namespace PhanMemNoiSoi
             string pAge = patient.AgeProperty.ToString();
             string pCause = patient.CauseCheckProperty;
             string doctor = Session.Instance.UserName;
-            string folderImgPath = new Patient().getFolderPathByPatient(patient); 
+            string folderImgPath = dgvPatient.Rows[currRowIndexCheck].Cells["DataPath"].Value.ToString().Trim(); 
             this.Hide();
             CheckAndView checkFr = new CheckAndView(numId, pId, pName, pAge, pCause, doctor, folderImgPath);
             checkFr.ShowDialog();
@@ -450,12 +460,14 @@ namespace PhanMemNoiSoi
                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+            int currRowIndexCheck = dgvPatient.SelectedRows[selectedRowCount - 1].Index;
+            string dataPath = dgvPatient.Rows[currRowIndexCheck].Cells["DataPath"].Value.ToString().Trim();
             //check folder is existed
-            if (Directory.Exists(curImgFolder))
+            if (Directory.Exists(dataPath))
             {
                 try
                 {
-                    Process.Start(curImgFolder);
+                    Process.Start(dataPath);
                 }
                 catch (Win32Exception win32Exception)
                 {

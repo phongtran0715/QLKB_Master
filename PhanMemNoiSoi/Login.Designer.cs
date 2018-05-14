@@ -92,6 +92,7 @@
             this.dgUserList.MultiSelect = false;
             this.dgUserList.Name = "dgUserList";
             this.dgUserList.ReadOnly = true;
+            this.dgUserList.RowTemplate.Height = 24;
             this.dgUserList.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dgUserList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgUserList.Size = new System.Drawing.Size(336, 245);

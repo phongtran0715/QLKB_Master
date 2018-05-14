@@ -21,8 +21,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QLKBKeyGen", "QLKBKeyGen\QL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OD.Forms.Security", "SecureBaseForm\OD.Forms.Security.csproj", "{5C9ADA8B-7F93-4968-B6C3-B6B9627C2B0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApplication1", "WindowsFormsApplication1\WindowsFormsApplication1.csproj", "{8E72EDDC-E026-4ECD-B599-F34A11FB932B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,14 +69,6 @@ Global
 		{5C9ADA8B-7F93-4968-B6C3-B6B9627C2B0F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5C9ADA8B-7F93-4968-B6C3-B6B9627C2B0F}.Release|x64.ActiveCfg = Release|Any CPU
 		{5C9ADA8B-7F93-4968-B6C3-B6B9627C2B0F}.Release|x64.Build.0 = Release|Any CPU
-		{8E72EDDC-E026-4ECD-B599-F34A11FB932B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8E72EDDC-E026-4ECD-B599-F34A11FB932B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8E72EDDC-E026-4ECD-B599-F34A11FB932B}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{8E72EDDC-E026-4ECD-B599-F34A11FB932B}.Debug|x64.Build.0 = Debug|Any CPU
-		{8E72EDDC-E026-4ECD-B599-F34A11FB932B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8E72EDDC-E026-4ECD-B599-F34A11FB932B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8E72EDDC-E026-4ECD-B599-F34A11FB932B}.Release|x64.ActiveCfg = Release|Any CPU
-		{8E72EDDC-E026-4ECD-B599-F34A11FB932B}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

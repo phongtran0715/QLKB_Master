@@ -7,7 +7,6 @@ using System.Windows.Forms;
 namespace PhanMemNoiSoi
 {
    public partial class SystemConfiguration : SecureBaseForm
-    //public partial class SystemConfiguration : Form
     {
         public SystemConfiguration(IPrincipal userPrincipal)
             :base(Session.Instance.UserRole, userPrincipal)
@@ -18,11 +17,6 @@ namespace PhanMemNoiSoi
         private void btnCancle_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void btnTest_Click(object sender, EventArgs e)
-        {
-            new ConfigDB(false, false).ShowDialog();
         }
 
         private void btnOk_Click(object sender, EventArgs e)

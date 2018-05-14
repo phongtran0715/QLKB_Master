@@ -9,12 +9,8 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Text;
 using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
 
 namespace PhanMemNoiSoi
 {
@@ -165,21 +161,73 @@ namespace PhanMemNoiSoi
             dgv.RowHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 12f);
         }
 
-        /// <summary>
-        /// Get saved image folder path from patient id  
-        /// </summary>
-        /// <param name="patientId"></param>
-        public string getImgFolderById(string patientId)
+        public string creatPatientFolder(string sickNum)
         {
-            string result = null;
-            string base_path = Properties.Settings.Default.imageFolder;
-            Patient patient = new Patient().getPatientByNum(patientId);
-            result = base_path + "\\" + patient.CreateTimeProperty.Year
-                                    + patient.CreateTimeProperty.Month + "\\"
-                                    + patient.CreateTimeProperty.Day + "\\"
-                                    + patient.NumProperty + "\\";
-            return result;
+            string BASE_IMG_FOLDER = Properties.Settings.Default.imageFolder;
+            string folderPath = null;
+            //check base folder is exist
+            if (!Directory.Exists(BASE_IMG_FOLDER))
+            {
+                try
+                {
+                    System.IO.Directory.CreateDirectory(BASE_IMG_FOLDER);
+                    Properties.Settings.Default.imageFolder = BASE_IMG_FOLDER;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                    MessageBox.Show("Không thể khởi tạo thưu mục lưu ảnh :" + BASE_IMG_FOLDER + ".\n Vui lòng thay đổi cài đặt thư mục lưu ảnh", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return null;
+                }
+
+            }
+            //check month folder
+            folderPath = BASE_IMG_FOLDER + "\\"
+                                  + DateTime.Today.Year.ToString()
+                                  + DateTime.Today.Month.ToString();
+            bool exists = System.IO.Directory.Exists(folderPath);
+            if (!exists)
+            {
+                try
+                {
+                    System.IO.Directory.CreateDirectory(folderPath);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                    MessageBox.Show("Không thể khởi tạo thưu mục lưu ảnh :" + BASE_IMG_FOLDER + ".\n Vui lòng thay đổi cài đặt thư mục lưu ảnh", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return null;
+                }
+            }
+            //check day folder
+            folderPath += "\\" + DateTime.Today.Day.ToString();
+            exists = System.IO.Directory.Exists(folderPath);
+            if (!exists)
+            {
+                System.IO.Directory.CreateDirectory(folderPath);
+            }
+            //check patient folder
+            folderPath += "\\" + sickNum + "\\";
+            exists = System.IO.Directory.Exists(folderPath);
+            if (!exists)
+            {
+                try
+                {
+                    System.IO.Directory.CreateDirectory(folderPath);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                    MessageBox.Show("Không thể khởi tạo thưu mục lưu ảnh :" + BASE_IMG_FOLDER + ".\n Vui lòng thay đổi cài đặt thư mục lưu ảnh", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return null;
+                }
+            }
+            return folderPath;
         }
+
 
         public bool DBConnectionStatus(string connString)
         {
@@ -280,10 +328,58 @@ namespace PhanMemNoiSoi
 
         public int getIdCheck()
         {
-            string sql = "SELECT  COUNT(*) FROM SickData";
-            SqlCommand comd = new SqlCommand(sql, DBConnection.Instance.sqlConn);
-            int count = Convert.ToInt32(comd.ExecuteScalar());
+            int count = 0;
+            try
+            {
+                string sql = "SELECT  MAX(Num) FROM SickData";
+                SqlCommand comd = new SqlCommand(sql, DBConnection.Instance.sqlConn);
+                object resultObj = comd.ExecuteScalar();
+                if (resultObj != null)
+                {
+                    count = Convert.ToInt32(comd.ExecuteScalar());
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
             return count;
+        }
+
+        public int getDbVersion()
+        {
+            int version = 0;
+            try
+            {
+                string sql = "SELECT  Version FROM DbVersion";
+                SqlCommand comd = new SqlCommand(sql, DBConnection.Instance.sqlConn);
+                object resultObj = comd.ExecuteScalar();
+                if (resultObj != null)
+                {
+                    version = Convert.ToInt32(comd.ExecuteScalar());
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            return version;
+        }
+
+        public bool setDbVersion(int version)
+        {
+            bool isSuccess = false;
+            try
+            {
+                string query = "UPDATE dbo.DbVersion SET Version = @Version";
+                SqlCommand command = new SqlCommand(query, DBConnection.Instance.sqlConn);
+                command.Parameters.Add("@Version", SqlDbType.Int).Value = version;
+                command.ExecuteNonQuery();
+            }catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            return isSuccess;
         }
 
         public string RemoveWhitespace(string input)
@@ -467,6 +563,7 @@ namespace PhanMemNoiSoi
             // the plain text value must be correct.
             return (hashValue == expectedHashString);
         }
+
     }
 }
 

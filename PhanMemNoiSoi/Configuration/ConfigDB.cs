@@ -3,7 +3,6 @@ using Microsoft.SqlServer.Management.Smo;
 using Microsoft.Win32;
 using System;
 using System.Data.SqlClient;
-using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 
@@ -21,15 +20,11 @@ namespace PhanMemNoiSoi
         private string dbName;
         private string password;
         private string userName;
-        private bool isRunMainApp;
-        private bool isCreateDb;
         private int checkDbErrorCode = 0;
 
-        public ConfigDB(bool isRunMainApp, bool isCreateDb)
+        public ConfigDB()
         {
             this.InitializeComponent();
-            this.isRunMainApp = isRunMainApp;
-            this.isCreateDb = isCreateDb;
         }
 
         private void ConfigDB_Load(object sender, EventArgs e)
@@ -58,18 +53,6 @@ namespace PhanMemNoiSoi
             this.cbInstance.Text = PhanMemNoiSoi.Properties.Settings.Default.serverName;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //save setting value
-            Properties.Settings.Default.serverName = cbInstance.Text.Trim();
-            Properties.Settings.Default.dbName = txtDbName.Text.Trim();
-            Properties.Settings.Default.dbUser = txtUser.Text.Trim();
-            Properties.Settings.Default.dbPassword = txtPass.Text.Trim();
-            Properties.Settings.Default.Save();
-            MessageBox.Show("Cập nhập thông tin thành công", "Thông báo", 
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
         private void button3_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -90,20 +73,27 @@ namespace PhanMemNoiSoi
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+         
             this.serverInstance = this.cbInstance.Text.Trim();
             this.dbName = this.txtDbName.Text.Trim();
             this.userName = this.txtUser.Text.Trim();
             this.password = this.txtPass.Text.Trim();
+
+            this.pbStatus.Visible = true;
+            this.lbStatus.Visible = true;
+            this.lbStatus.Text = "Đang khởi tạo cơ sở dữ liệu ...";
+
+            createDBJob();
+        }
+
+        private void createDBJob()
+        {
             if (this.backgroundWorker1.IsBusy)
             {
                 this.backgroundWorker1.CancelAsync();
             }
             else
             {
-                this.pbStatus.Visible = true;
-                this.lbStatus.Visible = true;
-                this.lbStatus.Text = "Đang kiểm tra ...";
-                this.btnOk.Enabled = false;
                 this.backgroundWorker1.RunWorkerAsync();
             }
         }
@@ -133,10 +123,7 @@ namespace PhanMemNoiSoi
             bool flag = true;
             if (DBConnection.Instance.CheckConnection(this.serverInstance))
             {
-                if (this.isCreateDb)
-                {
-                    this.createDbFromScript(this.scrCreateDB, this.serverInstance);
-                }
+                this.createDbFromScript(this.scrCreateDB, this.serverInstance);
                 string[] textArray1 = new string[] { "Data Source= ", this.serverInstance, ";Initial Catalog=", this.dbName, ";" };
                 string connString = string.Concat(textArray1);
                 if (!string.IsNullOrEmpty(this.userName))
@@ -159,16 +146,16 @@ namespace PhanMemNoiSoi
                 }
                 if (this.helper.DBConnectionStatus(connString))
                 {
-                    PhanMemNoiSoi.Properties.Settings.Default.serverName = this.serverInstance;
-                    PhanMemNoiSoi.Properties.Settings.Default.dbName = this.dbName;
-                    PhanMemNoiSoi.Properties.Settings.Default.dbUser = this.userName;
-                    PhanMemNoiSoi.Properties.Settings.Default.dbPassword = this.password;
-                    PhanMemNoiSoi.Properties.Settings.Default.Save();
-                    this.checkDbErrorCode = 0;
+                    Properties.Settings.Default.serverName = this.serverInstance;
+                    Properties.Settings.Default.dbName = this.dbName;
+                    Properties.Settings.Default.dbUser = this.userName;
+                    Properties.Settings.Default.dbPassword = this.password;
+                    Properties.Settings.Default.Save();
+                    checkDbErrorCode = 0;
                 }
                 else
                 {
-                    this.checkDbErrorCode = 1;
+                    checkDbErrorCode = 1;
                 }
             }
             else
@@ -181,16 +168,12 @@ namespace PhanMemNoiSoi
         {
             this.pbStatus.Visible = false;
             this.lbStatus.Visible = false;
-            this.btnOk.Enabled = true;
             switch (this.checkDbErrorCode)
             {
                 case 0:
-                    MessageBox.Show("Kết nối dữ liệu thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    if (this.isRunMainApp)
-                    {
-                        Process.Start(Application.ExecutablePath);
-                        Application.Exit();
-                    }
+                    MessageBox.Show("Khởi tạo cơ sở dữ liệu thành công! Vui lòng khởi động lại phầm mềm!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    this.Hide();
+                    Application.Exit();
                     break;
 
                 case 1:
@@ -201,6 +184,15 @@ namespace PhanMemNoiSoi
                 case 2:
                     MessageBox.Show("Tên máy chủ cơ sở dữ liệu không chính xác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                     break;
+            }
+        }
+
+        public void upgradeDB(int dbVersion)
+        {
+            bool isSuccess = createDbFromScript(this.scrCreateDB, this.serverInstance);
+            if(isSuccess == true)
+            {
+                helper.setDbVersion(dbVersion);
             }
         }
     }

@@ -63,6 +63,7 @@
             this.dgvInfoList.GridColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dgvInfoList.Location = new System.Drawing.Point(3, 22);
             this.dgvInfoList.Name = "dgvInfoList";
+            this.dgvInfoList.RowTemplate.Height = 24;
             this.dgvInfoList.Size = new System.Drawing.Size(362, 344);
             this.dgvInfoList.TabIndex = 1;
             this.dgvInfoList.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvInfoList_DataBindingComplete);

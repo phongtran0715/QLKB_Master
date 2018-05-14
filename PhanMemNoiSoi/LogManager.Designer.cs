@@ -33,9 +33,13 @@
             this.rbThang = new System.Windows.Forms.RadioButton();
             this.rbNgay = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnDeletAll = new System.Windows.Forms.Button();
             this.txtContent = new System.Windows.Forms.TextBox();
+            this.btnClearLog = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.cbUser = new System.Windows.Forms.ComboBox();
+            this.btnTatCa = new System.Windows.Forms.Button();
+            this.btnTimKiem = new System.Windows.Forms.Button();
             this.dtNgayKetThuc = new System.Windows.Forms.DateTimePicker();
             this.dtNgayBatDau = new System.Windows.Forms.DateTimePicker();
             this.label13 = new System.Windows.Forms.Label();
@@ -44,10 +48,6 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dgLogView = new System.Windows.Forms.DataGridView();
             this.btnExit = new System.Windows.Forms.Button();
-            this.btnDeletAll = new System.Windows.Forms.Button();
-            this.btnClearLog = new System.Windows.Forms.Button();
-            this.btnTatCa = new System.Windows.Forms.Button();
-            this.btnTimKiem = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -117,12 +117,40 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Bộ lọc";
             // 
+            // btnDeletAll
+            // 
+            this.btnDeletAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDeletAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeletAll.Image = global::PhanMemNoiSoi.Properties.Resources.trash_circle_red_5121;
+            this.btnDeletAll.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDeletAll.Location = new System.Drawing.Point(549, 128);
+            this.btnDeletAll.Name = "btnDeletAll";
+            this.btnDeletAll.Size = new System.Drawing.Size(110, 35);
+            this.btnDeletAll.TabIndex = 19;
+            this.btnDeletAll.Text = "     Xóa hết";
+            this.btnDeletAll.UseVisualStyleBackColor = true;
+            this.btnDeletAll.Click += new System.EventHandler(this.btnDeletAll_Click);
+            // 
             // txtContent
             // 
             this.txtContent.Location = new System.Drawing.Point(460, 31);
             this.txtContent.Name = "txtContent";
             this.txtContent.Size = new System.Drawing.Size(198, 26);
             this.txtContent.TabIndex = 18;
+            // 
+            // btnClearLog
+            // 
+            this.btnClearLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClearLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClearLog.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
+            this.btnClearLog.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnClearLog.Location = new System.Drawing.Point(419, 128);
+            this.btnClearLog.Name = "btnClearLog";
+            this.btnClearLog.Size = new System.Drawing.Size(110, 35);
+            this.btnClearLog.TabIndex = 13;
+            this.btnClearLog.Text = "     Xóa Log";
+            this.btnClearLog.UseVisualStyleBackColor = true;
+            this.btnClearLog.Click += new System.EventHandler(this.btnClearLog_Click);
             // 
             // label1
             // 
@@ -142,6 +170,35 @@
             this.cbUser.Size = new System.Drawing.Size(214, 28);
             this.cbUser.TabIndex = 16;
             this.cbUser.SelectedIndexChanged += new System.EventHandler(this.cbUser_SelectedIndexChanged);
+            // 
+            // btnTatCa
+            // 
+            this.btnTatCa.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnTatCa.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btnTatCa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTatCa.Image = ((System.Drawing.Image)(resources.GetObject("btnTatCa.Image")));
+            this.btnTatCa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnTatCa.Location = new System.Drawing.Point(289, 128);
+            this.btnTatCa.Name = "btnTatCa";
+            this.btnTatCa.Size = new System.Drawing.Size(110, 35);
+            this.btnTatCa.TabIndex = 14;
+            this.btnTatCa.Text = "   Tất cả";
+            this.btnTatCa.UseVisualStyleBackColor = true;
+            this.btnTatCa.Click += new System.EventHandler(this.btnTatCa_Click);
+            // 
+            // btnTimKiem
+            // 
+            this.btnTimKiem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTimKiem.Image = ((System.Drawing.Image)(resources.GetObject("btnTimKiem.Image")));
+            this.btnTimKiem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnTimKiem.Location = new System.Drawing.Point(161, 128);
+            this.btnTimKiem.Name = "btnTimKiem";
+            this.btnTimKiem.Size = new System.Drawing.Size(110, 35);
+            this.btnTimKiem.TabIndex = 13;
+            this.btnTimKiem.Text = "    Tìm kiếm";
+            this.btnTimKiem.UseVisualStyleBackColor = true;
+            this.btnTimKiem.Click += new System.EventHandler(this.btnTimKiem_Click);
             // 
             // dtNgayKetThuc
             // 
@@ -215,6 +272,7 @@
             this.dgLogView.MultiSelect = false;
             this.dgLogView.Name = "dgLogView";
             this.dgLogView.ReadOnly = true;
+            this.dgLogView.RowTemplate.Height = 24;
             this.dgLogView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgLogView.Size = new System.Drawing.Size(796, 413);
             this.dgLogView.TabIndex = 1;
@@ -235,63 +293,6 @@
             this.btnExit.Text = "    Thoát";
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // btnDeletAll
-            // 
-            this.btnDeletAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDeletAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDeletAll.Image = global::PhanMemNoiSoi.Properties.Resources.trash_circle_red_5121;
-            this.btnDeletAll.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDeletAll.Location = new System.Drawing.Point(549, 128);
-            this.btnDeletAll.Name = "btnDeletAll";
-            this.btnDeletAll.Size = new System.Drawing.Size(110, 35);
-            this.btnDeletAll.TabIndex = 19;
-            this.btnDeletAll.Text = "     Xóa hết";
-            this.btnDeletAll.UseVisualStyleBackColor = true;
-            this.btnDeletAll.Click += new System.EventHandler(this.btnDeletAll_Click);
-            // 
-            // btnClearLog
-            // 
-            this.btnClearLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClearLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClearLog.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
-            this.btnClearLog.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClearLog.Location = new System.Drawing.Point(419, 128);
-            this.btnClearLog.Name = "btnClearLog";
-            this.btnClearLog.Size = new System.Drawing.Size(110, 35);
-            this.btnClearLog.TabIndex = 13;
-            this.btnClearLog.Text = "     Xóa Log";
-            this.btnClearLog.UseVisualStyleBackColor = true;
-            this.btnClearLog.Click += new System.EventHandler(this.btnClearLog_Click);
-            // 
-            // btnTatCa
-            // 
-            this.btnTatCa.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnTatCa.Cursor = System.Windows.Forms.Cursors.Default;
-            this.btnTatCa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTatCa.Image = ((System.Drawing.Image)(resources.GetObject("btnTatCa.Image")));
-            this.btnTatCa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTatCa.Location = new System.Drawing.Point(289, 128);
-            this.btnTatCa.Name = "btnTatCa";
-            this.btnTatCa.Size = new System.Drawing.Size(110, 35);
-            this.btnTatCa.TabIndex = 14;
-            this.btnTatCa.Text = "   Tất cả";
-            this.btnTatCa.UseVisualStyleBackColor = true;
-            this.btnTatCa.Click += new System.EventHandler(this.btnTatCa_Click);
-            // 
-            // btnTimKiem
-            // 
-            this.btnTimKiem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTimKiem.Image = ((System.Drawing.Image)(resources.GetObject("btnTimKiem.Image")));
-            this.btnTimKiem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTimKiem.Location = new System.Drawing.Point(161, 128);
-            this.btnTimKiem.Name = "btnTimKiem";
-            this.btnTimKiem.Size = new System.Drawing.Size(110, 35);
-            this.btnTimKiem.TabIndex = 13;
-            this.btnTimKiem.Text = "    Tìm kiếm";
-            this.btnTimKiem.UseVisualStyleBackColor = true;
-            this.btnTimKiem.Click += new System.EventHandler(this.btnTimKiem_Click);
             // 
             // LogManager
             // 

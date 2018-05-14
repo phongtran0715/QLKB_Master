@@ -82,10 +82,11 @@ namespace PhanMemNoiSoi
             {
                 mySQL = new SqlCommand(query, DBConnection.Instance.sqlConn);
                 numRecord = (int)mySQL.ExecuteScalar();
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
             }
-            
+
             if (numRecord <= 0)
             {
                 return;
@@ -102,9 +103,9 @@ namespace PhanMemNoiSoi
                 while (rdr.Read())
                 {
                     gbList[index] = new System.Windows.Forms.GroupBox();
-                    gbList[index].Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, 
+                    gbList[index].Font = new System.Drawing.Font("Microsoft Sans Serif", 12F,
                         System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                    if(index == 0)
+                    if (index == 0)
                     {
                         gbList[index].Location = new System.Drawing.Point(8, 5 + index * (550 / numRecord));
                     }
@@ -112,7 +113,7 @@ namespace PhanMemNoiSoi
                     {
                         gbList[index].Location = new System.Drawing.Point(8, 20 + index * (550 / numRecord));
                     }
-                    
+
                     gbList[index].Name = rdr["ItemCode"].ToString();
                     gbList[index].Size = new System.Drawing.Size(groupBox1.Width * 98 / 100, 550 / numRecord);
                     gbList[index].TabIndex = 1;
@@ -136,17 +137,17 @@ namespace PhanMemNoiSoi
                     txtList[index].ScrollBars = System.Windows.Forms.ScrollBars.Both;
                     txtList[index].MouseClick += new System.Windows.Forms.MouseEventHandler(textbox_MouseClick);
                     txtList[index].ForeColor = Color.Blue;
-                    
+
                     contentShowRp[index] = rdr["Content"].ToString();
                     //increase index for next round
                     index++;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
             }
-            
-            if(txtList != null)
+
+            if (txtList != null)
             {
                 for (int i = 0; i < txtList.Length; i++)
                 {
@@ -184,7 +185,7 @@ namespace PhanMemNoiSoi
                 }
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
             }
             //remove end character
@@ -199,12 +200,12 @@ namespace PhanMemNoiSoi
         {
             var txtbox = sender as TextBox;
             this.adapTxtBox = txtbox;
-            showCheckItemForm(txtbox.Name.Trim());
+            showCheckItemForm(txtbox.Name.Trim(), txtbox.Text.Trim());
         }
 
-        private void showCheckItemForm(string itemCode)
+        private void showCheckItemForm(string itemCode, string currentText)
         {
-            CheckItem checkItemFr = new CheckItem(itemCode, patientId);
+            CheckItem checkItemFr = new CheckItem(itemCode, patientId, currentText);
             checkItemFr.updateData += updateTextbox;
             checkItemFr.ShowDialog();
         }
@@ -245,7 +246,7 @@ namespace PhanMemNoiSoi
             rp.openTemplateFile();
             fillReport(rp, iList);
             string tmp = Log.Instance.GetTempPath() + "tmp.docx";
-            rp.saveFile(tmp, true);           
+            rp.saveFile(tmp, true);
         }
 
         private void fillReport(ReportWord rp, List<String> iList)
@@ -262,25 +263,35 @@ namespace PhanMemNoiSoi
             rp.insertText("Cause", patientInfo.CauseCheckProperty);
             rp.insertText("Doctor", Session.Instance.UserName);
             rp.insertText("CreateTime", patientInfo.CreateTimeProperty.ToString(helper.getDateFormat(Settings.Default.datetimeFormat)));
+            //validate text data
+            if (txtList.Length > 0)
+            {
                 string[,] data = new string[txtList.Length, 2];
-                if (txtList != null)
+                for (int i = 0; i < txtList.Length; i++)
                 {
-                    for (int i = 0; i < txtList.Length; i++)
+                    string header = contentShowRp[i].Trim() + " : ";
+                    data[i, 0] = header;
+                    string content = txtList[i].Text.Trim();
+                    if (content.EndsWith(","))
                     {
-                        string header = contentShowRp[i].Trim() + " : ";
-                        data[i, 0] = header;
-                        string content = txtList[i].Text.Trim();
-                        if (content.EndsWith(","))
-                        {
-                            content = content.Remove(content.Length - 1);
-                        }
-                        data[i, 1] = content;
+                        content = content.Remove(content.Length - 1);
                     }
+                    data[i, 1] = content;
                 }
                 rp.createTable("table", data);
-            
-            rp.createImageTable("images", iList);
-            
+            }else
+            {
+                rp.searchReplace("<table>", "");
+            }
+            //validate image data
+            if(iList.Count > 0)
+            {
+                rp.createImageTable("images", iList);
+            }else
+            {
+                rp.searchReplace("<images>", "");
+            }
+
             rp.insertText("Date", DateTime.Now.Day.ToString());
             rp.insertText("Month", DateTime.Now.Month.ToString());
             rp.insertText("Year", DateTime.Now.Year.ToString());

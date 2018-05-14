@@ -14,7 +14,7 @@ namespace PhanMemNoiSoi
     {
         #region Capture camera variable
         private Capture capture = null;
-        private Filters filters = new Filters();
+        private Filters filters = null;
         Capture.HeFrame heFrame = null;
         Image imgCapture = null;
         #endregion
@@ -64,19 +64,28 @@ namespace PhanMemNoiSoi
                 //Load config from DB
                 string videoDevice = Settings.Default.vDevice;
                 string videoCompressor = Settings.Default.vCompress;
-                capture = new Capture(new Filter(videoDevice));
-                capture.VideoCompressor = new Filter(videoCompressor);
-
-                //TODO: restore framerate, framesize
-                /*
-                double frameRate = Properties.Settings.Default.vFrameRate;
-                Size freameSize = new Size(Properties.Settings.Default.vFrameSizeWidth,
-                    Properties.Settings.Default.vFrameSizeHigh);
-                //capture.FrameRate = frameRate;
-                //capture.FrameSize = freameSize;
-                */
-                capture.PreviewWindowFrame = pBox;
-                isSucess = true;
+                filters = new Filters();
+                if ((videoDevice != null) && (videoDevice != ""))
+                {
+                    capture = new Capture(new Filter(videoDevice));
+                    //set video compressor
+                    if ((videoCompressor != null) && (videoCompressor != ""))
+                    {
+                        try
+                        {
+                            capture.VideoCompressor = new Filter(videoCompressor);
+                        }catch(Exception ex)
+                        {
+                            Console.WriteLine(ex.ToString());
+                            capture.VideoCompressor = null;
+                        }
+                    }
+                    capture.PreviewWindowFrame = pBox;
+                    isSucess = true;
+                }else
+                {
+                    isSucess = false;
+                }
             }
             catch (Exception ex)
             {
@@ -89,15 +98,19 @@ namespace PhanMemNoiSoi
                 //Auto reinit camera with default param
                 try
                 {
-                    capture = new Capture(filters.VideoInputDevices[0]);
-                    capture.PreviewWindow = pBox;
-                    //Save new config param 
-                    Settings.Default.vDevice = capture.VideoDevice.MonikerString;
-                    Settings.Default.vCompress = capture.VideoCompressor.MonikerString;
-                    Settings.Default.vFrameRate = capture.FrameRate;
-                    Settings.Default.vFrameSizeWidth = capture.FrameSize.Width;
-                    Settings.Default.vFrameSizeHigh = capture.FrameSize.Height;
-                    isSucess = true;
+                    if(filters != null)
+                    {
+                        capture = new Capture(filters.VideoInputDevices[0]);
+                        capture.PreviewWindow = pBox;
+                        //Save new config param 
+                        Settings.Default.vDevice = capture.VideoDevice.MonikerString;
+                        if (capture.VideoCompressor != null)
+                        {
+                            Settings.Default.vCompress = capture.VideoCompressor.MonikerString;
+                        }
+                        Settings.Default.Save();
+                        isSucess = true;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -125,8 +138,15 @@ namespace PhanMemNoiSoi
 
         private void btnThoat_Click(object sender, EventArgs e)
         {
-            if (capture != null)
-                capture.Dispose();
+            try
+            {
+                if (capture != null)
+                    capture.Dispose();
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            
             Close();
         }
 
@@ -134,15 +154,11 @@ namespace PhanMemNoiSoi
         {
             pbRecordIcon.Visible = false;
             lbRecord.Visible = false;
-            try
+            camStatus = initCamera(pbVideo);
+            if(camStatus == false)
             {
-                initCamera(pbVideo);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Không kết nối được đến thiết bị thu video. Vui lòng kiểm tra lại camera.", "Thông báo",
+                MessageBox.Show("Không kết nối được đến thiết bị thu video. Vui lòng kiểm tra lại kết nối camera và thông số cài đặt.", "Thông báo",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Console.WriteLine(ex.ToString());
                 this.Close();
             }
 
@@ -154,9 +170,6 @@ namespace PhanMemNoiSoi
                 Properties.Settings.Default.imageFolder = DEFAULT_IMG_FOLDER;
                 Properties.Settings.Default.Save();
             }
-
-            //Init Camera
-            camStatus = true;
 
             // Set the ImageSize property to a larger size 
             listImage.View = View.LargeIcon;
@@ -274,28 +287,34 @@ namespace PhanMemNoiSoi
 
         private void btnChupHinh_Click(object sender, EventArgs e)
         {
-            string ss = Properties.Settings.Default.captureType;
-            if (string.Equals(Properties.Settings.Default.captureType, "capture_only"))
+            try
             {
-                captureFrame();
-            }
-            else
-            {
-                if (captureStatic)
+                if (string.Equals(Properties.Settings.Default.captureType, "capture_only"))
                 {
-                    //int camera again
-                    initCamera(pbVideo);
-                    captureStatic = false;
+                    captureFrame();
                 }
                 else
                 {
-                    // pause camera
-                    capture.GrapImg();
-                    capture.PreviewWindowFrame = null;
-                    pbVideo.Image = imgCapture;
-                    captureFrame();
-                    captureStatic = true;
+                    if (captureStatic)
+                    {
+                        //int camera again
+                        initCamera(pbVideo);
+                        captureStatic = false;
+                    }
+                    else
+                    {
+                        // pause camera
+                        capture.GrapImg();
+                        capture.PreviewWindowFrame = null;
+                        pbVideo.Image = imgCapture;
+                        captureFrame();
+                        captureStatic = true;
+                    }
                 }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
             }
         }
 
@@ -312,16 +331,25 @@ namespace PhanMemNoiSoi
                     item.ImageIndex = imageList.Images.Count - 1;
 
                     //save image to disk
-                    int fCount = Directory.GetFiles(folderImgPath, "*", SearchOption.TopDirectoryOnly).Length;
-                    string imageName = pId + "_" + System.Guid.NewGuid() + ".jpg";
-                    item.Name = imageName;
-                    myHelper.SaveImageCapture(imgCapture, folderImgPath + imageName);
-                    listImage.Items.Insert(0, item);
+                    if(Directory.Exists(folderImgPath))
+                    {
+                        int fCount = Directory.GetFiles(folderImgPath, "*", SearchOption.TopDirectoryOnly).Length;
+                        string imageName = pId + "_" + System.Guid.NewGuid() + ".jpg";
+                        item.Name = imageName;
+                        myHelper.SaveImageCapture(imgCapture, folderImgPath + imageName);
+                        listImage.Items.Insert(0, item);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Thư mục lưu trữ ảnh cho bệnh nhân này không tồn tại.", 
+                            "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + "\n" + ex.ToString());
+                Console.WriteLine(ex.ToString());
             }
         }
 
@@ -374,7 +402,6 @@ namespace PhanMemNoiSoi
 
         private void btnSaveVideo_Click(object sender, EventArgs e)
         {
-            //TODO : set video compress
             if (recordingVideo)
             {
                 //stop record video
@@ -388,6 +415,8 @@ namespace PhanMemNoiSoi
                     pbRecordIcon.Visible = false;
                     lbRecord.Visible = false;
                     btnDungHinh.Enabled = true;
+                    //reinit video
+                    initCamera(pbVideo);
                 }
                 catch (Exception ex)
                 {

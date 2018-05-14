@@ -142,6 +142,7 @@
             this.dgvUserList.Location = new System.Drawing.Point(6, 25);
             this.dgvUserList.Name = "dgvUserList";
             this.dgvUserList.ReadOnly = true;
+            this.dgvUserList.RowTemplate.Height = 24;
             this.dgvUserList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvUserList.Size = new System.Drawing.Size(560, 265);
             this.dgvUserList.TabIndex = 3;

@@ -42,7 +42,6 @@
             this.lbStatus = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.btnOk = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbStatus)).BeginInit();
@@ -161,13 +160,13 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Image = global::PhanMemNoiSoi.Properties.Resources.question_24x24;
+            this.button2.Image = global::PhanMemNoiSoi.Properties.Resources.checked_24x24;
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(12, 277);
+            this.button2.Location = new System.Drawing.Point(197, 277);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(98, 35);
+            this.button2.Size = new System.Drawing.Size(98, 37);
             this.button2.TabIndex = 34;
-            this.button2.Text = "     Kiểm tra";
+            this.button2.Text = "     OK";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -185,19 +184,6 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // btnOk
-            // 
-            this.btnOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOk.Image = global::PhanMemNoiSoi.Properties.Resources.checked_24x24;
-            this.btnOk.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnOk.Location = new System.Drawing.Point(157, 277);
-            this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(113, 35);
-            this.btnOk.TabIndex = 23;
-            this.btnOk.Text = "     Cập nhập";
-            this.btnOk.UseVisualStyleBackColor = true;
-            this.btnOk.Click += new System.EventHandler(this.button1_Click);
-            // 
             // backgroundWorker1
             // 
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
@@ -212,7 +198,6 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.btnOk);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -231,7 +216,6 @@
         #endregion
 
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;

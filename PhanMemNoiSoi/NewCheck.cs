@@ -15,7 +15,6 @@ namespace PhanMemNoiSoi
         Helper helper = new Helper();
         int currRowIndex;
         string BASE_IMG_FOLDER;
-        string folderImgPath = null;
         public NewCheck()
         {
             InitializeComponent();
@@ -103,8 +102,10 @@ namespace PhanMemNoiSoi
             try
             {
                 sickNum = DateTime.Now.ToString("yyyyMMddhhmmss");
-                string query = "INSERT INTO dbo.SickData (SickNum, SickName, Age, Address, Sex, InsuranceId, Telephone, Occupation, CauseCheck, Createtime)"
-                    + " VALUES(@SickNum,@SickName,@Age, @Address, @Sex, @InsuranceId, @Telephone,@Occupation, @CauseCheck, @Createtime)";
+                //create folder to store patient data
+                string dataPath = helper.creatPatientFolder(sickNum);
+                string query = "INSERT INTO dbo.SickData (SickNum, SickName, Age, Address, Sex, InsuranceId, Telephone, Occupation, CauseCheck, Createtime, DataPath)"
+                    + " VALUES(@SickNum,@SickName,@Age, @Address, @Sex, @InsuranceId, @Telephone,@Occupation, @CauseCheck, @Createtime, @DataPath)";
                 SqlCommand command = new SqlCommand(query, DBConnection.Instance.sqlConn);
                 command.Parameters.Add("@SickNum", SqlDbType.NChar).Value = sickNum;
                 command.Parameters.Add("@SickName", SqlDbType.NChar).Value = txtName.Text.ToString().Trim();
@@ -116,6 +117,10 @@ namespace PhanMemNoiSoi
                 command.Parameters.Add("@Occupation", SqlDbType.NChar).Value = txtJob.Text.Trim();
                 command.Parameters.Add("@CauseCheck", SqlDbType.NChar).Value = txtCauseCheck.Text.Trim();
                 command.Parameters.Add("@Createtime", SqlDbType.DateTime).Value = DateTime.Today.ToShortDateString();
+                if(dataPath != null)
+                {
+                    command.Parameters.Add("@DataPath", SqlDbType.NChar).Value = dataPath;
+                }
                 command.ExecuteNonQuery();
 
                 //update sick data grid view
@@ -145,8 +150,7 @@ namespace PhanMemNoiSoi
             btnXoaBN.Enabled = true;
             //update number sick to label
             updateNumSick(dgvBenhNhan.Rows.Count - 1);
-            //create folder to store patient data
-            creatPatientFolder(sickNum);
+            
             helper.setRowNumber(dgvBenhNhan, 20);
             //set focus to new row
 
@@ -159,69 +163,11 @@ namespace PhanMemNoiSoi
                 }
             }
             //update checkId
-            string outputValue = String.Format("{0:D6}", getIdCheck());
+            string outputValue = String.Format("{0:D6}", helper.getIdCheck());
             txtId.Text = outputValue;
         }
 
-        private void creatPatientFolder(string sickNum)
-        {
-            //check base folder is exist
-            if (!Directory.Exists(BASE_IMG_FOLDER))
-            {
-                try
-                {
-                    BASE_IMG_FOLDER = Properties.Settings.Default.imageFolder;
-                    System.IO.Directory.CreateDirectory(BASE_IMG_FOLDER);
-                    Properties.Settings.Default.imageFolder = BASE_IMG_FOLDER;
-                }catch(Exception ex)
-                {
-                    MessageBox.Show("Không thể khởi tạo thưu mục lưu ảnh :" + BASE_IMG_FOLDER + ".\n Vui lòng thay đổi cài đặt thư mục lưu ảnh", "Thông báo",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                
-            }
-            //check month folder
-            folderImgPath = BASE_IMG_FOLDER + "\\"
-                                  + DateTime.Today.Year.ToString()
-                                  + DateTime.Today.Month.ToString();
-            bool exists = System.IO.Directory.Exists(folderImgPath);
-            if (!exists)
-            {
-                try
-                {
-                    System.IO.Directory.CreateDirectory(folderImgPath);
-                }catch(Exception es)
-                {
-                    MessageBox.Show("Không thể khởi tạo thưu mục lưu ảnh :" + BASE_IMG_FOLDER + ".\n Vui lòng thay đổi cài đặt thư mục lưu ảnh", "Thông báo",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-            }
-            //check day folder
-            folderImgPath += "\\" + DateTime.Today.Day.ToString();
-            exists = System.IO.Directory.Exists(folderImgPath);
-            if (!exists)
-            {
-                System.IO.Directory.CreateDirectory(folderImgPath);
-            }
-            //check patient folder
-            folderImgPath += "\\" + sickNum + "\\";
-            exists = System.IO.Directory.Exists(folderImgPath);
-            if (!exists)
-            {
-                try
-                {
-                    System.IO.Directory.CreateDirectory(folderImgPath);
-                }catch(Exception ex)
-                {
-                    MessageBox.Show("Không thể khởi tạo thưu mục lưu ảnh :" + BASE_IMG_FOLDER + ".\n Vui lòng thay đổi cài đặt thư mục lưu ảnh", "Thông báo",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                
-            }
-        }
+
         private void txtTuoiBn_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
@@ -231,7 +177,7 @@ namespace PhanMemNoiSoi
         {
             loadDgvData();
 
-            string outputValue = String.Format("{0:D6}", getIdCheck());
+            string outputValue = String.Format("{0:D6}", helper.getIdCheck());
             txtId.Text = outputValue;
 
             DateTime dt = DateTime.Today;
@@ -248,8 +194,8 @@ namespace PhanMemNoiSoi
         private void loadDgvData()
         {
             string createTime = DateTime.Today.ToString("yyyy-MM-dd");
-            string query = string.Format("SELECT SickNum,SickName, Age, Address, Occupation, Telephone, InsuranceId, Sex, CauseCheck "
-                                            + " FROM SickData WHERE Createtime = '"
+            string query = string.Format("SELECT SickNum,SickName, Age, Address, Occupation, Telephone, "
+                                            + " InsuranceId, Sex, CauseCheck, DataPath FROM SickData WHERE Createtime = '"
                                             + createTime + "' ORDER BY SickNum DESC");
             dtaSick = new SqlDataAdapter(query, DBConnection.Instance.sqlConn);
             SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dtaSick);
@@ -257,10 +203,10 @@ namespace PhanMemNoiSoi
             tbSick.Locale = System.Globalization.CultureInfo.InvariantCulture;
             dtaSick.Fill(tbSick);
             bsSick.DataSource = tbSick;
-
             dgvBenhNhan.DataSource = bsSick;
 
             dgvBenhNhan.Columns["SickNum"].Visible = false;
+            dgvBenhNhan.Columns["DataPath"].Visible = false;
             dgvBenhNhan.Columns["SickName"].HeaderText = "Tên bệnh nhân";
             dgvBenhNhan.Columns["SickName"].Width = dgvBenhNhan.Width / 8;
             dgvBenhNhan.Columns["Age"].HeaderText = "Tuổi";
@@ -290,16 +236,6 @@ namespace PhanMemNoiSoi
             }
         }
 
-        private string creatSickNum()
-        {
-            string sickNum = "SN";
-            sickNum += DateTime.Today.Year.ToString();
-            sickNum += DateTime.Today.Month.ToString();
-            string dt = DateTime.Now.ToString("MMMM dd, yyyy");
-            MessageBox.Show(dt);
-            return null;
-        }
-
         private void btnXoaBN_Click(object sender, EventArgs e)
         {
             int selectedRowCount =
@@ -318,18 +254,20 @@ namespace PhanMemNoiSoi
             }
 
             string sickNum = dgvBenhNhan.Rows[currRowIndex].Cells["SickNum"].Value.ToString().Trim();
-            
+            string dataPath = dgvBenhNhan.Rows[currRowIndex].Cells["DataPath"].Value.ToString().Trim();
+
             //delete data in disk
-            string imgPath = helper.getImgFolderById(sickNum);
-            if (Directory.Exists(imgPath))
+            if (Directory.Exists(dataPath))
             {
                 try
                 {
-                    Directory.Delete(imgPath, true);
+                    Directory.Delete(dataPath, true);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    Console.WriteLine(ex.ToString());
+                    MessageBox.Show("Không thể xóa thư mục chứa thông tin bệnh nhân. Vui lòng thử lại sau!", 
+                        "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
 
@@ -352,17 +290,21 @@ namespace PhanMemNoiSoi
             dgvBenhNhan.Rows.RemoveAt(currRowIndex);
             updateNumSick(dgvBenhNhan.Rows.Count - 1);
 
-            //select last row in dgv
+            //select first row in dgv
             int lastRowIndex = dgvBenhNhan.Rows.Count - 1;
             if(lastRowIndex == 0)
             {
                 btnChiTiet.Enabled = false;
+                btnChupHinh.Enabled = false;
+                btnXoaBN.Enabled = false;
             }else
             {
+                selectRowInDgv(dgvBenhNhan, 0);
                 btnChiTiet.Enabled = true;
+                btnChupHinh.Enabled = true;
+                btnXoaBN.Enabled = true;
             }
-            currRowIndex = lastRowIndex;
-            //selectRowInDgv(dgvBenhNhan, lastRowIndex);
+            currRowIndex = 0;
             helper.setRowNumber(dgvBenhNhan, 20);
         }
 
@@ -455,27 +397,34 @@ namespace PhanMemNoiSoi
 
         private void btnChupHinh_Click(object sender, EventArgs e)
         {
+            if(dgvBenhNhan.SelectedRows.Count <= 0)
+            {
+                MessageBox.Show("Chưa có bệnh nhân nào được chọn. Vui lòng chọn bệnh nhân trước khi chụp ảnh!", "Thông báo", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             this.Hide();
             currRowIndex = dgvBenhNhan.SelectedRows[0].Index;
             string patientId = dgvBenhNhan.Rows[currRowIndex].Cells["SickNum"].Value.ToString().Trim();
+            string dataPath = dgvBenhNhan.Rows[currRowIndex].Cells["DataPath"].Value.ToString().Trim();
             string pName = txtName.Text.Trim();
             string pAge = txtAge.Text.Trim();
             string pInsurance = txtInsureId.Text.Trim();
             string doctor = "";
             string checkId = txtId.Text.Trim();
-            folderImgPath = Properties.Settings.Default.imageFolder + "\\" + DateTime.Today.Year.ToString()
-                        + DateTime.Today.Month + "\\"
-                        + DateTime.Today.Day + "\\"
-                        + patientId + "\\";
-            if (!Directory.Exists(folderImgPath))
+            //check dataPat is exist
+            if(Directory.Exists(dataPath) == false)
             {
-                folderImgPath = BASE_IMG_FOLDER + "\\" + DateTime.Today.Year.ToString()
-                                        + DateTime.Today.Month + "\\"
-                                        + DateTime.Today.Day + "\\"
-                                        + patientId + "\\";
+                //create new data path
+                dataPath = helper.creatPatientFolder(patientId);
+                //save new datapath to database
+                if(dataPath != null)
+                {
+                    updateDataPath(patientId, dataPath);
+                }
             }
             CheckAndView cavfr = new CheckAndView(checkId, patientId, pName, pAge, txtCauseCheck.Text.Trim(),
-                                                    doctor, folderImgPath);
+                                                    doctor, dataPath);
             cavfr.ShowDialog();
             this.Show();
             //set focus to new row
@@ -556,14 +505,6 @@ namespace PhanMemNoiSoi
             }
         }
 
-        private int getIdCheck()
-        {
-            string sql = "SELECT  COUNT(*) FROM SickData";
-            SqlCommand comd = new SqlCommand(sql, DBConnection.Instance.sqlConn);
-            int count = Convert.ToInt32(comd.ExecuteScalar());
-            return count;
-        }
-
         private void NewCheck_SizeChanged(object sender, EventArgs e)
         {
             dgvBenhNhan.Columns["SickName"].HeaderText = "Tên bệnh nhân";
@@ -582,6 +523,25 @@ namespace PhanMemNoiSoi
             dgvBenhNhan.Columns["Sex"].Width = dgvBenhNhan.Width / 15;
             dgvBenhNhan.Columns["CauseCheck"].HeaderText = "Lý do khám";
             dgvBenhNhan.Columns["CauseCheck"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        }
+
+        private void updateDataPath(string sickNum, string dataPath)
+        {
+            try
+            {
+                string query = "UPDATE dbo.SickData SET DataPath = @DataPath WHERE SickNum = @SickNum";
+                SqlCommand command = new SqlCommand(query, DBConnection.Instance.sqlConn);
+                command.Parameters.Add("@DataPath", SqlDbType.NChar).Value = dataPath;
+                command.Parameters.Add("@SickNum", SqlDbType.NChar).Value = sickNum;
+                command.ExecuteNonQuery();
+
+                //update data grid view
+                dgvBenhNhan.Rows[currRowIndex].Cells["DataPath"].Value = dataPath;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
     }
 }

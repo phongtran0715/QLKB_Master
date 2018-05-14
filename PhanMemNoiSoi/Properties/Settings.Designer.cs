@@ -109,61 +109,13 @@ namespace PhanMemNoiSoi.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("640")]
-        public int vFrameSizeHigh {
-            get {
-                return ((int)(this["vFrameSizeHigh"]));
-            }
-            set {
-                this["vFrameSizeHigh"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("480")]
-        public int vFrameSizeWidth {
-            get {
-                return ((int)(this["vFrameSizeWidth"]));
-            }
-            set {
-                this["vFrameSizeWidth"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("29.97")]
-        public double vFrameRate {
-            get {
-                return ((double)(this["vFrameRate"]));
-            }
-            set {
-                this["vFrameRate"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("@device:sw:{33D9A760-90C8-11D0-BD43-00A0C911CE86}\\\\MJPEG Compressor")]
         public string vCompress {
             get {
                 return ((string)(this["vCompress"]));
             }
             set {
                 this["vCompress"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int vSourceIndex {
-            get {
-                return ((int)(this["vSourceIndex"]));
-            }
-            set {
-                this["vSourceIndex"] = value;
             }
         }
         

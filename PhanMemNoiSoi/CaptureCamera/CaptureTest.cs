@@ -9,6 +9,7 @@
 // ------------------------------------------------------------------
 
 using DirectX.Capture;
+using PhanMemNoiSoi.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,7 +21,7 @@ namespace PhanMemNoiSoi
     public class CaptureTest : Form
     {
         public Capture capture = null;
-        public Filters filters = new Filters();
+        public Filters filters = null;
         int mDeviceIndex;
         //int mCompressIndex;
 
@@ -51,7 +52,8 @@ namespace PhanMemNoiSoi
             bool result = initCamera(panelVideo);
             if(result ==false)
             {
-                MessageBox.Show("Khởi tạo camera thất bại. Vui lòng kiểm tra lại kết nối thiết bị và thông số cài đặt!");
+                MessageBox.Show("Khởi tạo camera thất bại. Vui lòng kiểm tra lại kết nối thiết bị và thông số cài đặt!", "Thông báo", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             // Update the main menu
             // Much of the interesting work of this sample occurs here
@@ -199,7 +201,7 @@ namespace PhanMemNoiSoi
             this.panelVideo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelVideo.Location = new System.Drawing.Point(12, 12);
             this.panelVideo.Name = "panelVideo";
-            this.panelVideo.Size = new System.Drawing.Size(678, 484);
+            this.panelVideo.Size = new System.Drawing.Size(678, 442);
             this.panelVideo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.panelVideo.TabIndex = 6;
             this.panelVideo.TabStop = false;
@@ -211,7 +213,7 @@ namespace PhanMemNoiSoi
             this.btnExit.ForeColor = System.Drawing.Color.Black;
             this.btnExit.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
             this.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnExit.Location = new System.Drawing.Point(592, 505);
+            this.btnExit.Location = new System.Drawing.Point(592, 463);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(98, 35);
             this.btnExit.TabIndex = 5;
@@ -223,7 +225,7 @@ namespace PhanMemNoiSoi
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.Image = global::PhanMemNoiSoi.Properties.Resources.save_24;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(456, 505);
+            this.btnSave.Location = new System.Drawing.Point(456, 463);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(130, 35);
             this.btnSave.TabIndex = 3;
@@ -234,7 +236,7 @@ namespace PhanMemNoiSoi
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(8, 19);
             this.BackColor = System.Drawing.Color.SeaShell;
-            this.ClientSize = new System.Drawing.Size(698, 550);
+            this.ClientSize = new System.Drawing.Size(698, 508);
             this.Controls.Add(this.panelVideo);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnSave);
@@ -260,7 +262,7 @@ namespace PhanMemNoiSoi
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.ToString());
+                    Console.WriteLine(ex.ToString());
                 }
             }
 
@@ -313,15 +315,17 @@ namespace PhanMemNoiSoi
                     {
                         Properties.Settings.Default.vCompress = capture.VideoCompressor.MonikerString;
                     }
-                    Properties.Settings.Default.vFrameRate = capture.FrameRate;
-                    Properties.Settings.Default.vFrameSizeHigh = capture.FrameSize.Height;
-                    Properties.Settings.Default.vFrameSizeWidth = capture.FrameSize.Width;
                     Properties.Settings.Default.Save();
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + "\n\n" + ex.ToString());
+            }
+            //release data
+            if(capture != null)
+            {
+                capture.Dispose();
             }
             this.Close();
         }
@@ -374,14 +378,15 @@ namespace PhanMemNoiSoi
                 {
                     f = filters.VideoCompressors[c];
                     m = new MenuItem(f.Name, new EventHandler(mnuVideoCompressors_Click));
-                    if((capture.VideoCompressor!= null) && 
-                        (capture.VideoCompressor.MonikerString == f.MonikerString))
+                    if ((capture.VideoCompressor != null) && 
+                        (capture.VideoCompressor.Name.Equals(f.Name)))
                     {
                         m.Checked = true;
                     }else
                     {
                         m.Checked = false;
                     }
+                    
                     mnuVideoCompressors.MenuItems.Add(m);
                 }
                 mnuVideoCompressors.Enabled = ((capture.VideoDevice != null) && (filters.VideoCompressors.Count > 0));
@@ -520,6 +525,18 @@ namespace PhanMemNoiSoi
                 if ((videoDevice != null))
                 {
                     capture = new Capture(videoDevice);
+                    string vCompress = Properties.Settings.Default.vCompress;
+                    if ((vCompress != null) && (vCompress != ""))
+                    {
+                        try
+                        {
+                            capture.VideoCompressor = new Filter(vCompress);
+                        }catch(Exception ex)
+                        {
+                            Console.WriteLine(ex.ToString());
+                            capture.VideoCompressor = null;
+                        }
+                    }
                     if (capture.PreviewWindow == null)
                     {
                         capture.PreviewWindow = panelVideo;
@@ -544,6 +561,11 @@ namespace PhanMemNoiSoi
                 // We subtract 1 from m.Index beacuse the first item is (None)
                 MenuItem m = sender as MenuItem;
                 capture.VideoCompressor = (m.Index > 0 ? filters.VideoCompressors[m.Index - 1] : null);
+                if(capture.VideoCompressor != null)
+                {
+                    Properties.Settings.Default.vCompress = capture.VideoCompressor.MonikerString;
+                    Properties.Settings.Default.Save();
+                }
                 updateMenu();
             }
             catch (Exception ex)
@@ -699,26 +721,28 @@ namespace PhanMemNoiSoi
             //Init with config param loaded from DB
             try
             {
+                filters = new Filters();
                 //Load config from DB
-                string videoDevice = Properties.Settings.Default.vDevice;
-                string videoCompressor = Properties.Settings.Default.vCompress;
+                string videoDevice = Settings.Default.vDevice;
+                string videoCompressor = Settings.Default.vCompress;
                 capture = new Capture(new Filter(videoDevice));
-                capture.VideoCompressor = new Filter(videoCompressor);
-
-                //TODO: check to restore framerate, frame size
-                /*
-                double frameRate = Properties.Settings.Default.vFrameRate;
-                Size frameSize = new Size(Properties.Settings.Default.vFrameSizeWidth, 
-                    Properties.Settings.Default.vFrameSizeHigh);
-                //capture.FrameRate = frameRate;
-                //capture.FrameSize = frameSize;
-                */
-                capture.PreviewWindow = pBox;
+                if((videoCompressor != null) && (videoCompressor != ""))
+                {
+                    try
+                    {
+                        capture.VideoCompressor = new Filter(videoCompressor);
+                    }catch(Exception ex)
+                    {
+                        Console.WriteLine(ex.ToString());
+                    }
+                    
+                }
+                
+                capture.PreviewWindowFrame = pBox;
                 isSucess = true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
                 Console.WriteLine(ex.ToString());
                 isSucess = false;
             }
@@ -728,13 +752,21 @@ namespace PhanMemNoiSoi
                 //Auto reinit camera with default param (device index = 0)
                 try
                 {
-                    capture = new Capture(filters.VideoInputDevices[0]);
-                    capture.PreviewWindow = pBox;
-                    isSucess = true;
+                    if(filters != null)
+                    {
+                        capture = new Capture(filters.VideoInputDevices[0]);
+                        Settings.Default.vDevice = capture.VideoDevice.MonikerString;
+                        if (capture.VideoCompressor != null)
+                        {
+                            Settings.Default.vCompress = capture.VideoCompressor.MonikerString;
+                        }
+                        Settings.Default.Save();
+                        capture.PreviewWindowFrame = pBox;
+                        isSucess = true;
+                    }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.ToString());
                     Console.WriteLine(ex.ToString());
                     isSucess = false;
                 }

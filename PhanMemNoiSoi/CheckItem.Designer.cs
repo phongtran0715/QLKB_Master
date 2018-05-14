@@ -66,6 +66,7 @@
             this.dgvContentDetail.GridColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dgvContentDetail.Location = new System.Drawing.Point(3, 22);
             this.dgvContentDetail.Name = "dgvContentDetail";
+            this.dgvContentDetail.RowTemplate.Height = 24;
             this.dgvContentDetail.Size = new System.Drawing.Size(414, 281);
             this.dgvContentDetail.TabIndex = 1;
             this.dgvContentDetail.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvContentDetail_CellContentClick);

@@ -48,6 +48,8 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.txtAddr = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.txtCreatetime = new System.Windows.Forms.TextBox();
             this.txtJob = new System.Windows.Forms.TextBox();
             this.lbimgCount = new System.Windows.Forms.Label();
@@ -68,8 +70,6 @@
             this.dgvPatient = new System.Windows.Forms.DataGridView();
             this.btnOpenFolder = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtAddr = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -315,6 +315,23 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Chi tiết bệnh nhân";
             // 
+            // txtAddr
+            // 
+            this.txtAddr.Location = new System.Drawing.Point(86, 126);
+            this.txtAddr.Name = "txtAddr";
+            this.txtAddr.ReadOnly = true;
+            this.txtAddr.Size = new System.Drawing.Size(118, 26);
+            this.txtAddr.TabIndex = 30;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(13, 131);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(57, 20);
+            this.label2.TabIndex = 29;
+            this.label2.Text = "Địa chỉ";
+            // 
             // txtCreatetime
             // 
             this.txtCreatetime.Location = new System.Drawing.Point(318, 78);
@@ -484,6 +501,7 @@
             this.dgvPatient.MultiSelect = false;
             this.dgvPatient.Name = "dgvPatient";
             this.dgvPatient.ReadOnly = true;
+            this.dgvPatient.RowTemplate.Height = 24;
             this.dgvPatient.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPatient.Size = new System.Drawing.Size(812, 429);
             this.dgvPatient.TabIndex = 0;
@@ -514,23 +532,6 @@
             this.btnExit.Text = "    Thoát";
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 131);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(57, 20);
-            this.label2.TabIndex = 29;
-            this.label2.Text = "Địa chỉ";
-            // 
-            // txtAddr
-            // 
-            this.txtAddr.Location = new System.Drawing.Point(86, 126);
-            this.txtAddr.Name = "txtAddr";
-            this.txtAddr.ReadOnly = true;
-            this.txtAddr.Size = new System.Drawing.Size(118, 26);
-            this.txtAddr.TabIndex = 30;
             // 
             // Search
             // 

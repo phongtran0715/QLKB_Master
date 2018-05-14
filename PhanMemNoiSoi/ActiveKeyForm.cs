@@ -44,12 +44,11 @@ namespace PhanMemNoiSoi
             {
                 if(string.Equals(sysKey, userKey))
                 {
-                    MessageBox.Show("Kích hoạt bản quyền thành công! Phần mềm sẽ tự động khởi động lại", "Thông báo",
+                    MessageBox.Show("Kích hoạt bản quyền thành công! Vui lòng khởi động lại phần mềm", "Thông báo",
                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Properties.Settings.Default.softwareLicense = sysKey;
                     Properties.Settings.Default.Save();
-                    Application.Restart();
-                    Environment.Exit(0);
+                    Application.Exit();
                 }else
                 {
                     MessageBox.Show("Kích hoạt bản quyền thất bại! Mã bản quyền không chính xác.", "Thông báo",
