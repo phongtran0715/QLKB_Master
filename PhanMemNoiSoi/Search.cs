@@ -147,7 +147,7 @@ namespace PhanMemNoiSoi
             
             // create sql command
             bool isAnd = false;
-            string query = "SELECT SickNum,SickName, Age, Telephone, Createtime FROM SickData ";
+            string query = "SELECT SickNum,SickName, Age, Telephone, Createtime, DataPath FROM SickData ";
             if (!string.IsNullOrEmpty(txtTenSearch.Text.Trim()))
             {
                 query += " WHERE SickName LIKE N'%" + txtTenSearch.Text.Trim() + "%'";
