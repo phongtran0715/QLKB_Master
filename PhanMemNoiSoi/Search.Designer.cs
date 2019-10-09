@@ -37,7 +37,6 @@
             this.btnReCheck = new System.Windows.Forms.Button();
             this.btnDeleteSick = new System.Windows.Forms.Button();
             this.btnXoa = new System.Windows.Forms.Button();
-            this.btnTatCa = new System.Windows.Forms.Button();
             this.btnTimKiem = new System.Windows.Forms.Button();
             this.dtNgayKetThuc = new System.Windows.Forms.DateTimePicker();
             this.dtNgayBatDau = new System.Windows.Forms.DateTimePicker();
@@ -68,8 +67,16 @@
             this.label1 = new System.Windows.Forms.Label();
             this.gbResult = new System.Windows.Forms.GroupBox();
             this.dgvPatient = new System.Windows.Forms.DataGridView();
+            this.lbCurrentPage = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lbTotalPage = new System.Windows.Forms.Label();
+            this.btnLastPage = new System.Windows.Forms.Button();
+            this.btnPrevPage = new System.Windows.Forms.Button();
+            this.btnNextPage = new System.Windows.Forms.Button();
+            this.btnFirstPage = new System.Windows.Forms.Button();
             this.btnOpenFolder = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -133,7 +140,6 @@
             this.groupBox2.Controls.Add(this.btnReCheck);
             this.groupBox2.Controls.Add(this.btnDeleteSick);
             this.groupBox2.Controls.Add(this.btnXoa);
-            this.groupBox2.Controls.Add(this.btnTatCa);
             this.groupBox2.Controls.Add(this.btnTimKiem);
             this.groupBox2.Controls.Add(this.dtNgayKetThuc);
             this.groupBox2.Controls.Add(this.dtNgayBatDau);
@@ -157,7 +163,7 @@
             this.btnReCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReCheck.Image = global::PhanMemNoiSoi.Properties.Resources.camera_24;
             this.btnReCheck.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnReCheck.Location = new System.Drawing.Point(370, 122);
+            this.btnReCheck.Location = new System.Drawing.Point(336, 122);
             this.btnReCheck.Name = "btnReCheck";
             this.btnReCheck.Size = new System.Drawing.Size(98, 35);
             this.btnReCheck.TabIndex = 16;
@@ -183,7 +189,7 @@
             this.btnXoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnXoa.Image = global::PhanMemNoiSoi.Properties.Resources.refresh_24x24;
             this.btnXoa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnXoa.Location = new System.Drawing.Point(250, 122);
+            this.btnXoa.Location = new System.Drawing.Point(193, 122);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(98, 35);
             this.btnXoa.TabIndex = 15;
@@ -191,25 +197,12 @@
             this.btnXoa.UseVisualStyleBackColor = true;
             this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
-            // btnTatCa
-            // 
-            this.btnTatCa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTatCa.Image = ((System.Drawing.Image)(resources.GetObject("btnTatCa.Image")));
-            this.btnTatCa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTatCa.Location = new System.Drawing.Point(130, 122);
-            this.btnTatCa.Name = "btnTatCa";
-            this.btnTatCa.Size = new System.Drawing.Size(98, 35);
-            this.btnTatCa.TabIndex = 14;
-            this.btnTatCa.Text = "   Tất cả";
-            this.btnTatCa.UseVisualStyleBackColor = true;
-            this.btnTatCa.Click += new System.EventHandler(this.btnTatCa_Click);
-            // 
             // btnTimKiem
             // 
             this.btnTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTimKiem.Image = ((System.Drawing.Image)(resources.GetObject("btnTimKiem.Image")));
             this.btnTimKiem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTimKiem.Location = new System.Drawing.Point(10, 122);
+            this.btnTimKiem.Location = new System.Drawing.Point(44, 122);
             this.btnTimKiem.Name = "btnTimKiem";
             this.btnTimKiem.Size = new System.Drawing.Size(98, 35);
             this.btnTimKiem.TabIndex = 13;
@@ -219,6 +212,7 @@
             // 
             // dtNgayKetThuc
             // 
+            this.dtNgayKetThuc.Checked = false;
             this.dtNgayKetThuc.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtNgayKetThuc.Location = new System.Drawing.Point(469, 74);
             this.dtNgayKetThuc.Name = "dtNgayKetThuc";
@@ -228,6 +222,7 @@
             // 
             // dtNgayBatDau
             // 
+            this.dtNgayBatDau.Checked = false;
             this.dtNgayBatDau.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtNgayBatDau.Location = new System.Drawing.Point(469, 35);
             this.dtNgayBatDau.Name = "dtNgayBatDau";
@@ -484,7 +479,7 @@
             this.gbResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbResult.Location = new System.Drawing.Point(5, 180);
             this.gbResult.Name = "gbResult";
-            this.gbResult.Size = new System.Drawing.Size(818, 454);
+            this.gbResult.Size = new System.Drawing.Size(818, 436);
             this.gbResult.TabIndex = 2;
             this.gbResult.TabStop = false;
             this.gbResult.Text = "Danh sách bệnh nhân";
@@ -503,9 +498,94 @@
             this.dgvPatient.ReadOnly = true;
             this.dgvPatient.RowTemplate.Height = 24;
             this.dgvPatient.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPatient.Size = new System.Drawing.Size(812, 429);
+            this.dgvPatient.Size = new System.Drawing.Size(812, 411);
             this.dgvPatient.TabIndex = 0;
             this.dgvPatient.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgPatient_CellClick);
+            // 
+            // lbCurrentPage
+            // 
+            this.lbCurrentPage.AutoSize = true;
+            this.lbCurrentPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCurrentPage.ForeColor = System.Drawing.Color.Blue;
+            this.lbCurrentPage.Location = new System.Drawing.Point(632, 626);
+            this.lbCurrentPage.Name = "lbCurrentPage";
+            this.lbCurrentPage.Size = new System.Drawing.Size(19, 20);
+            this.lbCurrentPage.TabIndex = 19;
+            this.lbCurrentPage.Text = "0";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Blue;
+            this.label3.Location = new System.Drawing.Point(651, 626);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(14, 20);
+            this.label3.TabIndex = 20;
+            this.label3.Text = "/";
+            // 
+            // lbTotalPage
+            // 
+            this.lbTotalPage.AutoSize = true;
+            this.lbTotalPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTotalPage.ForeColor = System.Drawing.Color.Blue;
+            this.lbTotalPage.Location = new System.Drawing.Point(669, 625);
+            this.lbTotalPage.Name = "lbTotalPage";
+            this.lbTotalPage.Size = new System.Drawing.Size(19, 20);
+            this.lbTotalPage.TabIndex = 21;
+            this.lbTotalPage.Text = "0";
+            // 
+            // btnLastPage
+            // 
+            this.btnLastPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLastPage.Image = global::PhanMemNoiSoi.Properties.Resources.Button_Last_icon_24;
+            this.btnLastPage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLastPage.Location = new System.Drawing.Point(461, 620);
+            this.btnLastPage.Name = "btnLastPage";
+            this.btnLastPage.Size = new System.Drawing.Size(80, 32);
+            this.btnLastPage.TabIndex = 18;
+            this.btnLastPage.Text = "     Cuối";
+            this.btnLastPage.UseVisualStyleBackColor = true;
+            this.btnLastPage.Click += new System.EventHandler(this.btnLastPage_Click);
+            // 
+            // btnPrevPage
+            // 
+            this.btnPrevPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrevPage.Image = global::PhanMemNoiSoi.Properties.Resources.Button_Rewind_icon_24;
+            this.btnPrevPage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPrevPage.Location = new System.Drawing.Point(350, 619);
+            this.btnPrevPage.Name = "btnPrevPage";
+            this.btnPrevPage.Size = new System.Drawing.Size(80, 32);
+            this.btnPrevPage.TabIndex = 17;
+            this.btnPrevPage.Text = "     Trước";
+            this.btnPrevPage.UseVisualStyleBackColor = true;
+            this.btnPrevPage.Click += new System.EventHandler(this.btnPrevPage_Click);
+            // 
+            // btnNextPage
+            // 
+            this.btnNextPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNextPage.Image = global::PhanMemNoiSoi.Properties.Resources.Button_Forward_icon_24;
+            this.btnNextPage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnNextPage.Location = new System.Drawing.Point(230, 620);
+            this.btnNextPage.Name = "btnNextPage";
+            this.btnNextPage.Size = new System.Drawing.Size(80, 32);
+            this.btnNextPage.TabIndex = 16;
+            this.btnNextPage.Text = "     Sau";
+            this.btnNextPage.UseVisualStyleBackColor = true;
+            this.btnNextPage.Click += new System.EventHandler(this.btnNextPage_Click);
+            // 
+            // btnFirstPage
+            // 
+            this.btnFirstPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFirstPage.Image = global::PhanMemNoiSoi.Properties.Resources.Button_First_icon_24;
+            this.btnFirstPage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnFirstPage.Location = new System.Drawing.Point(119, 619);
+            this.btnFirstPage.Name = "btnFirstPage";
+            this.btnFirstPage.Size = new System.Drawing.Size(80, 32);
+            this.btnFirstPage.TabIndex = 15;
+            this.btnFirstPage.Text = "      Đầu";
+            this.btnFirstPage.UseVisualStyleBackColor = true;
+            this.btnFirstPage.Click += new System.EventHandler(this.btnFirstPage_Click);
             // 
             // btnOpenFolder
             // 
@@ -533,12 +613,31 @@
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.button4_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.Black;
+            this.label5.Location = new System.Drawing.Point(580, 626);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(50, 20);
+            this.label5.TabIndex = 22;
+            this.label5.Text = "Trang";
+            // 
             // Search
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SeaShell;
             this.ClientSize = new System.Drawing.Size(1283, 654);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.lbTotalPage);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lbCurrentPage);
+            this.Controls.Add(this.btnLastPage);
+            this.Controls.Add(this.btnPrevPage);
+            this.Controls.Add(this.btnNextPage);
+            this.Controls.Add(this.btnFirstPage);
             this.Controls.Add(this.btnOpenFolder);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.groupBox4);
@@ -563,6 +662,7 @@
             this.gbResult.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPatient)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -592,7 +692,6 @@
         private System.Windows.Forms.DateTimePicker dtNgayBatDau;
         private System.Windows.Forms.DateTimePicker dtNgayKetThuc;
         private System.Windows.Forms.Button btnXoa;
-        private System.Windows.Forms.Button btnTatCa;
         private System.Windows.Forms.Button btnTimKiem;
         private System.Windows.Forms.GroupBox gbResult;
         private System.Windows.Forms.DataGridView dgvPatient;
@@ -609,5 +708,13 @@
         private System.Windows.Forms.Button btnOpenFolder;
         private System.Windows.Forms.TextBox txtAddr;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnFirstPage;
+        private System.Windows.Forms.Button btnNextPage;
+        private System.Windows.Forms.Button btnPrevPage;
+        private System.Windows.Forms.Button btnLastPage;
+        private System.Windows.Forms.Label lbCurrentPage;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lbTotalPage;
+        private System.Windows.Forms.Label label5;
     }
 }

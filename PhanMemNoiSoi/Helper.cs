@@ -151,14 +151,16 @@ namespace PhanMemNoiSoi
         /// auto set row index for data grid view
         /// </summary>
         /// <param name="dgv"></param>
-        public void setRowNumber(DataGridView dgv, int ratioSize = 12)
+        public void setRowNumber(DataGridView dgv, int ratioSize = 12, int pageIndex = 0, int pageSize = 0)
         {
             foreach (DataGridViewRow row in dgv.Rows)
             {
-                row.HeaderCell.Value = String.Format("{0}", row.Index + 1);
+                row.HeaderCell.Value = String.Format("{0}", row.Index + (pageIndex * pageSize) + 1);
             }
-            dgv.RowHeadersWidth = dgv.Width / ratioSize;
+            //dgv.RowHeadersWidth = dgv.Width / ratioSize;
+            dgv.RowHeadersWidth = 50;
             dgv.RowHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 12f);
+            dgv.RowHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
 
         public string creatPatientFolder(string sickNum)

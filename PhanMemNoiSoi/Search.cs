@@ -12,18 +12,22 @@ using System.Windows.Forms;
 
 namespace PhanMemNoiSoi
 {
-    public partial class Search : SecureBaseForm
+    //public partial class Search : SecureBaseForm
+    public partial class Search : Form
     {
-        SqlDataAdapter dtaPatient = new SqlDataAdapter();
-        DataTable tbPatient = new DataTable();
-        BindingSource bsPatient = new BindingSource();
+        SqlDataAdapter sqlDta = new SqlDataAdapter();
         string[] imagesPatient = { };
         int imgIndex = 0;
         string BASE_IMG_FOLDER;
         Helper helper = new Helper();
+        DataSet ds;
+        private int PageSize = 15;
+        private int CurrentPageIndex = 1;
+        private int TotalPage = 0;
+        private SqlCommand sqlCmd;
 
         public Search(IPrincipal userPrincipal) 
-            :base(Session.Instance.UserRole, userPrincipal)
+            //:base(Session.Instance.UserRole, userPrincipal)
         {
             InitializeComponent();
         }
@@ -35,69 +39,141 @@ namespace PhanMemNoiSoi
 
         private void Search_Load(object sender, EventArgs e)
         {
+            PageSize = Properties.Settings.Default.maxRowDisplay;
+            Console.WriteLine("page size is " + PageSize);
             dtNgayBatDau.CustomFormat = helper.getDateFormat(Settings.Default.datetimeFormat);
             dtNgayKetThuc.CustomFormat = helper.getDateFormat(Settings.Default.datetimeFormat);
-            loadDgvPatient();
+            loadFilterData();
             //TODO: check base folder is exist
             BASE_IMG_FOLDER = Properties.Settings.Default.imageFolder;
         }
 
-        private void btnTatCa_Click(object sender, EventArgs e)
+        private void formatDgv()
         {
-            loadDgvPatient();
-            //update number record to label
-            gbResult.Text = "Danh sách bệnh nhân (" + tbPatient.Rows.Count + " kết quả)";
+            try
+            {
+                // Resize the DataGridView columns to fit the newly loaded content.
+                dgvPatient.AutoResizeColumns(
+                    DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
+                dgvPatient.Columns["SickNum"].Visible = false;
+                dgvPatient.Columns["DataPath"].Visible = false;
+                dgvPatient.Columns["SickName"].HeaderText = "Tên";
+                dgvPatient.Columns["Age"].HeaderText = "Tuổi";
+                dgvPatient.Columns["Age"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dgvPatient.Columns["Telephone"].HeaderText = "SĐT";
+                dgvPatient.Columns["Telephone"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dgvPatient.Columns["Createtime"].HeaderText = "Ngày khám";
+                dgvPatient.Columns["Createtime"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dgvPatient.Columns["Createtime"].DefaultCellStyle.Format = helper.getDateFormat(Settings.Default.datetimeFormat);
+
+                dgvPatient.Columns["SickName"].Width = dgvPatient.Width * 4 / 10;
+                dgvPatient.Columns["Age"].Width = dgvPatient.Width / 10;
+                dgvPatient.Columns["Telephone"].Width = dgvPatient.Width * 2 / 10;
+                dgvPatient.Columns["Createtime"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                foreach (DataGridViewColumn col in dgvPatient.Columns)
+                {
+                    col.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    col.HeaderCell.Style.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Pixel);
+                    col.SortMode = DataGridViewColumnSortMode.NotSortable;
+                }
+                helper.setRowNumber(dgvPatient, this.CurrentPageIndex, this.CurrentPageIndex - 1, this.PageSize);
+                if (dgvPatient.Rows.Count > 0)
+                    setFieldEnable(true);
+                else
+                    setFieldEnable(false);
+            }
+            catch (Exception)
+            {
+                //nothing todo
+            }
         }
 
-        private void loadDgvPatient()
+        private DataTable GetFilterRecord(int page)
         {
-            // load data for data grid view
-            string str = Settings.Default.maxRowDisplay.ToString();
-            string query = "SELECT TOP " + str + " SickNum, SickName, Age, Telephone, Createtime, " + 
-                " DataPath FROM SickData ORDER BY SickNum DESC;";
-            dtaPatient = new SqlDataAdapter(query, DBConnection.Instance.sqlConn);
-            SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dtaPatient);
-
-            tbPatient = new DataTable();
-            tbPatient.Locale = System.Globalization.CultureInfo.InvariantCulture;
-            dtaPatient.Fill(tbPatient);
-            bsPatient.DataSource = tbPatient;
-
-            // Resize the DataGridView columns to fit the newly loaded content.
-            dgvPatient.AutoResizeColumns(
-                DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
-            dgvPatient.DataSource = bsPatient;
-            dgvPatient.Columns["SickNum"].Visible = false;
-            dgvPatient.Columns["DataPath"].Visible = false;
-            dgvPatient.Columns["SickName"].HeaderText = "Tên";
-            dgvPatient.Columns["Age"].HeaderText = "Tuổi";
-            dgvPatient.Columns["Age"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgvPatient.Columns["Telephone"].HeaderText = "SĐT";
-            dgvPatient.Columns["Telephone"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgvPatient.Columns["Createtime"].HeaderText = "Ngày khám";
-            dgvPatient.Columns["Createtime"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgvPatient.Columns["Createtime"].DefaultCellStyle.Format = helper.getDateFormat(Settings.Default.datetimeFormat);
-
-            dgvPatient.Columns["SickName"].Width = dgvPatient.Width * 4 / 10;
-            dgvPatient.Columns["Age"].Width = dgvPatient.Width / 10;
-            dgvPatient.Columns["Telephone"].Width = dgvPatient.Width *2 / 10;
-            dgvPatient.Columns["Createtime"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            foreach (DataGridViewColumn col in dgvPatient.Columns)
+            DataTable dt = new DataTable();
+            dt.TableName = "SickData";
+            // create sql command
+            bool isAnd = false;
+            string baseQuery;
+            string extQuery = "";
+            if (page == 0)
             {
-                col.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                col.HeaderCell.Style.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Pixel);
-                col.SortMode = DataGridViewColumnSortMode.NotSortable;
-            }
-            helper.setRowNumber(dgvPatient);
-            if(dgvPatient.Rows.Count > 0)
+                baseQuery = "SELECT SickNum,SickName, Age, Telephone, Createtime, DataPath FROM SickData ";
+            }else
             {
-                setFieldEnable(true);
+                baseQuery = "SELECT TOP " + PageSize + " SickNum,SickName, Age, Telephone, Createtime, DataPath FROM SickData ";
             }
-            else
+            if (!string.IsNullOrEmpty(txtTenSearch.Text.Trim()))
             {
-                setFieldEnable(false);
+                extQuery += " WHERE SickName LIKE N'%" + txtTenSearch.Text.Trim() + "%'";
+                isAnd = true;
             }
+            if (!string.IsNullOrEmpty(txtPhone.Text.Trim()))
+            {
+                if (isAnd == true)
+                {
+                    extQuery += " AND Telephone LIKE N'%" + txtPhone.Text.Trim() + "%'";
+                }
+                else
+                {
+                    extQuery += " WHERE Telephone LIKE N'%" + txtPhone.Text.Trim() + "%'";
+                    isAnd = true;
+                }
+            }
+            if (dtNgayBatDau.Checked == true)
+            {
+                if (isAnd == true)
+                {
+                    extQuery += " AND Createtime >= '" + dtNgayBatDau.Value.ToString("yyyy-MM-dd") + "'";
+                }
+                else
+                {
+                    extQuery += " WHERE Createtime >= '" + dtNgayBatDau.Value.ToString("yyyy-MM-dd") + "'";
+                    isAnd = true;
+                }
+            }
+            if (dtNgayKetThuc.Checked == true)
+            {
+                if (isAnd == true)
+                    extQuery += " AND Createtime <= '" + dtNgayKetThuc.Value.ToString("yyyy-MM-dd") + "'";
+                else
+                {
+                    extQuery += " WHERE Createtime <= '" + dtNgayKetThuc.Value.ToString("yyyy-MM-dd") + "'";
+                    isAnd = true;
+                }
+            }
+            if(page > 1)
+            {
+                int PreviouspageLimit = (page - 1) * PageSize;
+                if (isAnd == true)
+                    extQuery += " AND SickNum NOT IN " + "(SELECT TOP " + PreviouspageLimit + " SickNum FROM SickData " + extQuery + " ORDER BY SickNum) ";
+                else
+                {
+                    extQuery += " WHERE SickNum NOT IN " + "(SELECT TOP " + PreviouspageLimit + " SickNum FROM SickData " + extQuery  + " ORDER BY SickNum) ";
+                    isAnd = true;
+                }
+                    
+            }
+            baseQuery += extQuery;
+            baseQuery += " ORDER BY SickNum DESC;";
+            Console.WriteLine(baseQuery);
+            try
+            {
+                sqlCmd = new SqlCommand(baseQuery, DBConnection.Instance.sqlConn);
+                this.sqlDta.SelectCommand = sqlCmd;
+                this.sqlDta.Fill(dt);
+                if(page == 0)
+                {
+                    this.ds.Tables.Add(dt);
+                }
+            }
+            catch (Exception)
+            {
+                //nothing todo
+            }
+            return dt;
         }
+
         private void rbThang_CheckedChanged(object sender, EventArgs e)
         {
             if (rbThang.Checked == true)
@@ -135,6 +211,24 @@ namespace PhanMemNoiSoi
             dtNgayKetThuc.Checked = false;
         }
 
+        private void loadFilterData()
+        {
+            ds = new DataSet();
+            this.CurrentPageIndex = 1;
+            this.CalculateTotalPages();
+            // Load the first page of data;
+            this.dgvPatient.DataSource = GetFilterRecord(1);
+            formatDgv();
+            int rowCount = ds.Tables["SickData"].Rows.Count;
+            if (rowCount > 0)
+                setFieldEnable(true);
+            else
+                setFieldEnable(false);
+            //update number record to label
+            gbResult.Text = "Danh sách bệnh nhân (" + rowCount + " kết quả)";
+            this.lbCurrentPage.Text = this.CurrentPageIndex.ToString();
+            this.lbTotalPage.Text = this.TotalPage.ToString();
+        }
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
             //check start date & end date 
@@ -144,96 +238,11 @@ namespace PhanMemNoiSoi
                                 "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            
-            // create sql command
-            bool isAnd = false;
-            string query = "SELECT SickNum,SickName, Age, Telephone, Createtime, DataPath FROM SickData ";
-            if (!string.IsNullOrEmpty(txtTenSearch.Text.Trim()))
-            {
-                query += " WHERE SickName LIKE N'%" + txtTenSearch.Text.Trim() + "%'";
-                isAnd = true;
-            }
-            if (!string.IsNullOrEmpty(txtPhone.Text.Trim()))
-            {
-                if (isAnd == true)
-                {
-                    query += " AND Telephone LIKE N'%" + txtPhone.Text.Trim() + "%'";
-                }
-                else
-                {
-                    query += " WHERE Telephone LIKE N'%" + txtPhone.Text.Trim() + "%'";
-                    isAnd = true;
-                }
-            }
-            if (dtNgayBatDau.Checked == true)
-            {
-                if (isAnd == true)
-                {
-                    query += " AND Createtime >= '" + dtNgayBatDau.Value.ToString("yyyy-MM-dd") + "'";
-                }
-                else
-                {
-                    query += " WHERE Createtime >= '" + dtNgayBatDau.Value.ToString("yyyy-MM-dd") + "'";
-                    isAnd = true;
-                }
-            }
-            if (dtNgayKetThuc.Checked == true)
-            {
-                if (isAnd == true)
-                {
-                    query += " AND Createtime <= '" + dtNgayKetThuc.Value.ToString("yyyy-MM-dd") + "'";
-                }
-                else
-                {
-                    query += " WHERE Createtime <= '" + dtNgayKetThuc.Value.ToString("yyyy-MM-dd") + "'";
-                    isAnd = true;
-                }
-            }
-            query += " ORDER BY Createtime DESC;";
-            Console.WriteLine(query);
             try
             {
-                dtaPatient = new SqlDataAdapter(query, DBConnection.Instance.sqlConn);
-
-                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dtaPatient);
-                tbPatient = new DataTable();
-                tbPatient.Locale = System.Globalization.CultureInfo.InvariantCulture;
-                dtaPatient.Fill(tbPatient);
-                bsPatient.DataSource = tbPatient;
-
-                // Resize the DataGridView columns to fit the newly loaded content
-                dgvPatient.AutoResizeColumns(
-                    DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
-                dgvPatient.DataSource = bsPatient;
-                dgvPatient.Columns["SickNum"].Visible = false;
-                dgvPatient.Columns["SickName"].HeaderText = "Tên";
-                dgvPatient.Columns["Age"].HeaderText = "Tuổi";
-                dgvPatient.Columns["Telephone"].HeaderText = "SĐT";
-                dgvPatient.Columns["Createtime"].HeaderText = "Ngày khám";
-
-                dgvPatient.Columns["SickName"].Width = dgvPatient.Width * 4 / 10;
-                dgvPatient.Columns["Age"].Width = dgvPatient.Width / 10;
-                dgvPatient.Columns["Telephone"].Width = dgvPatient.Width * 2 / 10;
-                dgvPatient.Columns["Createtime"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                foreach (DataGridViewColumn col in dgvPatient.Columns)
-                {
-                    col.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                    col.HeaderCell.Style.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Pixel);
-                    col.SortMode = DataGridViewColumnSortMode.NotSortable;
-                }
-                helper.setRowNumber(dgvPatient);
-                if (dgvPatient.Rows.Count > 0)
-                {
-                    setFieldEnable(true);
-                }
-                else
-                {
-                    setFieldEnable(false);
-                }
-                //update number record to label
-                gbResult.Text = "Danh sách bệnh nhân (" + tbPatient.Rows.Count + " kết quả)";
+                loadFilterData();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
                 MessageBox.Show("Câu truy vấn không thành công. Vui lòng xem lại giá trị tìm kiếm đầu vào!",
@@ -362,9 +371,9 @@ namespace PhanMemNoiSoi
                     return;
                 }
                 // delete data grid view
-                tbPatient.Rows.RemoveAt(currRowIndexCheck);
-                bsPatient.DataSource = tbPatient;
-                dgvPatient.DataSource = bsPatient;
+                dgvPatient.Rows.RemoveAt(currRowIndexCheck);
+                ds.Tables["SickData"].Rows.RemoveAt(currRowIndexCheck);
+                ds.AcceptChanges();
                 dgvPatient.Update();
                 dgvPatient.Refresh();
                 if (dgvPatient.RowCount == 0)
@@ -385,7 +394,8 @@ namespace PhanMemNoiSoi
                     }
                 }
                 //update number patient in label
-                gbResult.Text = "Danh sách bệnh nhân ( " + tbPatient.Rows.Count + " kết quả)";
+                int rowCount = ds.Tables["SickData"].Rows.Count;
+                gbResult.Text = "Danh sách bệnh nhân ( " + rowCount + " kết quả)";
                 helper.setRowNumber(dgvPatient);
                 if (dgvPatient.Rows.Count > 0)
                 {
@@ -443,7 +453,6 @@ namespace PhanMemNoiSoi
         {
             btnDeleteSick.Enabled = helper.myValidateRoles(RolesList.DELETE_PATIENT);
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
             if(dgvPatient.RowCount == 0)
@@ -480,7 +489,7 @@ namespace PhanMemNoiSoi
                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-        
+
         private void setFieldEnable(bool enableState)
         {
             btnReCheck.Enabled = enableState;
@@ -488,6 +497,55 @@ namespace PhanMemNoiSoi
             btnOpenFolder.Enabled = enableState;
             btnNextImg.Enabled = enableState;
             btnPrevImg.Enabled = enableState;
+        }
+
+        private void CalculateTotalPages()
+        {
+            GetFilterRecord(0);
+            int rowCount = ds.Tables["SickData"].Rows.Count;
+            TotalPage = rowCount / PageSize;
+            // if any row left after calculated pages, add one more page 
+            if (rowCount % PageSize > 0)
+                TotalPage += 1;
+            Console.WriteLine("Total page is " + TotalPage);
+        }
+
+        private void btnFirstPage_Click(object sender, EventArgs e)
+        {
+            this.CurrentPageIndex = 1;
+            this.dgvPatient.DataSource = GetFilterRecord(this.CurrentPageIndex);
+            formatDgv();
+            this.lbCurrentPage.Text = this.CurrentPageIndex.ToString();
+        }
+
+        private void btnNextPage_Click(object sender, EventArgs e)
+        {
+            if (this.CurrentPageIndex < this.TotalPage)
+            {
+                this.CurrentPageIndex++;
+                this.dgvPatient.DataSource = GetFilterRecord(this.CurrentPageIndex);
+                formatDgv();
+                this.lbCurrentPage.Text = this.CurrentPageIndex.ToString();
+            }
+        }
+
+        private void btnPrevPage_Click(object sender, EventArgs e)
+        {
+            if (this.CurrentPageIndex > 1)
+            {
+                this.CurrentPageIndex--;
+                this.dgvPatient.DataSource = GetFilterRecord(this.CurrentPageIndex);
+                formatDgv();
+                this.lbCurrentPage.Text = this.CurrentPageIndex.ToString();
+            }
+        }
+
+        private void btnLastPage_Click(object sender, EventArgs e)
+        {
+            this.CurrentPageIndex = TotalPage;
+            this.dgvPatient.DataSource = GetFilterRecord(this.CurrentPageIndex);
+            formatDgv();
+            this.lbCurrentPage.Text = this.CurrentPageIndex.ToString();
         }
     }
 }
