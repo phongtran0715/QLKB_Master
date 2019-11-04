@@ -133,7 +133,16 @@ INSERT INTO [QuangHuyMedical].[dbo].[WorkGroup]([WorkGroupId],[Descript]) VALUES
 commit transaction
 go
 
---(9) User Group Role
+--(9) Note Info
+if not exists (select name from sysobjects where name = 'NoteInfo' and type='U')
+CREATE TABLE [dbo].[NoteInfo](
+	[Id] [int] IDENTITY(1,1) PRIMARY KEY,
+	[Content] [nchar](256) NULL,
+	[ShowNum] [int] NULL
+) ON [PRIMARY]
+GO
+
+--(10) User Group Role
 if not exists (select name from sysobjects where name = 'UserGroupRole' and type='U')
 CREATE TABLE [dbo].[UserGroupRole](
 	[Num] [int] IDENTITY(1,1) NOT NULL,
@@ -161,7 +170,7 @@ INSERT INTO [QuangHuyMedical].[dbo].[UserGroupRole] ([RoleId], [GroupId]) VALUES
 commit transaction
 go
 
---(9) Work Log
+--(11) Work Log
 if not exists (select name from sysobjects where name = 'WorkLog' and type='U')
 CREATE TABLE [dbo].[WorkLog](
 	[Num] [int] IDENTITY(1,1) NOT NULL,
@@ -179,7 +188,7 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 go	   
 
---(9) Database version
+--(12) Database version
 if not exists (select name from sysobjects where name = 'DbVersion' and type='U')
 CREATE TABLE [dbo].[DbVersion](
 	[Version] [int] NOT NULL

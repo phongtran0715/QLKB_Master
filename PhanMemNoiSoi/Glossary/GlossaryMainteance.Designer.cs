@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GlossaryMainteance));
-            this.btnThoat = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage5 = new System.Windows.Forms.TabPage();
@@ -51,6 +50,13 @@
             this.dgvCheck = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tbNote = new System.Windows.Forms.TabPage();
+            this.btnNoteDown = new System.Windows.Forms.Button();
+            this.btnNoteUp = new System.Windows.Forms.Button();
+            this.btnNoteAdd = new System.Windows.Forms.Button();
+            this.btnNoteDelete = new System.Windows.Forms.Button();
+            this.dgvNote = new System.Windows.Forms.DataGridView();
+            this.btnThoat = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInfo)).BeginInit();
@@ -58,21 +64,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvCheckContentDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCheck)).BeginInit();
             this.tabControl1.SuspendLayout();
+            this.tbNote.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvNote)).BeginInit();
             this.SuspendLayout();
-            // 
-            // btnThoat
-            // 
-            this.btnThoat.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnThoat.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThoat.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
-            this.btnThoat.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnThoat.Location = new System.Drawing.Point(491, 594);
-            this.btnThoat.Name = "btnThoat";
-            this.btnThoat.Size = new System.Drawing.Size(99, 35);
-            this.btnThoat.TabIndex = 13;
-            this.btnThoat.Text = "    Thoát";
-            this.btnThoat.UseVisualStyleBackColor = true;
-            this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click_1);
             // 
             // contextMenuStrip1
             // 
@@ -108,7 +102,7 @@
             this.btnMoveDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMoveDown.Image = global::PhanMemNoiSoi.Properties.Resources.down;
             this.btnMoveDown.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMoveDown.Location = new System.Drawing.Point(323, 356);
+            this.btnMoveDown.Location = new System.Drawing.Point(323, 501);
             this.btnMoveDown.Name = "btnMoveDown";
             this.btnMoveDown.Size = new System.Drawing.Size(143, 35);
             this.btnMoveDown.TabIndex = 12;
@@ -122,7 +116,7 @@
             this.btnMoveUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMoveUp.Image = global::PhanMemNoiSoi.Properties.Resources.up;
             this.btnMoveUp.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMoveUp.Location = new System.Drawing.Point(183, 356);
+            this.btnMoveUp.Location = new System.Drawing.Point(183, 501);
             this.btnMoveUp.Name = "btnMoveUp";
             this.btnMoveUp.Size = new System.Drawing.Size(134, 35);
             this.btnMoveUp.TabIndex = 11;
@@ -136,7 +130,7 @@
             this.btnAddInfoReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddInfoReport.Image = global::PhanMemNoiSoi.Properties.Resources.add_24x24;
             this.btnAddInfoReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddInfoReport.Location = new System.Drawing.Point(78, 356);
+            this.btnAddInfoReport.Location = new System.Drawing.Point(78, 501);
             this.btnAddInfoReport.Name = "btnAddInfoReport";
             this.btnAddInfoReport.Size = new System.Drawing.Size(99, 35);
             this.btnAddInfoReport.TabIndex = 10;
@@ -150,7 +144,7 @@
             this.btnDeleteInfoReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDeleteInfoReport.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
             this.btnDeleteInfoReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDeleteInfoReport.Location = new System.Drawing.Point(472, 356);
+            this.btnDeleteInfoReport.Location = new System.Drawing.Point(472, 501);
             this.btnDeleteInfoReport.Name = "btnDeleteInfoReport";
             this.btnDeleteInfoReport.Size = new System.Drawing.Size(99, 35);
             this.btnDeleteInfoReport.TabIndex = 9;
@@ -173,7 +167,7 @@
             this.dgvInfo.ReadOnly = true;
             this.dgvInfo.RowTemplate.Height = 24;
             this.dgvInfo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvInfo.Size = new System.Drawing.Size(566, 345);
+            this.dgvInfo.Size = new System.Drawing.Size(566, 490);
             this.dgvInfo.TabIndex = 2;
             this.dgvInfo.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInfo_CellClick);
             this.dgvInfo.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvInfo_DataBindingComplete);
@@ -347,6 +341,7 @@
             this.tabControl1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage5);
+            this.tabControl1.Controls.Add(this.tbNote);
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(5, 5);
             this.tabControl1.Name = "tabControl1";
@@ -355,6 +350,110 @@
             this.tabControl1.TabIndex = 0;
             this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Selected);
             this.tabControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabControl1_MouseClick);
+            // 
+            // tbNote
+            // 
+            this.tbNote.Controls.Add(this.btnNoteDown);
+            this.tbNote.Controls.Add(this.btnNoteUp);
+            this.tbNote.Controls.Add(this.btnNoteAdd);
+            this.tbNote.Controls.Add(this.btnNoteDelete);
+            this.tbNote.Controls.Add(this.dgvNote);
+            this.tbNote.Location = new System.Drawing.Point(4, 29);
+            this.tbNote.Name = "tbNote";
+            this.tbNote.Padding = new System.Windows.Forms.Padding(3);
+            this.tbNote.Size = new System.Drawing.Size(577, 542);
+            this.tbNote.TabIndex = 5;
+            this.tbNote.Text = "Ghi chú ảnh";
+            this.tbNote.UseVisualStyleBackColor = true;
+            // 
+            // btnNoteDown
+            // 
+            this.btnNoteDown.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnNoteDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNoteDown.Image = global::PhanMemNoiSoi.Properties.Resources.down;
+            this.btnNoteDown.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnNoteDown.Location = new System.Drawing.Point(323, 501);
+            this.btnNoteDown.Name = "btnNoteDown";
+            this.btnNoteDown.Size = new System.Drawing.Size(143, 35);
+            this.btnNoteDown.TabIndex = 16;
+            this.btnNoteDown.Text = "      Chuyển xuống";
+            this.btnNoteDown.UseVisualStyleBackColor = true;
+            this.btnNoteDown.Click += new System.EventHandler(this.btnNoteDown_Click);
+            // 
+            // btnNoteUp
+            // 
+            this.btnNoteUp.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnNoteUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNoteUp.Image = global::PhanMemNoiSoi.Properties.Resources.up;
+            this.btnNoteUp.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnNoteUp.Location = new System.Drawing.Point(183, 501);
+            this.btnNoteUp.Name = "btnNoteUp";
+            this.btnNoteUp.Size = new System.Drawing.Size(134, 35);
+            this.btnNoteUp.TabIndex = 15;
+            this.btnNoteUp.Text = "      Chuyển lên";
+            this.btnNoteUp.UseVisualStyleBackColor = true;
+            this.btnNoteUp.Click += new System.EventHandler(this.btnNoteUp_Click);
+            // 
+            // btnNoteAdd
+            // 
+            this.btnNoteAdd.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnNoteAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNoteAdd.Image = global::PhanMemNoiSoi.Properties.Resources.add_24x24;
+            this.btnNoteAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnNoteAdd.Location = new System.Drawing.Point(78, 501);
+            this.btnNoteAdd.Name = "btnNoteAdd";
+            this.btnNoteAdd.Size = new System.Drawing.Size(99, 35);
+            this.btnNoteAdd.TabIndex = 14;
+            this.btnNoteAdd.Text = "  Thêm";
+            this.btnNoteAdd.UseVisualStyleBackColor = true;
+            this.btnNoteAdd.Click += new System.EventHandler(this.btnNoteAdd_Click);
+            // 
+            // btnNoteDelete
+            // 
+            this.btnNoteDelete.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnNoteDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNoteDelete.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
+            this.btnNoteDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnNoteDelete.Location = new System.Drawing.Point(472, 501);
+            this.btnNoteDelete.Name = "btnNoteDelete";
+            this.btnNoteDelete.Size = new System.Drawing.Size(99, 35);
+            this.btnNoteDelete.TabIndex = 13;
+            this.btnNoteDelete.Text = "Xóa ";
+            this.btnNoteDelete.UseVisualStyleBackColor = true;
+            this.btnNoteDelete.Click += new System.EventHandler(this.btnNoteDelete_Click);
+            // 
+            // dgvNote
+            // 
+            this.dgvNote.AllowUserToAddRows = false;
+            this.dgvNote.AllowUserToDeleteRows = false;
+            this.dgvNote.AllowUserToResizeRows = false;
+            this.dgvNote.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvNote.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvNote.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
+            this.dgvNote.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvNote.Location = new System.Drawing.Point(5, 5);
+            this.dgvNote.MultiSelect = false;
+            this.dgvNote.Name = "dgvNote";
+            this.dgvNote.ReadOnly = true;
+            this.dgvNote.RowTemplate.Height = 24;
+            this.dgvNote.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvNote.Size = new System.Drawing.Size(566, 490);
+            this.dgvNote.TabIndex = 3;
+            this.dgvNote.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvNote_CellClick);
+            // 
+            // btnThoat
+            // 
+            this.btnThoat.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnThoat.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThoat.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
+            this.btnThoat.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnThoat.Location = new System.Drawing.Point(491, 594);
+            this.btnThoat.Name = "btnThoat";
+            this.btnThoat.Size = new System.Drawing.Size(99, 35);
+            this.btnThoat.TabIndex = 13;
+            this.btnThoat.Text = "    Thoát";
+            this.btnThoat.UseVisualStyleBackColor = true;
+            this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click_1);
             // 
             // GlossaryMainteance
             // 
@@ -369,9 +468,9 @@
             this.MinimizeBox = false;
             this.Name = "GlossaryMainteance";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Quản lý danh mục";
             this.UserIsAllowed += new System.EventHandler(this.GlossaryMainteance_UserIsAllowed);
             this.UserIsDenied += new System.EventHandler(this.GlossaryMainteance_UserIsDenied);
+            this.Text = "Quản lý danh mục";
             this.Load += new System.EventHandler(this.GlossaryMainteance_Load);
             this.contextMenuStrip1.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
@@ -381,6 +480,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvCheckContentDetail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCheck)).EndInit();
             this.tabControl1.ResumeLayout(false);
+            this.tbNote.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvNote)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -407,5 +508,11 @@
         private System.Windows.Forms.Button btnMoveUp;
         private System.Windows.Forms.Button btnAddInfoReport;
         private System.Windows.Forms.Button btnDeleteInfoReport;
+        private System.Windows.Forms.TabPage tbNote;
+        private System.Windows.Forms.DataGridView dgvNote;
+        private System.Windows.Forms.Button btnNoteDown;
+        private System.Windows.Forms.Button btnNoteUp;
+        private System.Windows.Forms.Button btnNoteAdd;
+        private System.Windows.Forms.Button btnNoteDelete;
     }
 }

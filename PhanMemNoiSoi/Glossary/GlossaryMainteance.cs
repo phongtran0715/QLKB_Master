@@ -15,16 +15,17 @@ namespace PhanMemNoiSoi
                                           Session.Instance.UserRole);
 
         Helper helper = new Helper();
-        enum dataTable { DTA_CONTENT = 0, DTA_CONTENT_DETAIL, DTA_INFO_REPORT, DTA_TABLE_END }
-        enum bindSource { DTA_CONTENT = 0, DTA_CONTENT_DETAIL, DTA_INFO_REPORT, DTA_BIND_SOURCE_END }
-        enum dataAdapter { DTA_CONTENT = 0, DTA_CONTENT_DETAIL, DTA_INFO_REPORT, DTA_ADAPTER_END }
+        enum dataTable { DTA_CONTENT = 0, DTA_CONTENT_DETAIL, DTA_INFO_REPORT, DTA_NOTE_IMAGE, DTA_TABLE_END }
+        enum bindSource { DTA_CONTENT = 0, DTA_CONTENT_DETAIL, DTA_INFO_REPORT, DTA_NOTE_IMAGE, DTA_BIND_SOURCE_END }
+        enum dataAdapter { DTA_CONTENT = 0, DTA_CONTENT_DETAIL, DTA_INFO_REPORT, DTA_NOTE_IMAGE, DTA_ADAPTER_END }
 
         DataTable[] tbAdap = new DataTable[Enum.GetNames(typeof(dataTable)).Length - 1];
         SqlDataAdapter[] dtaAdap = new SqlDataAdapter[Enum.GetNames(typeof(dataAdapter)).Length - 1];
         BindingSource[] bsAdap = new BindingSource[Enum.GetNames(typeof(bindSource)).Length - 1];
 
-        const int TAB_CHECK_RECORD = 0;
-        const int TAB_INFO_IN_REPORT = 1;
+        const int TAB_CHECK_RECORD      = 0;
+        const int TAB_INFO_IN_REPORT    = 1;
+        const int TAB_NOTE_IMAGE        = 2;
 
         public GlossaryMainteance(IPrincipal userPrincipal) 
             : base(Session.Instance.UserRole, userPrincipal)
@@ -234,6 +235,29 @@ namespace PhanMemNoiSoi
             //set focus to newest insert row
             setFocusContent(dgvCheck.Rows.Count -1, 1);
             helper.setRowNumber(dgvCheck);
+        }
+
+        private void addNewNoteImage(string msg)
+        {
+            //add new record to database
+            try
+            {
+                string sqlCommand = "INSERT INTO NoteInfo (Content, ShowNum) VALUES ('" + msg + "', '" + (dgvNote.Rows.Count + 1) + "')";
+                SqlCommand mySQL = new SqlCommand(sqlCommand, DBConnection.Instance.sqlConn);
+                mySQL.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Thêm dữ liệu không thành công. \n Không thể kết nối đến cơ sở dữ liệu. \n Vui lòng thử lại sau",
+                                "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                Console.WriteLine(ex.ToString());
+                return;
+            }
+            //update dgv
+            loadNoteImage();
+            //set focus to newest insert row
+            //setFocusContent(dgvNote.Rows.Count - 1, 1);
+            helper.setRowNumber(dgvNote);
         }
 
         private void updateDgvNoiDung(string msg, string code)
@@ -509,6 +533,22 @@ namespace PhanMemNoiSoi
                         }
                         break;
                     }
+                case TAB_NOTE_IMAGE:
+                    {
+                        loadNoteImage();
+                        if (dgvNote.Rows.Count > 0)
+                        {
+                            setSelectedRow(dgvNote, 0);
+                            btnNoteUp.Enabled = false;
+                            btnNoteDown.Enabled = true;
+                        }
+                        else
+                        {
+                            btnNoteUp.Enabled = false;
+                            btnNoteDown.Enabled = false;
+                        }
+                        break;
+                    }
                 default:
                     break;
             }
@@ -573,6 +613,37 @@ namespace PhanMemNoiSoi
                 Console.WriteLine(ex.ToString());
             }   
         }
+
+        private void loadNoteImage()
+        {
+            try
+            {
+                // load data for data grid view
+                string query = "SELECT Id, Content, ShowNum FROM NoteInfo ORDER BY ShowNum ASC;";
+
+                dtaAdap[(int)dataAdapter.DTA_NOTE_IMAGE] = new SqlDataAdapter(query, DBConnection.Instance.sqlConn);
+
+                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dtaAdap[(int)dataAdapter.DTA_NOTE_IMAGE]);
+                tbAdap[(int)dataTable.DTA_NOTE_IMAGE] = new DataTable();
+
+                tbAdap[(int)dataTable.DTA_NOTE_IMAGE].Locale = System.Globalization.CultureInfo.InvariantCulture;
+                dtaAdap[(int)dataAdapter.DTA_NOTE_IMAGE].Fill(tbAdap[(int)dataTable.DTA_NOTE_IMAGE]);
+                bsAdap[(int)bindSource.DTA_NOTE_IMAGE].DataSource = tbAdap[(int)dataTable.DTA_NOTE_IMAGE];
+
+                // Resize the DataGridView columns to fit the newly loaded content.
+                dgvNote.DataSource = bsAdap[(int)bindSource.DTA_NOTE_IMAGE];
+                dgvNote.Columns["Id"].Visible = false;
+                dgvNote.Columns["ShowNum"].Visible = false;
+                dgvNote.Columns["Content"].HeaderText = "Nội dung";
+                dgvNote.Columns["Content"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                helper.setRowNumber(dgvNote);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+
 
         private void btnThoat_Click_1(object sender, EventArgs e)
         {
@@ -704,6 +775,42 @@ namespace PhanMemNoiSoi
             }
         }
 
+        private void updateNoteShowNum(int numFrom)
+        {
+            try
+            {
+                //update database
+                string sqlCommand = "SELECT Id,ShowNum FROM NoteInfo WHERE ShowNum > '" + numFrom + "' ORDER BY ShowNum ASC;";
+                SqlCommand cmd = new SqlCommand(sqlCommand, DBConnection.Instance.sqlConn);
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    string id = dr["Id"].ToString().Trim();
+                    int snum = Convert.ToInt16(dr["ShowNum"]);
+                    snum -= 1;
+                    //Update number oder
+                    string uQuery = "UPDATE NoteInfo SET ShowNum = '" + snum + "' WHERE Id = '" + id + "';";
+                    SqlCommand uSQL = new SqlCommand(uQuery, DBConnection.Instance.sqlConn);
+                    uSQL.ExecuteReader();
+
+                    //update data grid view
+                    for (int i = 0; i < dgvInfo.Rows.Count; i++)
+                    {
+                        if (string.Equals(dgvInfo.Rows[i].Cells["Id"].Value.ToString().Trim(), id))
+                        {
+                            dgvInfo.Rows[i].Cells["ShowNum"].Value = snum.ToString();
+                            break;
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+
         private void button3_Click(object sender, EventArgs e)
         {
             InfoReportList infoList = new InfoReportList();
@@ -744,69 +851,62 @@ namespace PhanMemNoiSoi
         {
             int selectedRowCount =
             dgvInfo.Rows.GetRowCount(DataGridViewElementStates.Selected);
-            if (selectedRowCount <= 0)
-            {
-                return;
-            }
-            int currRowIndexCheck = dgvInfo.SelectedRows[selectedRowCount - 1].Index;
-            int index = int.Parse(dgvInfo.Rows[currRowIndexCheck].Cells["ShowNum"].Value.ToString().Trim());
-            if (index > 0)
+            if (selectedRowCount <= 0) return;
+            int selectedRowIndex = dgvInfo.CurrentCell.RowIndex;
+            int currentShowNum = int.Parse(dgvInfo.Rows[selectedRowIndex].Cells["ShowNum"].Value.ToString().Trim());
+            if (currentShowNum > 0)
             {
                 try
                 {
-                    string itemCode = dgvInfo.Rows[currRowIndexCheck].Cells["ItemCode"].Value.ToString().Trim();
+                    string itemCode = dgvInfo.Rows[selectedRowIndex].Cells["ItemCode"].Value.ToString().Trim();
                     //update to increase previous item position in database
-                    string uQuery = "UPDATE CheckItem SET ShowNum = '" + index +
-                                    "' WHERE ItemCode = (SELECT ItemCode FROM CheckItem WHERE ShowNum = '" + (index - 1) + "' AND IsDisplay = 1)";
+                    string uQuery = "UPDATE CheckItem SET ShowNum = '" + currentShowNum +
+                                    "' WHERE ItemCode = (SELECT ItemCode FROM CheckItem WHERE ShowNum = '" + (currentShowNum - 1) + "' AND IsDisplay = 1)";
                     SqlCommand uSQL = new SqlCommand(uQuery, DBConnection.Instance.sqlConn);
                     uSQL.ExecuteReader();
 
                     //update to decrease current item position in database
-                    uQuery = "UPDATE CheckItem SET ShowNum = '" + (index - 1).ToString() +
+                    uQuery = "UPDATE CheckItem SET ShowNum = '" + (currentShowNum - 1).ToString() +
                                     "' WHERE ItemCode = '" + itemCode + "';";
                     uSQL = new SqlCommand(uQuery, DBConnection.Instance.sqlConn);
                     uSQL.ExecuteReader();
 
                     loadInfoReport();
-                    setSelectedRow(dgvInfo, currRowIndexCheck - 1);
-                    setStateOrderButon(currRowIndexCheck - 1);
+                    //setSelectedRow(dgvInfo, selectedRowIndex -1);
+                    //setStateOrderButon(selectedRowIndex - 1);
                 }catch(Exception ex)
                 {
                     Console.WriteLine(ex.ToString());
                 }
                 
             }
-            //ArrangeDgvCol();
         }
 
         private void btnMoveDown_Click(object sender, EventArgs e)
         {
-            int selectedRowCount =
+            int sRowCount =
             dgvInfo.Rows.GetRowCount(DataGridViewElementStates.Selected);
-            if (selectedRowCount < 0)
-            {
-                return;
-            }
-            int currRowIndexCheck = dgvInfo.SelectedRows[selectedRowCount - 1].Index;
-            int index = int.Parse(dgvInfo.Rows[currRowIndexCheck].Cells["ShowNum"].Value.ToString().Trim());
-            if (index >= 0)
+            if (sRowCount < 0) return;
+            int sRowIndex = dgvInfo.CurrentCell.RowIndex;
+            int currentShowNum = int.Parse(dgvInfo.Rows[sRowIndex].Cells["ShowNum"].Value.ToString().Trim());
+            if (currentShowNum >= 0)
             {
                 try
                 {
-                    string itemCode = dgvInfo.Rows[currRowIndexCheck].Cells["ItemCode"].Value.ToString().Trim();
+                    string itemCode = dgvInfo.Rows[sRowIndex].Cells["ItemCode"].Value.ToString().Trim();
                     //update to decrease after item position in database
-                    string uQuery = "UPDATE CheckItem SET ShowNum = '" + index +
-                                    "' WHERE ItemCode = (SELECT ItemCode FROM CheckItem WHERE ShowNum = '" + (index + 1) + "' AND IsDisplay = 1);";
+                    string uQuery = "UPDATE CheckItem SET ShowNum = '" + currentShowNum +
+                                    "' WHERE ItemCode = (SELECT ItemCode FROM CheckItem WHERE ShowNum = '" + (currentShowNum + 1) + "' AND IsDisplay = 1);";
                     SqlCommand uSQL = new SqlCommand(uQuery, DBConnection.Instance.sqlConn);
                     uSQL.ExecuteReader();
                     //update to decrease current item position in database
-                    uQuery = "UPDATE CheckItem SET ShowNum = '" + (index + 1).ToString() +
+                    uQuery = "UPDATE CheckItem SET ShowNum = '" + (currentShowNum + 1).ToString() +
                                     "' WHERE ItemCode = '" + itemCode + "';";
                     uSQL = new SqlCommand(uQuery, DBConnection.Instance.sqlConn);
                     uSQL.ExecuteReader();
                     loadInfoReport();
-                    setSelectedRow(dgvInfo, currRowIndexCheck + 1);
-                    setStateOrderButon(currRowIndexCheck + 1);
+                    //setSelectedRow(dgvInfo, currRowIndexCheck + 1);
+                    //setStateOrderButon(currRowIndexCheck + 1);
                 }catch(Exception ex)
                 {
                     Console.WriteLine(ex.ToString());
@@ -952,6 +1052,143 @@ namespace PhanMemNoiSoi
             if (dgvCheckContentDetail.Rows.Count > 0)
             {
                 dgvCheckContentDetail.CurrentCell = dgvCheckContentDetail.Rows[rowIndex].Cells[cellIndex];
+            }
+        }
+
+        private void btnNoteAdd_Click(object sender, EventArgs e)
+        {
+            NewNoteImage noteImgFrm = new NewNoteImage(userPrincipal);
+            noteImgFrm.updateData += addNewNoteImage;
+            noteImgFrm.ShowDialog();
+        }
+
+        private void btnNoteDelete_Click(object sender, EventArgs e)
+        {
+            int selectedRowCount = dgvNote.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            if (selectedRowCount <= 0) return;
+            int selectedRowIndex = dgvNote.CurrentCell.RowIndex;
+            int currentShowNum = int.Parse(dgvNote.Rows[selectedRowIndex].Cells["ShowNum"].Value.ToString().Trim());
+
+            DialogResult dlResult = MessageBox.Show("Bạn có chắc chắn muốn xóa nội dung này?", "Thông báo",
+                            MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (dlResult == DialogResult.Cancel) return;
+            int id = int.Parse(dgvNote.Rows[selectedRowIndex].Cells[0].Value.ToString().Trim());
+
+            //delete from database
+            try
+            {
+                string sqlCommand = "DELETE FROM NoteInfo WHERE Id = '" + id + "'";
+                SqlCommand mySQL = new SqlCommand(sqlCommand, DBConnection.Instance.sqlConn);
+                mySQL.ExecuteReader();
+                updateNoteShowNum(currentShowNum);
+            }
+            catch (System.Exception)
+            {
+                MessageBox.Show("Không thể xóa dữ liệu. \n Không kết nối được đến cơ sở dữ liệu. \n Vui lòng thử lại sau!",
+                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // update data grid view
+            loadNoteImage();
+            // set focus to another row
+            setFocusContent(0, 1);
+            helper.setRowNumber(dgvNote);
+        }
+
+        private void dgvNote_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int rIndex = e.RowIndex;
+            if (rIndex < 0)
+            {
+                return;
+            }
+            if (dgvNote.Rows.Count <= 1)
+            {
+                btnNoteUp.Enabled = false;
+                btnNoteDown.Enabled = false;
+                return;
+            }
+
+            if (rIndex == 0)
+            {
+                btnNoteUp.Enabled = false;
+                btnNoteDown.Enabled = true;
+            }
+            else if (rIndex == dgvNote.Rows.Count - 1)
+            {
+                btnNoteUp.Enabled = true;
+                btnNoteDown.Enabled = false;
+            }
+            else
+            {
+                btnNoteUp.Enabled = true;
+                btnNoteDown.Enabled = true;
+            }
+        }
+
+        private void btnNoteUp_Click(object sender, EventArgs e)
+        {
+            int sRowCount = dgvNote.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            if (sRowCount <= 0) return;
+            int sRowIndex = dgvNote.CurrentCell.RowIndex;
+            int currentShowNum = int.Parse(dgvNote.Rows[sRowIndex].Cells["ShowNum"].Value.ToString().Trim());
+            if (currentShowNum > 0)
+            {
+                try
+                {
+                    string id = dgvNote.Rows[sRowIndex].Cells["Id"].Value.ToString().Trim();
+                    //update to increase previous item position in database
+                    string uQuery = "UPDATE NoteInfo SET ShowNum = '" + currentShowNum +
+                                    "' WHERE Id = (SELECT Id FROM NoteInfo WHERE ShowNum = '" + (currentShowNum - 1) + "')";
+                    SqlCommand uSQL = new SqlCommand(uQuery, DBConnection.Instance.sqlConn);
+                    uSQL.ExecuteReader();
+
+                    //update to decrease current item position in database
+                    uQuery = "UPDATE NoteInfo SET ShowNum = '" + (currentShowNum - 1).ToString() +
+                                    "' WHERE Id = '" + id + "';";
+                    uSQL = new SqlCommand(uQuery, DBConnection.Instance.sqlConn);
+                    uSQL.ExecuteReader();
+                    loadNoteImage();
+                    //setSelectedRow(dgvNote, selectedRowIndex - 1);
+                    //setStateOrderButon(selectedRowIndex - 1);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
+            }
+        }
+
+        private void btnNoteDown_Click(object sender, EventArgs e)
+        {
+            int sRowCount = dgvNote.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            if (sRowCount < 0) return;
+            int sRowIndex = dgvNote.CurrentCell.RowIndex;
+            int currentShowNum = int.Parse(dgvNote.Rows[sRowIndex].Cells["ShowNum"].Value.ToString().Trim());
+            if (currentShowNum >= 0)
+            {
+                try
+                {
+                    string id = dgvNote.Rows[sRowIndex].Cells["Id"].Value.ToString().Trim();
+                    //update to decrease after item position in database
+                    string uQuery = "UPDATE NoteInfo SET ShowNum = '" + currentShowNum +
+                                    "' WHERE Id = (SELECT Id FROM NoteInfo WHERE ShowNum = '" + (currentShowNum + 1) + "');";
+                    SqlCommand uSQL = new SqlCommand(uQuery, DBConnection.Instance.sqlConn);
+                    uSQL.ExecuteReader();
+                    //update to decrease current item position in database
+                    uQuery = "UPDATE NoteInfo SET ShowNum = '" + (currentShowNum + 1).ToString() +
+                                    "' WHERE Id = '" + id + "';";
+                    uSQL = new SqlCommand(uQuery, DBConnection.Instance.sqlConn);
+                    uSQL.ExecuteReader();
+                    loadNoteImage();
+                    //setSelectedRow(dgvNote, selectedRowIndex + 1);
+                    //setStateOrderButon(currRowIndexCheck + 1);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
             }
         }
     }
