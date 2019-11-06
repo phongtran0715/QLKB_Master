@@ -145,7 +145,7 @@ namespace PhanMemNoiSoi
             }
         }
 
-        public void createImageTable(string name, List<String> images)
+        public void createImageTable(string name, List<MyImage> images)
         {
             if(images == null)
             {
@@ -165,29 +165,44 @@ namespace PhanMemNoiSoi
                 objTab1.BottomPadding = 5;
                 int iRow, iCols;
                 int imgIndex = 0;
+                //insert text caption
+                for(iRow =1; iRow <= numRows; iRow++)
+                {
+                    if(iRow %2 != 0)
+                    {
+                        for (iCols = 1; iCols <= numCols; iCols++)
+                        {
+                            if (imgIndex > images.Count) break;
+                            object oRange = objTab1.Cell(iRow, iCols).Range;
+                            ((Word.Range)oRange).Text = images[imgIndex].imageNote;
+                            imgIndex++;
+                        }
+                    }
+                }
+                imgIndex = 0;
+                //insert image
                 for (iRow = 1; iRow <= numRows; iRow++)
                 {
-                    for (iCols = 1; iCols <= numCols; iCols++)
+                    if (iRow % 2 == 0)
                     {
-                        if(imgIndex >= images.Count)
+                        for (iCols = 1; iCols <= numCols; iCols++)
                         {
-                            break;
+                            if (imgIndex > images.Count) break;
+                            object oRange = objTab1.Cell(iRow, iCols).Range;
+                            string tmpPath = Log.Instance.GetTempPath() + "tmp.jpg";
+                            Image image;
+                            if (Session.Instance.ActiveLicense == false)
+                            {
+                                image = Properties.Resources.img_default;
+                            }
+                            else
+                            {
+                                image = Image.FromFile(images[imgIndex].imagePath);
+                            }
+                            Image resizedImg = this.helper.ResizeImage(image, imgSize.Width, imgSize.Height);
+                            resizedImg.Save(tmpPath);
+                            this.wordDoc.InlineShapes.AddPicture(tmpPath, ref missing, true, ref oRange);
                         }
-                        object oRange = objTab1.Cell(iRow, iCols).Range;
-                        string tmpPath = Log.Instance.GetTempPath() + "tmp.jpg";
-                        Image image;
-                        if (Session.Instance.ActiveLicense == false)
-                        {
-                            image = Properties.Resources.img_default;
-                        }
-                        else
-                        {
-                            image = Image.FromFile(images[imgIndex]);
-                        }  
-                        Image resizedImg = this.helper.ResizeImage(image, imgSize.Width, imgSize.Height);
-                        resizedImg.Save(tmpPath);
-                        this.wordDoc.InlineShapes.AddPicture(tmpPath, ref missing, true, ref oRange);
-                        imgIndex++;
                     }
                 }
             }
@@ -247,23 +262,23 @@ namespace PhanMemNoiSoi
                     dimension[1] = 0;
                     break;
                 case 1:
-                    dimension[0] = 1;
+                    dimension[0] = 2;
                     dimension[1] = 1;
                     break;
                 case 2:
-                    dimension[0] = 1;
+                    dimension[0] = 2;
                     dimension[1] = 2;
                     break;
                 case 3:
-                    dimension[0] = 1;
+                    dimension[0] = 2;
                     dimension[1] = 3;
                     break;
                 case 4:
-                    dimension[0] = 2;
+                    dimension[0] = 4;
                     dimension[1] = 2;
                     break;
                 default:
-                    dimension[0] = 2;
+                    dimension[0] = 4;
                     dimension[1] = 3;
                     break;
             }

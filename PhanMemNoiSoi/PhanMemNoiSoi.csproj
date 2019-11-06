@@ -163,9 +163,13 @@
     <Compile Include="BackupRestoreDB\BackupAndRestore.Designer.cs">
       <DependentUpon>BackupAndRestore.cs</DependentUpon>
     </Compile>
-    <Compile Include="ListViewEx.cs">
-      <SubType>Component</SubType>
+    <Compile Include="Glossary\NewNoteImage.cs">
+      <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Glossary\NewNoteImage.Designer.cs">
+      <DependentUpon>NewNoteImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyImage.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -332,6 +336,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BackupRestoreDB\BackupAndRestore.resx">
       <DependentUpon>BackupAndRestore.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Glossary\NewNoteImage.resx">
+      <DependentUpon>NewNoteImage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SplashScreen\SplashScreenFrm.resx">
       <DependentUpon>SplashScreenFrm.cs</DependentUpon>

@@ -26,8 +26,9 @@ namespace PhanMemNoiSoi
         object missing = Missing.Value;
         string imagePath = null;
         string checkId = null;
-        int numImgChecked = 0;
         string[] imagesPatient = { };
+        List<string> listNoteImg = new List<string>();
+        List<string> listNameImg = new List<string>();
 
         const int TWO_IMAGE_REPORT = 2;
         const int FOUR_IMAGE_REPORT = 4;
@@ -35,30 +36,35 @@ namespace PhanMemNoiSoi
         Size img3Size;
         Size img4Size;
         ReportWord rp;
-
+        
         public gbCheckRecord(string patientId, string imagePath, string checkId)
         {
             InitializeComponent();
+            loadNoteImg();
             this.patientId = patientId;
             this.imagePath = imagePath;
             this.checkId = checkId;
             // Load image from disk
             var files = Directory.GetFiles(imagePath, "*.jpg", SearchOption.AllDirectories).OrderByDescending(d => new FileInfo(d).CreationTime);
             imagesPatient = files.ToArray();
-            //add to imageList
-            listImage.View = View.LargeIcon;
-            imageList1.ImageSize = new Size(195, 150);
-            listImage.Sorting = System.Windows.Forms.SortOrder.Descending;
-            listImage.LargeImageList = imageList1;
-
+            //add data to datagidview
             for (int i = 0; i < imagesPatient.Length; i++)
             {
                 Image img = Image.FromFile(imagesPatient[i]);
-                imageList1.Images.Add(img);
-                ListViewItem item = new ListViewItem();
-                item.ImageIndex = imageList1.Images.Count - 1;
-                item.Name = Path.GetFileName(imagesPatient[i]);
-                listImage.Items.Add(item);
+                listNameImg.Add(Path.GetFileName(imagesPatient[i]));
+
+                int row_index = dgvMain.Rows.Add(new DataGridViewRow());
+                DataGridViewRow row = dgvMain.Rows[row_index];
+                dgvMain.Rows[row_index].Cells["select"].Value = false;
+                dgvMain.Rows[row_index].Cells["image"].Value = img;
+
+                DataGridViewComboBoxCell c = new DataGridViewComboBoxCell();
+                foreach(string it in listNoteImg)
+                {
+                    c.Items.Add(it);
+                }
+                dgvMain.Rows[row_index].Cells["note"] = c;
+                row.Height = 200;
             }
             lbNumImgChecked.Text = "0 ảnh đã chọn.";
             img2Size.Width = Settings.Default.img2Width;
@@ -143,7 +149,7 @@ namespace PhanMemNoiSoi
                     index++;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
 
@@ -154,9 +160,24 @@ namespace PhanMemNoiSoi
                     txtList[i].Text = loadTxtBoxData(txtList[i].Name.Trim(), this.patientId);
                 }
             }
-
-            numImgChecked = 0;
             lbNumImgChecked.Text = "0 ảnh đã chọn.";
+        }
+
+        private void loadNoteImg()
+        {
+            string query = "SELECT Content FROM NoteInfo ORDER BY ShowNum ASC;";
+            try
+            {
+                SqlCommand mySQL = new SqlCommand(query, DBConnection.Instance.sqlConn);
+                SqlDataReader rdr = mySQL.ExecuteReader();
+                while (rdr.Read())
+                {
+                    listNoteImg.Add(rdr["Content"].ToString());
+                }
+            }
+            catch (Exception)
+            {
+            }
         }
 
         private string loadTxtBoxData(string itemCode, string patientId)
@@ -218,18 +239,25 @@ namespace PhanMemNoiSoi
         private void button1_Click_1(object sender, EventArgs e)
         {
             rp = new ReportWord();
-
             //check number image select
-            List<String> iList = new List<String>();
-            if (listImage != null)
+            List<MyImage> iList = new List<MyImage>();
+            int index = 0;
+            foreach(DataGridViewRow row in dgvMain.Rows)
             {
-                int imgCount = listImage.Items.Count;
-                for (int i = 0; i < imgCount; i++)
+                DataGridViewCell cellChecked = (DataGridViewCell)row.Cells[0];
+                DataGridViewCell cellImg = (DataGridViewCell)row.Cells[1];
+                DataGridViewCell cellNoteImg = (DataGridViewCell)row.Cells[2];
+                
+                if (cellChecked.Value != null && (bool)cellChecked.Value == true)
                 {
-                    if (listImage.Items[i].Checked)
-                    {
-                        iList.Add(imagePath + listImage.Items[i].Name);
-                    }
+                    MyImage myImg = new MyImage();
+                    myImg.id = index;
+                    myImg.imagePath = imagePath + listNameImg[index];
+                    if (cellNoteImg.Value != null)
+                        myImg.imageNote = cellNoteImg.Value.ToString();
+                    else
+                        myImg.imageNote = "";
+                    iList.Add(myImg);
                 }
             }
 
@@ -249,10 +277,11 @@ namespace PhanMemNoiSoi
             rp.saveFile(tmp, true);
         }
 
-        private void fillReport(ReportWord rp, List<String> iList)
+        private void fillReport(ReportWord rp, List<MyImage> iList)
         {
             Patient patientInfo = new Patient().getPatientByNum(this.patientId);
             rp.insertText("NumId", this.checkId);
+            rp.insertText("SickId", this.patientId);
             rp.insertText("Name", patientInfo.NameProperty);
             rp.insertText("Age", patientInfo.AgeProperty.ToString());
             rp.insertText("Address", patientInfo.AddrProperty);
@@ -295,19 +324,6 @@ namespace PhanMemNoiSoi
             rp.insertText("Date", DateTime.Now.Day.ToString());
             rp.insertText("Month", DateTime.Now.Month.ToString());
             rp.insertText("Year", DateTime.Now.Year.ToString());
-        }
-
-        private void listImage_ItemChecked(object sender, ItemCheckedEventArgs e)
-        {
-            if (listImage.Items[e.Item.Index].Checked)
-            {
-                if (numImgChecked <= listImage.Items.Count - 1) numImgChecked++;
-            }
-            else
-            {
-                if (numImgChecked > 0) numImgChecked--;
-            }
-            lbNumImgChecked.Text = numImgChecked.ToString() + " ảnh đã chọn.";
         }
 
         private void btnCancle_Click(object sender, EventArgs e)
