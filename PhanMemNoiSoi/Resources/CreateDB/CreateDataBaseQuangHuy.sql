@@ -137,7 +137,7 @@ go
 if not exists (select name from sysobjects where name = 'NoteInfo' and type='U')
 CREATE TABLE [dbo].[NoteInfo](
 	[Id] [int] IDENTITY(1,1) PRIMARY KEY,
-	[Content] [nchar](256) NULL,
+	[Content] [nchar](256) COLLATE Vietnamese_CI_AS NULL,
 	[ShowNum] [int] NULL
 ) ON [PRIMARY]
 GO
