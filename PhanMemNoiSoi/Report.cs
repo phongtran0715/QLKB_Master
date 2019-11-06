@@ -40,6 +40,16 @@ namespace PhanMemNoiSoi
         public gbCheckRecord(string patientId, string imagePath, string checkId)
         {
             InitializeComponent();
+            //Init column for dgv
+            DataGridViewColumn colSelect = new DataGridViewColumn();
+            DataGridViewColumn colImage = new DataGridViewColumn();
+            colSelect.HeaderText = "X";
+            colSelect.Width = 30;
+            colImage.HeaderText = "Ảnh";
+            colImage.Width = 190;
+            dgvMain.Columns.Add(colSelect);
+            dgvMain.Columns.Add(colImage);
+
             loadNoteImg();
             this.patientId = patientId;
             this.imagePath = imagePath;
@@ -48,23 +58,39 @@ namespace PhanMemNoiSoi
             var files = Directory.GetFiles(imagePath, "*.jpg", SearchOption.AllDirectories).OrderByDescending(d => new FileInfo(d).CreationTime);
             imagesPatient = files.ToArray();
             //add data to datagidview
-            for (int i = 0; i < imagesPatient.Length; i++)
+            int imgIndex = 0;
+            for (int i = 0; i < imagesPatient.Length *2; i++)
             {
-                Image img = Image.FromFile(imagesPatient[i]);
-                listNameImg.Add(Path.GetFileName(imagesPatient[i]));
-
-                int row_index = dgvMain.Rows.Add(new DataGridViewRow());
-                DataGridViewRow row = dgvMain.Rows[row_index];
-                dgvMain.Rows[row_index].Cells["select"].Value = false;
-                dgvMain.Rows[row_index].Cells["image"].Value = img;
-
-                DataGridViewComboBoxCell c = new DataGridViewComboBoxCell();
-                foreach(string it in listNoteImg)
+                DataGridViewRow row = new DataGridViewRow();
+                if (i % 2 == 0)
                 {
-                    c.Items.Add(it);
+                    //insert combobox 
+                    DataGridViewComboBoxCell cbCell = new DataGridViewComboBoxCell();
+                    DataGridViewTextBoxCell txtCell = new DataGridViewTextBoxCell();
+                    foreach (string it in listNoteImg)
+                    {
+                        cbCell.Items.Add(it);
+                    }
+                    row.Cells.Add(txtCell);
+                    row.Cells.Add(cbCell);
+                    int row_index = dgvMain.Rows.Add(row);
+                    dgvMain.Rows[row_index].Cells[0].ReadOnly = true;
                 }
-                dgvMain.Rows[row_index].Cells["note"] = c;
-                row.Height = 200;
+                else
+                {
+                    //insert image
+                    Image img = Image.FromFile(imagesPatient[imgIndex]);
+                    listNameImg.Add(Path.GetFileName(imagesPatient[imgIndex]));
+                    DataGridViewCheckBoxCell ckCell = new DataGridViewCheckBoxCell();
+                    DataGridViewImageCell imgCell = new DataGridViewImageCell();
+                    imgCell.ImageLayout = DataGridViewImageCellLayout.Stretch;
+                    row.Cells.Add(ckCell);
+                    row.Cells.Add(imgCell);
+                    imgCell.Value = img;
+                    row.Height = 180;
+                    int row_index = dgvMain.Rows.Add(row);
+                    imgIndex++;
+                }
             }
             lbNumImgChecked.Text = "0 ảnh đã chọn.";
             img2Size.Width = Settings.Default.img2Width;
@@ -245,16 +271,14 @@ namespace PhanMemNoiSoi
             foreach(DataGridViewRow row in dgvMain.Rows)
             {
                 DataGridViewCell cellChecked = (DataGridViewCell)row.Cells[0];
-                DataGridViewCell cellImg = (DataGridViewCell)row.Cells[1];
-                DataGridViewCell cellNoteImg = (DataGridViewCell)row.Cells[2];
-                
                 if (cellChecked.Value != null && (bool)cellChecked.Value == true)
                 {
                     MyImage myImg = new MyImage();
                     myImg.id = index;
                     myImg.imagePath = imagePath + listNameImg[index];
-                    if (cellNoteImg.Value != null)
-                        myImg.imageNote = cellNoteImg.Value.ToString();
+                    object noteInfo = dgvMain.Rows[row.Index - 1].Cells[1].Value;
+                    if (noteInfo != null)
+                        myImg.imageNote = noteInfo.ToString();
                     else
                         myImg.imageNote = "";
                     iList.Add(myImg);
@@ -351,6 +375,11 @@ namespace PhanMemNoiSoi
                 ms.Write(data, 0, data.Length);
                 return Image.FromStream(ms);
             }
+        }
+
+        private void dgvMain_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            
         }
     }
 }
