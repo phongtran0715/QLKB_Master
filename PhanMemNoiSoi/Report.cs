@@ -379,7 +379,34 @@ namespace PhanMemNoiSoi
 
         private void dgvMain_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
-            
+            //no thing to do
+        }
+
+        private void dgvMain_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int count = 0;
+            if (e.RowIndex >= 0 && e.ColumnIndex == 0)
+            {
+                if(e.RowIndex %2 != 0)
+                {
+                    DataGridViewRow row = dgvMain.Rows[e.RowIndex];
+                    row.Cells[0].Value = !Convert.ToBoolean(row.Cells[0].EditedFormattedValue);
+
+                    foreach (DataGridViewRow it in dgvMain.Rows)
+                    {
+                        object ckValue = dgvMain.Rows[it.Index].Cells[0].Value;
+                        if (ckValue != null)
+                        {
+                            bool value = (bool)ckValue;
+                            if (value == true)
+                            {
+                                count++;
+                            }
+                        }
+                    }
+                    lbNumImgChecked.Text = count + " ảnh đã chọn";
+                }
+            }
         }
     }
 }
