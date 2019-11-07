@@ -5,15 +5,14 @@ using System.Windows.Forms;
 
 namespace PhanMemNoiSoi
 {
-    //public partial class NewNoteIamge : SecureBaseForm
-    public partial class NewNoteImage : Form
+    public partial class NewNoteImage : SecureBaseForm
     {
         //Declare delegate for transfer data
         public delegate void UpdateDataHandler(string msg);
         public UpdateDataHandler updateData;
 
         public NewNoteImage(IPrincipal userPrincipal) 
-            //: base(RolesList.Instance.roleList.ToArray(), userPrincipal)
+            : base(RolesList.Instance.roleList.ToArray(), userPrincipal)
         {
             InitializeComponent();
         }

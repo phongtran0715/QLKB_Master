@@ -242,7 +242,7 @@ namespace PhanMemNoiSoi
             //add new record to database
             try
             {
-                string sqlCommand = "INSERT INTO NoteInfo (Content, ShowNum) VALUES ('" + msg + "', '" + (dgvNote.Rows.Count + 1) + "')";
+                string sqlCommand = "INSERT INTO NoteInfo (Content, ShowNum) VALUES (N'" + msg + "', '" + (dgvNote.Rows.Count + 1) + "')";
                 SqlCommand mySQL = new SqlCommand(sqlCommand, DBConnection.Instance.sqlConn);
                 mySQL.ExecuteNonQuery();
             }

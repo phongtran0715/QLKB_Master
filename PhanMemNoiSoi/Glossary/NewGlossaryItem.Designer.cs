@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewGlossaryItem));
             this.gbParent = new System.Windows.Forms.GroupBox();
             this.txtNoiDung = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancle = new System.Windows.Forms.Button();
             this.gbParent.SuspendLayout();
@@ -40,7 +39,6 @@
             // gbParent
             // 
             this.gbParent.Controls.Add(this.txtNoiDung);
-            this.gbParent.Controls.Add(this.label3);
             this.gbParent.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbParent.Location = new System.Drawing.Point(5, 5);
             this.gbParent.Name = "gbParent";
@@ -51,23 +49,13 @@
             // 
             // txtNoiDung
             // 
-            this.txtNoiDung.Location = new System.Drawing.Point(92, 54);
+            this.txtNoiDung.Location = new System.Drawing.Point(7, 25);
             this.txtNoiDung.MaxLength = 99;
             this.txtNoiDung.Multiline = true;
             this.txtNoiDung.Name = "txtNoiDung";
             this.txtNoiDung.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtNoiDung.Size = new System.Drawing.Size(340, 90);
+            this.txtNoiDung.Size = new System.Drawing.Size(425, 120);
             this.txtNoiDung.TabIndex = 4;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(6, 32);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(72, 20);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Nội dung";
             // 
             // btnOK
             // 
@@ -121,7 +109,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox gbParent;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancle;
         private System.Windows.Forms.TextBox txtNoiDung;

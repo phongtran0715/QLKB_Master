@@ -57,10 +57,10 @@
       <Value Profile="(Default)">220</Value>
     </Setting>
     <Setting Name="img4Width" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">270</Value>
+      <Value Profile="(Default)">200</Value>
     </Setting>
     <Setting Name="img4Heigh" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">150</Value>
+      <Value Profile="(Default)">120</Value>
     </Setting>
     <Setting Name="maxDayLog" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">60</Value>
@@ -81,7 +81,7 @@
       <Value Profile="(Default)">200</Value>
     </Setting>
     <Setting Name="img3Height" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">270</Value>
+      <Value Profile="(Default)">200</Value>
     </Setting>
   </Settings>
 </SettingsFile>

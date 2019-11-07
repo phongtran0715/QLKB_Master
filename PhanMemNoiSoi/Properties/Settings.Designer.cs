@@ -241,7 +241,7 @@ namespace PhanMemNoiSoi.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("270")]
+        [global::System.Configuration.DefaultSettingValueAttribute("200")]
         public int img4Width {
             get {
                 return ((int)(this["img4Width"]));
@@ -253,7 +253,7 @@ namespace PhanMemNoiSoi.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("150")]
+        [global::System.Configuration.DefaultSettingValueAttribute("120")]
         public int img4Heigh {
             get {
                 return ((int)(this["img4Heigh"]));
@@ -337,7 +337,7 @@ namespace PhanMemNoiSoi.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("270")]
+        [global::System.Configuration.DefaultSettingValueAttribute("200")]
         public int img3Height {
             get {
                 return ((int)(this["img3Height"]));
