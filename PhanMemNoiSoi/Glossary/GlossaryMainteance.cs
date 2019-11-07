@@ -216,7 +216,7 @@ namespace PhanMemNoiSoi
                 mySQL = new SqlCommand(sqlCommand, DBConnection.Instance.sqlConn);
                 mySQL.Parameters.Add("@itemCode", SqlDbType.NChar).Value = newItemCode;
                 mySQL.Parameters.Add("@content", SqlDbType.NChar).Value = msg;
-                mySQL.Parameters.Add("@showNum", SqlDbType.Int).Value = 0;
+                mySQL.Parameters.Add("@showNum", SqlDbType.Int).Value = dgvCheck.Rows.Count + 1;
                 mySQL.Parameters.Add("@isDisplay", SqlDbType.Int).Value = 0;
                 string msgLog = "Thêm mới danh mục '" + msg + "'";
                 Log.Instance.LogMessageToDB(DateTime.Now, Session.Instance.UserId, Session.Instance.UserName, msgLog);
@@ -257,7 +257,6 @@ namespace PhanMemNoiSoi
             loadNoteImage();
             //set focus to newest insert row
             //setFocusContent(dgvNote.Rows.Count - 1, 1);
-            helper.setRowNumber(dgvNote);
         }
 
         private void updateDgvNoiDung(string msg, string code)
@@ -520,33 +519,11 @@ namespace PhanMemNoiSoi
                 case TAB_INFO_IN_REPORT:
                     {
                         loadInfoReport();
-                        if (dgvInfo.Rows.Count > 0)
-                        {
-                            setSelectedRow(dgvInfo, 0);
-                            btnMoveUp.Enabled = false;
-                            btnMoveDown.Enabled = true;
-                        }
-                        else
-                        {
-                            btnMoveUp.Enabled = false;
-                            btnMoveDown.Enabled = false;
-                        }
                         break;
                     }
                 case TAB_NOTE_IMAGE:
                     {
                         loadNoteImage();
-                        if (dgvNote.Rows.Count > 0)
-                        {
-                            setSelectedRow(dgvNote, 0);
-                            btnNoteUp.Enabled = false;
-                            btnNoteDown.Enabled = true;
-                        }
-                        else
-                        {
-                            btnNoteUp.Enabled = false;
-                            btnNoteDown.Enabled = false;
-                        }
                         break;
                     }
                 default:
@@ -604,11 +581,13 @@ namespace PhanMemNoiSoi
                 // Resize the DataGridView columns to fit the newly loaded content.
                 dgvInfo.DataSource = bsAdap[(int)bindSource.DTA_INFO_REPORT];
                 dgvInfo.Columns["ItemCode"].Visible = false;
-                dgvInfo.Columns["ShowNum"].Visible = false;
+                dgvInfo.Columns["ShowNum"].Visible = true;
+                dgvInfo.Columns["ShowNum"].HeaderText = "STT";
                 dgvInfo.Columns["Content"].HeaderText = "Danh Mục";
                 dgvInfo.Columns["Content"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                helper.setRowNumber(dgvInfo);
-            }catch(Exception ex)
+                setStateOrderButon(dgvInfo, btnNoteUp, btnNoteDown, -1);
+            }
+            catch(Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }   
@@ -619,7 +598,7 @@ namespace PhanMemNoiSoi
             try
             {
                 // load data for data grid view
-                string query = "SELECT Id, Content, ShowNum FROM NoteInfo ORDER BY ShowNum ASC;";
+                string query = "SELECT Id, ShowNum, Content FROM NoteInfo ORDER BY ShowNum ASC;";
 
                 dtaAdap[(int)dataAdapter.DTA_NOTE_IMAGE] = new SqlDataAdapter(query, DBConnection.Instance.sqlConn);
 
@@ -633,10 +612,11 @@ namespace PhanMemNoiSoi
                 // Resize the DataGridView columns to fit the newly loaded content.
                 dgvNote.DataSource = bsAdap[(int)bindSource.DTA_NOTE_IMAGE];
                 dgvNote.Columns["Id"].Visible = false;
-                dgvNote.Columns["ShowNum"].Visible = false;
+                dgvNote.Columns["ShowNum"].Visible = true;
+                dgvNote.Columns["ShowNum"].HeaderText = "STT";
                 dgvNote.Columns["Content"].HeaderText = "Nội dung";
                 dgvNote.Columns["Content"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                helper.setRowNumber(dgvNote);
+                setStateOrderButon(dgvNote, btnNoteUp, btnNoteDown, -1);
             }
             catch (Exception ex)
             {
@@ -668,25 +648,25 @@ namespace PhanMemNoiSoi
             }
             if (dgvInfo.Rows.Count <= 1)
             {
-                btnMoveUp.Enabled = false;
-                btnMoveDown.Enabled = false;
+                btnInfoUp.Enabled = false;
+                btnInfoDown.Enabled = false;
                 return;
             }
 
             if (rIndex == 0)
             {
-                btnMoveUp.Enabled = false;
-                btnMoveDown.Enabled = true;
+                btnInfoUp.Enabled = false;
+                btnInfoDown.Enabled = true;
             }
             else if (rIndex == dgvInfo.Rows.Count - 1)
             {
-                btnMoveUp.Enabled = true;
-                btnMoveDown.Enabled = false;
+                btnInfoUp.Enabled = true;
+                btnInfoDown.Enabled = false;
             }
             else
             {
-                btnMoveUp.Enabled = true;
-                btnMoveDown.Enabled = true;
+                btnInfoUp.Enabled = true;
+                btnInfoDown.Enabled = true;
             }
         }
 
@@ -730,11 +710,7 @@ namespace PhanMemNoiSoi
             }
 
             // delete from data grid view
-            tbAdap[(int)dataTable.DTA_INFO_REPORT].Rows.RemoveAt(currRowIndexCheck);
-            bsAdap[(int)bindSource.DTA_CONTENT_DETAIL].DataSource = tbAdap[(int)dataTable.DTA_INFO_REPORT];
-            dgvInfo.DataSource = bsAdap[(int)bindSource.DTA_INFO_REPORT];
-            dgvInfo.Update();
-            dgvInfo.Refresh();
+            loadInfoReport();
         }
 
         private void updateShowNum(int numFrom)
@@ -792,18 +768,7 @@ namespace PhanMemNoiSoi
                     string uQuery = "UPDATE NoteInfo SET ShowNum = '" + snum + "' WHERE Id = '" + id + "';";
                     SqlCommand uSQL = new SqlCommand(uQuery, DBConnection.Instance.sqlConn);
                     uSQL.ExecuteReader();
-
-                    //update data grid view
-                    for (int i = 0; i < dgvInfo.Rows.Count; i++)
-                    {
-                        if (string.Equals(dgvInfo.Rows[i].Cells["Id"].Value.ToString().Trim(), id))
-                        {
-                            dgvInfo.Rows[i].Cells["ShowNum"].Value = snum.ToString();
-                            break;
-                        }
-                    }
                 }
-
             }
             catch (Exception ex)
             {
@@ -839,42 +804,40 @@ namespace PhanMemNoiSoi
                 }
 
                 // update data grid view
-                tbAdap[(int)dataTable.DTA_INFO_REPORT].Rows.Add(dgvInfo.Rows.Count + 1, pair.Key.Trim(), pair.Value.Trim());
-                bsAdap[(int)bindSource.DTA_INFO_REPORT].DataSource = tbAdap[(int)dataTable.DTA_INFO_REPORT];
-                dgvInfo.DataSource = bsAdap[(int)bindSource.DTA_INFO_REPORT];
-                dgvInfo.Update();
-                dgvInfo.Refresh();
+                loadInfoReport();
             }
         }
 
         private void btnMoveUp_Click(object sender, EventArgs e)
         {
-            int selectedRowCount =
+            int sRowCount =
             dgvInfo.Rows.GetRowCount(DataGridViewElementStates.Selected);
-            if (selectedRowCount <= 0) return;
-            int selectedRowIndex = dgvInfo.CurrentCell.RowIndex;
-            int currentShowNum = int.Parse(dgvInfo.Rows[selectedRowIndex].Cells["ShowNum"].Value.ToString().Trim());
-            if (currentShowNum > 0)
+            if (sRowCount <= 0) return;
+            int sRowIndex = dgvInfo.SelectedRows[0].Index;
+            Console.WriteLine("row selected index = " + sRowIndex);
+            int cShowNum = int.Parse(dgvInfo.Rows[sRowIndex].Cells["ShowNum"].Value.ToString().Trim());
+            if (cShowNum > 0)
             {
                 try
                 {
-                    string itemCode = dgvInfo.Rows[selectedRowIndex].Cells["ItemCode"].Value.ToString().Trim();
-                    //update to increase previous item position in database
-                    string uQuery = "UPDATE CheckItem SET ShowNum = '" + currentShowNum +
-                                    "' WHERE ItemCode = (SELECT ItemCode FROM CheckItem WHERE ShowNum = '" + (currentShowNum - 1) + "' AND IsDisplay = 1)";
+                    string itemCode = dgvInfo.Rows[sRowIndex].Cells["ItemCode"].Value.ToString().Trim();
+                    //update to decrease previous item position in database
+                    string uQuery = "UPDATE CheckItem SET ShowNum = '" + cShowNum +
+                                    "' WHERE ItemCode = (SELECT ItemCode FROM CheckItem WHERE ShowNum = '" + (cShowNum - 1) + "' AND IsDisplay = 1)";
                     SqlCommand uSQL = new SqlCommand(uQuery, DBConnection.Instance.sqlConn);
                     uSQL.ExecuteReader();
 
-                    //update to decrease current item position in database
-                    uQuery = "UPDATE CheckItem SET ShowNum = '" + (currentShowNum - 1).ToString() +
+                    //update to increase current item position in database
+                    uQuery = "UPDATE CheckItem SET ShowNum = '" + (cShowNum - 1).ToString() +
                                     "' WHERE ItemCode = '" + itemCode + "';";
                     uSQL = new SqlCommand(uQuery, DBConnection.Instance.sqlConn);
                     uSQL.ExecuteReader();
 
                     loadInfoReport();
-                    //setSelectedRow(dgvInfo, selectedRowIndex -1);
-                    //setStateOrderButon(selectedRowIndex - 1);
-                }catch(Exception ex)
+                    setSelectedRow(dgvInfo, sRowIndex -1);
+                    setStateOrderButon(dgvInfo, btnInfoUp, btnInfoDown, sRowIndex - 1);
+                }
+                catch(Exception ex)
                 {
                     Console.WriteLine(ex.ToString());
                 }
@@ -887,27 +850,29 @@ namespace PhanMemNoiSoi
             int sRowCount =
             dgvInfo.Rows.GetRowCount(DataGridViewElementStates.Selected);
             if (sRowCount < 0) return;
-            int sRowIndex = dgvInfo.CurrentCell.RowIndex;
-            int currentShowNum = int.Parse(dgvInfo.Rows[sRowIndex].Cells["ShowNum"].Value.ToString().Trim());
-            if (currentShowNum >= 0)
+            int sRowIndex = dgvInfo.SelectedRows[0].Index;
+            Console.WriteLine("row selected index = " + sRowIndex);
+            int cShowNum = int.Parse(dgvInfo.Rows[sRowIndex].Cells["ShowNum"].Value.ToString().Trim());
+            if (cShowNum >= 0)
             {
                 try
                 {
                     string itemCode = dgvInfo.Rows[sRowIndex].Cells["ItemCode"].Value.ToString().Trim();
                     //update to decrease after item position in database
-                    string uQuery = "UPDATE CheckItem SET ShowNum = '" + currentShowNum +
-                                    "' WHERE ItemCode = (SELECT ItemCode FROM CheckItem WHERE ShowNum = '" + (currentShowNum + 1) + "' AND IsDisplay = 1);";
+                    string uQuery = "UPDATE CheckItem SET ShowNum = '" + cShowNum +
+                                    "' WHERE ItemCode = (SELECT ItemCode FROM CheckItem WHERE ShowNum = '" + (cShowNum + 1) + "' AND IsDisplay = 1);";
                     SqlCommand uSQL = new SqlCommand(uQuery, DBConnection.Instance.sqlConn);
                     uSQL.ExecuteReader();
                     //update to decrease current item position in database
-                    uQuery = "UPDATE CheckItem SET ShowNum = '" + (currentShowNum + 1).ToString() +
+                    uQuery = "UPDATE CheckItem SET ShowNum = '" + (cShowNum + 1).ToString() +
                                     "' WHERE ItemCode = '" + itemCode + "';";
                     uSQL = new SqlCommand(uQuery, DBConnection.Instance.sqlConn);
                     uSQL.ExecuteReader();
                     loadInfoReport();
-                    //setSelectedRow(dgvInfo, currRowIndexCheck + 1);
-                    //setStateOrderButon(currRowIndexCheck + 1);
-                }catch(Exception ex)
+                    setSelectedRow(dgvInfo, sRowIndex + 1);
+                    setStateOrderButon(dgvInfo, btnInfoUp, btnInfoDown, sRowIndex + 1);
+                }
+                catch(Exception ex)
                 {
                     Console.WriteLine(ex.ToString());
                 }
@@ -921,16 +886,11 @@ namespace PhanMemNoiSoi
         /// <param name="rIndex">Position of row </param>
         private void setSelectedRow(DataGridView dgv, int rIndex)
         {
-            if (dgv.Rows.Count > 0)
+            if (rIndex < 0 || rIndex >= dgv.Rows.Count)
+                return;
+            else
             {
-                if ((rIndex >= 0) && (rIndex < dgv.Rows.Count))
-                {
-                    dgv.Rows[rIndex].Selected = true;
-                }
-                else
-                {
-                    dgv.Rows[0].Selected = true;
-                }
+                dgv.Rows[rIndex].Selected = true;
             }
         }
 
@@ -939,39 +899,33 @@ namespace PhanMemNoiSoi
         /// following position of current item 
         /// </summary>
         /// <param name="index">position number of selected item in data grid view</param>
-        private void setStateOrderButon(int index)
+        private void setStateOrderButon(DataGridView dgv, Button btnUp, Button btnDown,  int index)
         {
-            int numRow = dgvInfo.Rows.Count;
-            if (numRow == 0)
+            int numRow = dgv.Rows.Count;
+            if (numRow <= 1 || index == -1)
             {
-                btnMoveUp.Enabled = false;
-                btnMoveDown.Enabled = false;
+                btnUp.Enabled = false;
+                btnDown.Enabled = false;
                 return;
             }
             else
             {
                 if (index == 0)
                 {
-                    btnMoveUp.Enabled = false;
-                    btnMoveDown.Enabled = true;
+                    btnUp.Enabled = false;
+                    btnDown.Enabled = true;
                 }
-                else if (index == numRow - 1)
+                else if (index == numRow -1)
                 {
-                    btnMoveUp.Enabled = true;
-                    btnMoveDown.Enabled = false;
+                    btnUp.Enabled = true;
+                    btnDown.Enabled = false;
                 }
                 else
                 {
-                    btnMoveUp.Enabled = true;
-                    btnMoveDown.Enabled = true;
+                    btnUp.Enabled = true;
+                    btnDown.Enabled = true;
                 }
             }
-        }
-
-        private void dgvInfo_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            helper.setRowNumber(dgvInfo);
-            //ArrangeDgvCol();
         }
 
         private void ArrangeDgvCol()
@@ -1000,10 +954,10 @@ namespace PhanMemNoiSoi
             btnDeleteCheckContent.Enabled = helper.myValidateRoles(RolesList.CHANGE_GLOSSARY);
             btnEditCheck.Enabled = helper.myValidateRoles(RolesList.CHANGE_GLOSSARY);
             btnEditCheckContent.Enabled = helper.myValidateRoles(RolesList.CHANGE_GLOSSARY);
-            btnMoveDown.Visible = helper.myValidateRoles(RolesList.CHANGE_GLOSSARY);
-            btnMoveUp.Visible = helper.myValidateRoles(RolesList.CHANGE_GLOSSARY);
-            btnAddInfoReport.Visible = helper.myValidateRoles(RolesList.CHANGE_GLOSSARY);
-            btnDeleteInfoReport.Visible = helper.myValidateRoles(RolesList.CHANGE_GLOSSARY);
+            btnInfoDown.Visible = helper.myValidateRoles(RolesList.CHANGE_GLOSSARY);
+            btnInfoUp.Visible = helper.myValidateRoles(RolesList.CHANGE_GLOSSARY);
+            btnInfoAdd.Visible = helper.myValidateRoles(RolesList.CHANGE_GLOSSARY);
+            btnInfoDelete.Visible = helper.myValidateRoles(RolesList.CHANGE_GLOSSARY);
         }
 
         private void dgvCheck_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -1066,13 +1020,13 @@ namespace PhanMemNoiSoi
         {
             int selectedRowCount = dgvNote.Rows.GetRowCount(DataGridViewElementStates.Selected);
             if (selectedRowCount <= 0) return;
-            int selectedRowIndex = dgvNote.CurrentCell.RowIndex;
-            int currentShowNum = int.Parse(dgvNote.Rows[selectedRowIndex].Cells["ShowNum"].Value.ToString().Trim());
+            int sRowIndex = dgvNote.SelectedRows[0].Index;
+            int cShowNum = int.Parse(dgvNote.Rows[sRowIndex].Cells["ShowNum"].Value.ToString().Trim());
 
             DialogResult dlResult = MessageBox.Show("Bạn có chắc chắn muốn xóa nội dung này?", "Thông báo",
                             MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (dlResult == DialogResult.Cancel) return;
-            int id = int.Parse(dgvNote.Rows[selectedRowIndex].Cells[0].Value.ToString().Trim());
+            int id = int.Parse(dgvNote.Rows[sRowIndex].Cells[0].Value.ToString().Trim());
 
             //delete from database
             try
@@ -1080,7 +1034,7 @@ namespace PhanMemNoiSoi
                 string sqlCommand = "DELETE FROM NoteInfo WHERE Id = '" + id + "'";
                 SqlCommand mySQL = new SqlCommand(sqlCommand, DBConnection.Instance.sqlConn);
                 mySQL.ExecuteReader();
-                updateNoteShowNum(currentShowNum);
+                updateNoteShowNum(cShowNum);
             }
             catch (System.Exception)
             {
@@ -1093,7 +1047,6 @@ namespace PhanMemNoiSoi
             loadNoteImage();
             // set focus to another row
             setFocusContent(0, 1);
-            helper.setRowNumber(dgvNote);
         }
 
         private void dgvNote_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -1131,27 +1084,27 @@ namespace PhanMemNoiSoi
         {
             int sRowCount = dgvNote.Rows.GetRowCount(DataGridViewElementStates.Selected);
             if (sRowCount <= 0) return;
-            int sRowIndex = dgvNote.CurrentCell.RowIndex;
-            int currentShowNum = int.Parse(dgvNote.Rows[sRowIndex].Cells["ShowNum"].Value.ToString().Trim());
-            if (currentShowNum > 0)
+            int sRowIndex = dgvNote.SelectedRows[0].Index;
+            int cShowNum = int.Parse(dgvNote.Rows[sRowIndex].Cells["ShowNum"].Value.ToString().Trim());
+            if (cShowNum > 0)
             {
                 try
                 {
                     string id = dgvNote.Rows[sRowIndex].Cells["Id"].Value.ToString().Trim();
                     //update to increase previous item position in database
-                    string uQuery = "UPDATE NoteInfo SET ShowNum = '" + currentShowNum +
-                                    "' WHERE Id = (SELECT Id FROM NoteInfo WHERE ShowNum = '" + (currentShowNum - 1) + "')";
+                    string uQuery = "UPDATE NoteInfo SET ShowNum = '" + cShowNum +
+                                    "' WHERE Id = (SELECT Id FROM NoteInfo WHERE ShowNum = '" + (cShowNum - 1) + "')";
                     SqlCommand uSQL = new SqlCommand(uQuery, DBConnection.Instance.sqlConn);
                     uSQL.ExecuteReader();
 
                     //update to decrease current item position in database
-                    uQuery = "UPDATE NoteInfo SET ShowNum = '" + (currentShowNum - 1).ToString() +
+                    uQuery = "UPDATE NoteInfo SET ShowNum = '" + (cShowNum - 1).ToString() +
                                     "' WHERE Id = '" + id + "';";
                     uSQL = new SqlCommand(uQuery, DBConnection.Instance.sqlConn);
                     uSQL.ExecuteReader();
                     loadNoteImage();
-                    //setSelectedRow(dgvNote, selectedRowIndex - 1);
-                    //setStateOrderButon(selectedRowIndex - 1);
+                    setSelectedRow(dgvNote, sRowIndex - 1);
+                    setStateOrderButon(dgvNote, btnNoteUp, btnNoteDown,  sRowIndex - 1);
                 }
                 catch (Exception ex)
                 {
@@ -1164,7 +1117,7 @@ namespace PhanMemNoiSoi
         {
             int sRowCount = dgvNote.Rows.GetRowCount(DataGridViewElementStates.Selected);
             if (sRowCount < 0) return;
-            int sRowIndex = dgvNote.CurrentCell.RowIndex;
+            int sRowIndex = dgvNote.SelectedRows[0].Index;
             int currentShowNum = int.Parse(dgvNote.Rows[sRowIndex].Cells["ShowNum"].Value.ToString().Trim());
             if (currentShowNum >= 0)
             {
@@ -1182,8 +1135,8 @@ namespace PhanMemNoiSoi
                     uSQL = new SqlCommand(uQuery, DBConnection.Instance.sqlConn);
                     uSQL.ExecuteReader();
                     loadNoteImage();
-                    //setSelectedRow(dgvNote, selectedRowIndex + 1);
-                    //setStateOrderButon(currRowIndexCheck + 1);
+                    setSelectedRow(dgvNote, sRowIndex + 1);
+                    setStateOrderButon(dgvNote, btnNoteUp, btnNoteDown, sRowIndex + 1);
                 }
                 catch (Exception ex)
                 {

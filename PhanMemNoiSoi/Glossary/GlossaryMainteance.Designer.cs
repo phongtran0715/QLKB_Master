@@ -33,10 +33,10 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.btnMoveDown = new System.Windows.Forms.Button();
-            this.btnMoveUp = new System.Windows.Forms.Button();
-            this.btnAddInfoReport = new System.Windows.Forms.Button();
-            this.btnDeleteInfoReport = new System.Windows.Forms.Button();
+            this.btnInfoDown = new System.Windows.Forms.Button();
+            this.btnInfoUp = new System.Windows.Forms.Button();
+            this.btnInfoAdd = new System.Windows.Forms.Button();
+            this.btnInfoDelete = new System.Windows.Forms.Button();
             this.dgvInfo = new System.Windows.Forms.DataGridView();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.btnEditCheckContent = new System.Windows.Forms.Button();
@@ -83,10 +83,10 @@
             // 
             // tabPage5
             // 
-            this.tabPage5.Controls.Add(this.btnMoveDown);
-            this.tabPage5.Controls.Add(this.btnMoveUp);
-            this.tabPage5.Controls.Add(this.btnAddInfoReport);
-            this.tabPage5.Controls.Add(this.btnDeleteInfoReport);
+            this.tabPage5.Controls.Add(this.btnInfoDown);
+            this.tabPage5.Controls.Add(this.btnInfoUp);
+            this.tabPage5.Controls.Add(this.btnInfoAdd);
+            this.tabPage5.Controls.Add(this.btnInfoDelete);
             this.tabPage5.Controls.Add(this.dgvInfo);
             this.tabPage5.Location = new System.Drawing.Point(4, 29);
             this.tabPage5.Name = "tabPage5";
@@ -96,61 +96,61 @@
             this.tabPage5.Text = "Thông tin in trên phiếu khám";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // btnMoveDown
+            // btnInfoDown
             // 
-            this.btnMoveDown.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnMoveDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMoveDown.Image = global::PhanMemNoiSoi.Properties.Resources.down;
-            this.btnMoveDown.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMoveDown.Location = new System.Drawing.Point(323, 501);
-            this.btnMoveDown.Name = "btnMoveDown";
-            this.btnMoveDown.Size = new System.Drawing.Size(143, 35);
-            this.btnMoveDown.TabIndex = 12;
-            this.btnMoveDown.Text = "      Chuyển xuống";
-            this.btnMoveDown.UseVisualStyleBackColor = true;
-            this.btnMoveDown.Click += new System.EventHandler(this.btnMoveDown_Click);
+            this.btnInfoDown.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnInfoDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInfoDown.Image = global::PhanMemNoiSoi.Properties.Resources.down;
+            this.btnInfoDown.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnInfoDown.Location = new System.Drawing.Point(323, 501);
+            this.btnInfoDown.Name = "btnInfoDown";
+            this.btnInfoDown.Size = new System.Drawing.Size(143, 35);
+            this.btnInfoDown.TabIndex = 12;
+            this.btnInfoDown.Text = "      Chuyển xuống";
+            this.btnInfoDown.UseVisualStyleBackColor = true;
+            this.btnInfoDown.Click += new System.EventHandler(this.btnMoveDown_Click);
             // 
-            // btnMoveUp
+            // btnInfoUp
             // 
-            this.btnMoveUp.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnMoveUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMoveUp.Image = global::PhanMemNoiSoi.Properties.Resources.up;
-            this.btnMoveUp.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMoveUp.Location = new System.Drawing.Point(183, 501);
-            this.btnMoveUp.Name = "btnMoveUp";
-            this.btnMoveUp.Size = new System.Drawing.Size(134, 35);
-            this.btnMoveUp.TabIndex = 11;
-            this.btnMoveUp.Text = "      Chuyển lên";
-            this.btnMoveUp.UseVisualStyleBackColor = true;
-            this.btnMoveUp.Click += new System.EventHandler(this.btnMoveUp_Click);
+            this.btnInfoUp.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnInfoUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInfoUp.Image = global::PhanMemNoiSoi.Properties.Resources.up;
+            this.btnInfoUp.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnInfoUp.Location = new System.Drawing.Point(183, 501);
+            this.btnInfoUp.Name = "btnInfoUp";
+            this.btnInfoUp.Size = new System.Drawing.Size(134, 35);
+            this.btnInfoUp.TabIndex = 11;
+            this.btnInfoUp.Text = "      Chuyển lên";
+            this.btnInfoUp.UseVisualStyleBackColor = true;
+            this.btnInfoUp.Click += new System.EventHandler(this.btnMoveUp_Click);
             // 
-            // btnAddInfoReport
+            // btnInfoAdd
             // 
-            this.btnAddInfoReport.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnAddInfoReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddInfoReport.Image = global::PhanMemNoiSoi.Properties.Resources.add_24x24;
-            this.btnAddInfoReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddInfoReport.Location = new System.Drawing.Point(78, 501);
-            this.btnAddInfoReport.Name = "btnAddInfoReport";
-            this.btnAddInfoReport.Size = new System.Drawing.Size(99, 35);
-            this.btnAddInfoReport.TabIndex = 10;
-            this.btnAddInfoReport.Text = "  Thêm";
-            this.btnAddInfoReport.UseVisualStyleBackColor = true;
-            this.btnAddInfoReport.Click += new System.EventHandler(this.button3_Click);
+            this.btnInfoAdd.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnInfoAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInfoAdd.Image = global::PhanMemNoiSoi.Properties.Resources.add_24x24;
+            this.btnInfoAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnInfoAdd.Location = new System.Drawing.Point(78, 501);
+            this.btnInfoAdd.Name = "btnInfoAdd";
+            this.btnInfoAdd.Size = new System.Drawing.Size(99, 35);
+            this.btnInfoAdd.TabIndex = 10;
+            this.btnInfoAdd.Text = "  Thêm";
+            this.btnInfoAdd.UseVisualStyleBackColor = true;
+            this.btnInfoAdd.Click += new System.EventHandler(this.button3_Click);
             // 
-            // btnDeleteInfoReport
+            // btnInfoDelete
             // 
-            this.btnDeleteInfoReport.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnDeleteInfoReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDeleteInfoReport.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
-            this.btnDeleteInfoReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDeleteInfoReport.Location = new System.Drawing.Point(472, 501);
-            this.btnDeleteInfoReport.Name = "btnDeleteInfoReport";
-            this.btnDeleteInfoReport.Size = new System.Drawing.Size(99, 35);
-            this.btnDeleteInfoReport.TabIndex = 9;
-            this.btnDeleteInfoReport.Text = "Xóa ";
-            this.btnDeleteInfoReport.UseVisualStyleBackColor = true;
-            this.btnDeleteInfoReport.Click += new System.EventHandler(this.button1_Click);
+            this.btnInfoDelete.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnInfoDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInfoDelete.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
+            this.btnInfoDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnInfoDelete.Location = new System.Drawing.Point(472, 501);
+            this.btnInfoDelete.Name = "btnInfoDelete";
+            this.btnInfoDelete.Size = new System.Drawing.Size(99, 35);
+            this.btnInfoDelete.TabIndex = 9;
+            this.btnInfoDelete.Text = "Xóa ";
+            this.btnInfoDelete.UseVisualStyleBackColor = true;
+            this.btnInfoDelete.Click += new System.EventHandler(this.button1_Click);
             // 
             // dgvInfo
             // 
@@ -165,12 +165,12 @@
             this.dgvInfo.MultiSelect = false;
             this.dgvInfo.Name = "dgvInfo";
             this.dgvInfo.ReadOnly = true;
+            this.dgvInfo.RowHeadersVisible = false;
             this.dgvInfo.RowTemplate.Height = 24;
             this.dgvInfo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvInfo.Size = new System.Drawing.Size(566, 490);
             this.dgvInfo.TabIndex = 2;
             this.dgvInfo.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInfo_CellClick);
-            this.dgvInfo.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvInfo_DataBindingComplete);
             // 
             // tabPage1
             // 
@@ -347,7 +347,7 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(585, 575);
-            this.tabControl1.TabIndex = 0;
+            this.tabControl1.TabIndex = 2;
             this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Selected);
             this.tabControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabControl1_MouseClick);
             // 
@@ -435,6 +435,7 @@
             this.dgvNote.MultiSelect = false;
             this.dgvNote.Name = "dgvNote";
             this.dgvNote.ReadOnly = true;
+            this.dgvNote.RowHeadersVisible = false;
             this.dgvNote.RowTemplate.Height = 24;
             this.dgvNote.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvNote.Size = new System.Drawing.Size(566, 490);
@@ -504,10 +505,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.DataGridView dgvInfo;
-        private System.Windows.Forms.Button btnMoveDown;
-        private System.Windows.Forms.Button btnMoveUp;
-        private System.Windows.Forms.Button btnAddInfoReport;
-        private System.Windows.Forms.Button btnDeleteInfoReport;
+        private System.Windows.Forms.Button btnInfoDown;
+        private System.Windows.Forms.Button btnInfoUp;
+        private System.Windows.Forms.Button btnInfoAdd;
+        private System.Windows.Forms.Button btnInfoDelete;
         private System.Windows.Forms.TabPage tbNote;
         private System.Windows.Forms.DataGridView dgvNote;
         private System.Windows.Forms.Button btnNoteDown;
