@@ -1,4 +1,6 @@
-﻿using System;
+﻿using OD.Forms.Security;
+using System.Security.Principal;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -7,7 +9,7 @@ using System.Windows.Forms;
 
 namespace PhanMemNoiSoi
 {
-    public partial class NewCheck : Form
+    public partial class NewCheck : SecureBaseForm
     {
         private SqlDataAdapter dtaSick = new SqlDataAdapter();
         private BindingSource bsSick = new BindingSource();
@@ -15,7 +17,8 @@ namespace PhanMemNoiSoi
         Helper helper = new Helper();
         int currRowIndex;
         string BASE_IMG_FOLDER;
-        public NewCheck()
+        bool ruleEnableDelete = false;
+        public NewCheck(IPrincipal userPrincipal) : base(Session.Instance.UserRole, userPrincipal)
         {
             InitializeComponent();
             BASE_IMG_FOLDER = Properties.Settings.Default.imageFolder;
@@ -147,7 +150,7 @@ namespace PhanMemNoiSoi
             }
             //enable button
             btnChupHinh.Enabled = true;
-            btnXoaBN.Enabled = true;
+            btnDeleteSick.Enabled = true & ruleEnableDelete;
             //update number sick to label
             updateNumSick(dgvBenhNhan.Rows.Count - 1);
             
@@ -182,7 +185,7 @@ namespace PhanMemNoiSoi
 
             DateTime dt = DateTime.Today;
             btnThemMoi.Enabled = false;
-            btnXoaBN.Enabled = false;
+            btnDeleteSick.Enabled = false;
             btnChupHinh.Enabled = false;
             btnChiTiet.Enabled = false;
             //select last row in dgv
@@ -296,13 +299,13 @@ namespace PhanMemNoiSoi
             {
                 btnChiTiet.Enabled = false;
                 btnChupHinh.Enabled = false;
-                btnXoaBN.Enabled = false;
+                btnDeleteSick.Enabled = false;
             }else
             {
                 selectRowInDgv(dgvBenhNhan, 0);
                 btnChiTiet.Enabled = true;
                 btnChupHinh.Enabled = true;
-                btnXoaBN.Enabled = true;
+                btnDeleteSick.Enabled = true & ruleEnableDelete;
             }
             currRowIndex = 0;
             helper.setRowNumber(dgvBenhNhan, 20);
@@ -320,7 +323,7 @@ namespace PhanMemNoiSoi
             currRowIndex = dgvBenhNhan.SelectedRows[selectedRowCount - 1].Index;
             if (currRowIndex == dgvBenhNhan.Rows.Count - 1)
             {
-                btnXoaBN.Enabled = false;
+                btnDeleteSick.Enabled = false;
                 btnThemMoi.Enabled = false;
                 btnChupHinh.Enabled = false;
                 btnChiTiet.Enabled = false;
@@ -339,7 +342,7 @@ namespace PhanMemNoiSoi
                 rdWomen.Checked = true;
             txtCauseCheck.Text = dgvBenhNhan.Rows[currRowIndex].Cells["CauseCheck"].Value.ToString().Trim();
 
-            btnXoaBN.Enabled = true;
+            btnDeleteSick.Enabled = true & ruleEnableDelete;
             btnChupHinh.Enabled = true;
             btnThemMoi.Enabled = true;
             btnChiTiet.Enabled = true;
@@ -542,6 +545,17 @@ namespace PhanMemNoiSoi
             {
                 Console.WriteLine(ex.ToString());
             }
+        }
+        private void NewCheck_UserIsDenied(object sender, EventArgs e)
+        {
+            MessageBox.Show("Bạn không có quyền truy cập vào danh mục này.\nVui lòng liên hệ với admin!",
+                            "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void NewCheck_UserIsAllowed(object sender, EventArgs e)
+        {
+            ruleEnableDelete = helper.myValidateRoles(RolesList.DELETE_PATIENT);
+            btnDeleteSick.Enabled = ruleEnableDelete;
         }
     }
 }

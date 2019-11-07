@@ -12,8 +12,7 @@ using System.Windows.Forms;
 
 namespace PhanMemNoiSoi
 {
-    //public partial class Search : SecureBaseForm
-    public partial class Search : Form
+    public partial class Search : SecureBaseForm
     {
         SqlDataAdapter sqlDta = new SqlDataAdapter();
         string[] imagesPatient = { };
@@ -25,9 +24,10 @@ namespace PhanMemNoiSoi
         private int CurrentPageIndex = 1;
         private int TotalPage = 0;
         private SqlCommand sqlCmd;
+        bool ruleEnableDelete = false;
 
         public Search(IPrincipal userPrincipal) 
-            //:base(Session.Instance.UserRole, userPrincipal)
+            :base(Session.Instance.UserRole, userPrincipal)
         {
             InitializeComponent();
         }
@@ -451,7 +451,8 @@ namespace PhanMemNoiSoi
 
         private void Search_UserIsAllowed(object sender, EventArgs e)
         {
-            btnDeleteSick.Enabled = helper.myValidateRoles(RolesList.DELETE_PATIENT);
+            ruleEnableDelete = helper.myValidateRoles(RolesList.DELETE_PATIENT);
+            btnDeleteSick.Enabled = ruleEnableDelete;
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -493,7 +494,7 @@ namespace PhanMemNoiSoi
         private void setFieldEnable(bool enableState)
         {
             btnReCheck.Enabled = enableState;
-            btnDeleteSick.Enabled = enableState;
+            btnDeleteSick.Enabled = enableState & ruleEnableDelete;
             btnOpenFolder.Enabled = enableState;
             btnNextImg.Enabled = enableState;
             btnPrevImg.Enabled = enableState;

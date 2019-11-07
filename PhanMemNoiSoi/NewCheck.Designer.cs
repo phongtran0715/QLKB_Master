@@ -55,7 +55,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.gbBenhNhan = new System.Windows.Forms.GroupBox();
             this.dgvBenhNhan = new System.Windows.Forms.DataGridView();
-            this.btnXoaBN = new System.Windows.Forms.Button();
+            this.btnDeleteSick = new System.Windows.Forms.Button();
             this.btnThemMoi = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
@@ -321,7 +321,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gbBenhNhan.Controls.Add(this.dgvBenhNhan);
-            this.gbBenhNhan.Controls.Add(this.btnXoaBN);
+            this.gbBenhNhan.Controls.Add(this.btnDeleteSick);
             this.gbBenhNhan.Controls.Add(this.btnThemMoi);
             this.gbBenhNhan.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbBenhNhan.Location = new System.Drawing.Point(0, 209);
@@ -352,17 +352,17 @@
             this.dgvBenhNhan.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBenhNhan_CellDoubleClick);
             this.dgvBenhNhan.SelectionChanged += new System.EventHandler(this.dgvBenhNhan_SelectionChanged);
             // 
-            // btnXoaBN
+            // btnDeleteSick
             // 
-            this.btnXoaBN.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
-            this.btnXoaBN.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnXoaBN.Location = new System.Drawing.Point(170, 23);
-            this.btnXoaBN.Name = "btnXoaBN";
-            this.btnXoaBN.Size = new System.Drawing.Size(112, 35);
-            this.btnXoaBN.TabIndex = 15;
-            this.btnXoaBN.Text = "     Xóa BN";
-            this.btnXoaBN.UseVisualStyleBackColor = true;
-            this.btnXoaBN.Click += new System.EventHandler(this.btnXoaBN_Click);
+            this.btnDeleteSick.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
+            this.btnDeleteSick.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDeleteSick.Location = new System.Drawing.Point(170, 23);
+            this.btnDeleteSick.Name = "btnDeleteSick";
+            this.btnDeleteSick.Size = new System.Drawing.Size(112, 35);
+            this.btnDeleteSick.TabIndex = 15;
+            this.btnDeleteSick.Text = "     Xóa BN";
+            this.btnDeleteSick.UseVisualStyleBackColor = true;
+            this.btnDeleteSick.Click += new System.EventHandler(this.btnXoaBN_Click);
             // 
             // btnThemMoi
             // 
@@ -405,6 +405,8 @@
             this.Name = "NewCheck";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Khám Bệnh";
+            this.UserIsAllowed += new System.EventHandler(this.NewCheck_UserIsAllowed);
+            this.UserIsDenied += new System.EventHandler(this.NewCheck_UserIsDenied);
             this.Load += new System.EventHandler(this.NewCheck_Load);
             this.SizeChanged += new System.EventHandler(this.NewCheck_SizeChanged);
             this.groupBox1.ResumeLayout(false);
@@ -431,7 +433,7 @@
         private System.Windows.Forms.Button btnChupHinh;
         private System.Windows.Forms.Button btnLuuBn;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button btnXoaBN;
+        private System.Windows.Forms.Button btnDeleteSick;
         private System.Windows.Forms.Button btnThemMoi;
         private System.Windows.Forms.DataGridView dgvBenhNhan;
         private System.Windows.Forms.Button btnChiTiet;

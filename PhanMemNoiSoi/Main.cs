@@ -14,7 +14,9 @@ namespace PhanMemNoiSoi
 
         private void btnKhambenh_Click(object sender, EventArgs e)
         {
-            NewCheck ncfr = new NewCheck();
+            IPrincipal userPrincipal = new GenericPrincipal(WindowsIdentity.GetCurrent(),
+                               new string[] { RolesList.VIEW_REPORT });
+            NewCheck ncfr = new NewCheck(userPrincipal);
             ncfr.ShowDialog();
         }
 

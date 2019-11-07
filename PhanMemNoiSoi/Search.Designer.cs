@@ -652,6 +652,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tìm kiếm bệnh nhân";
             this.Load += new System.EventHandler(this.Search_Load);
+            this.UserIsAllowed += new System.EventHandler(this.Search_UserIsAllowed);
+            this.UserIsDenied += new System.EventHandler(this.Search_UserIsDenied);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
