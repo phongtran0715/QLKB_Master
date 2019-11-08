@@ -63,13 +63,13 @@
     <WarningLevel>4</WarningLevel>
     <DebugType>none</DebugType>
     <ErrorReport>prompt</ErrorReport>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DShowNET, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\DShowNET\bin\Debug\DShowNET.dll</HintPath>
+      <HintPath>..\DShowNET\bin\Release\DShowNET.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
