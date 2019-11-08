@@ -553,7 +553,7 @@
             this.btnPrevPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPrevPage.Image = global::PhanMemNoiSoi.Properties.Resources.Button_Rewind_icon_24;
             this.btnPrevPage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPrevPage.Location = new System.Drawing.Point(350, 619);
+            this.btnPrevPage.Location = new System.Drawing.Point(233, 619);
             this.btnPrevPage.Name = "btnPrevPage";
             this.btnPrevPage.Size = new System.Drawing.Size(80, 32);
             this.btnPrevPage.TabIndex = 17;
@@ -566,7 +566,7 @@
             this.btnNextPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNextPage.Image = global::PhanMemNoiSoi.Properties.Resources.Button_Forward_icon_24;
             this.btnNextPage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNextPage.Location = new System.Drawing.Point(230, 620);
+            this.btnNextPage.Location = new System.Drawing.Point(350, 620);
             this.btnNextPage.Name = "btnNextPage";
             this.btnNextPage.Size = new System.Drawing.Size(80, 32);
             this.btnNextPage.TabIndex = 16;
@@ -651,9 +651,9 @@
             this.Name = "Search";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tìm kiếm bệnh nhân";
-            this.Load += new System.EventHandler(this.Search_Load);
             this.UserIsAllowed += new System.EventHandler(this.Search_UserIsAllowed);
             this.UserIsDenied += new System.EventHandler(this.Search_UserIsDenied);
+            this.Load += new System.EventHandler(this.Search_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
