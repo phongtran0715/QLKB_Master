@@ -39,7 +39,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Image = global::PhanMemNoiSoi.Properties.Resources.About_us;
+            this.pictureBox1.Image = global::PhanMemNoiSoi.Properties.Resources.about_us;
             this.pictureBox1.Location = new System.Drawing.Point(5, 5);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(712, 142);
@@ -65,7 +65,7 @@
             this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox2.Image = global::PhanMemNoiSoi.Properties.Resources.About11;
+            this.pictureBox2.Image = global::PhanMemNoiSoi.Properties.Resources.About1;
             this.pictureBox2.Location = new System.Drawing.Point(5, 153);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(712, 302);
@@ -77,7 +77,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SeaShell;
-            this.BackgroundImage = global::PhanMemNoiSoi.Properties.Resources.background__1_;
+            this.BackgroundImage = global::PhanMemNoiSoi.Properties.Resources.background;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(719, 501);
             this.Controls.Add(this.pictureBox2);

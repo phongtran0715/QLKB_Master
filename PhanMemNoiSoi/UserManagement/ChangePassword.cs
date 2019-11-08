@@ -55,7 +55,7 @@ namespace PhanMemNoiSoi
                         MessageBox.Show("Cập nhập mật khẩu thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.Close();
                     }
-                    catch (System.Exception ex)
+                    catch (System.Exception)
                     {
                         MessageBox.Show("Không thể cập nhập cơ sở dữ liệu", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }

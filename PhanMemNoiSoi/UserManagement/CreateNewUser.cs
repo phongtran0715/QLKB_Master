@@ -75,7 +75,7 @@ namespace PhanMemNoiSoi
                 MessageBox.Show("Thêm mới tài khoản thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 MessageBox.Show("Tạo tài khoản mới thất bại. \n Không thể kết nối đến cơ sở dữ liệu. \n Vui lòng thử lại sau!",
                                 "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);

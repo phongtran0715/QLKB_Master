@@ -115,7 +115,7 @@ namespace PhanMemNoiSoi
                 mySQL = new SqlCommand(query, DBConnection.Instance.sqlConn);
                 numRecord = (int)mySQL.ExecuteScalar();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
 
@@ -232,7 +232,7 @@ namespace PhanMemNoiSoi
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
             //remove end character

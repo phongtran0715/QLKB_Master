@@ -321,7 +321,7 @@ namespace PhanMemNoiSoi
                 string msgLog = "Thêm mới danh mục nội dung '" + msg + "'";
                 Log.Instance.LogMessageToDB(DateTime.Now, Session.Instance.UserId, Session.Instance.UserName, msgLog);
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 MessageBox.Show("Thêm dữ liệu không thành công. \n Không thể kết nối đến cơ sở dữ liệu. \n Vui lòng thử lại sau",
                                 "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
@@ -381,7 +381,7 @@ namespace PhanMemNoiSoi
                 mySQL.ExecuteReader();
                 updateShowNum(1);
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 MessageBox.Show("Không thể xóa dữ liệu. \n Không kết nối được đến cơ sở dữ liệu. \n Vui lòng thử lại sau!",
                     "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -429,7 +429,7 @@ namespace PhanMemNoiSoi
                 mySQL.ExecuteReader();
 
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 MessageBox.Show("Không thể xóa dữ liệu. \n Không kết nối được đến cơ sở dữ liệu. \n Vui lòng thử lại sau!",
                     "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);

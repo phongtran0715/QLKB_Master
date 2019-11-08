@@ -158,7 +158,7 @@ namespace PhanMemNoiSoi
 
                     MessageBox.Show("Xóa tài khoản thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                catch (System.Exception ex)
+                catch (System.Exception)
                 {
                     MessageBox.Show("Xóa tài khoản thất bại. Không cập nhập được cơ sở dữ liệu. Vui lòng thử lại sau!", "Thông báo",
                                     MessageBoxButtons.OK, MessageBoxIcon.Error);

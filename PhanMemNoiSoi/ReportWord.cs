@@ -52,7 +52,7 @@ namespace PhanMemNoiSoi
                     wordApp = null;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
         }

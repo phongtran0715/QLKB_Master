@@ -424,7 +424,7 @@
             // 
             this.pbRecordIcon.BackColor = System.Drawing.Color.Transparent;
             this.pbRecordIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pbRecordIcon.Image = global::PhanMemNoiSoi.Properties.Resources.giphy__1_;
+            this.pbRecordIcon.Image = global::PhanMemNoiSoi.Properties.Resources.giphy;
             this.pbRecordIcon.Location = new System.Drawing.Point(38, 605);
             this.pbRecordIcon.Name = "pbRecordIcon";
             this.pbRecordIcon.Size = new System.Drawing.Size(71, 64);

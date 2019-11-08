@@ -282,7 +282,7 @@ namespace PhanMemNoiSoi
                 mySQL.Parameters.Add("@sickNum", SqlDbType.NChar).Value = sickNum;
                 mySQL.ExecuteReader();
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 MessageBox.Show("Không thể xóa dữ liệu. \n Không kết nối được đến cơ sở dữ liệu. \n Vui lòng thử lại sau!",
                     "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);

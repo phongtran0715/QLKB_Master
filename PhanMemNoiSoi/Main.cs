@@ -43,7 +43,7 @@ namespace PhanMemNoiSoi
 
         private void Main_Load(object sender, EventArgs e)
         {
-            this.BackgroundImage = new Bitmap(PhanMemNoiSoi.Properties.Resources._3);
+            this.BackgroundImage = new Bitmap(PhanMemNoiSoi.Properties.Resources.main_background);
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             if(Session.Instance.ActiveLicense)
             {

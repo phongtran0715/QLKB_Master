@@ -382,7 +382,7 @@ namespace PhanMemNoiSoi
                 dgvBackup.Update();
                 dgvBackup.Refresh();
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 MessageBox.Show("Không thể xóa dữ liệu. \n Không kết nối được đến cơ sở dữ liệu. \n Vui lòng thử lại sau!",
                     "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);

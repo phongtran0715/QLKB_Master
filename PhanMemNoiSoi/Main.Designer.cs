@@ -171,7 +171,7 @@
             // pbKey
             // 
             this.pbKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.pbKey.Image = global::PhanMemNoiSoi.Properties.Resources.key_gif;
+            this.pbKey.Image = global::PhanMemNoiSoi.Properties.Resources.key;
             this.pbKey.Location = new System.Drawing.Point(60, 597);
             this.pbKey.Name = "pbKey";
             this.pbKey.Size = new System.Drawing.Size(61, 37);
@@ -235,7 +235,7 @@
             // btnGioiThieu
             // 
             this.btnGioiThieu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGioiThieu.BackgroundImage = global::PhanMemNoiSoi.Properties.Resources.About_icon;
+            this.btnGioiThieu.BackgroundImage = global::PhanMemNoiSoi.Properties.Resources.about_icon;
             this.btnGioiThieu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnGioiThieu.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGioiThieu.Location = new System.Drawing.Point(1120, 388);
