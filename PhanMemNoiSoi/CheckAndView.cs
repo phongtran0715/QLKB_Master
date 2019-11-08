@@ -166,9 +166,17 @@ namespace PhanMemNoiSoi
             string imgFolder = Properties.Settings.Default.imageFolder;
             if (!Directory.Exists(imgFolder))
             {
-                Directory.CreateDirectory(DEFAULT_IMG_FOLDER);
-                Properties.Settings.Default.imageFolder = DEFAULT_IMG_FOLDER;
-                Properties.Settings.Default.Save();
+                try {
+                    Directory.CreateDirectory(DEFAULT_IMG_FOLDER);
+                    Properties.Settings.Default.imageFolder = DEFAULT_IMG_FOLDER;
+                    Properties.Settings.Default.Save();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Thư mục lưu ảnh không tồn tại : " + DEFAULT_IMG_FOLDER + "\n Vui lòng cài đặt lại thư mục lưu ảnh mặc định!",
+                        "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Close();
+                }
             }
 
             // Set the ImageSize property to a larger size 

@@ -424,19 +424,16 @@ namespace PhanMemNoiSoi
         {
             int selectedRowCount =
             dgvPatient.Rows.GetRowCount(DataGridViewElementStates.Selected);
-            if (selectedRowCount <= 0)
-            {
-                return;
-            }
-            int currRowIndexCheck = dgvPatient.SelectedRows[selectedRowCount - 1].Index;
-            string pId = dgvPatient.Rows[currRowIndexCheck].Cells["SickNum"].Value.ToString().Trim();
+            if (selectedRowCount <= 0) return;
+            int rowIndex = dgvPatient.SelectedRows[selectedRowCount - 1].Index;
+            string pId = dgvPatient.Rows[rowIndex].Cells["SickNum"].Value.ToString().Trim();
             Patient patient = new Patient().getPatientByNum(pId);
             string numId = String.Format("{0:D6}", helper.getIdCheck());
             string pName = patient.NameProperty;
             string pAge = patient.AgeProperty.ToString();
             string pCause = patient.CauseCheckProperty;
             string doctor = Session.Instance.UserName;
-            string folderImgPath = dgvPatient.Rows[currRowIndexCheck].Cells["DataPath"].Value.ToString().Trim(); 
+            string folderImgPath = dgvPatient.Rows[rowIndex].Cells["DataPath"].Value.ToString().Trim(); 
             this.Hide();
             CheckAndView checkFr = new CheckAndView(numId, pId, pName, pAge, pCause, doctor, folderImgPath);
             checkFr.ShowDialog();
