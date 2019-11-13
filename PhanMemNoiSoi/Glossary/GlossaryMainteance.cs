@@ -810,15 +810,15 @@ namespace PhanMemNoiSoi
 
         private void btnMoveUp_Click(object sender, EventArgs e)
         {
-            int sRowCount =
-            dgvInfo.Rows.GetRowCount(DataGridViewElementStates.Selected);
-            if (sRowCount <= 0) return;
-            int sRowIndex = dgvInfo.SelectedRows[0].Index;
-            Console.WriteLine("row selected index = " + sRowIndex);
-            int cShowNum = int.Parse(dgvInfo.Rows[sRowIndex].Cells["ShowNum"].Value.ToString().Trim());
-            if (cShowNum > 0)
+            try
             {
-                try
+                int sRowCount =
+                dgvInfo.Rows.GetRowCount(DataGridViewElementStates.Selected);
+                if (sRowCount <= 0) return;
+                int sRowIndex = dgvInfo.SelectedRows[0].Index;
+                Console.WriteLine("row selected index = " + sRowIndex);
+                int cShowNum = int.Parse(dgvInfo.Rows[sRowIndex].Cells["ShowNum"].Value.ToString().Trim());
+                if (cShowNum > 0)
                 {
                     string itemCode = dgvInfo.Rows[sRowIndex].Cells["ItemCode"].Value.ToString().Trim();
                     //update to decrease previous item position in database
@@ -834,28 +834,26 @@ namespace PhanMemNoiSoi
                     uSQL.ExecuteReader();
 
                     loadInfoReport();
-                    setSelectedRow(dgvInfo, sRowIndex -1);
+                    setSelectedRow(dgvInfo, sRowIndex - 1);
                     setStateOrderButon(dgvInfo, btnInfoUp, btnInfoDown, sRowIndex - 1);
                 }
-                catch(Exception ex)
-                {
-                    Console.WriteLine(ex.ToString());
-                }
-                
+            }
+            catch (Exception)
+            {
             }
         }
 
         private void btnMoveDown_Click(object sender, EventArgs e)
         {
-            int sRowCount =
-            dgvInfo.Rows.GetRowCount(DataGridViewElementStates.Selected);
-            if (sRowCount < 0) return;
-            int sRowIndex = dgvInfo.SelectedRows[0].Index;
-            Console.WriteLine("row selected index = " + sRowIndex);
-            int cShowNum = int.Parse(dgvInfo.Rows[sRowIndex].Cells["ShowNum"].Value.ToString().Trim());
-            if (cShowNum >= 0)
+            try
             {
-                try
+                int sRowCount =
+                dgvInfo.Rows.GetRowCount(DataGridViewElementStates.Selected);
+                if (sRowCount < 0) return;
+                int sRowIndex = dgvInfo.SelectedRows[0].Index;
+                Console.WriteLine("row selected index = " + sRowIndex);
+                int cShowNum = int.Parse(dgvInfo.Rows[sRowIndex].Cells["ShowNum"].Value.ToString().Trim());
+                if (cShowNum >= 0)
                 {
                     string itemCode = dgvInfo.Rows[sRowIndex].Cells["ItemCode"].Value.ToString().Trim();
                     //update to decrease after item position in database
@@ -872,10 +870,9 @@ namespace PhanMemNoiSoi
                     setSelectedRow(dgvInfo, sRowIndex + 1);
                     setStateOrderButon(dgvInfo, btnInfoUp, btnInfoDown, sRowIndex + 1);
                 }
-                catch(Exception ex)
-                {
-                    Console.WriteLine(ex.ToString());
-                }
+            }
+            catch(Exception)
+            {
             }
         }
 
@@ -1082,13 +1079,13 @@ namespace PhanMemNoiSoi
 
         private void btnNoteUp_Click(object sender, EventArgs e)
         {
-            int sRowCount = dgvNote.Rows.GetRowCount(DataGridViewElementStates.Selected);
-            if (sRowCount <= 0) return;
-            int sRowIndex = dgvNote.SelectedRows[0].Index;
-            int cShowNum = int.Parse(dgvNote.Rows[sRowIndex].Cells["ShowNum"].Value.ToString().Trim());
-            if (cShowNum > 0)
+            try
             {
-                try
+                int sRowCount = dgvNote.Rows.GetRowCount(DataGridViewElementStates.Selected);
+                if (sRowCount <= 0) return;
+                int sRowIndex = dgvNote.SelectedRows[0].Index;
+                int cShowNum = int.Parse(dgvNote.Rows[sRowIndex].Cells["ShowNum"].Value.ToString().Trim());
+                if (cShowNum > 0)
                 {
                     string id = dgvNote.Rows[sRowIndex].Cells["Id"].Value.ToString().Trim();
                     //update to increase previous item position in database
@@ -1104,24 +1101,24 @@ namespace PhanMemNoiSoi
                     uSQL.ExecuteReader();
                     loadNoteImage();
                     setSelectedRow(dgvNote, sRowIndex - 1);
-                    setStateOrderButon(dgvNote, btnNoteUp, btnNoteDown,  sRowIndex - 1);
+                    setStateOrderButon(dgvNote, btnNoteUp, btnNoteDown, sRowIndex - 1);
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.ToString());
-                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
             }
         }
 
         private void btnNoteDown_Click(object sender, EventArgs e)
         {
-            int sRowCount = dgvNote.Rows.GetRowCount(DataGridViewElementStates.Selected);
-            if (sRowCount < 0) return;
-            int sRowIndex = dgvNote.SelectedRows[0].Index;
-            int currentShowNum = int.Parse(dgvNote.Rows[sRowIndex].Cells["ShowNum"].Value.ToString().Trim());
-            if (currentShowNum >= 0)
+            try
             {
-                try
+                int sRowCount = dgvNote.Rows.GetRowCount(DataGridViewElementStates.Selected);
+                if (sRowCount < 0) return;
+                int sRowIndex = dgvNote.SelectedRows[0].Index;
+                int currentShowNum = int.Parse(dgvNote.Rows[sRowIndex].Cells["ShowNum"].Value.ToString().Trim());
+                if (currentShowNum >= 0)
                 {
                     string id = dgvNote.Rows[sRowIndex].Cells["Id"].Value.ToString().Trim();
                     //update to decrease after item position in database
@@ -1138,10 +1135,10 @@ namespace PhanMemNoiSoi
                     setSelectedRow(dgvNote, sRowIndex + 1);
                     setStateOrderButon(dgvNote, btnNoteUp, btnNoteDown, sRowIndex + 1);
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.ToString());
-                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
             }
         }
     }
