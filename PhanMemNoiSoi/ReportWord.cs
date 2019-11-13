@@ -172,7 +172,7 @@ namespace PhanMemNoiSoi
                     {
                         for (iCols = 1; iCols <= numCols; iCols++)
                         {
-                            if (imgIndex > images.Count) break;
+                            if (imgIndex > images.Count - 1) break;
                             object oRange = objTab1.Cell(iRow, iCols).Range;
                             ((Word.Range)oRange).Text = images[imgIndex].imageNote;
                             imgIndex++;
@@ -187,7 +187,7 @@ namespace PhanMemNoiSoi
                     {
                         for (iCols = 1; iCols <= numCols; iCols++)
                         {
-                            if (imgIndex > images.Count) break;
+                            if (imgIndex > images.Count - 1) break;
                             object oRange = objTab1.Cell(iRow, iCols).Range;
                             string tmpPath = Log.Instance.GetTempPath() + "tmp.jpg";
                             Image image;
@@ -202,6 +202,7 @@ namespace PhanMemNoiSoi
                             Image resizedImg = this.helper.ResizeImage(image, imgSize.Width, imgSize.Height);
                             resizedImg.Save(tmpPath);
                             this.wordDoc.InlineShapes.AddPicture(tmpPath, ref missing, true, ref oRange);
+                            imgIndex++;
                         }
                     }
                 }

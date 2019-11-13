@@ -271,17 +271,21 @@ namespace PhanMemNoiSoi
             foreach(DataGridViewRow row in dgvMain.Rows)
             {
                 DataGridViewCell cellChecked = (DataGridViewCell)row.Cells[0];
-                if (cellChecked.Value != null && (bool)cellChecked.Value == true)
+                if(row.Index %2 != 0)
                 {
-                    MyImage myImg = new MyImage();
-                    myImg.id = index;
-                    myImg.imagePath = imagePath + listNameImg[index];
-                    object noteInfo = dgvMain.Rows[row.Index - 1].Cells[1].Value;
-                    if (noteInfo != null)
-                        myImg.imageNote = noteInfo.ToString();
-                    else
-                        myImg.imageNote = "";
-                    iList.Add(myImg);
+                    if (cellChecked.Value != null && (bool)cellChecked.Value == true)
+                    {
+                        MyImage myImg = new MyImage();
+                        myImg.id = iList.Count;
+                        myImg.imagePath = imagePath + listNameImg[index];
+                        object noteInfo = dgvMain.Rows[row.Index - 1].Cells[1].Value;
+                        if (noteInfo != null)
+                            myImg.imageNote = noteInfo.ToString();
+                        else
+                            myImg.imageNote = "";
+                        iList.Add(myImg);
+                    }
+                    index++;
                 }
             }
 
@@ -412,7 +416,7 @@ namespace PhanMemNoiSoi
         private void dgvMain_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int count = 0;
-            if (e.RowIndex >= 0 && e.ColumnIndex == 1)
+            if (e.RowIndex >= 0)
             {
                 if (e.RowIndex % 2 != 0)
                 {
