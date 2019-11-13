@@ -408,5 +408,39 @@ namespace PhanMemNoiSoi
                 }
             }
         }
+
+        private void dgvMain_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int count = 0;
+            if (e.RowIndex >= 0 && e.ColumnIndex == 1)
+            {
+                if (e.RowIndex % 2 != 0)
+                {
+                    DataGridViewRow row = dgvMain.Rows[e.RowIndex];
+                    DataGridViewCheckBoxCell chk = (DataGridViewCheckBoxCell)row.Cells[0];
+                    row.Selected = true;
+                    if (chk.Value == null || (bool)chk.Value == false)
+                        chk.Value = true;
+                    else
+                        chk.Value = false;
+                    dgvMain.EndEdit();
+                    dgvMain.RefreshEdit();
+
+                    foreach (DataGridViewRow it in dgvMain.Rows)
+                    {
+                        object ckValue = dgvMain.Rows[it.Index].Cells[0].Value;
+                        if (ckValue != null)
+                        {
+                            bool value = (bool)ckValue;
+                            if (value == true)
+                            {
+                                count++;
+                            }
+                        }
+                    }
+                    lbNumImgChecked.Text = count + " ảnh đã chọn";
+                }
+            }
+        }
     }
 }
