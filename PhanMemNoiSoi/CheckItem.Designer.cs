@@ -70,6 +70,7 @@
             this.dgvContentDetail.Size = new System.Drawing.Size(414, 281);
             this.dgvContentDetail.TabIndex = 1;
             this.dgvContentDetail.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvContentDetail_CellContentClick);
+            this.dgvContentDetail.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvContentDetail_CellContentDoubleClick);
             this.dgvContentDetail.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvContentDetail_CellValueChanged_1);
             this.dgvContentDetail.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvContentDetail_DataBindingComplete);
             // 

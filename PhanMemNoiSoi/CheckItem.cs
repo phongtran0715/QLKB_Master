@@ -230,5 +230,35 @@ namespace PhanMemNoiSoi
                 }
             }
         }
+
+        private void dgvContentDetail_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex != -1)
+            {
+                DataGridViewRow row = dgvContentDetail.Rows[e.RowIndex];
+                DataGridViewCheckBoxCell chk = (DataGridViewCheckBoxCell)row.Cells["X"];
+                row.Selected = true;
+                if (chk.Value == null || (bool)chk.Value == false)
+                    chk.Value = true;
+                else
+                    chk.Value = false;
+                dgvContentDetail.EndEdit();
+                dgvContentDetail.RefreshEdit();
+
+                string content = dgvContentDetail.Rows[e.RowIndex].Cells["Content"].Value.ToString().Trim();
+                if (chk.Value!= null && (bool)chk.Value == true)
+                {
+                    txtSelected.Text += content + ", ";
+                }
+                else
+                {
+                    int index = txtSelected.Text.IndexOf(content);
+                    if (index != -1)
+                    {
+                        txtSelected.Text = txtSelected.Text.Remove(index, (content + ", ").Length);
+                    }
+                }
+            }
+        }
     }
 }
