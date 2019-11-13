@@ -197,4 +197,3 @@ begin transaction
 INSERT INTO [QuangHuyMedical].[dbo].[DbVersion] ([Version]) VALUES ( '380');
 commit transaction
 GO
-commit;

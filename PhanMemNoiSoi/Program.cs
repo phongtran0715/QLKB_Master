@@ -10,7 +10,7 @@ namespace PhanMemNoiSoi
     static class Program
     {
         private static Mutex mutex = null;
-        private const int DB_VERSION = 380;
+        private const int DB_VERSION = 400;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
