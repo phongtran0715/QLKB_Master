@@ -83,6 +83,7 @@
             this.dgvMain.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvMain.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvMain.Location = new System.Drawing.Point(3, 22);
             this.dgvMain.Name = "dgvMain";
             this.dgvMain.RowHeadersVisible = false;

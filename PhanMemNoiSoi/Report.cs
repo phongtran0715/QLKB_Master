@@ -73,6 +73,7 @@ namespace PhanMemNoiSoi
                     }
                     row.Cells.Add(txtCell);
                     row.Cells.Add(cbCell);
+                    row.Height = 30;
                     int row_index = dgvMain.Rows.Add(row);
                     dgvMain.Rows[row_index].Cells[0].ReadOnly = true;
                 }
