@@ -77,6 +77,8 @@
             this.btnOpenFolder = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
+            this.txtSicknum = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -137,6 +139,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label14);
+            this.groupBox2.Controls.Add(this.txtSicknum);
             this.groupBox2.Controls.Add(this.btnReCheck);
             this.groupBox2.Controls.Add(this.btnDeleteSick);
             this.groupBox2.Controls.Add(this.btnXoa);
@@ -163,7 +167,7 @@
             this.btnReCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReCheck.Image = global::PhanMemNoiSoi.Properties.Resources.camera_24;
             this.btnReCheck.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnReCheck.Location = new System.Drawing.Point(336, 122);
+            this.btnReCheck.Location = new System.Drawing.Point(336, 128);
             this.btnReCheck.Name = "btnReCheck";
             this.btnReCheck.Size = new System.Drawing.Size(98, 35);
             this.btnReCheck.TabIndex = 16;
@@ -176,7 +180,7 @@
             this.btnDeleteSick.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDeleteSick.Image = global::PhanMemNoiSoi.Properties.Resources.delete_24x24;
             this.btnDeleteSick.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDeleteSick.Location = new System.Drawing.Point(490, 122);
+            this.btnDeleteSick.Location = new System.Drawing.Point(490, 128);
             this.btnDeleteSick.Name = "btnDeleteSick";
             this.btnDeleteSick.Size = new System.Drawing.Size(155, 35);
             this.btnDeleteSick.TabIndex = 13;
@@ -189,7 +193,7 @@
             this.btnXoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnXoa.Image = global::PhanMemNoiSoi.Properties.Resources.refresh_24x24;
             this.btnXoa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnXoa.Location = new System.Drawing.Point(193, 122);
+            this.btnXoa.Location = new System.Drawing.Point(193, 128);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(98, 35);
             this.btnXoa.TabIndex = 15;
@@ -202,7 +206,7 @@
             this.btnTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTimKiem.Image = ((System.Drawing.Image)(resources.GetObject("btnTimKiem.Image")));
             this.btnTimKiem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTimKiem.Location = new System.Drawing.Point(44, 122);
+            this.btnTimKiem.Location = new System.Drawing.Point(44, 128);
             this.btnTimKiem.Name = "btnTimKiem";
             this.btnTimKiem.Size = new System.Drawing.Size(98, 35);
             this.btnTimKiem.TabIndex = 13;
@@ -214,7 +218,7 @@
             // 
             this.dtNgayKetThuc.Checked = false;
             this.dtNgayKetThuc.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtNgayKetThuc.Location = new System.Drawing.Point(469, 74);
+            this.dtNgayKetThuc.Location = new System.Drawing.Point(469, 78);
             this.dtNgayKetThuc.Name = "dtNgayKetThuc";
             this.dtNgayKetThuc.ShowCheckBox = true;
             this.dtNgayKetThuc.Size = new System.Drawing.Size(175, 26);
@@ -224,7 +228,7 @@
             // 
             this.dtNgayBatDau.Checked = false;
             this.dtNgayBatDau.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtNgayBatDau.Location = new System.Drawing.Point(469, 35);
+            this.dtNgayBatDau.Location = new System.Drawing.Point(469, 32);
             this.dtNgayBatDau.Name = "dtNgayBatDau";
             this.dtNgayBatDau.ShowCheckBox = true;
             this.dtNgayBatDau.Size = new System.Drawing.Size(175, 26);
@@ -232,24 +236,24 @@
             // 
             // txtPhone
             // 
-            this.txtPhone.Location = new System.Drawing.Point(105, 65);
+            this.txtPhone.Location = new System.Drawing.Point(77, 60);
             this.txtPhone.MaxLength = 49;
             this.txtPhone.Name = "txtPhone";
-            this.txtPhone.Size = new System.Drawing.Size(176, 26);
+            this.txtPhone.Size = new System.Drawing.Size(204, 26);
             this.txtPhone.TabIndex = 9;
             // 
             // txtTenSearch
             // 
-            this.txtTenSearch.Location = new System.Drawing.Point(105, 31);
+            this.txtTenSearch.Location = new System.Drawing.Point(77, 28);
             this.txtTenSearch.MaxLength = 69;
             this.txtTenSearch.Name = "txtTenSearch";
-            this.txtTenSearch.Size = new System.Drawing.Size(176, 26);
+            this.txtTenSearch.Size = new System.Drawing.Size(204, 26);
             this.txtTenSearch.TabIndex = 8;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(357, 77);
+            this.label13.Location = new System.Drawing.Point(357, 81);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(106, 20);
             this.label13.TabIndex = 7;
@@ -258,7 +262,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(356, 38);
+            this.label12.Location = new System.Drawing.Point(356, 35);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(103, 20);
             this.label12.TabIndex = 6;
@@ -267,7 +271,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 68);
+            this.label11.Location = new System.Drawing.Point(6, 66);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(54, 20);
             this.label11.TabIndex = 5;
@@ -276,7 +280,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 33);
+            this.label10.Location = new System.Drawing.Point(6, 32);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(36, 20);
             this.label10.TabIndex = 1;
@@ -624,6 +628,23 @@
             this.label5.TabIndex = 22;
             this.label5.Text = "Trang";
             // 
+            // txtSicknum
+            // 
+            this.txtSicknum.Location = new System.Drawing.Point(77, 92);
+            this.txtSicknum.MaxLength = 49;
+            this.txtSicknum.Name = "txtSicknum";
+            this.txtSicknum.Size = new System.Drawing.Size(204, 26);
+            this.txtSicknum.TabIndex = 17;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(6, 97);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(57, 20);
+            this.label14.TabIndex = 18;
+            this.label14.Text = "Mã BN";
+            // 
             // Search
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -718,5 +739,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lbTotalPage;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtSicknum;
+        private System.Windows.Forms.Label label14;
     }
 }

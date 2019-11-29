@@ -55,8 +55,9 @@ namespace PhanMemNoiSoi
                 // Resize the DataGridView columns to fit the newly loaded content.
                 dgvPatient.AutoResizeColumns(
                     DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
-                dgvPatient.Columns["SickNum"].Visible = false;
                 dgvPatient.Columns["DataPath"].Visible = false;
+                dgvPatient.Columns["SickNum"].HeaderText = "Mã BN";
+                dgvPatient.Columns["SickNum"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 dgvPatient.Columns["SickName"].HeaderText = "Tên";
                 dgvPatient.Columns["Age"].HeaderText = "Tuổi";
                 dgvPatient.Columns["Age"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -66,7 +67,8 @@ namespace PhanMemNoiSoi
                 dgvPatient.Columns["Createtime"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 dgvPatient.Columns["Createtime"].DefaultCellStyle.Format = helper.getDateFormat(Settings.Default.datetimeFormat);
 
-                dgvPatient.Columns["SickName"].Width = dgvPatient.Width * 4 / 10;
+                dgvPatient.Columns["SickNum"].Width = dgvPatient.Width * 2 / 10;
+                dgvPatient.Columns["SickName"].Width = dgvPatient.Width * 3 / 10;
                 dgvPatient.Columns["Age"].Width = dgvPatient.Width / 10;
                 dgvPatient.Columns["Telephone"].Width = dgvPatient.Width * 2 / 10;
                 dgvPatient.Columns["Createtime"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -103,10 +105,22 @@ namespace PhanMemNoiSoi
             {
                 baseQuery = "SELECT TOP " + PageSize + " SickNum,SickName, Age, Telephone, Createtime, DataPath FROM SickData ";
             }
+            if (!string.IsNullOrEmpty(txtSicknum.Text.Trim()))
+            {
+                extQuery += " WHERE SickNum LIKE N'%" + txtSicknum.Text.Trim() + "%'";
+                isAnd = true;
+            }
             if (!string.IsNullOrEmpty(txtTenSearch.Text.Trim()))
             {
-                extQuery += " WHERE SickName LIKE N'%" + txtTenSearch.Text.Trim() + "%'";
-                isAnd = true;
+                if (isAnd == true)
+                {
+                    extQuery += " AND SickName LIKE N'%" + txtTenSearch.Text.Trim() + "%'";
+                }
+                else
+                {
+                    extQuery += " WHERE SickName LIKE N'%" + txtTenSearch.Text.Trim() + "%'";
+                    isAnd = true;
+                }   
             }
             if (!string.IsNullOrEmpty(txtPhone.Text.Trim()))
             {
