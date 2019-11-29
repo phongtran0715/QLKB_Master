@@ -49,7 +49,7 @@
             // pictureBox2
             // 
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox2.Image = global::PhanMemNoiSoi.Properties.Resources.Spalsh_Banner_4_0;
+            this.pictureBox2.Image = global::PhanMemNoiSoi.Properties.Resources.Spalsh_Banner;
             this.pictureBox2.Location = new System.Drawing.Point(2, 132);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(701, 322);

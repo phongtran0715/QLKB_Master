@@ -63,9 +63,9 @@ namespace PhanMemNoiSoi.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap About_4_0 {
+        internal static System.Drawing.Bitmap About {
             get {
-                object obj = ResourceManager.GetObject("About_4_0", resourceCulture);
+                object obj = ResourceManager.GetObject("About", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -556,16 +556,6 @@ namespace PhanMemNoiSoi.Properties {
         internal static System.Drawing.Bitmap Spalsh_Banner {
             get {
                 object obj = ResourceManager.GetObject("Spalsh_Banner", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Spalsh_Banner_4_0 {
-            get {
-                object obj = ResourceManager.GetObject("Spalsh_Banner_4_0", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
