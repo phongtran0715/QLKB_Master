@@ -29,6 +29,7 @@ namespace PhanMemNoiSoi
         string[] imagesPatient = { };
         List<string> listNoteImg = new List<string>();
         List<string> listNameImg = new List<string>();
+        List<int> lRowSelected = new List<int>();
 
         const int TWO_IMAGE_REPORT = 2;
         const int FOUR_IMAGE_REPORT = 4;
@@ -36,7 +37,7 @@ namespace PhanMemNoiSoi
         Size img3Size;
         Size img4Size;
         ReportWord rp;
-        
+
         public gbCheckRecord(string patientId, string imagePath, string checkId)
         {
             InitializeComponent();
@@ -268,28 +269,18 @@ namespace PhanMemNoiSoi
             rp = new ReportWord();
             //check number image select
             List<MyImage> iList = new List<MyImage>();
-            int index = 0;
-            foreach(DataGridViewRow row in dgvMain.Rows)
+            foreach(int it in lRowSelected)
             {
-                DataGridViewCell cellChecked = (DataGridViewCell)row.Cells[0];
-                if(row.Index %2 != 0)
-                {
-                    if (cellChecked.Value != null && (bool)cellChecked.Value == true)
-                    {
-                        MyImage myImg = new MyImage();
-                        myImg.id = iList.Count;
-                        myImg.imagePath = imagePath + listNameImg[index];
-                        object noteInfo = dgvMain.Rows[row.Index - 1].Cells[1].Value;
-                        if (noteInfo != null)
-                            myImg.imageNote = noteInfo.ToString();
-                        else
-                            myImg.imageNote = "";
-                        iList.Add(myImg);
-                    }
-                    index++;
-                }
+                MyImage myImg = new MyImage();
+                myImg.id = it / 2;
+                myImg.imagePath = imagePath + listNameImg[it/2];
+                object noteInfo = dgvMain.Rows[it - 1].Cells[1].Value;
+                if (noteInfo != null)
+                    myImg.imageNote = noteInfo.ToString();
+                else
+                    myImg.imageNote = "";
+                iList.Add(myImg);
             }
-
             if (iList.Count == 0)
             {
                 DialogResult result = MessageBox.Show("Bạn chưa chọn ảnh. Bạn có muốn tiếp tục xem báo cáo?", "Thông báo",
@@ -387,36 +378,44 @@ namespace PhanMemNoiSoi
             //no thing to do
         }
 
+        private bool imgExist(int id)
+        {
+            bool result = false;
+            foreach(int it in lRowSelected)
+            {
+                if (it == id)
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
+        }
+
         private void dgvMain_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            int count = 0;
             if (e.RowIndex >= 0 && e.ColumnIndex == 0)
             {
                 if(e.RowIndex %2 != 0)
                 {
                     DataGridViewRow row = dgvMain.Rows[e.RowIndex];
                     row.Cells[0].Value = !Convert.ToBoolean(row.Cells[0].EditedFormattedValue);
-
-                    foreach (DataGridViewRow it in dgvMain.Rows)
+                    if((bool)row.Cells[0].Value == true)
                     {
-                        object ckValue = dgvMain.Rows[it.Index].Cells[0].Value;
-                        if (ckValue != null)
-                        {
-                            bool value = (bool)ckValue;
-                            if (value == true)
-                            {
-                                count++;
-                            }
-                        }
+                        if(imgExist(e.RowIndex) == false)
+                            lRowSelected.Add(e.RowIndex);
+                    }else
+                    {
+                        if (imgExist(e.RowIndex) == true)
+                            lRowSelected.Remove(e.RowIndex);
                     }
-                    lbNumImgChecked.Text = count + " ảnh đã chọn";
+                    lbNumImgChecked.Text = lRowSelected.Count + " ảnh đã chọn";
                 }
             }
         }
 
         private void dgvMain_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            int count = 0;
             if (e.RowIndex >= 0)
             {
                 if (e.RowIndex % 2 != 0)
@@ -425,25 +424,22 @@ namespace PhanMemNoiSoi
                     DataGridViewCheckBoxCell chk = (DataGridViewCheckBoxCell)row.Cells[0];
                     row.Selected = true;
                     if (chk.Value == null || (bool)chk.Value == false)
+                    {
+                        if (imgExist(e.RowIndex) == false)
+                            lRowSelected.Add(e.RowIndex);
                         chk.Value = true;
+                    }
                     else
+                    {
+                        if (imgExist(e.RowIndex) == true)
+                            lRowSelected.Remove(e.RowIndex);
                         chk.Value = false;
+                    }
+                        
                     dgvMain.EndEdit();
                     dgvMain.RefreshEdit();
 
-                    foreach (DataGridViewRow it in dgvMain.Rows)
-                    {
-                        object ckValue = dgvMain.Rows[it.Index].Cells[0].Value;
-                        if (ckValue != null)
-                        {
-                            bool value = (bool)ckValue;
-                            if (value == true)
-                            {
-                                count++;
-                            }
-                        }
-                    }
-                    lbNumImgChecked.Text = count + " ảnh đã chọn";
+                    lbNumImgChecked.Text = lRowSelected.Count + " ảnh đã chọn";
                 }
             }
         }
