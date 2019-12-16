@@ -9,6 +9,7 @@ use QuangHuyMedical
 go
 -- (1) UserList
 if not exists (select name from sysobjects where name = 'UserList' and type='U')
+BEGIN
 CREATE TABLE [dbo].[UserList](
 	[UserId] [int] IDENTITY(0,1) NOT NULL,
 	[UserName] [nchar](100) COLLATE Vietnamese_CI_AS NOT NULL,
@@ -23,13 +24,11 @@ CREATE TABLE [dbo].[UserList](
 begin transaction
 INSERT INTO [QuangHuyMedical].[dbo].[UserList]([UserName],[Sex],[WorkGroupId],[Password]) VALUES ('sys','male','Admin','YslwPITD33Of1WqxOU6MPWQr4YAovsEOQK/5Dh2XxQd7UycJAiPFM8lzs4pBQenKBx2nymOKwUfYKMchj7/SjmQ30XINlA==')
 commit transaction
+END
 go
 
 --(2)	SickData
-if object_id('dbo.SickData') is not null
-begin
-  drop table dbo.SickData
-end
+if not exists (select name from sysobjects where name = 'SickData' and type='U')
 CREATE TABLE [dbo].[SickData](
 	[Num] [int] IDENTITY(1,1) NOT NULL,
 	[SickNum] [nchar](20) COLLATE Vietnamese_CI_AS NOT NULL,
@@ -101,7 +100,12 @@ CREATE TABLE [dbo].[BackupInfo](
 go
 
 --(7) Roles LIST
+if object_id('dbo.RolesList') is not null
+BEGIN
+  DROP table dbo.RolesList
+END
 if not exists (select name from sysobjects where name = 'RolesList' and type='U')
+BEGIN
 CREATE TABLE [dbo].[RolesList](
 	[Num] [int] NOT NULL,
 	[RoleName] [nchar](50) NOT NULL
@@ -118,10 +122,16 @@ INSERT INTO [QuangHuyMedical].[dbo].[RolesList]([Num],[RoleName]) VALUES ('7',N'
 INSERT INTO [QuangHuyMedical].[dbo].[RolesList]([Num],[RoleName]) VALUES ('8',N'Sao lưu , khôi phục dữ liệu ')
 INSERT INTO [QuangHuyMedical].[dbo].[RolesList]([Num],[RoleName]) VALUES ('9',N'Xem lịch sử hệ thống')
 commit transaction
+END
 go
 
 --(8) Work Group
+if object_id('dbo.WorkGroup') is not null
+BEGIN
+  DROP table dbo.WorkGroup
+END
 if not exists (select name from sysobjects where name = 'WorkGroup' and type='U')
+BEGIN
 CREATE TABLE [dbo].[WorkGroup](
 	[WorkGroupId] [nchar](50) NOT NULL,
 	[Descript] [nchar](50) COLLATE Vietnamese_CI_AS NOT NULL,
@@ -131,6 +141,7 @@ INSERT INTO [QuangHuyMedical].[dbo].[WorkGroup]([WorkGroupId],[Descript]) VALUES
 INSERT INTO [QuangHuyMedical].[dbo].[WorkGroup]([WorkGroupId],[Descript]) VALUES ('Manager',N'Quản Lý')
 INSERT INTO [QuangHuyMedical].[dbo].[WorkGroup]([WorkGroupId],[Descript]) VALUES ('Admin',N'Admin')
 commit transaction
+END
 go
 
 --(9) Note Info
@@ -143,7 +154,12 @@ CREATE TABLE [dbo].[NoteInfo](
 GO
 
 --(10) User Group Role
+if object_id('dbo.UserGroupRole') is not null
+BEGIN
+  DROP table dbo.UserGroupRole
+END
 if not exists (select name from sysobjects where name = 'UserGroupRole' and type='U')
+BEGIN
 CREATE TABLE [dbo].[UserGroupRole](
 	[Num] [int] IDENTITY(1,1) NOT NULL,
 	[GroupId] [nchar](50) NOT NULL,
@@ -168,6 +184,7 @@ INSERT INTO [QuangHuyMedical].[dbo].[UserGroupRole] ([RoleId], [GroupId]) VALUES
 INSERT INTO [QuangHuyMedical].[dbo].[UserGroupRole] ([RoleId], [GroupId]) VALUES ( '5', 'Doctor');
 INSERT INTO [QuangHuyMedical].[dbo].[UserGroupRole] ([RoleId], [GroupId]) VALUES ( '7', 'Doctor');
 commit transaction
+END
 go
 
 --(11) Work Log
@@ -189,11 +206,17 @@ PRIMARY KEY CLUSTERED
 go	   
 
 --(12) Database version
+if object_id('dbo.DbVersion') is not null
+BEGIN
+  DROP table dbo.DbVersion
+END
 if not exists (select name from sysobjects where name = 'DbVersion' and type='U')
+BEGIN
 CREATE TABLE [dbo].[DbVersion](
 	[Version] [int] NOT NULL
 ) ON [PRIMARY]
 begin transaction
 INSERT INTO [QuangHuyMedical].[dbo].[DbVersion] ([Version]) VALUES ( '380');
 commit transaction
+END
 GO

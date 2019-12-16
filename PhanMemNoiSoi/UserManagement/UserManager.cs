@@ -53,7 +53,7 @@ namespace PhanMemNoiSoi
             bSource = new BindingSource();
             dta = new SqlDataAdapter();
 
-            string sqlQuery = "SELECT uList.UserId, uList.UserName, wGroup.WorkGroupId, wGroup.Descript " + 
+            string sqlQuery = "SELECT DISTINCT uList.UserId, uList.UserName, wGroup.WorkGroupId, wGroup.Descript " + 
                                     " FROM UserList uList , WorkGroup wGroup WHERE uList.WorkGroupId = wGroup.WorkGroupId ;";
             dta = new SqlDataAdapter(sqlQuery, DBConnection.Instance.sqlConn);
             SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dta);
@@ -274,7 +274,7 @@ namespace PhanMemNoiSoi
             SqlDataAdapter udta = new SqlDataAdapter();
             try
             {
-                string selectCommand = "SELECT WorkGroupId, Descript FROM WorkGroup;";
+                string selectCommand = "SELECT DISTINCT WorkGroupId, Descript FROM WorkGroup;";
                 udta = new SqlDataAdapter(selectCommand, DBConnection.Instance.sqlConn);
                 SqlCommandBuilder commandBuilder = new SqlCommandBuilder(udta);
                 utb.Locale = System.Globalization.CultureInfo.InvariantCulture;
@@ -303,7 +303,7 @@ namespace PhanMemNoiSoi
 
             //update role list
             // check item selected
-            string query = "SELECT RoleId FROM UserGroupRole WHERE GroupId = @id";
+            string query = "SELECT DISTINCT RoleId FROM UserGroupRole WHERE GroupId = @id";
             SqlCommand sqlCom = new SqlCommand(query, DBConnection.Instance.sqlConn);
             sqlCom.Parameters.Add("@id", SqlDbType.NChar).Value = groupId;
             SqlDataReader sqlDtaReader = sqlCom.ExecuteReader();

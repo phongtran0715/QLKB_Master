@@ -10,7 +10,7 @@ namespace PhanMemNoiSoi
     static class Program
     {
         private static Mutex mutex = null;
-        private const int DB_VERSION = 400;
+        private const int DB_VERSION = 410;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -54,7 +54,7 @@ namespace PhanMemNoiSoi
             else
             {
                 int dbVersion = helper.getDbVersion();
-                if(dbVersion != DB_VERSION)
+                if(dbVersion < DB_VERSION)
                 {
                     ConfigDB configDb = new ConfigDB();
                     configDb.upgradeDB(DB_VERSION);
