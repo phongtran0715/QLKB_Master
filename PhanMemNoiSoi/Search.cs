@@ -396,15 +396,19 @@ namespace PhanMemNoiSoi
                 }
                 resetPatientField();
                 //delete data in disk
+                if (pbPatient.Image != null)
+                    pbPatient.Image = null;
+                System.GC.Collect();
+                System.GC.WaitForPendingFinalizers();
                 if (Directory.Exists(dataPath))
                 {
                     try
                     {
                         Directory.Delete(dataPath, true);
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        MessageBox.Show(ex.Message);
+                        //MessageBox.Show(ex.Message);
                     }
                 }
                 //update number patient in label
